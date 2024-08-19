@@ -19,7 +19,7 @@ function tel(phone) {
   return phonePattern.test(phone);
 }
 
-export default function Inscription() {
+function Inscription() {
   const { handleSubmit, register, formState: { errors }, watch } = useForm();
   const navigate = useNavigate();
 
@@ -51,47 +51,35 @@ export default function Inscription() {
       .catch(error => console.error('Erreur lors de la récupération des villes:', error));
   }, []);
 
-  useEffect(() => {
-    if (selectedVille) {
-      fetch(`https://ville-propre.onrender.com/communes?ville_id=${selectedVille}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log('Communes:', data); // Ajoutez cette ligne
-          setCommunes(data);
-        })
-        .catch(error => console.error('Erreur lors de la récupération des communes:', error));
-    } else {
-      setCommunes([]);
-      setQuartiers([]);
-    }
-  }, [selectedVille]);
-
-  useEffect(() => {
-    if (selectedCommune) {
-      fetch(`https://ville-propre.onrender.com/quartiers?commune_id=${selectedCommune}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log('Quartiers:', data); // Ajoutez cette ligne
-          setQuartiers(data);
-        })
-        .catch(error => console.error('Erreur lors de la récupération des quartiers:', error));
-    } else {
-      setQuartiers([]);
-    }
-  }, [selectedCommune]);
-
   const handleVilleChange = (e) => {
     const value = e.target.value;
     setSelectedVille(value);
-    setSelectedCommune(''); // Réinitialiser la commune
-    setSelectedQuartier(''); // Réinitialiser le quartier
-  };
+    setSelectedCommune(''); 
+    setSelectedQuartier('');
 
-  const handleCommuneChange = (e) => {
-    const value = e.target.value;
-    setSelectedCommune(value);
-    setSelectedQuartier(''); // Réinitialiser le quartier
-  };
+    // Appeler l'API pour récupérer les communes liées à la ville sélectionnée
+    fetch(`https://ville-propre.onrender.com/villes/${value}/communes`)
+        .then(response => response.json())
+        .then(data => {
+            setCommunes(data);
+        })
+        .catch(error => console.error('Erreur lors de la récupération des communes:', error));
+};
+
+
+const handleCommuneChange = (e) => {
+  const value = e.target.value;
+  setSelectedCommune(value);
+  setSelectedQuartier('');
+
+  // Appeler l'API pour récupérer les quartiers liés à la commune sélectionnée
+  fetch(`https://ville-propre.onrender.com/communes/${value}/quartiers`)
+      .then(response => response.json())
+      .then(data => {
+          setQuartiers(data);
+      })
+      .catch(error => console.error('Erreur lors de la récupération des quartiers:', error));
+};
 
   const handleQuartierChange = (e) => {
     const value = parseInt(e.target.value, 10);
@@ -119,6 +107,8 @@ export default function Inscription() {
       });
     }
   };
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data) => {
     if (!tel(data.telClt || data.telPME)) {
@@ -200,27 +190,28 @@ export default function Inscription() {
       }
     }
 
+    setIsLoading(true);
+    
     const apiUrl = formType === 'pme' ? 'https://ville-propre.onrender.com/pme' : 'https://ville-propre.onrender.com/client';
 
     fetch(apiUrl, {
       method: 'POST',
       body: formData,
     })
-      .then(response => response.json().then(result => ({ status: response.status, body: result })))
-      .then(({ status, body }) => {
-        if (status === 200) {
-          navigate('/login');
-        } else {
-          console.error('Erreur lors de la création du compte:', body.detail);
-          if (Array.isArray(body.detail)) {
-            toast.error(`Erreur: ${body.detail.map(err => err.msg).join(', ') || 'Erreur inconnue'}`);
-          } else {
-            toast.error(`Erreur: ${body.detail || 'Erreur inconnue'}`);
-          }
-        }
-      })     
-    console.log('Data to submit:', data);
-    console.log('FormData contents:', Array.from(formData.entries()));
+    .then(response => {
+      setIsLoading(false);
+      if (!response.ok) {
+        return response.json().then(error => { throw new Error(error.detail || 'Erreur inconnue') });
+      }
+      return response.json();
+    })
+    .then(data => {
+      navigate('/login');
+    })
+    .catch(error => {
+      console.error('Erreur lors de la création du compte:', error.message);
+      toast.error(error.message);
+    });
 
   };
 
@@ -233,8 +224,8 @@ export default function Inscription() {
         <img src="src/assets/background.avif" className="background" alt="background" />
       </Box>
       <Box className="box-container">
-        <div className="logo">
-          <img src="src/assets/logo.jpg" id="logo" />
+        <div className="lg">
+          <img src="src/assets/logo.jpg" id="lg" />
         </div>
         <div className="button-group">
           <button className="client" onClick={() =>
@@ -257,41 +248,39 @@ export default function Inscription() {
             <select name="role" id="role" className="type" {...register("roleClt")} onChange={handleUserRoleChange}  required>
               <option value="menage">Ménage</option>
               <option value="entreprise">Entreprise</option>
-              {errors.roleClt && <span>{errors.roleCtl.message}</span>}
+              {errors.roleClt && <span className="error-message">{errors.roleCtl.message}</span>}
             </select>
             
               <div className="input-container">
                 <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="nom_prenom" className="noms" placeholder="Nom et Prénom(s)"
                   {...register("nomsClt", { required: "Veuillez saisir votre nom" })} />
-                {errors.nomsClt && <span>{errors.nomsClt.message}</span>}
+                  {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
               </div>
+
               <div className="input-container">
                 <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
                 <input type="email" name="email" id="mail" placeholder="E-mail"
                   {...register("mailClt", { required: "Veuillez saisir votre email" })} />
-                {errors.mailClt && <span>{errors.mailClt.message}</span>}
+                {errors.mailClt && <span className="error-message">{errors.mailClt.message}</span>}
               </div>
               <div className="input-container">
                 <i class='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
                 <select name="genre" id="genre" className="genre" defaultValue='' {...register("genreClt")} required>
                   <option value="homme">Homme</option>
                   <option value="femme">Femme</option>
-                  {errors.genreClt && <span>{errors.genreClt.message}</span>}
+                  {errors.genreClt && <span className="error-message">{errors.genreClt.message}</span>}
                 </select>
               </div>
               <div className="input-container">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                 <div className="adresse">
-                  <label id="ville-label">Ville</label>
                   <select
-                    labelId="ville-label"
                     id="ville"
                     value={selectedVille}
                     onChange={handleVilleChange}
-                    label="Ville"
                   >
-                    <option value=""></option>
+                    <option value="ville">Ville</option>
                     {villes.map(ville => (
                       <option key={ville.id} value={ville.id}>{ville.ville}</option>
                     ))}
@@ -299,25 +288,21 @@ export default function Inscription() {
                 </div>
 
                 <div className="adresse">
-                  <label id="commune-label">Commune</label>
                   <select
-                    labelId="commune-label"
                     id="commune"
                     value={selectedCommune}
                     onChange={handleCommuneChange}
-                    label="Commune"
                     disabled={!selectedVille} // Désactiver si aucune ville sélectionnée
                   >
+                    <option value="commune">Commune</option>
                     {communes.map(commune => (
-                      <option key={commune.id} value={commune.id}>{commune.nom}</option>
+                      <option key={commune.id} value={commune.id}>{commune.commune}</option>
                     ))}
                   </select>
                 </div>
 
                 <div >
-                  <label id="quartier-label">Quartier</label>
                   <select
-                    labelId="quartier-label"
                     id="quartierClt"
                     {...register("quartierClt", { required: "Ce champ est obligatoire" })}
                     value={selectedQuartier}
@@ -326,11 +311,11 @@ export default function Inscription() {
                       handleQuartierChange(e);
                       console.log('Quartier sélectionné:', e.target.value); // Ajoutez cette ligne
                     }}
-                    label="Quartier"
                     disabled={!selectedCommune}
                   >
+                    <option value="quartier">Quartier</option>
                     {quartiers.map(quartier => (
-                      <option key={quartier.id} value={quartier.id}>{quartier.nom}</option>
+                      <option key={quartier.id} value={quartier.id}>{quartier.quartier}</option>
                     ))}
                   </select>
                 </div>
@@ -340,7 +325,7 @@ export default function Inscription() {
                 <span style={{ marginRight: '5px' }}>+224</span>
                 <input type="tel" name="telClt" id="telClt" placeholder="Numéro de téléphone"
                   {...register("telClt", { required: "Entrez votre numéro de téléphone", validate: value => tel(value) || "Numéro de téléphone invalide" })} />
-                {errors.telClt && <span>{errors.telClt.message}</span>}
+                {errors.telClt && <span className="error-message">{errors.telClt.message}</span>}
               </div>
               <div className="input-container">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
@@ -384,7 +369,7 @@ export default function Inscription() {
                     minLength: { value: 8, message: "Entrez un mot de passe de 8 caractères minimum" },
                     validate: value => isPasswordValid(value) || "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
                   })} />
-                {errors.mdpClt && <p>{errors.mdpClt.message}</p>}
+                {errors.mdpClt && <p className="error-message">{errors.mdpClt.message}</p>}
               </div>
               <div className="input-container">
                 <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
@@ -433,14 +418,12 @@ export default function Inscription() {
               <div className="input-container">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                 <div className="adresse">
-                  <label id="ville-label">Ville</label>
                   <select
-                    labelId="ville-label"
                     id="ville"
                     value={selectedVille}
                     onChange={handleVilleChange}
-                    label="Ville"
                   >
+                    <option value="ville">Ville</option>
                     {villes.map(ville => (
                       <option key={ville.id} value={ville.id}>{ville.ville}</option>
                     ))}
@@ -448,25 +431,21 @@ export default function Inscription() {
                 </div>
 
                 <div className="adresse">
-                  <label id="commune-label">Commune</label>
                   <select
-                    labelId="commune-label"
                     id="commune"
                     value={selectedCommune}
                     onChange={handleCommuneChange}
-                    label="Commune"
                     disabled={!selectedVille} // Désactiver si aucune ville sélectionnée
                   >
+                    <option value="commune">Commune</option>
                     {communes.map(commune => (
-                      <option key={commune.id} value={commune.id}>{commune.nom}</option>
+                      <option key={commune.id} value={commune.id}>{commune.commune}</option>
                     ))}
                   </select>
                 </div>
 
                 <div >
-                  <label id="quartier-label">Quartier</label>
                   <select
-                    labelId="quartier-label"
                     id="quartierPME"
                     {...register("quartierPME", { required: "Ce champ est obligatoire" })}
                     value={selectedQuartier}
@@ -475,11 +454,11 @@ export default function Inscription() {
                       handleQuartierChange(e);
                       console.log('Quartier sélectionné:', e.target.value); // Ajoutez cette ligne
                     }}
-                    label="Quartier"
                     disabled={!selectedCommune}
                   >
+                    <option value="quartier">Quartier</option>
                     {quartiers.map(quartier => (
-                      <option key={quartier.id} value={quartier.id}>{quartier.nom}</option>
+                      <option key={quartier.id} value={quartier.id}>{quartier.quartier}</option>
                     ))}
                   </select>
                 </div>
@@ -571,8 +550,11 @@ export default function Inscription() {
           </form>
 
         )}
+        {isLoading && <div className="loader">Chargement...</div>}
         <a href="#" className="login-link">Vous êtes déjà inscrit? Connectez-vous</a>
       </Box>
     </Stack>
   );
 }
+
+export default Inscription;

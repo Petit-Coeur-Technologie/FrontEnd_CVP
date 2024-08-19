@@ -49,7 +49,7 @@
 }
 
 /* Style du logo */
-#logo {
+#lg {
   width: auto;
   height: 30px;
 }
@@ -246,4 +246,9 @@ a {
 
 a:hover {
   color: #fdb024;
+}
+
+.error-message {
+  color:#fdb024;
+  font-size: 12px;
 }
