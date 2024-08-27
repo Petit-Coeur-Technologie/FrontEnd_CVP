@@ -5,74 +5,34 @@
 }
 
 .home {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Aligne les cartes en haut */
-    background-color: #f4f4f4; /* Couleur de fond pour contraster avec les cartes */
-    min-height: 100vh; /* S'assure que la section occupe toute la hauteur de l'écran */
+  padding-top: 70px; /* Compense la hauteur de la navbar */
+  min-height: 100vh;
+
   }
   
   .cards-container {
     display: grid;
-    margin-top: 300px;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Augmenté la taille min */
     gap: 20px; /* Espacement entre les cartes */
     width: 100%;
-    max-width: 1200px;
-  }
-  
-  .card {
-    height: 200px;
-    background-color: #ffffff;
-    border-radius: 12px; /* Coins plus arrondis */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre plus douce et plus grande */
-    padding: 25px; /* Augmenté le padding interne */
-    transition: transform 0.2s, box-shadow 0.2s; /* Animation pour l'ombre et le déplacement */
-  }
-  
-  .card:hover {
-    transform: translateY(-10px); /* Déplacement légèrement augmenté */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
   }
 
-  .card-logo {
-    width: 100px; /* Taille du logo, ajustez selon vos besoins */
-    height: auto; /* Pour conserver le ratio d'aspect */
-    margin-bottom: 15px; /* Espacement sous le logo */
-    border-radius: 8px; /* Optionnel : arrondir les coins du logo */
-  }
-  
-  
-  .card-title {
-    font-size: 1.6em; /* Taille de police légèrement augmentée */
-    margin-bottom: 15px; /* Espacement augmenté sous le titre */
-    color: #222; /* Couleur de texte légèrement plus foncée */
-    font-weight: 600; /* Titre plus épais */
-  }
-  
-  .card-description {
-    font-size: 1em;
-    color: #555; /* Couleur de texte légèrement plus sombre */
-    line-height: 1.6; /* Espace entre les lignes pour une meilleure lisibilité */
-  }  
+  /* Bouton "Voir plus" */
+.voir-plus-container {
+  text-align: center;
+}
 
-  button {
-    background-color: #00804b;
-    border-radius: 50px;
-    color: white;
-    border: none;
-  }
-  
-  .rating-stars {
-    display: flex;
-    align-items: center;
-  }
-  
-  .star-filled {
-    color: #ffc107;
-  }
-  
-  .star-empty {
-    color: #e4e5e9;
-  }
-  
+.voir-plus-button {
+  background-color: #fdb024;
+  color: white;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.voir-plus-button:hover {
+  background-color: #fdb024;
+  color: #00804b;
+}

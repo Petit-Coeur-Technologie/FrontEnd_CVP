@@ -30,7 +30,6 @@ function Inscription() {
   const [selectedCommune, setSelectedCommune] = useState('');
   const [selectedQuartier, setSelectedQuartier] = useState('');
 
-
   const [formType, setFormType] = useState('client');
   const [userRole, setUserRole] = useState('menage');
   const [fileNames, setFileNames] = useState({
@@ -45,7 +44,7 @@ function Inscription() {
     fetch('https://ville-propre.onrender.com/villes')
       .then(response => response.json())
       .then(data => {
-        console.log('Villes:', data); // Ajoutez cette ligne
+        // console.log('Villes:', data);
         setVilles(data);
       })
       .catch(error => console.error('Erreur lors de la récupération des villes:', error));
@@ -57,36 +56,33 @@ function Inscription() {
     setSelectedCommune(''); 
     setSelectedQuartier('');
 
-    // Appeler l'API pour récupérer les communes liées à la ville sélectionnée
     fetch(`https://ville-propre.onrender.com/villes/${value}/communes`)
         .then(response => response.json())
         .then(data => {
             setCommunes(data);
         })
         .catch(error => console.error('Erreur lors de la récupération des communes:', error));
-};
+  };
 
+  const handleCommuneChange = (e) => {
+    const value = e.target.value;
+    setSelectedCommune(value);
+    setSelectedQuartier('');
 
-const handleCommuneChange = (e) => {
-  const value = e.target.value;
-  setSelectedCommune(value);
-  setSelectedQuartier('');
-
-  // Appeler l'API pour récupérer les quartiers liés à la commune sélectionnée
-  fetch(`https://ville-propre.onrender.com/communes/${value}/quartiers`)
+    fetch(`https://ville-propre.onrender.com/communes/${value}/quartiers`)
       .then(response => response.json())
       .then(data => {
           setQuartiers(data);
       })
       .catch(error => console.error('Erreur lors de la récupération des quartiers:', error));
-};
+  };
 
   const handleQuartierChange = (e) => {
     const value = parseInt(e.target.value, 10);
     if (!isNaN(value)) {
       setSelectedQuartier(value);
     } else {
-      setSelectedQuartier(''); // Réinitialiser si la valeur est invalide
+      setSelectedQuartier('');
     }
   };
 
@@ -110,26 +106,27 @@ const handleCommuneChange = (e) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    console.log('Données soumises :', data);
+    console.log('Tentative de soumission du formulaire avec les données :', data);
     if (!tel(data.telClt || data.telPME)) {
       toast.error("Numéro de téléphone invalide");
       return;
     }
-
+  
     if (data.mdpClt !== data.cmdpClt || data.mdpPME !== data.cmdpPME) {
       toast.error("Les mots de passe ne sont pas identiques.");
       return;
     }
-
-    // Préparation des données du formulaire
+  
     const formData = new FormData();
     let quartierId = parseInt(formType === 'pme' ? data.quartierPME : data.quartierClt, 10);
-
+  
     if (isNaN(quartierId)) {
       toast.error("Quartier invalide.");
       return;
     }
-
+  
     if (formType === 'pme') {
       formData.append('quartier_id', quartierId);
       formData.append('nom_prenom', data.nomsPME);
@@ -137,26 +134,25 @@ const handleCommuneChange = (e) => {
       formData.append('genre', data.genrePME);
       formData.append('email', data.mailPME);
       formData.append('mot_de_passe', data.mdpPME);
-
+  
       if (idFileRef.current && idFileRef.current.files.length > 0) {
         formData.append('copie_pi', idFileRef.current.files[0]);
       } else {
         toast.error("Veuillez télécharger une copie de votre pièce d'identité.");
         return;
       }
-
+  
       formData.append('nom_pme', data.nomPME);
       formData.append('description', data.descPME);
       formData.append('zone_intervention', data.zonePME);
       formData.append('num_enregistrement', data.numEnregistrementPME);
       formData.append('tarif_mensuel', data.tarifMensuelPME);
       formData.append('tarif_abonnement', data.tarifAbonnementPME);
-
+  
       if (logoFileRef.current && logoFileRef.current.files.length > 0) {
         formData.append('logo_pme', logoFileRef.current.files[0]);
       }
-
-      // Ajout des champs manquants
+  
       formData.append('create_at', new Date().toISOString());
       formData.append('update_at', new Date().toISOString());
       formData.append('is_actif', true);
@@ -168,19 +164,18 @@ const handleCommuneChange = (e) => {
       formData.append('genre', data.genreClt);
       formData.append('email', data.mailClt);
       formData.append('mot_de_passe', data.mdpClt);
-
-      // Ajout des champs manquants
+  
       formData.append('create_at', new Date().toISOString());
       formData.append('update_at', new Date().toISOString());
       formData.append('is_actif', true);
-
+  
       if (idFileRef.current && idFileRef.current.files.length > 0) {
         formData.append('copie_pi', idFileRef.current.files[0]);
       } else {
         toast.error("Veuillez télécharger une copie de votre pièce d'identité.");
         return;
       }
-
+  
       if (userRole === "entreprise") {
         formData.append('nom_entreprise', data.nomEntreprise);
         formData.append('num_rccm', data.nEntreprise);
@@ -189,31 +184,38 @@ const handleCommuneChange = (e) => {
         }
       }
     }
-
+  
     setIsLoading(true);
-    
+  
     const apiUrl = formType === 'pme' ? 'https://ville-propre.onrender.com/pme' : 'https://ville-propre.onrender.com/client';
 
-    fetch(apiUrl, {
-      method: 'POST',
-      body: formData,
-    })
-    .then(response => {
-      setIsLoading(false);
-      if (!response.ok) {
-        return response.json().then(error => { throw new Error(error.detail || 'Erreur inconnue') });
+    try {
+      console.log('Envoi des données à l\'API...');
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
+      });
+  
+      console.log('Réponse de l\'API :', response);
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Réponse de l\'API (données) :', result);
+        toast.success("Inscription réussie");
+        navigate('/connexion');
+      } else {
+        const errorData = await response.json();
+        console.error('Erreur lors de l\'inscription :', errorData);
+        toast.error("Erreur lors de l'inscription.");
       }
-      return response.json();
-    })
-    .then(data => {
-      navigate('/login');
-    })
-    .catch(error => {
-      console.error('Erreur lors de la création du compte:', error.message);
-      toast.error(error.message);
-    });
-
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi des données :', error);
+      toast.error("Erreur lors de l'inscription.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+  
 
   return (
     <Stack className="stack-container">
@@ -244,29 +246,31 @@ const handleCommuneChange = (e) => {
 
 
             <div className="form-container">
-              
-            <select name="role" id="role" className="type" {...register("roleClt")} onChange={handleUserRoleChange}  required>
+
+            <div className="input-container"> 
+            <select name="role" id="role" className="type selectIns" {...register("roleClt")} onChange={handleUserRoleChange}  required>
               <option value="menage">Ménage</option>
               <option value="entreprise">Entreprise</option>
               {errors.roleClt && <span className="error-message">{errors.roleCtl.message}</span>}
             </select>
+            </div>
             
               <div className="input-container">
                 <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
-                <input type="text" name="nom_prenom" className="noms" placeholder="Nom et Prénom(s)"
+                <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"
                   {...register("nomsClt", { required: "Veuillez saisir votre nom" })} />
                   {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
               </div>
 
               <div className="input-container">
                 <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
-                <input type="email" name="email" id="mail" placeholder="E-mail"
+                <input type="email" name="email" id="mail" placeholder="E-mail" className="inputIns"
                   {...register("mailClt", { required: "Veuillez saisir votre email" })} />
                 {errors.mailClt && <span className="error-message">{errors.mailClt.message}</span>}
               </div>
               <div className="input-container">
-                <i class='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
-                <select name="genre" id="genre" className="genre" defaultValue='' {...register("genreClt")} required>
+                <i className='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
+                <select name="genre" id="genre" className="genre selectIns" defaultValue='' {...register("genreClt")} required>
                   <option value="homme">Homme</option>
                   <option value="femme">Femme</option>
                   {errors.genreClt && <span className="error-message">{errors.genreClt.message}</span>}
@@ -279,6 +283,7 @@ const handleCommuneChange = (e) => {
                     id="ville"
                     value={selectedVille}
                     onChange={handleVilleChange}
+                    className="selectIns"
                   >
                     <option value="ville">Ville</option>
                     {villes.map(ville => (
@@ -293,6 +298,7 @@ const handleCommuneChange = (e) => {
                     value={selectedCommune}
                     onChange={handleCommuneChange}
                     disabled={!selectedVille} // Désactiver si aucune ville sélectionnée
+                    className="selectIns"
                   >
                     <option value="commune">Commune</option>
                     {communes.map(commune => (
@@ -307,6 +313,7 @@ const handleCommuneChange = (e) => {
                     {...register("quartierClt", { required: "Ce champ est obligatoire" })}
                     value={selectedQuartier}
                     name="quartier_id"
+                    className="selectIns"
                     onChange={(e) => {
                       handleQuartierChange(e);
                       console.log('Quartier sélectionné:', e.target.value); // Ajoutez cette ligne
@@ -323,13 +330,13 @@ const handleCommuneChange = (e) => {
               <div className="input-container">
                 <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                 <span style={{ marginRight: '5px' }}>+224</span>
-                <input type="tel" name="telClt" id="telClt" placeholder="Numéro de téléphone"
+                <input type="tel" name="telClt" id="telClt" placeholder="Numéro de téléphone" className="inputIns"
                   {...register("telClt", { required: "Entrez votre numéro de téléphone", validate: value => tel(value) || "Numéro de téléphone invalide" })} />
                 {errors.telClt && <span className="error-message">{errors.telClt.message}</span>}
               </div>
               <div className="input-container">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
-                <input type="file" name="copie_pi" id="copie_pi" className="file-upload"
+                <input type="file" name="copie_pi" id="copie_pi" className="file-upload inputIns"
                   ref={idFileRef} // Utilisation de ref pour le fichier d'identité
                   onChange={(e) => handleFileChange(e, 'idFile')} />
                 <label htmlFor="copie_pi" className="file-upload-label">
@@ -341,13 +348,13 @@ const handleCommuneChange = (e) => {
                 <>
                   <div className="input-container">
                     <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
-                    <input type="text" name="nom_entreprise" className="nom" placeholder="Nom de l'entreprise"
+                    <input type="text" name="nom_entreprise" className="nom inputIns" placeholder="Nom de l'entreprise"
                       {...register("nomEntreprise")} required/>
                   </div>
 
                   <div className="input-container">
                     <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
-                    <input type="file" name="logo_entreprise" id="logo_entreprise" className="file-upload"
+                    <input type="file" name="logo_entreprise" id="logo_entreprise" className="file-upload inputIns"
                       ref={logoFileRef} // Utilisation de ref pour le fichier du logo
                       onChange={(e) => handleFileChange(e, 'logoFile')} />
                     <label htmlFor="logo_entreprise" className="file-upload-label">
@@ -356,14 +363,14 @@ const handleCommuneChange = (e) => {
                   </div>
                   <div className="input-container">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
-                    <input type="text" name="num_rccm" className="registration" placeholder="Numéro d'enregistrement"
+                    <input type="text" name="num_rccm" className="registration inputIns" placeholder="Numéro d'enregistrement"
                       {...register("nEntreprise")} required />
                   </div>
                 </>
               )}
               <div className="input-container">
                 <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
-                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe"
+                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" className="inputIns"
                   {...register("mdpClt", {
                     required: "Entrez votre mot de passe",
                     minLength: { value: 8, message: "Entrez un mot de passe de 8 caractères minimum" },
@@ -373,7 +380,7 @@ const handleCommuneChange = (e) => {
               </div>
               <div className="input-container">
                 <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
-                <input type="password" name="cmdp" id="cmdp" placeholder="Confirmation de mot de passe"
+                <input type="password" name="cmdp" id="cmdp" placeholder="Confirmation de mot de passe" className="inputIns"
                   {...register("cmdpClt", {
                     required: "Confirmez votre mot de passe",
                     minLength: { value: 8, message: "Confirmez un mot de passe de 8 caratères minimum" }
@@ -381,14 +388,15 @@ const handleCommuneChange = (e) => {
               </div>
             </div>
             <div className="checkbox-container accept ">
-              <input type="checkbox" name="validate" id="validate"
+              <input type="checkbox" name="validate" id="validate" className="inputIns"
                 {...register("accept", { required: "Veuillez accepter les politiques de confidentialités!" })} />
-              <label htmlFor="validate">
-                J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer">politiques de confidentialité</a>
+              <label htmlFor="validate" className="labelPolitique">
+                J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
               </label>
             </div>
             <div>
-              <button type="submit" id="subCLT" className="sub">S'inscrire</button>
+              <button type="submit" id="subClt" className="sub" disabled={isLoading}>S'inscrire
+            </button>
             </div>
             <h3>Ou s'inscrire avec</h3>
             <div className="ins">
@@ -402,25 +410,26 @@ const handleCommuneChange = (e) => {
               {/* Contenu de la section PME */}
               <div className="input-container">
                 <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
-                <input type="text" name="nom_prenom" className="noms" placeholder="Nom et Prénom(s)"  {...register("nomsPME")} required />
+                <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"  {...register("nomsPME")} required />
               </div>
               <div className="input-container">
                 <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
-                <input type="email" name="email" id="mail" placeholder="E-mail"  {...register("mailPME")} required />
+                <input type="email" name="email" id="mail" className="inputIns" placeholder="E-mail"  {...register("mailPME")} required />
               </div>
               <div className="input-container">
-                <i class='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
-                <select name="genre" id="genre" className="genre" defaultValue=""  {...register("genrePME")} required>
+                <i className='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
+                <select name="genre" id="genre" className="genre selectIns" defaultValue=""  {...register("genrePME")} required>
                   <option value="homme">Homme</option>
                   <option value="femme">Femme</option>
                 </select>
               </div>
-              <div className="input-container">
+              <div className="input-container input-container2">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                 <div className="adresse">
                   <select
                     id="ville"
                     value={selectedVille}
+                    className="selectIns  selectIns1"
                     onChange={handleVilleChange}
                   >
                     <option value="ville">Ville</option>
@@ -436,6 +445,7 @@ const handleCommuneChange = (e) => {
                     value={selectedCommune}
                     onChange={handleCommuneChange}
                     disabled={!selectedVille} // Désactiver si aucune ville sélectionnée
+                    className="selectIns   selectIns2"
                   >
                     <option value="commune">Commune</option>
                     {communes.map(commune => (
@@ -450,6 +460,7 @@ const handleCommuneChange = (e) => {
                     {...register("quartierPME", { required: "Ce champ est obligatoire" })}
                     value={selectedQuartier}
                     name="quartier_id"
+                    className="selectIns   selectIns3"
                     onChange={(e) => {
                       handleQuartierChange(e);
                       console.log('Quartier sélectionné:', e.target.value); // Ajoutez cette ligne
@@ -466,12 +477,12 @@ const handleCommuneChange = (e) => {
               <div className="input-container">
                 <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                 <span style={{ marginRight: '5px' }}>+224</span>
-                <input type="tel" name="tel" id="telPME" placeholder="Numéro de téléphone"
-                  {...register("telPME", { required: "Entrez votre numéro de téléphone" })} />
+                <input type="tel" name="tel" id="telPME" placeholder="Numéro de téléphone" className="inputIns"
+                  {...register("telPME")} required/>
               </div>
               <div className="input-container">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
-                <input type="file" name="copie_pi" id="copie_pi" className="file-upload"
+                <input type="file" name="copie_pi" id="copie_pi" className="file-upload inputIns"
                   ref={idFileRef} // Utilisation de ref pour le fichier d'identité
                   onChange={(e) => handleFileChange(e, 'idFile')} />
                 <label htmlFor="copie_pi" className="file-upload-label">
@@ -480,17 +491,17 @@ const handleCommuneChange = (e) => {
               </div>
               <div className="input-container">
                 <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
-                <input type="text" name="nom_pme" className="nom" placeholder="Nom de la PME"
+                <input type="text" name="nom_pme" className="nom inputIns" placeholder="Nom de la PME"
                   {...register("nomPME")} required />
               </div>
               <div className="input-container">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
-                <input type="text" name="num_enregistrement" className="registration"
+                <input type="text" name="num_enregistrement" className="registration inputIns"
                   placeholder="Numéro d'enregistrement"  {...register("numEnregistrementPME")} required />
               </div>
               <div className="input-container">
                 <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
-                <input type="file" name="logo_pme" id="logo_pme" className="file-upload"
+                <input type="file" name="logo_pme" id="logo_pme" className="file-upload inputIns"
                   ref={logoFileRef} // Utilisation de ref pour le fichier du logo
                   onChange={(e) => handleFileChange(e, 'logoFile')} />
                 <label htmlFor="logo_pme" className="file-upload-label">
@@ -499,7 +510,7 @@ const handleCommuneChange = (e) => {
               </div>
               <div className="input-container">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
-                <input type="zone" name="zone_intervention" className="zone" placeholder="Zone d'intervention"
+                <input type="zone" name="zone_intervention" className="zone inputIns" placeholder="Zone d'intervention"
                   {...register("zonePME")} required />
               </div>
               <div className="text-container">
@@ -511,17 +522,17 @@ const handleCommuneChange = (e) => {
               </div>
               <div className="input-container">
                 <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
-                <input type="text" name="tarif_mensuel" className="tarif-mensuel" placeholder="Tarif mensuel (en GNF)"
+                <input type="text" name="tarif_mensuel" className="tarif-mensuel inputIns" placeholder="Tarif mensuel (en GNF)"
                   {...register("tarifMensuelPME", { required: "Entrez le tarif mensuel" })} />
               </div>
               <div className="input-container">
                 <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
-                <input type="text" name="tarif_abonnement" className="tarif-abonnement" placeholder="Tarif abonnement (en GNF)"
+                <input type="text" name="tarif_abonnement" className="tarif-abonnement inputIns" placeholder="Tarif abonnement (en GNF)"
                   {...register("tarifAbonnementPME", { required: "Entrez le tarif abonnement" })} />
               </div>
               <div className="input-container">
                 <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
-                <input type="password" name="mot_de_passe" id="mdpPME" placeholder="Mot de passe"
+                <input type="password" name="mot_de_passe" id="mdpPME" className="inputIns" placeholder="Mot de passe"
                   {...register("mdpPME", {
                     required: "Entrez votre mot de passe",
                     minLength: { value: 8, message: "Entrez un mot de passe de 8 caractères minimum" },
@@ -531,27 +542,28 @@ const handleCommuneChange = (e) => {
               </div>
               <div className="input-container">
                 <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
-                <input type="password" name="cmdpPME" id="cmdpPME" placeholder="Confirmation de mot de passe"
+                <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
                   {...register("cmdpPME", {
                     required: "Confirmez votre mot de passe",
                     validate: value => value === watch("mdpPME") || "Les mots de passe doivent correspondre"
                   })} />
               </div>
               <div className="checkbox-container">
-                <input type="checkbox" name="validate" id="validate" required />
-                <label htmlFor="validate">
-                  J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer">politiques de confidentialité</a>
+                <input type="checkbox" name="validate" id="validate" className="inputIns" required />
+                <label htmlFor="validate" className="labelPolitique">
+                  J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                 </label>
               </div>
               <div>
-                <button type="submit" id="subPME" className="sub">S'inscrire</button>
+                <button type="submit" id="subPME" className="sub" disabled={isLoading}>
+              {isLoading ? 'Chargement...' : 'S\'inscrire'}
+            </button>
               </div>
             </div>
           </form>
 
         )}
-        {isLoading && <div className="loader">Chargement...</div>}
-        <a href="#" className="login-link">Vous êtes déjà inscrit? Connectez-vous</a>
+        <a href='/connexion' className="login-link" >Vous êtes déjà inscrit? Connectez-vous</a>
       </Box>
     </Stack>
   );

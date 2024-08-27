@@ -61,7 +61,7 @@
 }
 
 /* Style général pour les boutons */
-button {
+.client, .pme {
   width: 100px;
   height: auto;
   margin: 10px 0px;
@@ -88,8 +88,8 @@ button {
 }
 
 .type{
-    width: 150px;
-    height: 30px;
+  width: 150px;
+  height: 30px;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   background-color: #00804b;
@@ -98,7 +98,8 @@ button {
 
 /* Conteneur des champs de saisie avec icône */
 .input-container {
-  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
   position: relative;
   display: flex;
   align-items: center;
@@ -121,22 +122,31 @@ button {
 }
 
 /* Style des champs de saisie, des sélecteurs et des zones de texte */
-input,
-select,
-textarea {
+.inputIns,
+.selectIns,
+.desc {
   background: #00804b;
   border: none;
   color: #ffffff;
   outline: none;
   font-size: 15px;
 }
+.selectIns1{
+  width: 60px!important;
+}
+.selectIns2{
+  width: 100px!important;
+}
+.selectIns3{
+  width: 100px!important;
+}
 
-input::placeholder, select::placeholder, textarea::placeholder{
+.inputIns::placeholder, .selectIns::placeholder, .desc::placeholder{
     color: #d9d9d9;
 }
 
 /* Cacher l'input file */
-input[type="file"] {
+.inputIns[type="file"] {
   display: none;
 }
 
@@ -159,7 +169,7 @@ input[type="file"] {
 }
 
 /* Style du textarea */
-textarea, #cmdp {
+.desc, #cmdp {
   width: calc(100% - 10px);
   height: 50px;
   resize: none;
@@ -189,7 +199,7 @@ textarea, #cmdp {
 }
 
 /* Style pour le texte à côté de la case à cocher */
-.checkbox-container label {
+.labelPolitique {
   margin-left: 5px;
 }
 
@@ -205,6 +215,10 @@ textarea, #cmdp {
   background-color: #fdb024;
   color: #00804b;
   font-size: 17px;
+  cursor: pointer;
+}
+.sub:active {
+  background-color: #d89008;
 }
 
 .ins{
@@ -239,12 +253,12 @@ textarea, #cmdp {
 }
 
 /* Style du lien en bas de la boîte */
-a {
+.lienPolitique, .login-link {
   color: #ffffff;
   text-decoration: none;
 }
 
-a:hover {
+.lienPolitique:hover, .login-link:hover {
   color: #fdb024;
 }
 
