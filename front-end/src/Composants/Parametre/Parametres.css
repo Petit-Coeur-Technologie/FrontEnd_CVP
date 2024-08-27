@@ -1,0 +1,75 @@
+
+/* Styles pour le conteneur des paramètres */
+.conteneurParametre {
+    display: flex;
+    padding: 20px;
+  }
+  
+  /* Styles pour le menu latéral */
+  .menu {
+    width: 250px;
+    border-right: 1px solid #ccc;
+    overflow-y: scroll;
+    max-height: 500px;
+  }
+  
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .menu li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .menu li.active {
+    background-color: #e0e0e0;
+    font-weight: bold;
+  }
+  
+  /* Styles pour le contenu */
+  .contenu {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  /* Styles pour les boutons */
+  .btn {
+    margin: 5px 10px 5px 0;
+    padding: 10px 15px;
+    background-color: #f8f9fa; /* Couleur de fond subtile */
+    color: #333; /* Couleur du texte */
+    border: 1px solid #ccc; /* Bordure subtile */
+    border-radius: 4px; /* Coins arrondis */
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, border-color 0.3s; /* Effet de transition pour le survol */
+  }
+  
+  .btn:hover {
+    background-color: #e2e6ea; /* Couleur de fond au survol */
+    border-color: #b8bcc1; /* Couleur de la bordure au survol */
+  }
+  
+  /* Styles pour les boutons de danger */
+  .btn.danger {
+    background-color: #f8d7da; /* Couleur de fond subtile pour les avertissements */
+    color: #721c24; /* Couleur du texte pour les avertissements */
+    border: 1px solid #f5c6cb; /* Bordure subtile pour les avertissements */
+  }
+  
+  .btn.danger:hover {
+    background-color: #f1b0b7; /* Couleur de fond au survol pour les avertissements */
+    border-color: #f1b0b7; /* Couleur de la bordure au survol pour les avertissements */
+  }

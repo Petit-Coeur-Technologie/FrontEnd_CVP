@@ -1,0 +1,268 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* Conteneur principal pour centrer la boîte */
+.stack-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: #ffffff;
+  height: 100vh;
+}
+
+/* Conteneur pour l'image et le titre */
+.right-container {
+  position: absolute;
+  width: calc(50% - 10px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 20px;
+}
+
+.background{
+  width:calc(90%-20px);
+  height: 90%;
+}
+
+/* Conteneur de la boîte principale */
+/* Fixe la hauteur pour éviter les variations */
+.box-container {
+  position: absolute;
+  right: 20px;
+  width: 520px;
+  height: 100%; /* Hauteur fixée pour éviter les changements */
+  padding: 5px 10px;
+  background-color: #00804b;
+  color: #ffffff;
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pour s'assurer que tout le contenu est bien positionné */
+}
+
+/* Style du logo */
+#lg {
+  width: auto;
+  height: 30px;
+}
+
+/* Groupe de boutons pour basculer entre les types de formulaires */
+.button-group {
+  display: flex;
+  justify-content: center;
+}
+
+/* Style général pour les boutons */
+.client, .pme {
+  width: 100px;
+  height: auto;
+  margin: 10px 0px;
+  border: none;
+  border-bottom: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+  border-left: 1px solid #d9d9d9;
+  outline: none;
+  border-radius: 5px;
+  background-color: #00804b;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Conteneur du formulaire et des champs de saisie */
+.form-container {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.type{
+  width: 150px;
+  height: 30px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background-color: #00804b;
+  margin-bottom: 10px;
+}
+
+/* Conteneur des champs de saisie avec icône */
+.input-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(50% - 5px);
+  height: 35px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background-color: #00804b;
+  box-sizing: border-box;
+}
+
+.input-container:last-child {
+  margin-right: auto;
+}
+
+/* Style des icônes dans les champs de saisie */
+.input-container i {
+  color: #fdb024;
+  margin: 0px 5px;
+}
+
+/* Style des champs de saisie, des sélecteurs et des zones de texte */
+.inputIns,
+.selectIns,
+.desc {
+  background: #00804b;
+  border: none;
+  color: #ffffff;
+  outline: none;
+  font-size: 15px;
+}
+.selectIns1{
+  width: 60px!important;
+}
+.selectIns2{
+  width: 100px!important;
+}
+.selectIns3{
+  width: 100px!important;
+}
+
+.inputIns::placeholder, .selectIns::placeholder, .desc::placeholder{
+    color: #d9d9d9;
+}
+
+/* Cacher l'input file */
+.inputIns[type="file"] {
+  display: none;
+}
+
+/* Styliser le label comme un bouton */
+.custom-file-upload {
+  width: calc(60% - 5px);
+  height: 70%;
+  font-size: 16px;
+  cursor: pointer;
+  color:#000000;
+  background-color: #fbbc05;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#file-name {
+  font-size: small;
+}
+
+/* Style du textarea */
+.desc, #cmdp {
+  width: calc(100% - 10px);
+  height: 50px;
+  resize: none;
+}
+
+/* Conteneur pour le texte (textarea) */
+.text-container {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 5px);
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background-color: #00804b;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Conteneur pour la case à cocher */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#validate{
+  border: none ;
+}
+
+/* Style pour le texte à côté de la case à cocher */
+.labelPolitique {
+  margin-left: 5px;
+}
+
+.accept{
+  margin-top: 5px;
+}
+
+/* Style spécifique pour le bouton "submit" */
+.sub {
+  width: 200px;
+  height: 30px;
+  border: none;
+  background-color: #fdb024;
+  color: #00804b;
+  font-size: 17px;
+  cursor: pointer;
+}
+.sub:active {
+  background-color: #d89008;
+}
+
+.ins{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    }
+
+.cercle{
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 10px 20px;
+}
+
+/* Icône Google pour l'inscription */
+.google-icon {
+  background: linear-gradient(
+    to right,
+    #4285f4 25%,
+    #34a853 25%,
+    #34a853 50%,
+    #fbbc05 50%,
+    #fbbc05 75%,
+    #ea4335 75%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
+}
+
+/* Style du lien en bas de la boîte */
+.lienPolitique, .login-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.lienPolitique:hover, .login-link:hover {
+  color: #fdb024;
+}
+
+.error-message {
+  color:#fdb024;
+  font-size: 12px;
+}

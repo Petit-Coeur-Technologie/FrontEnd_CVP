@@ -1,0 +1,64 @@
+:root {
+  /* Définition des couleurs personnalisées à utiliser tout au long du CSS */
+  --jaunefonce: #fdb024;
+  --vert: #00804b;
+  --gris: rgb(229, 229, 229);
+  --grisclair: rgb(190, 190, 190);
+  --bleu: rgb(14, 80, 160);
+  --bleuclair:#007BFF;
+  --blanc: rgb(255, 255, 255);
+  --noir: black;
+  --violetclair: blueviolet;
+  --rouge: rgb(189, 0, 0);
+  --transparant: transparent;
+  --police: Verdana, Geneva, Arial, 'Lucida Sans', sans-serif;
+}
+
+*{
+  /* Réinitialise les marges, les paddings et la boîte de dimensionnement pour tous les éléments */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family:var(--police); 
+}
+  
+/* ----------------------- Pour styliser le fichier Home.jsx---------------------------- */
+.conteneurHome{
+    padding: 20px;
+}
+
+/* ----------------------- Pour styliser le fichier AideAssistance.jsx---------------------------- */
+.dAide {
+  padding: 5px;
+  overflow-y: auto;
+  max-height: 520px;
+}
+.dAideChild{
+  padding-right: 5px;
+}
+
+.pAide {
+  white-space: pre-wrap; /* Conserve les espaces blancs et les sauts de ligne */
+  line-height: 1.5; /* Ajuste la hauteur de ligne pour une meilleure lisibilité */
+  padding: 10px; /* Ajoute un peu d'espace autour du texte */
+  background-color: #f4f4f4; /* Ajoute une couleur de fond pour mieux voir le texte */
+  text-align: justify;
+}
+.pAide h3{
+  text-indent: 10px;
+}
+
+/* ----------------------- Pour styliser le fichier Notification.jsx---------------------------- */
+.divNotification2{
+  margin: 20px;
+  height: 100vh;
+  width: 96.5%;
+}
+
+.divPreparation{
+  padding: 20px;
+}
+.btnActiver{
+  border-radius: 10px;
+}
