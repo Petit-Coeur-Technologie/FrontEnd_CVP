@@ -10,11 +10,11 @@
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:space-between;
   max-width: 100%;
   height: 100%;
   padding: 0 20px; /* Espacement pour éviter que le contenu touche les bords */
-  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  box-sizing: border-box; 
 }
 
 /* Conteneur pour l'image et le titre */
@@ -41,15 +41,11 @@
 
 /* Conteneur de la boîte principale */
 .box-container {
-  flex: 1;
   padding: 20px 10px; /* Espacement interne généreux */
   height: 100%;
   background-color: #00804b; /* Couleur de fond principale */
   color: #ffffff; /* Couleur du texte */
   border-radius: 12px; /* Coins arrondis */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centre le contenu verticalement */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Ombre légère pour un effet de profondeur */
   position: relative; /* Position relative pour les éléments internes */
   left: 0;
@@ -102,14 +98,14 @@
   background-color: #004d40;
 }
 .input-containerMENAGE{
-  width: 100%!important;
+  width: 100%;
 }
 /* Conteneur du formulaire et des champs de saisie */
 .form-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   height: 70%;
 }
@@ -125,8 +121,7 @@
   background-color: #04623b;
   box-sizing: border-box;
   padding: 0 10px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 /* Style des icônes dans les champs de saisie */
@@ -348,12 +343,6 @@
   text-decoration: none;
   /* font-size: 14px; */
 }
-.login-link{
- display: flex;
- justify-content: center;
-  /* padding-top: 10px;
-  margin-top: 15px; */
-}
 
 .lienPolitique:hover, .login-link:hover {
   color: #fdb024;
@@ -373,38 +362,129 @@
   font-size: 35px;
 }
 
-@media (max-width:970px){
+/* POUR GERER LE RESPONSIVE DE FORMULAIRE D'INSCRIPTION (ES MEDIA SCREEN)  */
+
+@media (min-width:900px){
+  .box-container{
+    width: 60%!important;
+  }
   .labelPolitique, .login-link, .textInscrireAvec{
     font-size: 13px;
   }
-
-  /* .insEntreprise{
+  .checkbox-container .labelPolitique .lienPolitique{
+    width: 50%;
+  }
+  .input-containerMENAGE{
+    width: 88%!important;
+  }
+  .accept{
+    margin-left: 30px;
+    display:flex;
+    justify-content: start;
+  }
+  .divLogin-link2{
+    margin-top: 10px!important;
+  }
+  .ins{
+    width: 98%;
+  }
+  .text-container{
+    width: 95.5%!important;
+  }
+  .input-containerTablettePolitique{
     position: relative;
-    top: 10px;
-    bottom: 10px;
-  } */
+    left: -100px;
+  }
+  .subPME{
+    position: relative;
+    left: 210px;
+  }
+  .form-container{
+    height: 50%;
+    /* justify-content: space-between; */
+    margin-left: 30px;
+  }
+  .checkbox-container{
+    width: 100%!important;
+  }
+  .labelPolitique, .login-link{
+    font-size: 16px;
+  }
+  .input-containerMENAGE{
+    width: 97%!important;
+  }
 }
 
-@media (max-width:820px) {
-  /* Conteneur du formulaire et des champs de saisie */
-  .stack-container{
+@media (min-width:751px){
+  .box-container{
     width: 70%;
-    position: relative;
-    left: 14%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    flex: 1;
+  }
+  .input-containerMENAGE{
+    width: 98.2%!important;
+  }
+}
+
+/* Responsive pour les tablettes */
+@media (max-width:750px){
+  .box-container{
+    left: -10px;
+  }
+  .labelPolitique, .login-link, .textInscrireAvec{
+    font-size: 13px;
   }
   .right-container {
     display:none;
   }
-  /* .input-container, .input-containerMENAGE{
-    width: 90%!important;
-  } */
-
+  .checkbox-container .labelPolitique .lienPolitique{
+    width: 50%;
+  }
+  .input-container, .checkbox-container,.accept, .text-container{
+    width: 47%!important;
+  }
+  .input-containerMENAGE{
+    width: 95.5%!important;
+  }
+  .accept{
+    margin-left: 30px;
+    display:flex;
+    justify-content: start;
+  }
+  .divLogin-link2{
+    margin-top: 10px!important;
+  }
+  .ins{
+    width: 98%;
+  }
+  .text-container{
+    width: 95.5%!important;
+  }
+  .input-containerTablettePolitique{
+    position: relative;
+    left: -100px;
+  }
+  .subPME{
+    position: relative;
+    left: 180px;
+  }
+  .form-container{
+    height: 50%;
+    /* justify-content: space-between; */
+    margin-left: 30px;
+  }
+  .checkbox-container{
+    width: 100%!important;
+  }
+  .labelPolitique, .login-link{
+    font-size: 16px;
+  }
 }
-@media (max-width:500px) {
 
+@media (max-width:700px) {
+
+  .box-container{
+    width: 90%;
+    left: 30px;
+  }
   .input-container, .input-containerMENAGE, .checkbox-container,.accept, .text-container{
     width: 90%!important;
   }
@@ -417,19 +497,64 @@
   .ins{
     width: 98%;
   }
+  .form-container{
+    height: 50%;
+    margin-left: 30px;
+  }
+
   .form-container2{
     gap: 10px;
   }
   .input-container{
     overflow-x: hidden;
-    /* width: 50%!important; */
+    width: 94%!important;
+  }
+  .input-containerSelect{
+    width: 46%!important;
   }
   .stack-container{
     width: 90%;
     position: relative;
     left: 2%;
   }
-  .input-container{
+  .input-container, .selectIns{
     font-size: 14px;
   }
+  .text-container{
+    width: 94%!important;
+  }
+  .subPME{
+    position: relative;
+    left: 90px;
+  }
+}
+
+.divMereTest{
+  height: 300px;
+  width: 300px;
+  background-color: rgb(15, 102, 93);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  /* position: relative; */
+  position: fixed;
+}
+
+.divfille1{
+  background-color: #ea4335;
+  height: 30px;
+  width: 30px;
+  position: fixed;
+}
+.divfille2{
+  background-color: #81920e;
+  height: 30px;
+  width: 30px;
+ 
+  /* left: 10px; */
+}
+.divfille3{
+  background-color: #35ea53;
+  height: 30px;
+  width: 30px;
 }
