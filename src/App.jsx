@@ -22,7 +22,6 @@ import Details from './Composants/Details/Details.jsx';
 import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
-import Register from './pages/Register/register.jsx';
 
 function App() {
   const location = useLocation();
@@ -30,7 +29,6 @@ function App() {
   // Condition pour vérifier si on est sur une page qui ne doit pas afficher Navbar et Footer
   const hideNavbarAndFooter =
     location.pathname === '/inscription' ||
-    location.pathname === '/register' ||
     location.pathname === '/connexion' ||  // Add this line to hide Navbar and Footer on the login page
     location.pathname.startsWith('/dashboard');
 
@@ -42,7 +40,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Accueil />} />
         <Route path='/inscription' element={<Inscription />} />
-        <Route path='/register' element={<Register />} />
         <Route path='/sens' element={<Sensibilisation />} />
         <Route path='/pmes' element={<Pmes />} />
         <Route path='/pmes/:id' element={<InfosPme/>}/>
