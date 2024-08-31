@@ -272,7 +272,6 @@ function Inscription() {
 
 
             <div className={`form-container ${userRole === 'entreprise' ? 'form-container2' : ''}`}>
-
             <div className={`input-container ${userRole === 'menage' ? 'input-containerMENAGE' : ''}`}> 
               <select name="role" id="role" className="type selectIns" {...register("roleClt")} onChange={handleUserRoleChange}  required>
                 <option value="menage">Ménage</option>
@@ -283,20 +282,20 @@ function Inscription() {
             </div>
             
             
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"
                   {...register("nomsClt", { required: "Veuillez saisir votre nom" })} />
                   {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
               </div>
 
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
                 <input type="email" name="email" id="mail" placeholder="E-mail" className="inputIns"
                   {...register("mailClt", { required: "Veuillez saisir votre email" })} />
                 {errors.mailClt && <span className="error-message">{errors.mailClt.message}</span>}
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerSelect input-containerTablette">
                 <i className='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
                 <select name="genre" id="genre" className="genre selectIns" defaultValue='' {...register("genreClt")} required>
                   <option value="homme">Homme</option>
@@ -304,14 +303,17 @@ function Inscription() {
                   {errors.genreClt && <span className="error-message">{errors.genreClt.message}</span>}
                 </select>
               </div>
-              <div className="input-container">
+
+                {/* -------- Pour la selection de la ville, la commun et le quartier si c'est un Client -------------------------------*/}
+                {/* Pour la selection de la ville */}
+              <div className="input-container input-containerSelect input-containerTablette">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                 <div className="adresse">
                   <select
                     id="ville"
                     value={selectedVille}
                     onChange={handleVilleChange}
-                    className="selectIns"
+                    className="selectIns "
                   >
                     <option value="ville">Ville</option>
                     {villes.map(ville => (
@@ -319,14 +321,17 @@ function Inscription() {
                     ))}
                   </select>
                 </div>
+              </div>
 
+              <div className="input-container input-containerSelect input-containerTablette">
+                <i class='bx bx-home'></i>
                 <div className="adresse">
                   <select
                       id="commune"
                       value={selectedCommune}
                       onChange={handleCommuneChange}
                       disabled={!selectedVille}
-                      className="selectIns"
+                      className="selectIns "
                     >
                       <option value="">Commune</option>
                       {communes.map(commune => (
@@ -334,8 +339,11 @@ function Inscription() {
                       ))}
                   </select>
                 </div>
+              </div>
 
-                <div >
+              <div className="input-container input-containerSelect input-containerTablette">
+                <i class='bx bx-home-alt-2'></i>
+                <div>
                   <select
                     id="quartierClt"
                     {...register("quartierClt", { required: "Ce champ est obligatoire" })}
@@ -359,14 +367,14 @@ function Inscription() {
 
 
 
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                 <span style={{ marginRight: '5px' }}>+224</span>
                 <input type="tel" name="telClt" id="telClt" placeholder="Numéro de téléphone" className="inputIns"
                   {...register("telClt", { required: "Entrez votre numéro de téléphone", validate: value => tel(value) || "Numéro de téléphone invalide" })} />
                 {errors.telClt && <span className="error-message">{errors.telClt.message}</span>}
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                 <input type="file" name="copie_pi" id="copie_pi" className="file-upload inputIns"
                   ref={idFileRef} // Utilisation de ref pour le fichier d'identité
@@ -379,13 +387,13 @@ function Inscription() {
               {userRole === "entreprise" && (
 
                 <>
-                  <div className="input-container">
+                  <div className="input-container input-containerTablette">
                     <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="nom_entreprise" className="nom inputIns" placeholder="Nom de l'entreprise"
                       {...register("nomEntreprise")} required/>
                   </div>
 
-                  <div className="input-container">
+                  <div className="input-container input-containerTablette">
                     <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="logo_entreprise" id="logo_entreprise" className="file-upload inputIns"
                       ref={logoFileRef} // Utilisation de ref pour le fichier du logo
@@ -394,14 +402,14 @@ function Inscription() {
                       {fileNames.logoFile}
                     </label>
                   </div>
-                  <div className="input-container">
+                  <div className="input-container input-containerTablette">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="num_rccm" className="registration inputIns" placeholder="Numéro d'enregistrement"
                       {...register("nEntreprise")} required />
                   </div>
                 </>
               )}
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
               
                 <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
                 <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" className="inputIns"
@@ -412,7 +420,7 @@ function Inscription() {
                   })} />
                 {errors.mdpClt && <p className="error-message">{errors.mdpClt.message}</p>}
               </div>
-              <div className="input-container input-containerMDP">
+              <div className="input-container input-containerMDP input-containerTablette">
                 <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
                 <input type="password" name="cmdp" id="cmdp" placeholder="Confirmation de mot de passe" className="inputIns"
                   {...register("cmdpClt", {
@@ -442,15 +450,15 @@ function Inscription() {
           <form action="" onSubmit={handleSubmit(onSubmitEnvois)}>
             <div className="form-container">
               {/* Contenu de la section PME */}
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"  {...register("nomsPME")} required />
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
                 <input type="email" name="email" id="mail" className="inputIns" placeholder="E-mail"  {...register("mailPME")} required />
               </div>
-              <div className="input-container input-container2">
+              <div className="input-container input-container2 input-containerSelect input-containerTablette">
                 <i className='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
                 <select name="genre" id="genre" className="genre selectIns" defaultValue=""  {...register("genrePME")} required>
                   <option value="homme">Homme</option>
@@ -458,7 +466,9 @@ function Inscription() {
                 </select>
               </div>
 
-              <div className="input-container input-container2">
+              {/* -------- Pour la selection de la ville, la commun et le quartier si c'est une PME -------------------------------*/}
+                {/* Pour la selection de la ville */}
+              <div className="input-container input-container2 input-containerSelect input-containerTablette">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                 <div className="adresse">
                   <select
@@ -473,7 +483,11 @@ function Inscription() {
                     ))}
                   </select>
                 </div>
-
+              </div>
+                
+                {/* Pour la selection de la commun */}
+              <div className="input-container input-container2 input-containerSelect input-containerTablette">
+              <i class='bx bx-home'></i>
                 <div className="adresse">
                   <select
                     id="commune"
@@ -488,8 +502,12 @@ function Inscription() {
                     ))}
                   </select>
                 </div>
+              </div>
 
-                <div >
+                {/* Pour la selection du quartier */}
+              <div className="input-container input-container2 input-containerSelect input-containerTablette">
+                <i class='bx bx-home-alt-2'></i>
+                 <div className="adresse">
                   <select
                     id="quartierPME"
                     {...register("quartierPME", { required: "Ce champ est obligatoire" })}
@@ -508,14 +526,17 @@ function Inscription() {
                     ))}
                   </select>
                 </div>
-              </div>
-              <div className="input-container">
+            </div>
+
+            {/* ------------------------------------------------------------------------------------------------- */}
+
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                 <span style={{ marginRight: '5px' }}>+224</span>
                 <input type="tel" name="tel" id="telPME" placeholder="Numéro de téléphone" className="inputIns"
                   {...register("telPME")} required/>
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                 <input type="file" name="copie_pi" id="copie_pi" className="file-upload inputIns"
                   ref={idFileRef} // Utilisation de ref pour le fichier d'identité
@@ -524,17 +545,17 @@ function Inscription() {
                   {fileNames.idFile}
                 </label>
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="nom_pme" className="nom inputIns" placeholder="Nom de la PME"
                   {...register("nomPME")} required />
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="num_enregistrement" className="registration inputIns"
                   placeholder="Numéro d'enregistrement"  {...register("numEnregistrementPME")} required />
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                 <input type="file" name="logo_pme" id="logo_pme" className="file-upload inputIns"
                   ref={logoFileRef} // Utilisation de ref pour le fichier du logo
@@ -543,29 +564,29 @@ function Inscription() {
                   {fileNames.logoFile}
                 </label>
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                 <input type="zone" name="zone_intervention" className="zone inputIns" placeholder="Zone d'intervention"
                   {...register("zonePME")} required />
               </div>
-              <div className="text-container">
+              <div className="text-container input-containerTablette">
                 <textarea name="description" id="desc" className="desc" placeholder="Description de la PME"
                   {...register("descPME", {
                     required: "Confirmez votre mot de passe",
                     maxLength: { value: 500, message: "Veuillez saisir une description de 500 caractères maximum" }
                   })} ></textarea>
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="tarif_mensuel" className="tarif-mensuel inputIns" placeholder="Tarif mensuel (en GNF)"
                   {...register("tarifMensuelPME", { required: "Entrez le tarif mensuel" })} />
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
                 <input type="text" name="tarif_abonnement" className="tarif-abonnement inputIns" placeholder="Tarif abonnement (en GNF)"
                   {...register("tarifAbonnementPME", { required: "Entrez le tarif abonnement" })} />
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
                 <input type="password" name="mot_de_passe" id="mdpPME" className="inputIns" placeholder="Mot de passe"
                   {...register("mdpPME", {
@@ -575,7 +596,7 @@ function Inscription() {
                   })} />
                 {errors.mdpPME && <p>{errors.mdpPME.message}</p>}
               </div>
-              <div className="input-container">
+              <div className="input-container input-containerTablette">
                 <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
                 <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
                   {...register("cmdpPME", {
@@ -584,14 +605,14 @@ function Inscription() {
                   })} />
               </div>
 
-              <div className="checkbox-container">
+              <div className="checkbox-container input-containerTablette input-containerTablettePolitique">
                 <input type="checkbox" name="validate" id="validate" className="inputIns" required />
                 <label htmlFor="validate" className="labelPolitique">
                   J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                 </label>
               </div>
               <div>
-                <button type="submit" id="subPME" className="sub" disabled={isLoading}>
+                <button type="submit" id="subPME" className="sub subPME" disabled={isLoading}>
               {isLoading ? 'Chargement...' : 'S\'inscrire'}
               </button>
               </div>
