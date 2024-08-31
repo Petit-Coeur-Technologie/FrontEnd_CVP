@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import '../Register/register.css'
+import './inscription.css'
 import "boxicons/css/boxicons.min.css";
 
 const passwordClient = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
@@ -66,15 +66,15 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
 
     return (
         <form onSubmit={handleSubmit(onSubmitClt)}>
-            <div className="form-container">
-                <div className="input-container">
+           <div className={`form-container ${userRole === 'entreprise' ? 'form-container2' : ''}`}>
+           <div className={`input-container ${userRole === 'menage' ? 'input-containerMENAGE' : ''}`}> 
                     <select name="role" id="role" className="type selectIns" {...register("roleClt")} value={userRole} onChange={(e) => onUserRoleChange(e.target.value)} required>
                         <option value="menage">Ménage</option>
                         <option value="entreprise">Entreprise</option>
                     </select>
                 </div>
 
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"
                         {...register("nomsClt", { required: "Veuillez saisir votre nom" })} />
@@ -82,13 +82,13 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
 
 
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
                     <input type="email" name="email" id="mail" placeholder="E-mail" className="inputIns"
                         {...register("mailClt", { required: "Veuillez saisir votre email" })} />
                     {errors.mailClt && <span className="error-message">{errors.mailClt.message}</span>}
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerSelect input-containerTablette">
                     <i className='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
                     <select name="genre" id="genre" className="genre selectIns" defaultValue='' {...register("genreClt")} required>
                         <option value="homme">Homme</option>
@@ -96,7 +96,9 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         {errors.genreClt && <span className="error-message">{errors.genreClt.message}</span>}
                     </select>
                 </div>
-                <div className="input-container input-container2">
+                 {/* -------- Pour la selection de la ville, la commun et le quartier si c'est un Client -------------------------------*/}
+                {/* Pour la selection de la ville */}
+              <div className="input-container input-containerSelect input-containerTablette">
                     <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
@@ -111,8 +113,10 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                             ))}
                         </select>
 
-                    </div>
-
+                        </div>
+                        </div>
+                        <div className="input-container input-containerSelect input-containerTablette">
+                        <i class='bx bx-home'></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -127,8 +131,10 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                                 <option key={commune.id} value={commune.id}>{commune.commune}</option>
                             ))}
                         </select>
-                    </div>
-
+                        </div>
+                        </div>
+                        <div className="input-container input-containerSelect input-containerTablette">
+                        <i class='bx bx-home-alt-2'></i>
                     <div >
                         <select
                             id="quartierClt"
@@ -146,14 +152,14 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </select>
                     </div>
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                     <span style={{ marginRight: '5px' }}>+224</span>
                     <input type="tel" name="tel" id="telClt" placeholder="Numéro de téléphone" className="inputIns"
                         {...register("telClt", { required: "Entrez votre numéro de téléphone", validate: value => telClt(value) || "Numéro de téléphone invalide" })} />
                     {errors.telClt && <span className="error-message">{errors.telClt.message}</span>}
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="copie_pi" id="copie_pi" className="file-upload inputIns"
                         ref={copieFileRef} // Utilisation de ref pour le fichier d'identité
@@ -165,13 +171,13 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 {/* Affichage conditionnel basé sur le type de client */}
                 {userRole === "entreprise" && (
                     <>
-                        <div className="input-container">
+                         <div className="input-container input-containerTablette">
                             <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
                             <input type="text" name="nom_entreprise" className="nom inputIns" placeholder="Nom de l'entreprise"
                                 {...register("nomEntreprise")} required />
                         </div>
 
-                        <div className="input-container">
+                        <div className="input-container input-containerTablette">
                             <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                             <input type="file" name="logo_entreprise" id="logo_entreprise" className="file-upload inputIns"
                                 ref={entrepriseFileRef} // Utilisation de ref pour le fichier du logo
@@ -180,14 +186,14 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                                 {cltLogoFile}
                             </label>
                         </div>
-                        <div className="input-container">
+                        <div className="input-container input-containerTablette">
                             <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                             <input type="text" name="num_rccm" className="registration inputIns" placeholder="Numéro d'enregistrement"
                                 {...register("nEntreprise")} required />
                         </div>
                     </>
                 )}
-                <div className="input-container">
+                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
                     <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" className="inputIns"
                         {...register("mdpClt", {
@@ -197,7 +203,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         })} />
                     {errors.mdpClt && <p className="error-message">{errors.mdpClt.message}</p>}
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerMDP input-containerTablette">
                     <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
                     <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
                         {...register("cmdpClt", {
@@ -213,13 +219,13 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                     J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                 </label>
             </div>
-            <div>
-                <button type="submit" id='subClt' className='sub' disabled={isLoading}>S'inscrire</button>
+            <div className="divSub">
+                <button type="submit" id='subClt' className='sub' disabled={isLoading}>{isLoading ? 'Chargement...' : 'S\'inscrire'}</button>
             </div>
-            <h3>Ou s'inscrire avec</h3>
-            <div className="ins">
-                <div className="cercle"><i className="bx bxl-google google-icon"></i></div>
-                <div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div>
+            {/* -------------------------------------------------------------------------------------------------------------- */}
+            <div className="ins insEntreprise">
+                <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
+                <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
             </div>
         </form>
     );

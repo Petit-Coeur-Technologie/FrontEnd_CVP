@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import '../Register/register.css'
+import './inscription.css'
 import "boxicons/css/boxicons.min.css";
 
 const passwordPme = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
@@ -69,23 +69,25 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
         <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-container">
                 {/* Contenu de la section PME */}
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="nomsPME" className="noms inputIns" placeholder="Nom et Prénom(s)"  {...register("nomsPME")} required />
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
                     <input type="email" name="mailPME" id="mail" className="inputIns" placeholder="E-mail"  {...register("mailPME")} required />
                 </div>
-                <div className="input-container">
+                <div className="input-container input-container2 input-containerSelect input-containerTablette">
                     <i className='bx bx-male-female' style={{ color: '#fdb024' }} ></i>
                     <select name="genrePME" id="genre" className="genre selectIns" defaultValue=""  {...register("genrePME")} required>
                         <option value="homme">Homme</option>
                         <option value="femme">Femme</option>
                     </select>
                 </div>
-                <div className="input-container input-container2">
-                    <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
+ {/* -------- Pour la selection de la ville, la commun et le quartier si c'est une PME -------------------------------*/}
+                {/* Pour la selection de la ville */}
+                <div className="input-container input-container2 input-containerSelect input-containerTablette">
+                <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
@@ -98,9 +100,12 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                                 <option key={ville.id} value={ville.id}>{ville.ville}</option>
                             ))}
                         </select>
-
+                        </div>
                     </div>
 
+ {/* Pour la selection de la commun */}
+ <div className="input-container input-container2 input-containerSelect input-containerTablette">
+              <i class='bx bx-home'></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -116,8 +121,11 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                             ))}
                         </select>
                     </div>
-
-                    <div >
+                    </div>
+ {/* Pour la selection du quartier */}
+ <div className="input-container input-container2 input-containerSelect input-containerTablette">
+                <i class='bx bx-home-alt-2'></i>
+                 <div className="adresse">
                         <select
                             id="quartierPME"
                             {...register("quartierPME", { required: "Ce champ est obligatoire" })}
@@ -137,14 +145,17 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                         </select>
                     </div>
                 </div>
-                <div className="input-container">
+
+                {/* ------------------------------------------------------------------------------------------------- */}
+
+              <div className="input-container input-containerTablette">
                     <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                     <span style={{ marginRight: '5px' }}>+224</span>
                     <input type="tel" name="telPME" id="telPME" placeholder="Numéro de téléphone" className="inputIns"
                         {...register("telPME", { required: "Entrez votre numéro de téléphone", validate: value => telPme(value) || "Numéro de téléphone invalide" })} />
                     {errors.telClt && <span className="error-message">{errors.telClt.message}</span>}
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="copie_pi" id="copie_pi_pme" className="file-upload inputIns"
                        ref={idFileRef} onChange={(e) => handlePmeFileChange(e, 'idFile')} />
@@ -152,17 +163,17 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                         {pmeIdFile}
                     </label>
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="nom_pme" className="nom inputIns" placeholder="Nom de la PME"
                         {...register("nomPME")} required />
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="numEnregistrementPME" className="registration inputIns"
                         placeholder="Numéro d'enregistrement"  {...register("numEnregistrementPME")} required />
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="logo_pme" id="logo_pme" className="file-upload inputIns"
                        ref={logoFileRef} onChange={(e) => handlePmeFileChange(e, 'logoFile')} />
@@ -170,29 +181,29 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                         {pmeLogoFile}
                     </label>
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                     <input type="zone" name="zone_intervention" className="zone inputIns" placeholder="Zone d'intervention"
                         {...register("zonePME")} required />
                 </div>
-                <div className="text-container">
+                <div className="text-container input-containerTablette">
                     <textarea name="description" id="desc" className="desc" placeholder="Description de la PME"
                         {...register("descPME", {
                             required: "Confirmez votre mot de passe",
                             maxLength: { value: 500, message: "Veuillez saisir une description de 500 caractères maximum" }
                         })} ></textarea>
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="tarif_mensuel" className="tarif-mensuel inputIns" placeholder="Tarif mensuel (en GNF)"
                         {...register("tarifMensuelPME", { required: "Entrez le tarif mensuel" })} />
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="tarif_abonnement" className="tarif-abonnement inputIns" placeholder="Tarif abonnement (en GNF)"
                         {...register("tarifAbonnementPME", { required: "Entrez le tarif abonnement" })} />
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
                     <input type="password" name="mdpPME" id="mdpPME" className="inputIns" placeholder="Mot de passe"
                         {...register("mdpPME", {
@@ -202,7 +213,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                         })} />
                     {errors.mdpPME && <p>{errors.mdpPME.message}</p>}
                 </div>
-                <div className="input-container">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
                     <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
                         {...register("cmdpPME", {
@@ -210,13 +221,13 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                             validate: value => value === watch("mdpPME") || "Les mots de passe doivent correspondre"
                         })} />
                 </div>
-                <div className="checkbox-container">
+                <div className="checkbox-container input-containerTablette input-containerTablettePolitique">
                     <input type="checkbox" name="validate" id="validate" className="inputIns" required />
                     <label htmlFor="validate" className="labelPolitique">
                         J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                     </label>
                 </div>
-                <div>
+                <div className="divSub">
                     <button type="submit" id="subPME" className="sub" disabled={isLoading}>
                         {isLoading ? 'Chargement...' : 'S\'inscrire'}
                     </button>
