@@ -24,7 +24,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
             .catch(error => console.error('Erreur lors de la récupération des villes:', error));
     }, []);
 
-    const handleVilleClt = (e) => {
+    const handleVilleChange = (e) => {
         const value = e.target.value;
         setSelectedClientVille(value);
         setSelectedClientCommune('');
@@ -36,24 +36,20 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
             .catch(error => console.error('Erreur lors de la récupération des communes:', error));
     };
 
-    const handleCommuneClt = (e) => {
+    const handleCommuneChange = (e) => {
         const value = e.target.value;
         setSelectedClientCommune(value);
         setSelectedClientQuartier('');
 
         fetch(`https://ville-propre.onrender.com/communes/${value}/quartiers`)
             .then(response => response.json())
-            .then(data => {
-                setClientQuartiers(data);
-                console.log('Quartiers récupérés :', data); // Ajoutez ce log pour vérifier les données récupérées
-            })
+            .then(data => setClientQuartiers(data))
             .catch(error => console.error('Erreur lors de la récupération des quartiers:', error));
     };
 
-    const handleQuartierClt = (e) => {
+    const handleQuartierChange = (e) => {
         const value = parseInt(e.target.value, 10);
         setSelectedClientQuartier(!isNaN(value) ? value : '');
-        console.log('Quartier sélectionné:', value); // Ajoutez un console.log ici pour déboguer
     };
 
 
@@ -106,7 +102,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         <select
                             id="ville"
                             value={selectedClientVille}
-                            onChange={(e) => handleVilleClt(e, 'pme')}
+                            onChange={(e) => handleVilleChange(e, 'client')}
                             className="selectIns"
                         >
                             <option value="ville">Ville</option>
@@ -122,7 +118,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                             id="commune"
                             value={selectedClientCommune}
                             name="communeClt"
-                            onChange={handleCommuneClt}
+                            onChange={handleCommuneChange}
                             disabled={!selectedClientVille} // Désactiver si aucune ville sélectionnée
                             className="selectIns   selectIns2"
                         >
@@ -138,9 +134,9 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                             id="quartierClt"
                             {...register("quartierClt", { required: "Ce champ est obligatoire" })}
                             value={selectedClientQuartier || ''}
-                            name="quartier_id"
+                            name="quartierClt"
                             className="selectIns selectIns3"
-                            onChange={handleQuartierClt}
+                            onChange={handleQuartierChange}
                             disabled={!selectedClientCommune}
                         >
                             <option value="">Quartier</option> {/* Changer la valeur à "" pour éviter une valeur par défaut incorrecte */}
