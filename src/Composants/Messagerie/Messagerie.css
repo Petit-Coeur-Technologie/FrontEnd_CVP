@@ -1,0 +1,246 @@
+
+.conteneurMessagerie{
+    padding: 20px;
+}
+/* Conteneur principal */
+.messagerieContainer {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+  }
+  
+  /* Liste des contacts */
+  .contactsList {
+    width: 400px;
+    height: 83%;
+    background-color: var(--blanc);
+    overflow-y: auto;
+    color: white;
+    padding: 20px;
+    margin: 20px 0 0 10px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .divRechercheContact{
+    position: fixed;
+    background-color: var(--blanc);
+    width: 320px;
+  }
+  .rechercheContact{
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1em;
+    margin-right: 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  .rechercheContact:focus {
+    outline: none;
+    border-color: #2980b9;
+  }
+  
+  .contactsList h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    /* margin-top: 40px; */
+    text-align: center;
+    color: var(--noir);
+  }
+  
+  .divContact{
+    margin-top: 80px;
+  }
+  .contact {
+    padding: 15px;
+    margin-bottom: 5px;
+    /* background-color: #34495e; */
+    color: var(--noir);
+    border-bottom: 1px solid var(--gris);
+    /* border-radius: 8px; */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .contact2{
+    background-color: var(--grisclair);
+    transition: all .3s ease-in-out;
+    transform: translateX(5px);
+  }
+  
+  .contact:hover {
+    background-color: #ebebeb;
+  }
+  .clickContact{
+    background-color: #c4c3c3;
+  }
+  
+  /* Conteneur des messages */
+  .conteneurMessagerie {
+    width: 75%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  /* Zone des messages */
+  .messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--blanc);
+    height: 100%;
+    position: relative;
+  }
+  .divMessage {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .messageDate {
+    font-size: 0.75rem;
+    color: var(--noir);
+    margin-top: 4px;
+    text-align: right; 
+  }
+  
+  .pasMassage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--grisclair);
+  }
+  
+  .messageContainer {
+    margin-bottom: 15px;
+    display: flex;
+  }
+  
+  .messageContainer.user {
+    justify-content: flex-end;
+  }
+  
+  .messageContainer.other {
+    display: block;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  
+  .message {
+    max-width: 60%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 1em;
+    line-height: 1.5;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    display: block;
+  }
+  
+  .message.user {
+    background-color: #3498db;
+    color: white;
+    overflow-wrap: break-word;
+  }
+  
+  .message.other {
+    background-color: #ecf0f1;
+    color: #333;
+    width: 100%;
+    display: block;
+  }
+  
+  /* Zone de saisie */
+  .inputArea {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .taperMessage {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1em;
+    margin-right: 10px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .taperMessage:focus {
+    outline: none;
+    border-color: #2980b9;
+  }
+  
+  .msgBtn {
+    padding: 10px 20px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Scrollbar stylisée pour la zone des messages */
+  .messages::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .messages::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    border-radius: 10px;
+  }
+  
+  .messages::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Autres styles ... */
+
+  .messageContainer {
+    position: relative; 
+    
+}
+
+.messageOptions {
+    display: block;
+    background-color: #f4f3f3;
+    padding: 0;
+    width: 200px;
+    height: 180px;
+    position: absolute;
+    top: 10px!important;
+    /* border-radius: 10px; */
+    right: 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 200; 
+}
+
+.msgObtn {
+    display: block;
+    background-color: transparent;
+    border-radius: 0%;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    padding: 20px 10px;
+    transition: color 0.3s ease;
+    width: 100%;
+}
+
+.msgObtn:hover {
+    color: #1a73e8;
+    background-color: var(--gris);
+}

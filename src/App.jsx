@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import Inscription from './pages/inscription/inscription.jsx';
 import Accueil from './pages/Accueil/accueil.jsx';
 import Sensibilisation from './pages/Sensibilisation/Sensibilisation.jsx';
 import Pmes from './pages/PMES/pmes.jsx';
@@ -21,14 +22,13 @@ import Details from './Composants/Details/Details.jsx';
 import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
-import Inscription from './pages/inscription/inscription.jsx';
 
 function App() {
   const location = useLocation();
 
   // Condition pour vérifier si on est sur une page qui ne doit pas afficher Navbar et Footer
   const hideNavbarAndFooter =
-  location.pathname === '/inscription' ||
+    location.pathname === '/inscription' ||
     location.pathname === '/connexion' ||  // Add this line to hide Navbar and Footer on the login page
     location.pathname.startsWith('/dashboard');
 
