@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import '../Register/register.css'
 import "boxicons/css/boxicons.min.css";
@@ -6,7 +6,7 @@ import "boxicons/css/boxicons.min.css";
 const passwordClient = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
 const phonePatternClt = /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 
-function ClientForm({ onSubmit, isLoading }) {
+function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, userRole, onUserRoleChange }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [clientVilles, setClientVilles] = useState([]);
     const [clientCommunes, setClientCommunes] = useState([]);
@@ -14,15 +14,8 @@ function ClientForm({ onSubmit, isLoading }) {
     const [selectedClientVille, setSelectedClientVille] = useState('');
     const [selectedClientCommune, setSelectedClientCommune] = useState('');
     const [selectedClientQuartier, setSelectedClientQuartier] = useState('');
-    const [fileNames, setFileNames] = useState({ idFile: `Pièce d'identité` });
-    const idFileRef = useRef(null);
-    const logoFileRef = useRef(null);
-
-    const [userRole, setUserRole] = useState('menage');
-
-    const handleUserRoleChange = (event) => {
-        setUserRole(event.target.value);
-    };
+    const [cltIdFile, setCltIdFile] = useState("Pièce d'identité");
+    const [cltLogoFile, setCltLogoFile] = useState("Logo d'entreprise");
 
     useEffect(() => {
         fetch('https://ville-propre.onrender.com/villes')
@@ -31,7 +24,7 @@ function ClientForm({ onSubmit, isLoading }) {
             .catch(error => console.error('Erreur lors de la récupération des villes:', error));
     }, []);
 
-    const handleVilleChange = (e) => {
+    const handleVilleClt = (e) => {
         const value = e.target.value;
         setSelectedClientVille(value);
         setSelectedClientCommune('');
@@ -43,27 +36,32 @@ function ClientForm({ onSubmit, isLoading }) {
             .catch(error => console.error('Erreur lors de la récupération des communes:', error));
     };
 
-    const handleCommuneChange = (e) => {
+    const handleCommuneClt = (e) => {
         const value = e.target.value;
         setSelectedClientCommune(value);
         setSelectedClientQuartier('');
 
         fetch(`https://ville-propre.onrender.com/communes/${value}/quartiers`)
             .then(response => response.json())
-            .then(data => setClientQuartiers(data))
+            .then(data => {
+                setClientQuartiers(data);
+                console.log('Quartiers récupérés :', data); // Ajoutez ce log pour vérifier les données récupérées
+            })
             .catch(error => console.error('Erreur lors de la récupération des quartiers:', error));
     };
 
-    const handleQuartierChange = (e) => {
+    const handleQuartierClt = (e) => {
         const value = parseInt(e.target.value, 10);
         setSelectedClientQuartier(!isNaN(value) ? value : '');
+        console.log('Quartier sélectionné:', value); // Ajoutez un console.log ici pour déboguer
     };
 
-    const handleFileChange = (event) => {
-        if (event.target.files.length > 0) {
-            setFileNames({ idFile: event.target.files[0].name });
-        } else {
-            setFileNames({ idFile: 'Aucun fichier' });
+
+    const handleFichiers = (event, fileType) => {
+        if (fileType === "idFileClt" && event.target.files.length > 0) {
+            setCltIdFile(event.target.files[0].name);
+        } else if (fileType === "logoFileClt" && event.target.files.length > 0) {
+            setCltLogoFile(event.target.files[0].name);
         }
     };
 
@@ -71,14 +69,12 @@ function ClientForm({ onSubmit, isLoading }) {
     const isPasswordValidClt = (password) => passwordClient.test(password);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmitClt)}>
             <div className="form-container">
-
                 <div className="input-container">
-                    <select name="role" id="role" className="type selectIns" {...register("roleClt")} onChange={handleUserRoleChange} required>
+                    <select name="role" id="role" className="type selectIns" {...register("roleClt")} value={userRole} onChange={(e) => onUserRoleChange(e.target.value)} required>
                         <option value="menage">Ménage</option>
                         <option value="entreprise">Entreprise</option>
-                        {errors.roleClt && <span className="error-message">{errors.roleCtl.message}</span>}
                     </select>
                 </div>
 
@@ -86,8 +82,9 @@ function ClientForm({ onSubmit, isLoading }) {
                     <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"
                         {...register("nomsClt", { required: "Veuillez saisir votre nom" })} />
-                    {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
                 </div>
+                {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
+
 
                 <div className="input-container">
                     <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
@@ -103,13 +100,13 @@ function ClientForm({ onSubmit, isLoading }) {
                         {errors.genreClt && <span className="error-message">{errors.genreClt.message}</span>}
                     </select>
                 </div>
-                <div className="input-container">
+                <div className="input-container input-container2">
                     <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
                             value={selectedClientVille}
-                            onChange={(e) => handleVilleChange(e, 'client')}
+                            onChange={(e) => handleVilleClt(e, 'pme')}
                             className="selectIns"
                         >
                             <option value="ville">Ville</option>
@@ -124,9 +121,10 @@ function ClientForm({ onSubmit, isLoading }) {
                         <select
                             id="commune"
                             value={selectedClientCommune}
-                            onChange={handleCommuneChange}
+                            name="communeClt"
+                            onChange={handleCommuneClt}
                             disabled={!selectedClientVille} // Désactiver si aucune ville sélectionnée
-                            className="selectIns"
+                            className="selectIns   selectIns2"
                         >
                             <option value="commune">Commune</option>
                             {clientCommunes.map(commune => (
@@ -139,16 +137,13 @@ function ClientForm({ onSubmit, isLoading }) {
                         <select
                             id="quartierClt"
                             {...register("quartierClt", { required: "Ce champ est obligatoire" })}
-                            value={selectedClientQuartier}
+                            value={selectedClientQuartier || ''}
                             name="quartier_id"
-                            className="selectIns"
-                            onChange={(e) => {
-                                handleQuartierChange(e);
-                                console.log('Quartier sélectionné:', e.target.value); // Ajoutez cette ligne
-                            }}
+                            className="selectIns selectIns3"
+                            onChange={handleQuartierClt}
                             disabled={!selectedClientCommune}
                         >
-                            <option value="quartier">Quartier</option>
+                            <option value="">Quartier</option> {/* Changer la valeur à "" pour éviter une valeur par défaut incorrecte */}
                             {clientQuartiers.map(quartier => (
                                 <option key={quartier.id} value={quartier.id}>{quartier.quartier}</option>
                             ))}
@@ -158,17 +153,17 @@ function ClientForm({ onSubmit, isLoading }) {
                 <div className="input-container">
                     <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                     <span style={{ marginRight: '5px' }}>+224</span>
-                    <input type="tel" name="telClt" id="telClt" placeholder="Numéro de téléphone" className="inputIns"
+                    <input type="tel" name="tel" id="telClt" placeholder="Numéro de téléphone" className="inputIns"
                         {...register("telClt", { required: "Entrez votre numéro de téléphone", validate: value => telClt(value) || "Numéro de téléphone invalide" })} />
                     {errors.telClt && <span className="error-message">{errors.telClt.message}</span>}
                 </div>
                 <div className="input-container">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="copie_pi" id="copie_pi" className="file-upload inputIns"
-                        ref={idFileRef} // Utilisation de ref pour le fichier d'identité
-                        onChange={(e) => handleFileChange(e, 'idFile')} />
+                        ref={copieFileRef} // Utilisation de ref pour le fichier d'identité
+                        onChange={(e) => handleFichiers(e, 'idFileClt')} />
                     <label htmlFor="copie_pi" className="file-upload-label">
-                        {fileNames.idFile}
+                        {cltIdFile}
                     </label>
                 </div>
                 {/* Affichage conditionnel basé sur le type de client */}
@@ -183,10 +178,10 @@ function ClientForm({ onSubmit, isLoading }) {
                         <div className="input-container">
                             <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                             <input type="file" name="logo_entreprise" id="logo_entreprise" className="file-upload inputIns"
-                                ref={logoFileRef} // Utilisation de ref pour le fichier du logo
-                                onChange={(e) => handleFileChange(e, 'logoFile')} />
+                                ref={entrepriseFileRef} // Utilisation de ref pour le fichier du logo
+                                onChange={(e) => handleFichiers(e, 'logoFileClt')} />
                             <label htmlFor="logo_entreprise" className="file-upload-label">
-                                {fileNames.logoFile}
+                                {cltLogoFile}
                             </label>
                         </div>
                         <div className="input-container">
@@ -208,10 +203,10 @@ function ClientForm({ onSubmit, isLoading }) {
                 </div>
                 <div className="input-container">
                     <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
-                    <input type="password" name="cmdp" id="cmdp" placeholder="Confirmation de mot de passe" className="inputIns"
+                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
                         {...register("cmdpClt", {
                             required: "Confirmez votre mot de passe",
-                            minLength: { value: 8, message: "Confirmez un mot de passe de 8 caratères minimum" }
+                            validate: value => value === watch("mdpClt") || "Les mots de passe doivent correspondre"
                         })} />
                 </div>
             </div>
@@ -223,9 +218,7 @@ function ClientForm({ onSubmit, isLoading }) {
                 </label>
             </div>
             <div>
-                <button type="submit" id="subClt" className="sub" disabled={isLoading}>
-                    {isLoading ? 'Chargement...' : 'S\'inscrire'}
-                </button>
+                <button type="submit" id='subClt' className='sub' disabled={isLoading}>S'inscrire</button>
             </div>
             <h3>Ou s'inscrire avec</h3>
             <div className="ins">

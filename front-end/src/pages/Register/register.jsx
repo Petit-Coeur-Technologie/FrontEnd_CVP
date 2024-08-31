@@ -11,17 +11,22 @@ function Register() {
   const navigate = useNavigate();
   const [formType, setFormType] = useState('client');
   const [isLoading, setIsLoading] = useState(false);
+  const [userRole, setUserRole] = useState('menage'); // Ajoutez ceci pour suivre le role d'utilisateur
 
   const idFileRef = useRef(null);
   const logoFileRef = useRef(null);
 
-  const telPme = (phone) => /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/.test(phone); // Validation du numéro de téléphone
+  const copieFileRef = useRef(null);
+  const entrepriseFileRef = useRef(null);
+
+  const telPme = (phone) => /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/.test(phone); // Validation du numéro de téléphone PME
+  const telClt = (phone) => /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/.test(phone); // Validation du numéro de téléphone Client
 
   const onSubmitClient = async (data) => {
     console.log('Soumission du formulaire Client avec les données:', data);
 
     // Vérification et validation des données du client
-    if (!telPme(data.telClt)) {
+    if (!telClt(data.telClt)) {
       toast.error("Numéro de téléphone invalide pour le client.");
       return;
     }
@@ -33,15 +38,15 @@ function Register() {
 
     // Construction des données du formulaire Client
     const formData = new FormData();
-    let quartierId = parseInt(data.quartierClt, 10);
+    let quartierIdClt = parseInt(data.quartierClt, 10);
 
-    if (isNaN(quartierId)) {
+    if (isNaN(quartierIdClt)) {
       toast.error("Quartier invalide pour le client.");
       return;
     }
 
     formData.append('role', data.roleClt);
-    formData.append('quartier_id', quartierId);
+    formData.append('quartier_id', quartierIdClt);
     formData.append('nom_prenom', data.nomsClt);
     formData.append('tel', data.telClt);
     formData.append('genre', data.genreClt);
@@ -52,27 +57,27 @@ function Register() {
     formData.append('update_at', new Date().toISOString());
     formData.append('is_actif', true);
 
-    if (data.idFile) {
-      formData.append('copie_pi', data.idFile);
+    if (copieFileRef.current && copieFileRef.current.files.length > 0) {
+      formData.append('copie_pi', copieFileRef.current.files[0]);
     } else {
-      toast.error("Veuillez télécharger une copie de votre pièce d'identité pour le client.");
+      toast.error("Veuillez télécharger une copie de votre pièce d'identité.");
       return;
     }
 
-    if (data.userRole === "entreprise") {
+    if (userRole === "entreprise") {
       formData.append('nom_entreprise', data.nomEntreprise);
       formData.append('num_rccm', data.nEntreprise);
-      if (data.logoFile) {
-        formData.append('logo_entreprise', data.logoFile);
+      if (entrepriseFileRef.current && entrepriseFileRef.current.files.length > 0) {
+        formData.append('logo_entreprise', entrepriseFileRef.current.files[0]);
       }
     }
     setIsLoading(true);
 
-    const apiUrl = 'https://ville-propre.onrender.com/client';
+    const urlClt = 'https://ville-propre.onrender.com/client';
 
     try {
       console.log('Envoi des données à l\'API...');
-      const response = await fetch(apiUrl, {
+      const response = await fetch(urlClt, {
         method: 'POST',
         body: formData
       });
@@ -80,22 +85,22 @@ function Register() {
       console.log('Réponse de l\'API :', response);
 
       if (response.ok) {
-        const result = await response.json();
-        console.log('Réponse de l\'API (données) :', result);
-        toast.success("Inscription réussie");
-        navigate('/connexion');
+          const result = await response.json();
+          console.log('Réponse de l\'API (données) :', result);
+          toast.success("Inscription réussie");
+          navigate('/connexion');
       } else {
-        const errorData = await response.json();
-        console.error('Erreur lors de l\'inscription :', errorData);
-        toast.error("Erreur lors de l'inscription.");
+          const errorData = await response.json();
+          console.error('Erreur lors de l\'inscription :', errorData);
+          toast.error("Erreur lors de l'inscription.");
       }
-    } catch (error) {
+  } catch (error) {
       console.error('Erreur lors de l\'envoi des données :', error);
       toast.error("Erreur lors de l'inscription.");
-    } finally {
+  } finally {
       setIsLoading(false);
-    }
-  };
+  }
+};  
 
   const onSubmitPme = async (data) => {
     console.log('Soumission du formulaire PME avec les données:', data);
@@ -198,7 +203,14 @@ function Register() {
         </div>
 
         {formType === 'client' ? (
-          <ClientForm onSubmit={onSubmitClient} isLoading={isLoading} />
+                   <ClientForm 
+                   onSubmitClt={onSubmitClient} 
+                   isLoading={isLoading} 
+                   copieFileRef={copieFileRef} 
+                   entrepriseFileRef={entrepriseFileRef} 
+                   userRole={userRole}  // Passez userRole comme prop
+                   onUserRoleChange={setUserRole}  // Ajoutez ceci pour changer le role d'utilisateur
+                 />
         ) : (
           <PmeForm onSubmit={onSubmitPme} isLoading={isLoading} idFileRef={idFileRef} logoFileRef={logoFileRef}/>
         )}

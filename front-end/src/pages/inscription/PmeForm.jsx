@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import '../Register/register.css'
 import "boxicons/css/boxicons.min.css";
@@ -16,7 +16,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
     const [selectedPmeQuartier, setSelectedPmeQuartier] = useState('');
     // États pour les fichiers spécifiques du formulaire PME
     const [pmeIdFile, setPmeIdFile] = useState("Pièce d'identité");
-    const [pmeLogoFile, setPmeLogoFile] = useState("Logo");;
+    const [pmeLogoFile, setPmeLogoFile] = useState("Logo");
 
     useEffect(() => {
         fetch('https://ville-propre.onrender.com/villes')

@@ -262,7 +262,18 @@
     color: #fdb024;
   }
   
-  .error-message {
-    color:#fdb024;
-    font-size: 12px;
-  }  
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column; /* Ajoute le message d'erreur directement sous l'input */
+    align-items: flex-start; /* Aligne tout à gauche */
+    width: 100%;
+}
+/* Style des messages d'erreur */
+.error-message {
+  color: #fdb024; /* Couleur spécifique des erreurs */
+  font-size: 12px; /* Taille de police pour les messages d'erreur */
+  margin: 0; /* Supprime les marges par défaut */
+  padding-left: 25px; /* Distance pour s'aligner avec le texte des inputs */
+}
+   
