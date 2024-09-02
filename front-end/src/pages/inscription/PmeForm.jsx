@@ -105,7 +105,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
 
  {/* Pour la selection de la commun */}
  <div className="input-container input-container2 input-containerSelect input-containerTablette">
-              <i class='bx bx-home'></i>
+              <i className='bx bx-home'></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -124,7 +124,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                     </div>
  {/* Pour la selection du quartier */}
  <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i class='bx bx-home-alt-2'></i>
+                <i className='bx bx-home-alt-2'></i>
                  <div className="adresse">
                         <select
                             id="quartierPME"

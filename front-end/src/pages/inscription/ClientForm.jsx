@@ -116,7 +116,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                         </div>
                         <div className="input-container input-containerSelect input-containerTablette">
-                        <i class='bx bx-home'></i>
+                        <i className='bx bx-home'></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -134,7 +134,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                         </div>
                         <div className="input-container input-containerSelect input-containerTablette">
-                        <i class='bx bx-home-alt-2'></i>
+                        <i className='bx bx-home-alt-2'></i>
                     <div >
                         <select
                             id="quartierClt"

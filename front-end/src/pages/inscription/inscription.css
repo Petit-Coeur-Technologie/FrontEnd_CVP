@@ -7,16 +7,18 @@
 
 /* Conteneur principal pour centrer la boîte */
 .stack-container {
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   align-items: center;
   justify-content:space-between;
   max-width: 100%;
-  height: 100%;
+  height: 100vh;
   padding: 0 20px; /* Espacement pour éviter que le contenu touche les bords */
   box-sizing: border-box; 
 }
-
+.insEntreprise{
+  margin-top: 10px!important;
+}
 /* Conteneur pour l'image et le titre */
 .right-container {
   flex: 1;
@@ -105,8 +107,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  /* justify-content: center; */
-  align-items: center;
+  /* align-items: center; */
   height: 70%;
 }
 
@@ -139,7 +140,6 @@
   border: none;
   color: #ffffff;
   font-size: 16px;
-  /* padding: 8px; */
   border-radius: 8px;
 }
 
@@ -162,7 +162,7 @@
   left: 30px;
 } */
 /* Styliser le label comme un bouton */
-.custom-file-upload {
+/* .custom-file-upload {
   width: calc(60% - 10px);
   height: 50px;
   font-size: 16px;
@@ -175,14 +175,13 @@
   justify-content: center;
   padding: 10px;
   margin: 10px 0;
-}
+} */
 
 /* Style du textarea */
 .desc, #cmdp {
   width: calc(100% - 20px);
   height: 80px;
   resize: none;
-  /* padding: 10px; */
   border-radius: 8px;
   background-color: #04623b;
 }
@@ -207,8 +206,7 @@
 .checkbox-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  
+  justify-content: center; 
 }
 
 /* Style pour le texte à côté de la case à cocher */
@@ -228,11 +226,12 @@
 /* Style spécifique pour le bouton "submit" */
 .sub {
   width: 220px;
-  height: 45px;
+  height: 40px;
   border: none;
   background-color: #fdb024;
   color: #004d40;
   font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.3s ease;
@@ -241,10 +240,10 @@
 .sub:hover {
   background-color: #d89008;
 }
-.textInscrireAvec{
+/* .textInscrireAvec{
   display: flex;
   align-items: center;
-}
+} */
 /* .ins {
   display: flex;
   justify-content: center;
@@ -257,33 +256,32 @@
 /* Style pour les textes "Ou s'inscrire avec" */
 .textInscrireAvecGoogle,
 .textInscrireAvecFacebook {
-  font-size: 16px;
-  color: white;
-  margin-bottom: 10px; /* Espace entre le texte et l'icône */
-  text-align: center;
+  /* font-size: 16px; */
+  /* color: white; */
+  margin-bottom: 5px; 
+  /* text-align: center; */
 }
 
 /* Conteneur pour le texte et l'icône ensemble */
 .divTextIconGoogle, 
 .divTextIconFacebook {
-  display: flex;
+  /* display: flex; */
   gap: 10px;
-  justify-content: center;
+  /* justify-content: center; */
   margin: 10px;
   border-radius: 10px;
-  align-items: center;
-  background-color: #05673f; /* Couleur de fond douce */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile pour l'effet de profondeur */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout de transition pour l'effet au survol */
-  /* cursor: pointer; */
+  /* align-items: center; */
+  /* background-color: #05673f;  */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-.insEntreprise{
+/* .insEntreprise{
   margin-top: 20px;
-}
-.google-icon {
-  color: #DB4437; /* Couleur spécifique pour l'icône Google */
+} */
+/* .google-icon {
+  color: #DB4437; 
   font-size: 30px;
-}
+} */
 
 /* Icône Facebook déjà stylée inline */
 
@@ -291,7 +289,7 @@
 /* ---------------------------------------------------------------------- */
 
 
-.cercle {
+/* .cercle {
   background-color: #ffffff;
   border-radius: 50%;
   width: 35px;
@@ -301,10 +299,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-.cercleGoogle{
+} */
+/* .cercleGoogle{
   margin-left: -10px;
-}
+} */
 
 /* Icône Google pour l'inscription */
 .google-icon {
@@ -323,26 +321,25 @@
   font-size: 32px;
   text-align: center;
 }
-.divLogin-link{
+/* .divLogin-link{
   margin-top: 10px!important;
 }
 .divLogin-link2{
   margin-top: 100px!important;
-}
+} */
 
 /* Style pour la section de lien de connexion */
-.divLogin-link {
-  margin-top: 40px; /* Espace supplémentaire pour positionner cette section sous les boutons */
+/* .divLogin-link {
+  margin-top: 40px; 
   display: flex;
   justify-content: center;
-}
+} */
 
 /* Style du lien en bas de la boîte */
-.lienPolitique, .login-link {
+/* .lienPolitique, .login-link {
   color: #ffffff;
   text-decoration: none;
-  /* font-size: 14px; */
-}
+} */
 
 .lienPolitique:hover, .login-link:hover {
   color: #fdb024;
@@ -351,15 +348,18 @@
 
 /* Message d'erreur */
 .error-message {
-  color: #f44336; /* Rouge vif pour l'erreur */
+  color: #f44336; 
   font-size: 14px;
 }
 .bx{
   margin: 0;
   padding: 0!important;
 }
-.cercle .bx{
-  font-size: 35px;
+.divBtn{
+  width: 100%;
+  display: flex;
+  text-align: center!important;
+  padding: 0;
 }
 
 /* POUR GERER LE RESPONSIVE DE FORMULAIRE D'INSCRIPTION (ES MEDIA SCREEN)  */
@@ -393,11 +393,11 @@
   }
   .input-containerTablettePolitique{
     position: relative;
-    left: -100px;
+    left: 0px;
   }
   .subPME{
     position: relative;
-    left: 210px;
+    left: 25%;
   }
   .form-container{
     height: 50%;
@@ -410,9 +410,6 @@
   .labelPolitique, .login-link{
     font-size: 16px;
   }
-  .input-containerMENAGE{
-    width: 97%!important;
-  }
 }
 
 @media (min-width:751px){
@@ -421,6 +418,21 @@
   }
   .input-containerMENAGE{
     width: 98.2%!important;
+  }
+  .divLogin-link2{
+    margin-top: 10px!important;
+  }
+  .subPME{
+    position: relative;
+    left: 25%;
+  }
+  .input-containerTablettePolitique{
+    justify-content: start!important;
+  }
+  .accept{
+    /* margin-left: 30px; */
+    display:flex;
+    justify-content: start;
   }
 }
 
@@ -460,11 +472,11 @@
   }
   .input-containerTablettePolitique{
     position: relative;
-    left: -100px;
+    left: 0px;
   }
   .subPME{
     position: relative;
-    left: 180px;
+    left: 25%;
   }
   .form-container{
     height: 50%;
@@ -477,13 +489,17 @@
   .labelPolitique, .login-link{
     font-size: 16px;
   }
+
+  /* .sub{
+    left: 100px;
+  } */
 }
 
 @media (max-width:700px) {
 
   .box-container{
-    width: 90%;
-    left: 30px;
+    width: 100%;
+    /* left: 30px; */
   }
   .input-container, .input-containerMENAGE, .checkbox-container,.accept, .text-container{
     width: 90%!important;
@@ -513,9 +529,9 @@
     width: 46%!important;
   }
   .stack-container{
-    width: 90%;
+    width: 100%;
     position: relative;
-    left: 2%;
+    /* left: 2%; */
   }
   .input-container, .selectIns{
     font-size: 14px;
@@ -525,7 +541,7 @@
   }
   .subPME{
     position: relative;
-    left: 90px;
+    left: 70px;
   }
 }
 
