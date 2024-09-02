@@ -1,160 +1,231 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: 0;
-}
+/* Connexion.css */
 
-.buttonReni, .buttonReni{
-    background-color:  #fdb024;
-    padding: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border: #00804b;
-    border-radius: 10px;
-    color: #00804b;
-    font-weight: bold;
-    
-}
-.buttonReni:hover, .buttonReni:hover{
-    background-color:  #fdb024;
-    padding: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border: #00804b;
-    border-radius: 10px;
-    color: #00804b;
-    font-weight: bold;
-    
-}
-.mot{
-    color: white;
-    text-decoration: none;
-    display: flex;
-    justify-content: end;
-    padding: 0 5px
-}
-.mot2:first-child{
-    color: #fdb024;
-    text-align: center;
-    position: relative;
-    /* margin-bottom: 10px; */
-    top: -10px;
-    justify-content: center;
-}
-.mot2:last-child{
-    /* position: relative;
-    top: 3px; */
-    color: #fdb024;
-    text-align: center;
-    position: relative;
-    justify-content: center;
-}
-
-.input{
-    background-color: white;
-    border: 1px solid white;
-    border-radius: 10px;
-    padding: 10px;
-    color: black;
-    position: relative;
-}
-#divmot2{
-    margin-top: 2px;
-    position: absolute;
-    bottom: 10px;
-    left:100px;
-    color: #fdb024;
-}
-.input:hover{
-    border: 2px solid #fdb024 ;
-}
-.input::placeholder{
-    color: rgb(167, 167, 167);
-}
-
-.oubien{
-    color: white;
-    text-align: center;
-}
-
-.connexion{
-    color: white;
-    text-align: center;
-    padding-bottom: 5px; 
-}
-
-.gf{
-    color: blue;
-    background-color: white;
-    font-size: 30px;
-    border-radius: 50%;
-    padding: 0%;
-}
-.bx1{
-    background-color: #00804b;
-    display: flex;
-    justify-content: center;
-    margin-top: 0px;
-    gap: 40px;
-    padding: 0%;
-}
-
-.bm{
-    /* display: flex; */
-    background-color: #00804b;
-    border-radius: 50%;
-    height: 90px;
-    /* justify-content: center; */
-    text-align: center;
-    position: relative;
-    top:0;
-    left: 39%;
-    margin-bottom: 10px;
-}
-.MuiBox-root{
-    position: relative;
-}
-.boxe{
-    position: absolute;
-    left: 0;
-    background-color: #00804b!important;
-    top: 230px;
-}
-.stacke{
+body, .stacke {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-.envoyer, .fermer{
-    background-color: #fdb024;
-}
-.mdp{
-    position: absolute;
-    top: -40px;
-    left: 22%;
-    color: white;
-    
-}
-.fermer{
-    position: relative;
-    top: 45px;
-    border-radius: 10px;
-    width: 100px;
-    height: 25px;
-    color: #00804b;
-    font-weight: bold;
-    border: none;
-}
-.pErreur {
     margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    color: red;
-
-
-}
-.mot3{
+  }
+  
+  .stackeChild {
+    background-color: #00804b; /* Couleur de fond principale */
+    padding: 40px;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .h2Con {
     color: white;
-    background:  #fdb024
-}
+  }
+  
+  .divMereImageBmw{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .divImageBmw{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    display: block;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .imageBmw {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+  }
+  
+  .input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: #04623b;
+  }
+  ::placeholder{
+    color: #b2dfdb;
+  }
+  
+  .inputEmail {
+    margin-bottom: 10px;
+  }
+  
+  .inputMdp {
+    margin-bottom: 20px;
+  }
+  
+  .mdpOublie {
+    display: block;
+    text-align: right;
+    color: white;
+    font-size: 14px;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .mdpOublie:hover {
+    color: #fdb024;
+    font-weight: normal;
+  }
+  
+  .btnConnexion {
+    width: 220px;
+    height: 40px;
+    border: none;
+    background-color: #fdb024;
+    color: #004d40;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btnConnexion:hover {
+    background-color: #db9719;
+  }
+  
+  .pErreur {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .divIcone {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .divIcone a {
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .divIcone a:hover {
+    color: #007bff;
+  }
+  
+  #divmot2 {
+    margin-top: 30px;
+
+  }
+  
+  .mot3 {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .mot3 a {
+    color: white;
+    text-decoration: none;
+    /* font-weight: bold; */
+    margin-left: 5px;
+  }
+  
+  .mot3 a:hover {
+    font-weight: normal;
+    color: #fdb024;
+  }
+
+
+  /* Conteneur pour le texte et l'icône ensemble */
+  .divTextIconGoogle, 
+  .divTextIconFacebook {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    background-color: #05673f; /* Couleur de fond douce */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile pour l'effet de profondeur */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout de transition pour l'effet au survol */
+    /* cursor: pointer; */
+  }
+  .divTextIconGoogle:hover,
+  .divTextIconFacebook:hover{
+    background-color: #045837;
+    cursor: pointer;
+  }
+  .divIcone{
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  /* Style pour les textes "Ou s'inscrire avec" */
+  .textInscrireAvecGoogle,
+  .textInscrireAvecFacebook {
+    /* font-size: 16px; */
+    color: white;
+  }
+
+  .google-icon {
+    color: #DB4437; /* Couleur spécifique pour l'icône Google */
+    font-size: 30px;
+  }
+  
+  .cercle {
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .cercleGoogle{
+    margin-left: -10px;
+  }
+  
+  /* Icône Google pour l'inscription */
+  .google-icon {
+    background: linear-gradient(
+      to right,
+      #4285f4 25%,
+      #34a853 25%,
+      #34a853 50%,
+      #fbbc05 50%,
+      #fbbc05 75%,
+      #ea4335 75%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 32px;
+    text-align: center;
+  }
+  .divLogin-link{
+    margin-top: 10px!important;
+  }
+  .divLogin-link2{
+    margin-top: 100px!important;
+  }
+  
+  /* Style pour la section de lien de connexion */
+  .divLogin-link {
+    margin-top: 40px; /* Espace supplémentaire pour positionner cette section sous les boutons */
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Style du lien en bas de la boîte */
+  .lienPolitique, .login-link {
+    color: #ffffff;
+    text-decoration: none;
+    /* font-size: 14px; */
+  }
+  

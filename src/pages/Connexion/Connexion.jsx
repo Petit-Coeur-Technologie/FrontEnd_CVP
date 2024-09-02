@@ -56,51 +56,38 @@ export default function Connexion() {
   };
   
   return (
-    <Stack className='stacke'>
-      <Box
-        width={"400px"}
-        sx={{
-          bgcolor: "#00804b",
-          borderRadius: "10px",
-          padding: 3,
-          height: "500px",
-        }}
-      >
-        <Typography className="connexion" variant='h4'>Connexion</Typography>
-        <img className="bm" src={myImage} alt="pct" />
-        {showForgotPassword ? (
+    <div className='stacke'>
+      <div className='stackeChild'>
+        <h2 className="h2Con">Connexion</h2>
+        <div className='divMereImageBmw'>
+          <div className="divImageBmw">
+            <img className="imageBmw" src={myImage} alt="pct" />
+          </div>
+        </div>
+        {showForgotPassword ? 
+        (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
         ) : (
-          <form onSubmit={handleSubmit}>
-            <Stack direction={"column"} gap={2}>
-              <input
-                className="input"
-                type="email"
-                placeholder='E-mail...'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                className="input"
-                type="password"
-                placeholder='Mot de Passe...'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <a href='#' className="mot" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
-              <Button className="buttonReni" variant="contained" type="submit">Se Connecter</Button>
-              {errorMessage && <p className='pErreur' color="error">{errorMessage}</p>}
-              <div className="bx1">
-                  <a href="#"><i className='bx bxl-google gf'></i></a>
-                  <a href="#"><i className='bx bxl-facebook gf'></i></a>
+        <form onSubmit={handleSubmit}>
+          <div className='divFormulaire'>
+              <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)}/>
+              <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
+              <button className="btnConnexion" type="submit">Se Connecter</button>
+              {errorMessage && <p className='pErreur'>{errorMessage}</p>}
+
+              <div className="divIcone">
+                <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
+                <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
               </div>
+
               <div id="divmot2">
-                <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription" > Inscrivez-Vous!</a></p>
+                <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription"> Inscrivez-Vous!</a></p>
               </div>
-            </Stack>
-          </form>
+            </div>
+        </form>
         )}
-      </Box>
-    </Stack>
+      </div>
+    </div>
   );
 }

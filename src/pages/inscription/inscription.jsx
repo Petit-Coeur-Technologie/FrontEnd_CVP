@@ -611,7 +611,7 @@ function Inscription() {
                   J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                 </label>
               </div>
-              <div>
+              <div className="divBtn">
                 <button type="submit" id="subPME" className="sub subPME" disabled={isLoading}>
               {isLoading ? 'Chargement...' : 'S\'inscrire'}
               </button>
