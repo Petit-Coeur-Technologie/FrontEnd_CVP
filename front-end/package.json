@@ -1,5 +1,5 @@
 {
-  "name": "cours-react",
+  "name": "front-end",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,17 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "@mui/material": "^5.16.5",
-    "@react-oauth/google": "^0.12.1",
-    "axios": "^1.7.2",
-    "json-server": "^1.0.0-beta.1",
+    "boxicons": "^2.1.4",
+    "docx": "^8.5.0",
     "react": "^18.3.1",
+    "react-calendar": "^5.0.0",
     "react-dom": "^18.3.1",
-    "react-facebook-login": "^4.1.1",
+    "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^6.25.1"
+    "react-router-dom": "^6.3.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
