@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './Filtre.css';
+import './Filtre.css'
 
 const Filtre = ({ list, setFilteredResults }) => {
   const [searchText, setSearchText] = useState("");

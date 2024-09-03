@@ -1,5 +1,5 @@
 import React from 'react';
-import './PmeCard.css';  // Assurez-vous que le fichier CSS est bien importé
+import './PmeCard.css'
 import { Link } from 'react-router-dom';
 
 function PmeCard({ pme }) {
