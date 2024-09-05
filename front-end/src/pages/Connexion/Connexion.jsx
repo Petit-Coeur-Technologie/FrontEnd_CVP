@@ -33,7 +33,8 @@ export default function Connexion() {
             const response = await fetch('https://ville-propre.onrender.com/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${token}` // Ajoute le token JWT dans l'en-tête Authorization
                 },
                 body: formData
             });
@@ -46,7 +47,7 @@ export default function Connexion() {
             const { token } = data; // Supposons que le token est retourné dans la réponse
 
             // Stocker le token dans un cookie
-            document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // Cookie valable 7 jours
+            document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24}`; // Cookie valable 7 jours
 
             alert('Connexion réussie');
 
