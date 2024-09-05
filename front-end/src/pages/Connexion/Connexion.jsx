@@ -2,58 +2,63 @@ import React, { useState } from 'react';
 import { Box, Stack, Button, Typography } from '@mui/material';
 import myImage from '/src/assets/th.jpeg';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
-import { useNavigate } from 'react-router-dom'; // Importation du hook useNavigate
+import { useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
 
 import "./Connexion.css";
 
 export default function Connexion() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const navigate = useNavigate(); // Initialisation du hook useNavigate
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showForgotPassword, setShowForgotPassword] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation(); // Récupération de l'URL de redirection
 
-  // Expression régulière pour valider le mot de passe
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // Expression régulière pour valider le mot de passe
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    if (!passwordRegex.test(password)) {
-      setErrorMessage('Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!');
-      return;
-    }
-  
-    try {
-      const formData = new URLSearchParams();
-      formData.append('username', username);
-      formData.append('password', password);
-  
-      const response = await fetch('https://ville-propre.onrender.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: formData
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      const { token } = data; // Supposons que le token est retourné dans la réponse
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-      // Stocker le token dans un cookie
-      document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // Cookie valable 7 jours
+        if (!passwordRegex.test(password)) {
+            setErrorMessage('Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!');
+            return;
+        }
 
-      alert('Connexion réussie');
-      navigate('/dashboard'); // Redirection vers le tableau de bord
-    } catch (error) {
-      console.error('Erreur lors de la connexion:', error);
-      setErrorMessage(error.message);
-    }
-  };
+        try {
+            const formData = new URLSearchParams();
+            formData.append('username', username);
+            formData.append('password', password);
+
+            const response = await fetch('https://ville-propre.onrender.com/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const { token } = data; // Supposons que le token est retourné dans la réponse
+
+            // Stocker le token dans un cookie
+            document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // Cookie valable 7 jours
+
+            alert('Connexion réussie');
+
+            // Redirection après connexion
+            const redirectPath = location.state?.from?.pathname || '/dashboard';
+            navigate(redirectPath);
+
+        } catch (error) {
+            console.error('Erreur lors de la connexion:', error);
+            setErrorMessage(error.message);
+        }
+    };
   
   return (
     <div className='stacke'>

@@ -7,6 +7,9 @@ import Filtre from '../../Composants/Filtre/Filtre';
 function Accueil() {
   const [pmes, setPmes] = useState([]);
   const [filteredPmes, setFilteredPmes] = useState([]);
+  const [zones, setZones] = useState([]);
+  const [tarifs, setTarifs] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   useEffect(() => {
     fetch('https://ville-propre.onrender.com/pmes')
@@ -14,6 +17,18 @@ function Accueil() {
       .then((data) => {
         setPmes(data);
         setFilteredPmes(data); // Par défaut, afficher toutes les PMEs
+        
+        // Extraire les zones uniques
+        const uniqueZones = [...new Set(data.map(pme => pme.zone_intervention))];
+        setZones(uniqueZones);
+
+        // Extraire les tarifs uniques
+        const uniqueTarifs = [...new Set(data.map(pme => pme.tarif_mensuel))];
+        setTarifs(uniqueTarifs);
+
+        // Extraire les notes uniques
+        const uniqueNotes = [...new Set(data.map(pme => pme.rating))];
+        setNotes(uniqueNotes);
       })
       .catch((error) => {
         console.error('Error fetching PMEs:', error);
@@ -22,7 +37,13 @@ function Accueil() {
 
   return (
     <div className="home">
-      <Filtre list={pmes} setFilteredResults={setFilteredPmes} />
+      <Filtre 
+        list={pmes} 
+        setFilteredResults={setFilteredPmes} 
+        zones={zones} 
+        tarifs={tarifs} 
+        notes={notes} 
+      />
       <div className="cards-container">
         {filteredPmes.slice(0, 10).map((pme) => (
           <PmeCard key={pme.id} pme={pme} />

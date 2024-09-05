@@ -17,19 +17,14 @@
     margin-right: auto;
 }
 
-.foot .foot-container p{
-    font-size: 16px;
-    text-align: left;
-    /* text-align: center; */
-}
 
-.foot a{
+.mailien{
     text-decoration: none;
     text-align: right;
     /* text-align: center; */
 }
 
-a:hover{
-    color: #0086bd;
+.mailien:hover{
+    color: #fdb024;
     font-weight: bold;
 }

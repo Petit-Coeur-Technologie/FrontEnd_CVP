@@ -7,14 +7,18 @@
 .home {
   padding-top: 70px; /* Compense la hauteur de la navbar */
   min-height: 100vh;
-
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content:space-around;
   }
   
   .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Augmenté la taille min */
-    gap: 20px; /* Espacement entre les cartes */
     width: 100%;
+    justify-items: center;
+    gap: 20px;
   }
 
   /* Bouton "Voir plus" */

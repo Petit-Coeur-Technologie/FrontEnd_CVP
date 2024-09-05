@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Filtre.css';
 
-const Filtre = ({ list, setFilteredResults }) => {
+const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   const [searchText, setSearchText] = useState("");
   const [zone, setZone] = useState("");
   const [tarif, setTarif] = useState("");
@@ -45,19 +45,21 @@ const Filtre = ({ list, setFilteredResults }) => {
         onChange={(e) => setSearchText(e.target.value)}
       />
       
+      {/* Filtre par zones dynamiques */}
       <select value={zone} className="select-filtre" onChange={(e) => setZone(e.target.value)}>
         <option value="">Toutes les zones</option>
-        <option value="Zone1">Zone 1</option>
-        <option value="Zone2">Zone 2</option>
-        <option value="Zone3">Zone 3</option>
+        {zones.map((z, index) => (
+          <option key={index} value={z}>{z}</option>
+        ))}
       </select>
       
-      <input
-        type="number"
-        placeholder="Tarif max"
-        value={tarif}
-        onChange={(e) => setTarif(e.target.value)}
-      />
+      {/* Filtre par tarifs dynamiques */}
+      <select value={tarif} className="select-filtre" onChange={(e) => setTarif(e.target.value)}>
+        <option value="">Tous les tarifs</option>
+        {tarifs.map((t, index) => (
+          <option key={index} value={t}>{t} FG et moins</option>
+        ))}
+      </select>
       
       <select value={note} onChange={(e) => setNote(e.target.value)}>
         <option value="">Toutes les notes</option>

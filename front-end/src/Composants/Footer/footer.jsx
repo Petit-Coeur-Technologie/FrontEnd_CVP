@@ -5,8 +5,7 @@ const Footer=()=>{
     return(
         <div className='foot'>
         <div className='foot-container'>
-          <p>Petit coeur Technologie</p>
-          <a href="mail: petitcoeur@gmail.com">E-mail: petitcoeur@gmail.com</a>
+          <a href="mail: petitcoeur@gmail.com" className='mailien'>E-mail: petitcoeur@gmail.com</a>
         </div>
       </div>
     )

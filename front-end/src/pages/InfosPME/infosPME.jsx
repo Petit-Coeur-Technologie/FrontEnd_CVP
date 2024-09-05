@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./infosPME.css";
+import toast from "react-hot-toast";
+import LoginModal from "../../Composants/Souscription/souscription";
 
 function InfosPme() {
     const { id } = useParams();
-    const [pme, setPme] = useState(null);
-    const [isSubscribed, setIsSubscribed] = useState(false);
     const navigate = useNavigate();
+    const [pme, setPme] = useState(null);
+    const [souscrit, setSouscrit] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     useEffect(() => {
         fetch(`https://ville-propre.onrender.com/pmes/${id}`)
@@ -19,24 +22,11 @@ function InfosPme() {
                 console.error("Error fetching PME details:", error);
             });
 
-        // Logique pour vérifier si l'utilisateur est abonné
-        // Simuler la vérification d'abonnement
-        const userIsSubscribed = true; // Remplacez cette ligne par la vérification réelle
-        setIsSubscribed(userIsSubscribed);
-
     }, [id]);
 
     if (!pme) {
         return <div>Loading...</div>;
     }
-
-    const handleCommentClick = () => {
-        if (!isSubscribed) {
-            alert("Vous devez être abonné pour commenter.");
-            // Rediriger vers la page d'abonnement ou d'inscription si l'utilisateur n'est pas abonné
-            navigate("/connexion");
-        }
-    };
 
     function renderStars(rating) {
         const stars = [];
@@ -51,6 +41,63 @@ function InfosPme() {
         }
         return stars;
     }
+
+    const urlaboné = 'https://ville-propre.onrender.com/abonnement';
+
+    const generateUniqueSubscriptionNumber = () => {
+        return 'AB' + Math.floor(Math.random() * 1000000);
+    };
+
+// Fonction pour récupérer le token d'authentification
+const getAuthToken = () => {
+    return localStorage.getItem('authToken'); // Récupère le token depuis le stockage local
+};
+
+const Souscription = () => {
+    const token = getAuthToken(); // Utiliser getAuthToken pour récupérer le token
+
+    if (!token) {
+        // Si aucun token, afficher un modal de connexion ou rediriger vers la page de connexion
+        setShowLoginModal(true);
+        return;
+    }
+
+    const souscriptionData = {
+        pme_id: id,  // Identifiant de la PME
+        num_abonnement: generateUniqueSubscriptionNumber(),  // Numéro unique pour l'abonnement
+        tarif_abonnement: pme.tarif_abonnement,  // Tarif de l'abonnement
+        status_abonnement: "pending",  // Statut de l'abonnement
+        debut_abonnement: new Date().toISOString(),  // Date de début de l'abonnement
+        fin_abonnement: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString()  // Date de fin de l'abonnement (par exemple, un mois après la date de début)
+    };
+
+    fetch(urlaboné, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(souscriptionData),
+    })
+    .then((response) => {
+        if (!response.ok) {
+            return response.json().then((data) => {
+                console.error("Response Error Data:", data);  // Log des données d'erreur
+                throw new Error("L'abonnement a échoué!");
+            });
+        }
+        return response.json();
+    })        
+    .then((data) => {
+        console.log("Subscription successful:", data);
+        setSouscrit(true);
+        toast("Vous vous êtes abonné avec succès!");
+    })
+    .catch(er => {
+        console.error('Une erreur est survenue', er);
+        toast('Une erreur est survenue');
+    });
+};
 
     return (
         <div className="infosPME">
@@ -69,18 +116,27 @@ function InfosPme() {
                     <p className="pme-zone p">Zone d'intervention: {pme.zone_intervention}</p>
                     <p className="pme-tarifs p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
                     <p className="pme-tarifs p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
-                    <button type="button" onClick={handleCommentClick} className="commentaireBtn">
-                        {isSubscribed ? "Commenter" : "S'abonner pour commenter"}
+                    <button
+                        type="button"
+                        className="AbonnementBtn"
+                        onClick={Souscription}
+                        disabled={souscrit} // Désactiver le bouton si déjà abonné
+                    >
+                        {souscrit ? "Abonné" : "S'abonner"}
                     </button>
                 </div>
             </div>
-            <div className="infosPME_comments">
-                {isSubscribed ? (
-                    <textarea className="commentairePme" placeholder="Laisser un commentaire..." />
-                ) : (
-                    <p>Vous devez être abonné pour commenter. <a href="/subscribe" className="a">S'abonner maintenant</a></p>
-                )}
-            </div>
+            {/* Afficher le popup de connexion si showLoginModal est vrai */}
+            {showLoginModal && (
+                <LoginModal
+                    onClose={() => setShowLoginModal(false)}
+                    onLogin={() => {
+                        setShowLoginModal(false);
+                                              // Redirection vers la page de connexion avec l'URL de la page d'abonnement en tant que état
+                                              navigate('/connexion', { state: { from: { pathname: window.location.pathname } } });
+                    }}
+                />
+            )}
         </div>
     );
 }

@@ -24,6 +24,8 @@ import InfosPme from './pages/InfosPME/infosPME.jsx';
 import Inscription from './pages/inscription/inscription.jsx';
 
 function App() {
+
+  
   const location = useLocation();
 
   // Condition pour vérifier si on est sur une page qui ne doit pas afficher Navbar et Footer
