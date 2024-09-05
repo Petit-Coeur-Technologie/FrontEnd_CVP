@@ -14,6 +14,7 @@ const Navbar = () => {
     // Fonction pour vérifier si l'utilisateur est connecté
     const isAuthenticated = () => {
         const token = getCookie('authToken'); // Récupérer le token du cookie
+        console.log("Token dans Navbar : ", token);
         return !!token; // Retourne true si le token existe, sinon false
     };
 
