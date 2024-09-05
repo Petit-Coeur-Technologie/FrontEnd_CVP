@@ -78,6 +78,7 @@ const Souscription = () => {
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(souscriptionData),
+        credentials: 'include' // Ajouter cette ligne pour inclure les cookies
     })
     .then((response) => {
         if (!response.ok) {
