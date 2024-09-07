@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import profilImg from '../../assets/moi.png'; // Importe une image de profil par défaut
 
-const Abonnes = ({ pme_id }) => {
+const Abonnes = () => {
   const [abonnes, setAbonnes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [popupVisible, setPopupVisible] = useState(false);
@@ -12,7 +12,7 @@ const Abonnes = ({ pme_id }) => {
   const [newComment, setNewComment] = useState('');
   const [userId, setUserId] = useState(null);
   const [accessToken, setAccessToken] = useState('');
-  const [localPmeId, setLocalPmeId] = useState(pme_id); // Nouvel état pour stocker pme_id
+  const [pmeId, setPmeId] = useState(null); // Nouvel état pour stocker pme_id
 
   useEffect(() => {
     // Fonction pour obtenir les cookies
@@ -25,14 +25,17 @@ const Abonnes = ({ pme_id }) => {
     const fetchUserData = () => {
       const userIdFromCookie = getCookie('userId');
       const tokenFromCookie = getCookie('authToken');
+      const pmeIdFromCookie = getCookie('pmeId'); // Renommé pour éviter confusion
 
       if (userIdFromCookie) {
         setUserId(userIdFromCookie);
-        setLocalPmeId(userIdFromCookie); // Met à jour l'état localPmeId
       }
       
       if (tokenFromCookie) {
         setAccessToken(tokenFromCookie);
+      }
+      if (pmeIdFromCookie) { // Mise à jour de l'état pmeId
+        setPmeId(pmeIdFromCookie);
       }
     };
 
@@ -40,11 +43,12 @@ const Abonnes = ({ pme_id }) => {
   }, []);
 
   useEffect(() => {
-    if (!userId || !accessToken) return;
+    if (!userId || !accessToken || !pmeId) return; // Assure que userId, accessToken et pmeId sont définis
   
     const fetchAbonnes = async () => {
       try {
-        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${localPmeId}/pme`, {
+        console.log(`Envoi de la requête à : https://ville-propre.onrender.com/abonnement/${pmeId}/client`);
+        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${pmeId}/client`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -53,33 +57,33 @@ const Abonnes = ({ pme_id }) => {
         });
   
         if (!response.ok) {
-          throw new Error('Erreur réseau lors de la récupération des abonnés.');
+          throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
         }
   
-        const data = await response.json();
-        const filteredData = data.filter(abonne => abonne.user_id === userId); 
-        setAbonnes(filteredData);
+        const data = await response.json(); // Utilisez await pour obtenir les données JSON
+        setAbonnes(data); // Mettez à jour l'état avec les données récupérées
+  
         console.log('Récupération des abonnés réussie...');
+        console.log(data); // Affiche les données pour vérification
       } catch (error) {
         console.error('Erreur lors de la récupération des abonnés:', error.message);
       }
     };
   
     fetchAbonnes();
-  }, [userId, accessToken, localPmeId]);
+  }, [userId, accessToken, pmeId]);
+  
   
 
-  useEffect(() => {
-    console.log("ID "+userId);
-    console.log("Token : "+accessToken);
-    console.log("l'id de pme_id : "+localPmeId); // Utilisez localPmeId ici
-  });
+    const URL_COPIE_PIECE = "https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/copie_pi/";
 
+  
   // Filtre les abonnés en fonction du terme de recherche
-  const filteredAbonnes = abonnes.filter((abonne) =>
-    abonne.Nom_complet.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    abonne.Tel.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredAbonnes = abonnes.filter((abonne) =>
+  //   abonne.Nom_complet.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   abonne.Tel.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
 
   // Gère le changement du terme de recherche
   const handleSearchChange = (event) => {
@@ -88,7 +92,7 @@ const Abonnes = ({ pme_id }) => {
 
   // Gère la sélection d'un abonné pour afficher les détails
   const handleDetailler = (index) => {
-    setSelectedAbonne(filteredAbonnes[index]);
+    setSelectedAbonne(abonnes[index]);
     setPopupVisible(true);
     setShowCommentsPopup(false);
     setShowAddCommentPopup(false);
@@ -155,17 +159,23 @@ const Abonnes = ({ pme_id }) => {
 
       {/* Liste des abonnés filtrés */}
       <div className='divDonnes'>
-        {filteredAbonnes.map((abonne, index) => (
+        {abonnes.map((abonne, index) => (
           <div className='donnees' key={index}>
             <div className='divImageProfil'>
-              <img src={abonne.profil || profilImg} alt="profil" /> {/* Utilisation d'une image par défaut si aucune image de profil n'est fournie */}
+            <img src={`${URL_COPIE_PIECE}${abonne.utilisateur.copie_pi}`} alt="profil" /> {/* Utilisation d'une image par défaut si aucune image de profil n'est fournie */}
             </div>
-            <p>{abonne.Nom_complet}</p> {/* Nom de l'abonné */}
-            <address>{abonne.addresse}</address> {/* Adresse */}
-            <p>{abonne.Tel}</p> {/* Numéro de téléphone */}
-            <p>{abonne.Type}</p> {/* Type (Ménage, Entreprise, etc.) */}
+            <p>
+            {/* {
+              `${URL_COPIE_PIECE}${abonne.utilisateur.copie_pi}`
+            } */}
+            </p>
+            <p>{abonne.utilisateur.nom_prenom}</p> {/* Nom de l'abonné */}
+            <address>{abonne.utilisateur.quartier_id}</address> {/* Adresse */}
+            <p>{abonne.utilisateur.tel}</p> {/* Numéro de téléphone */}
+            <p>{abonne.utilisateur.role}</p> {/* Type (Ménage, Entreprise, etc.) */}
             <button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button> {/* Bouton pour voir les détails */}
           </div>
+          
         ))}
       </div>
 
@@ -176,22 +186,23 @@ const Abonnes = ({ pme_id }) => {
             <span className='closePopup' onClick={closeAllPopups}>&times;</span> {/* Bouton pour fermer le popup */}
             <div className='voirImages'>
               <div className='detailsImage'>
-                <img src={selectedAbonne.profil || profilImg} alt="profil" /> {/* Utilisation d'une image par défaut si aucune image de profil n'est fournie */}
+                <img src={`${URL_COPIE_PIECE}${selectedAbonne.profil}`} alt="profil" />
+                {/* Utilisation d'une image par défaut si aucune image de profil n'est fournie */}
               </div>
             </div>
-            <p><span className='label'>Nom complet:</span> {selectedAbonne.Nom_complet}</p>
-            <p><span className='label'>Adresse:</span> {selectedAbonne.addresse}</p>
-            <p><span className='label'>Téléphone:</span> {selectedAbonne.Tel}</p>
-            <p><span className='label'>Type:</span> {selectedAbonne.Type}</p>
-            <p><span className='label'>Genre:</span> {selectedAbonne.Genre || 'Non spécifié'}</p>
-            <p><span className='label'>Email:</span> {selectedAbonne.Email || 'Non spécifié'}</p>
+            <p><span className='label'>Nom complet:</span> {selectedAbonne.utilisateur.nom_prenom}</p>
+            <p><span className='label'>Adresse:</span> {selectedAbonne.utilisateur.quartier_id}</p>
+            <p><span className='label'>Téléphone:</span> {selectedAbonne.utilisateur.tel}</p>
+            <p><span className='label'>Type:</span> {selectedAbonne.utilisateur.role}</p>
+            <p><span className='label'>Genre:</span> {selectedAbonne.utilisateur.genre || 'Non spécifié'}</p>
+            <p><span className='label'>Email:</span> {selectedAbonne.utilisateur.email || 'Non spécifié'}</p>
             <div className='divBtnVoirEnvoyer'>
               <button type="button" className='voirCommentaire' onClick={handleShowComments}>Commentaires</button>
               <button type="button" className='envoyeCommentaire' onClick={handleAddComment}>Envoyer un commentaire</button>
             </div>
           </div>
         </div>
-      )}
+)}
 
       {/* Popup pour voir les commentaires */}
       {showCommentsPopup && selectedAbonne && (
