@@ -13,7 +13,8 @@ function InfosPme() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        fetch(`https://ville-propre.onrender.com/pmes/${id}`)
+        // Récupération des détails de la PME
+        fetch(`https://ville-propre.onrender.com/pme/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 setPme(data);
@@ -22,11 +23,13 @@ function InfosPme() {
             .catch((error) => {
                 console.error("Error fetching PME details:", error);
             });
-
+    
         // Vérifier l'authentification à l'initialisation
         checkAuth();
+    
     }, [id]);
 
+    
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -82,7 +85,7 @@ function InfosPme() {
             }
     
             const data = await response.json();
-            console.log("Subscription successful:", data);
+            console.log("Souscription a réussi:", data);
             setSouscrit(true);
             toast("Vous vous êtes abonné avec succès!");
         } catch (error) {
