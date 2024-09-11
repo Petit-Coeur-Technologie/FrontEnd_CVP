@@ -14,7 +14,7 @@ function InfosPme() {
 
     useEffect(() => {
         // Récupération des détails de la PME
-        fetch(`https://ville-propre.onrender.com/pme/${id}`)
+        fetch(`https://ville-propre.onrender.com/pmes/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 setPme(data);
