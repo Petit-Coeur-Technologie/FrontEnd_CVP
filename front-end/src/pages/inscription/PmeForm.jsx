@@ -222,13 +222,13 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                         })} />
                 </div>
                 <div className="checkbox-container input-containerTablette input-containerTablettePolitique">
-                    <input type="checkbox" name="validate" id="validate" className="inputIns" required />
-                    <label htmlFor="validate" className="labelPolitique">
+                    <input type="checkbox" name="validate" id="validate" className="inputIns inputInsPme" required />
+                    <label htmlFor="validate" className="labelPolitique labelPolitiquePme">
                         J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                     </label>
                 </div>
-                <div className="divSub">
-                    <button type="submit" id="subPME" className="sub" disabled={isLoading}>
+                <div className="divSub divSubPme">
+                    <button type="submit" id="subPME" className="sub " disabled={isLoading}>
                         {isLoading ? 'Chargement...' : 'S\'inscrire'}
                     </button>
                 </div>
