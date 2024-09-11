@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Stack, Button, Typography } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
 import myImage from '/src/assets/th.jpeg';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
-import { useNavigate } from 'react-router-dom'; // Importation du hook useNavigate
 
 import "./Connexion.css";
+import toast from 'react-hot-toast';
 
 export default function Connexion() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const navigate = useNavigate(); // Initialisation du hook useNavigate
+  const navigate = useNavigate();
+  const location = useLocation(); // Récupération de l'URL de redirection
 
   // Expression régulière pour valider le mot de passe
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -20,7 +21,9 @@ export default function Connexion() {
     event.preventDefault();
   
     if (!passwordRegex.test(password)) {
-      setErrorMessage('Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!');
+      setErrorMessage(
+        'Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!'
+      );
       return;
     }
   
@@ -32,9 +35,9 @@ export default function Connexion() {
       const response = await fetch('https://ville-propre.onrender.com/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formData
+        body: formData,
       });
   
       if (!response.ok) {
@@ -42,65 +45,74 @@ export default function Connexion() {
       }
   
       const data = await response.json();
-      const { token } = data; // Supposons que le token est retourné dans la réponse
-
-      // Stocker le token dans un cookie
-      document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // Cookie valable 7 jours
-
-      alert('Connexion réussie');
-      navigate('/dashboard'); // Redirection vers le tableau de bord
+      const accessToken = data.access_token;
+      const userId = data.user_id;
+  
+      // Vérifier le rôle de l'utilisateur (pme ou client standard)
+      if (data.role === 'pme') {
+        // Pour les PMEs, récupérer également l'ID de la PME
+        const pmeId = data.user_rel_key;
+  
+        // Stocker les informations dans des cookies
+        document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `pmeId=${pmeId}; path=/; max-age=${60 * 60 * 24}`;
+  
+        console.log('PME connecté:', accessToken, userId, pmeId);
+      } else {
+        // Pour les clients standard, récupérer uniquement le token et l'ID utilisateur
+        document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
+  
+        console.log('Client connecté:', accessToken, userId);
+      }
+  
+      toast.success('Connexion réussie');
+  
+      // Redirection vers la page souhaitée
+      const redirectPath = location.state?.from?.pathname || '/dashboard';
+      navigate(redirectPath);
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
       setErrorMessage(error.message);
+      toast.error('Échec de la connexion.');
     }
-  };
+  };  
+
   
   return (
-    <Stack className='stacke'>
-      <Box
-        width={"400px"}
-        sx={{
-          bgcolor: "#00804b",
-          borderRadius: "10px",
-          padding: 3,
-          height: "500px",
-        }}
-      >
-        <Typography className="connexion" variant='h4'>Connexion</Typography>
-        <img className="bm" src={myImage} alt="pct" />
-        {showForgotPassword ? (
+    <div className='stacke'>
+      <div className='stackeChild'>
+        <h2 className="h2Con">Connexion</h2>
+        <div className='divMereImageBmw'>
+          <div className="divImageBmw">
+            <img className="imageBmw" src={myImage} alt="pct" />
+          </div>
+        </div>
+        {showForgotPassword ? 
+        (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
         ) : (
-          <form onSubmit={handleSubmit}>
-            <Stack direction={"column"} gap={2}>
-              <input
-                className="input"
-                type="email"
-                placeholder='E-mail...'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                className="input"
-                type="password"
-                placeholder='Mot de Passe...'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <a href='#' className="mot" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
-              <Button className="buttonReni" variant="contained" type="submit">Se Connecter</Button>
-              {errorMessage && <p className='pErreur' color="error">{errorMessage}</p>}
-              <div className="bx1">
-                  <a href="#"><i className='bx bxl-google gf'></i></a>
-                  <a href="#"><i className='bx bxl-facebook gf'></i></a>
+        <form onSubmit={handleSubmit}>
+          <div className='divFormulaire'>
+              <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required />
+              <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
+              <button className="btnConnexion" type="submit">Se Connecter</button>
+              {errorMessage && <p className='pErreur'>{errorMessage}</p>}
+
+                <div className="divIcone">
+                  <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
+                  <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
+                </div>
+
+                <div id="divmot2">
+                  <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription"> Inscrivez-Vous!</a></p>
+                </div>
               </div>
-              <div id="divmot2">
-                <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription" > Inscrivez-Vous!</a></p>
-              </div>
-            </Stack>
-          </form>
-        )}
-      </Box>
-    </Stack>
+            </form>
+          )}
+      </div>
+    </div>
   );
 }

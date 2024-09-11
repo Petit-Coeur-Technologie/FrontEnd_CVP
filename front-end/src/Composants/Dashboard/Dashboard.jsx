@@ -1,6 +1,6 @@
 import React, { useState } from 'react'; // Import de React et du hook useState pour gérer l'état local
 import { Link, Outlet } from 'react-router-dom'; // Import de Link et Outlet pour la navigation via React Router
-import Profil from '../../Composants/Profil/Profil';// Importation du composant Profil
+import Profil from '../Profil/Profil';// Importation du composant Profil
 import './Dashboard.css'; // Importation du fichier CSS pour styliser le tableau de bord
 
 export default function Dashboard() { // Déclaration du composant fonctionnel Dashboard
@@ -42,7 +42,7 @@ export default function Dashboard() { // Déclaration du composant fonctionnel D
   // Tableau d'éléments pour le deuxième menu latéral
   const elements_ul_Barlaterale2 = [
     { name: 'Paramètres', path: 'parametres', icon: 'bxs-cog' },
-    { name: 'Retour', path: "#", icon: 'bxs-log-out-circle' }
+    { name: 'Retour', path: "/", icon: 'bxs-log-out-circle' }
   ];
 
   return (

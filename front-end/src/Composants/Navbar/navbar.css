@@ -29,9 +29,12 @@
     height: auto;
 }
 
-li:hover{
+
+.NavLink:hover{
     font-weight: bolder;
-    color: #fdb024;
+    color: #fdb024!important;
+    background-color: none!important;
+    text-decoration: none!important;
 }
 
 
@@ -41,7 +44,7 @@ li:hover{
     justify-content: flex-end;
 }
 
-.nav ul{
+.ListeNavbar{
     list-style: none;
     display: flex;
     gap: 1rem;

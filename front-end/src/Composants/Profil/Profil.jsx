@@ -35,12 +35,18 @@ export default function Profil({ onUpdateProfileImage }) {
     fileInputRef.current.click();
   };
 
+  // const handleConfirmChange = () => {
+  //   setProfileImage(selectedImage);
+  //   setShowPopup(false);
+  //   onUpdateProfileImage(selectedImage);
+  // };
   const handleConfirmChange = () => {
+    console.log('Selected Image:', selectedImage);
     setProfileImage(selectedImage);
     setShowPopup(false);
     onUpdateProfileImage(selectedImage);
   };
-
+  
   const handleCancelChange = () => {
     setSelectedImage(null);
     setShowPopup(false);
