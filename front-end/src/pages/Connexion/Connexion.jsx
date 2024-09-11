@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Stack, Button, Typography } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
 import myImage from '/src/assets/th.jpeg';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
-import { useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
 
 import "./Connexion.css";
+import toast from 'react-hot-toast';
 
 export default function Connexion() {
   const [username, setUsername] = useState('');
@@ -19,51 +19,67 @@ export default function Connexion() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!passwordRegex.test(password)) {
-      setErrorMessage('Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!');
+      setErrorMessage(
+        'Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!'
+      );
       return;
     }
-
+  
     try {
       const formData = new URLSearchParams();
       formData.append('username', username);
       formData.append('password', password);
-
+  
       const response = await fetch('https://ville-propre.onrender.com/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formData
+        body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
+  
       const data = await response.json();
-      const { token } = data; // Supposons que le token est retourné dans la réponse
-
       const accessToken = data.access_token;
-
-      // Stocker le token dans un cookie
-      document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24 * 7}`; // Cookie valable 7 jours
-      console.log("Cookie après connexion : ", accessToken); // Ajouter ce log pour vérifier
-
-
-      alert('Connexion réussie');
-
-      // Redirection après connexion
+      const userId = data.user_id;
+  
+      // Vérifier le rôle de l'utilisateur (pme ou client standard)
+      if (data.role === 'pme') {
+        // Pour les PMEs, récupérer également l'ID de la PME
+        const pmeId = data.user_rel_key;
+  
+        // Stocker les informations dans des cookies
+        document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `pmeId=${pmeId}; path=/; max-age=${60 * 60 * 24}`;
+  
+        console.log('PME connecté:', accessToken, userId, pmeId);
+      } else {
+        // Pour les clients standard, récupérer uniquement le token et l'ID utilisateur
+        document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
+  
+        console.log('Client connecté:', accessToken, userId);
+      }
+  
+      toast.success('Connexion réussie');
+  
+      // Redirection vers la page souhaitée
       const redirectPath = location.state?.from?.pathname || '/dashboard';
       navigate(redirectPath);
-
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
       setErrorMessage(error.message);
+      toast.error('Échec de la connexion.');
     }
-  };
+  };  
 
+  
   return (
     <div className='stacke'>
       <div className='stackeChild'>
@@ -73,17 +89,17 @@ export default function Connexion() {
             <img className="imageBmw" src={myImage} alt="pct" />
           </div>
         </div>
-        {showForgotPassword ?
-          (
-            <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className='divFormulaire'>
-                <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} />
-                <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
-                <button className="btnConnexion" type="submit">Se Connecter</button>
-                {errorMessage && <p className='pErreur'>{errorMessage}</p>}
+        {showForgotPassword ? 
+        (
+          <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
+        ) : (
+        <form onSubmit={handleSubmit}>
+          <div className='divFormulaire'>
+              <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required />
+              <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
+              <button className="btnConnexion" type="submit">Se Connecter</button>
+              {errorMessage && <p className='pErreur'>{errorMessage}</p>}
 
                 <div className="divIcone">
                   <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
