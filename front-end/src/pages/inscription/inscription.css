@@ -1,93 +1,92 @@
+/* Réinitialisation des marges et des espacements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-/* Conteneur principal pour centrer la boîte */
+/* Conteneur principal */
 .stack-container {
-  /* position: fixed; */
   display: flex;
   align-items: center;
-  justify-content:space-between;
   max-width: 100%;
+  width: 100%;
   height: 100vh;
-  padding: 0 20px; /* Espacement pour éviter que le contenu touche les bords */
-  box-sizing: border-box; 
+  padding: 0px;
+  position: fixed;
 }
-.insEntreprise{
-  margin-top: 10px!important;
-}
+
 /* Conteneur pour l'image et le titre */
 .right-container {
+  background-image: url('src/assets/background.avif');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100%;
   flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Centre le contenu verticalement */
-  padding: 20px; /* Espacement interne */
-  background-color: #ffffff; /* Fond blanc pour contraste */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Ombre légère pour une meilleure séparation visuelle */
-  border-radius: 15px; /* Coins arrondis */
-  position: relative; /* Position relative pour les éléments internes */
+  justify-content: center;
+  padding: 20px;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.title{
+  position: relative;
+  top: 20px;
 }
 
 /* Logo */
 .logoInscription {
-  width: auto; /* Ajuste automatiquement la largeur */
-  max-width: 100%; /* Assure que le logo ne dépasse pas le conteneur */
-  max-height: 80%; /* Limite la hauteur pour éviter l'écrasement */
-  object-fit: contain; /* Conserve les proportions du logo */
+  width: auto;
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
 }
-
 /* Conteneur de la boîte principale */
 .box-container {
-  padding: 20px 10px; /* Espacement interne généreux */
+  padding: 20px 10px;
   height: 100%;
-  background-color: #00804b; /* Couleur de fond principale */
-  color: #ffffff; /* Couleur du texte */
-  border-radius: 12px; /* Coins arrondis */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Ombre légère pour un effet de profondeur */
-  position: relative; /* Position relative pour les éléments internes */
-  left: 0;
-  margin-left: 20px; /* Espace entre les conteneurs */
-  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-  overflow-y: scroll;
+  background-color: #00804b;
+  color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+  overflow-y: auto;
   overflow-x: hidden;
   z-index: 3000;
+  border-radius: 0px;
 }
 
 /* Style du logo */
 #lg {
   width: 60px;
-  height: 60px; /* Ajustement de la hauteur pour un meilleur rendu */
-  justify-content: center;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
-.lg{
+
+.lg {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
 }
 
-/* Groupe de boutons pour basculer entre les types de formulaires */
+/* Groupe de boutons pour les types de formulaires */
 .button-group {
   display: flex;
   justify-content: center;
-  margin-bottom: 5px; /* Espacement sous le groupe de boutons */
+  margin-bottom: 5px;
 }
 
-/* Style général pour les boutons */
+/* Style général des boutons */
 .client, .pme {
   width: 120px;
   height: auto;
   margin: 5px;
   border: none;
   border-radius: 8px;
-  background-color: #054d39!important;
+  background-color: #054d39;
   color: #ffffff;
   font-size: 18px;
   cursor: pointer;
@@ -99,85 +98,59 @@
 .client:hover, .pme:hover {
   background-color: #004d40;
 }
-.input-containerMENAGE{
-  width: 100%;
-}
+
 /* Conteneur du formulaire et des champs de saisie */
 .form-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  /* align-items: center; */
-  height: 70%;
+  /* height: 70%; */
+  position: relative;
+  left: -10px;
 }
 
-/* Style des sélecteurs et des champs de saisie */
+/* Style des champs de saisie */
 .input-container {
   display: flex;
   align-items: center;
   width: calc(50% - 10px);
   height: 40px;
-  border: 1px solid #004d40;
-  border-radius: 8px;
+  font-size: 14px;
   background-color: #04623b;
-  box-sizing: border-box;
-  padding: 0 10px;
+  padding: 0 0 0 10px;
   overflow: hidden;
 }
 
-/* Style des icônes dans les champs de saisie */
 .input-container i {
   color: #fdb024;
-  margin-right: 10px;
-  position: relative;
+  margin-right: 5px;
 }
 
-/* Style des champs de saisie, des sélecteurs et des zones de texte */
-.inputIns,
-.selectIns,
-.desc {
+.inputIns, .selectIns, .desc {
   background-color: #04623b;
-  border: none;
+  border: none!important;
   color: #ffffff;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
-.inputIns::placeholder,
-.selectIns::placeholder,
-.desc::placeholder {
+.inputIns::placeholder, .selectIns::placeholder, .desc::placeholder {
   color: #b2dfdb;
+  font-size: 14px;
 }
 
-/* Cacher l'input file */
 .inputIns[type="file"] {
   display: none;
 }
-
-/* .input-containerMENAGE{
-  width: 80%;
-} */
-/* .type{
+.inputIns[type="text"], .inputIns[type="email"] {
   position: relative;
-  left: 30px;
+  top: 5px;
+  padding: 0;
+}
+/* .selectIns1, .selectIns2, .selectIns3, .genre{
+  font-size: 14px;
 } */
-/* Styliser le label comme un bouton */
-/* .custom-file-upload {
-  width: calc(60% - 10px);
-  height: 50px;
-  font-size: 16px;
-  cursor: pointer;
-  color: #ffffff;
-  background-color: #fbbc05;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  margin: 10px 0;
-} */
-
-/* Style du textarea */
 .desc, #cmdp {
   width: calc(100% - 20px);
   height: 80px;
@@ -185,42 +158,33 @@
   border-radius: 8px;
   background-color: #04623b;
 }
-/* .selectIns1,
-.selectIns2,
-.selectIns3{
-  width: 140px;
-} */
 
-/* Conteneur pour le texte (textarea) */
 .text-container {
-  display: block;
-  align-items: center;
-  width: 100%;
+  width: 98.3%;
   border: 1px solid #04623b;
-  border-radius: 8px;
   background-color: #04623b;
   padding: 10px;
 }
 
-/* Conteneur pour la case à cocher */
 .checkbox-container {
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
-/* Style pour le texte à côté de la case à cocher */
 .labelPolitique {
   margin-left: 10px;
 }
 
-.accept{
-  margin: 10px 0px 10px 0;
+.accept {
+  margin: 10px 0;
 }
 
 .divSub{
   display: flex;
-  justify-content: center;
+  width: 100%;
+  justify-content: center!important;
+  margin-bottom: 10px;
 }
 
 /* Style spécifique pour le bouton "submit" */
@@ -240,69 +204,23 @@
 .sub:hover {
   background-color: #d89008;
 }
-/* .textInscrireAvec{
-  display: flex;
-  align-items: center;
-} */
-/* .ins {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-} */
 
-/* -------------------------------------------------------------------- */
-
+.cercle{
+  height: 30px!important;
+  width: 30px!important;
+}
 
 /* Style pour les textes "Ou s'inscrire avec" */
-.textInscrireAvecGoogle,
-.textInscrireAvecFacebook {
-  /* font-size: 16px; */
-  /* color: white; */
-  margin-bottom: 5px; 
-  /* text-align: center; */
+.textInscrireAvecGoogle, .textInscrireAvecFacebook {
+  margin-bottom: 5px;
 }
 
-/* Conteneur pour le texte et l'icône ensemble */
-.divTextIconGoogle, 
-.divTextIconFacebook {
-  /* display: flex; */
+.divTextIconGoogle, .divTextIconFacebook {
   gap: 10px;
-  /* justify-content: center; */
   margin: 10px;
-  border-radius: 10px;
-  /* align-items: center; */
-  /* background-color: #05673f;  */
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 40px;
 }
-/* .insEntreprise{
-  margin-top: 20px;
-} */
-/* .google-icon {
-  color: #DB4437; 
-  font-size: 30px;
-} */
-
-/* Icône Facebook déjà stylée inline */
-
-
-/* ---------------------------------------------------------------------- */
-
-
-/* .cercle {
-  background-color: #ffffff;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  margin: 5px;
-  display: block;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-} */
-/* .cercleGoogle{
-  margin-left: -10px;
-} */
 
 /* Icône Google pour l'inscription */
 .google-icon {
@@ -321,26 +239,12 @@
   font-size: 32px;
   text-align: center;
 }
-/* .divLogin-link{
-  margin-top: 10px!important;
+
+.divLogin-linkPme{
+  padding: 0px!important;
 }
-.divLogin-link2{
-  margin-top: 100px!important;
-} */
 
-/* Style pour la section de lien de connexion */
-/* .divLogin-link {
-  margin-top: 40px; 
-  display: flex;
-  justify-content: center;
-} */
-
-/* Style du lien en bas de la boîte */
-/* .lienPolitique, .login-link {
-  color: #ffffff;
-  text-decoration: none;
-} */
-
+/* Style pour les liens */
 .lienPolitique:hover, .login-link:hover {
   color: #fdb024;
   font-weight: normal;
@@ -348,228 +252,352 @@
 
 /* Message d'erreur */
 .error-message {
-  color: #f44336; 
+  color: #f44336;
   font-size: 14px;
 }
-.bx{
+
+.bx {
   margin: 0;
-  padding: 0!important;
+  padding: 0 !important;
+  font-size: 17px!important;
 }
-.divBtn{
+.bxs-home, .bx-home, .bx-home-alt-2, .bx-male-female, .bx-euro{
+  margin-right: 0!important;
+}
+
+.divBtn {
   width: 100%;
   display: flex;
-  text-align: center!important;
+  text-align: center !important;
   padding: 0;
 }
 
-/* POUR GERER LE RESPONSIVE DE FORMULAIRE D'INSCRIPTION (ES MEDIA SCREEN)  */
+/* Conteneur de la case à cocher */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
-@media (min-width:900px){
-  .box-container{
-    width: 60%!important;
+/* Cacher l'élément checkbox par défaut */
+.custom-checkbox {
+  display: none;
+}
+
+/* Style de l'élément label qui sera utilisé comme la case à cocher */
+.labelPolitique {
+  position: relative;
+  padding-left: 20px; /* Espace pour la case à cocher */
+  cursor: pointer;
+  /* font-size: 14px; */
+  color: #cacaca;
+}
+.labelPolitiquePme {
+  position: relative;
+  padding-left: 10px; /* Espace pour la case à cocher */
+  cursor: pointer;
+  /* font-size: 14px; */
+  color: #cacaca;
+}
+
+.inputInsPme{
+  margin-left: 20px;
+}
+/* Style de la case à cocher */
+.labelPolitique::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border: 2px solid #004d40;
+  border-radius: 3px;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* Style de la case à cocher quand elle est sélectionnée */
+.custom-checkbox:checked + .labelPolitique::after{
+  border-color: #004d40;
+}
+.inputInsPme:checked + .labelPolitiquePme::after{
+  border-color: #004d40!important;
+}
+
+/* Style de la coche (checkmark) */
+.labelPolitique::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 45%;
+  transform: translateY(-50%) scale(0);
+  width: 5px;
+  height: 3px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: transform 0.3s;
+}
+.labelPolitiquePme::before {
+  content: '';
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border: 2px solid #004d40;
+  border-radius: 3px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.labelPolitiquePme::after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 45%;
+  transform: translateY(-50%) scale(0);
+  width: 5px;
+  height: 3px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: transform 0.3s;
+}
+
+/* Afficher la coche quand la case est sélectionnée */
+.custom-checkbox:checked + .labelPolitique::after, .labelPolitiquePme::after {
+  transform: translateY(-50%) scale(1) rotate(45deg);
+}
+
+/* Responsive Design */
+
+/* Tablettes et plus grandes */
+@media (min-width: 1000px) {
+  .divLogin-linkPme{
+    margin-top: 0px!important;
   }
-  .labelPolitique, .login-link, .textInscrireAvec{
+  .box-container {
+    width: 50% !important;
+  }
+  .labelPolitique, .login-link, .textInscrireAvec {
     font-size: 13px;
   }
-  .checkbox-container .labelPolitique .lienPolitique{
+  .checkbox-container .labelPolitique .lienPolitique {
     width: 50%;
   }
-  .input-containerMENAGE{
-    width: 88%!important;
+  .input-containerMENAGE {
+    width: 88% !important;
   }
-  .accept{
+  .accept {
     margin-left: 30px;
-    display:flex;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: start;
   }
-  .divLogin-link2{
-    margin-top: 10px!important;
+  .ins {
+    width: 100%;
   }
-  .ins{
-    width: 98%;
-  }
-  .text-container{
-    width: 95.5%!important;
-  }
-  .input-containerTablettePolitique{
+
+  .input-containerTablettePolitique {
     position: relative;
-    left: 0px;
+    left: 0;
   }
-  .subPME{
+  /* .subPME {
     position: relative;
     left: 25%;
-  }
-  .form-container{
+  } */
+  .form-container {
     height: 50%;
-    /* justify-content: space-between; */
-    margin-left: 30px;
+    width: 99%;
+    margin-left: 5px;
   }
-  .checkbox-container{
-    width: 100%!important;
+  .checkbox-container {
+    width: 100% !important;
   }
-  .labelPolitique, .login-link{
+  .labelPolitique, .login-link {
     font-size: 16px;
   }
 }
 
-@media (min-width:751px){
-  .box-container{
-    width: 70%;
+/* Tablettes et petits écrans */
+@media (min-width: 791px) {
+  .form-container{
+    left: 0;
+    justify-content: center;
   }
-  .input-containerMENAGE{
-    width: 98.2%!important;
+  .box-container {
+    width: 60%;
   }
-  .divLogin-link2{
-    margin-top: 10px!important;
+  .input-containerMENAGE {
+    width: 98.2% !important;
   }
-  .subPME{
-    position: relative;
-    left: 25%;
+  .input-containerTablettePolitique {
+    justify-content: start !important;
   }
-  .input-containerTablettePolitique{
-    justify-content: start!important;
-  }
-  .accept{
-    /* margin-left: 30px; */
-    display:flex;
+  .accept {
+    display: flex;
     justify-content: start;
+    flex-wrap: wrap;
+  }
+  .checkbox-container {
+    width: 100% !important;
+    position: relative;
+    left: -3px;
+  }
+  .checkbox-containerPme{
+    left: -8px;
   }
 }
 
-/* Responsive pour les tablettes */
-@media (max-width:750px){
-  .box-container{
+/* Mobile */
+@media (max-width: 790px) {
+  .stack-container{
+    width: 90%;
+    left: 6%;
+  }
+  .box-container {
     left: -10px;
   }
-  .labelPolitique, .login-link, .textInscrireAvec{
+  .labelPolitique, .login-link, .textInscrireAvec {
     font-size: 13px;
   }
   .right-container {
-    display:none;
+    display: none;
   }
-  .checkbox-container .labelPolitique .lienPolitique{
+  .checkbox-container .labelPolitique .lienPolitique {
     width: 50%;
   }
-  .input-container, .checkbox-container,.accept, .text-container{
-    width: 47%!important;
+  .input-container, .checkbox-container, .accept, .text-container {
+    width: 47% !important;
   }
-  .input-containerMENAGE{
-    width: 95.5%!important;
+  .input-containerMENAGE {
+    width: 95.5% !important;
   }
-  .accept{
+  .accept {
     margin-left: 30px;
-    display:flex;
+    display: flex;
     justify-content: start;
   }
-  .divLogin-link2{
-    margin-top: 10px!important;
-  }
-  .ins{
+  .ins {
     width: 98%;
   }
-  .text-container{
-    width: 95.5%!important;
+  .text-container {
+    width: 95.5% !important;
   }
-  .input-containerTablettePolitique{
+  .input-containerTablettePolitique {
     position: relative;
-    left: 0px;
+    left: 0;
   }
-  .subPME{
+  .subPME {
     position: relative;
     left: 25%;
   }
-  .form-container{
+  .form-container {
     height: 50%;
-    /* justify-content: space-between; */
     margin-left: 30px;
+    left: -4px;
   }
-  .checkbox-container{
-    width: 100%!important;
+  .checkbox-container {
+    width: 100% !important;
+    position: relative;
+    /* left: -10px; */
   }
-  .labelPolitique, .login-link{
+  .checkbox-containerPme{
+    left: -80px;
+  }
+  .labelPolitique, .login-link {
     font-size: 16px;
   }
-
-  /* .sub{
-    left: 100px;
-  } */
 }
 
-@media (max-width:700px) {
-
-  .box-container{
+/* Très petit écran */
+@media (max-width: 700px) {
+  .stack-container{
+    left: 0;
+    right: 0;
+  }
+  .box-container {
     width: 100%;
-    /* left: 30px; */
   }
-  .input-container, .input-containerMENAGE, .checkbox-container,.accept, .text-container{
-    width: 90%!important;
+  .input-container, .input-containerMENAGE, .checkbox-container, .accept, .text-container {
+    width: 90% !important;
   }
-  .accept{
+  .accept {
     margin-left: 20px;
   }
-  .divLogin-link2{
-    margin-top: 10px!important;
+
+  .ins {
+    width: 92%;
+    position: relative;
+    left: 22px;
   }
-  .ins{
-    width: 98%;
-  }
-  .form-container{
+  .form-container {
     height: 50%;
     margin-left: 30px;
+    left: 8px;
   }
-
-  .form-container2{
+  .form-container2 {
     gap: 10px;
   }
-  .input-container{
+  .input-container {
     overflow-x: hidden;
-    width: 94%!important;
+    width: 94% !important;
   }
-  .input-containerSelect{
-    width: 46%!important;
+  .input-containerSelect {
+    width: 46% !important;
   }
-  .stack-container{
+  .stack-container {
     width: 100%;
     position: relative;
-    /* left: 2%; */
   }
-  .input-container, .selectIns{
+  .checkbox-container {
+    width: 100% !important;
+    position: relative;
+    left: 0px;
+  }
+  .checkbox-containerPme{
+    left: -13px;
+  }
+  .input-container, .selectIns {
     font-size: 14px;
   }
-  .text-container{
-    width: 94%!important;
+  .text-container {
+    width: 94% !important;
   }
-  .subPME{
+  .subPME {
     position: relative;
     left: 70px;
   }
 }
 
-.divMereTest{
+/* Divs de test */
+.divMereTest {
   height: 300px;
   width: 300px;
   background-color: rgb(15, 102, 93);
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  /* position: relative; */
   position: fixed;
 }
 
-.divfille1{
+.divfille1 {
   background-color: #ea4335;
   height: 30px;
   width: 30px;
   position: fixed;
 }
-.divfille2{
+
+.divfille2 {
   background-color: #81920e;
   height: 30px;
   width: 30px;
- 
-  /* left: 10px; */
 }
-.divfille3{
+
+.divfille3 {
   background-color: #35ea53;
   height: 30px;
   width: 30px;

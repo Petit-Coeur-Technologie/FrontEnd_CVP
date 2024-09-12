@@ -1,12 +1,7 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
-}
-
+/* Conteneur principal */
 .home {
-  padding-top: 70px; /* Compense la hauteur de la navbar */
-  min-height: 100vh;
+  padding: 10px 20px;
+  background-color: #f0f4f8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
   justify-items: center;

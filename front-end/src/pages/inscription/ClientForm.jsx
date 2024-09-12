@@ -205,7 +205,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 </div>
                 <div className="input-container input-containerMDP input-containerTablette">
                     <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
-                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
+                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmez le mot de passe"
                         {...register("cmdpClt", {
                             required: "Confirmez votre mot de passe",
                             validate: value => value === watch("mdpClt") || "Les mots de passe doivent correspondre"
@@ -213,7 +213,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 </div>
             </div>
             <div className="checkbox-container accept ">
-                <input type="checkbox" name="validate" id="validate" className="inputIns"
+                <input type="checkbox" name="validate" id="validate" className="custom-checkbox"
                     {...register("accept", { required: "Veuillez accepter les politiques de confidentialités!" })} />
                 <label htmlFor="validate" className="labelPolitique">
                     J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>

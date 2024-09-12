@@ -17,67 +17,52 @@ export default function Connexion() {
   // Expression régulière pour valider le mot de passe
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    if (!passwordRegex.test(password)) {
-      setErrorMessage(
-        'Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!'
-      );
-      return;
-    }
-  
-    try {
-      const formData = new URLSearchParams();
-      formData.append('username', username);
-      formData.append('password', password);
-  
-      const response = await fetch('https://ville-propre.onrender.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formData,
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+    
+      if (!passwordRegex.test(password)) {
+        setErrorMessage('Le mot de passe doit contenir 1 maj, 1 min, minimum 8 caractères et un caractère spécial!');
+        return;
       }
-  
-      const data = await response.json();
-      const accessToken = data.access_token;
-      const userId = data.user_id;
-  
-      // Vérifier le rôle de l'utilisateur (pme ou client standard)
-      if (data.role === 'pme') {
-        // Pour les PMEs, récupérer également l'ID de la PME
-        const pmeId = data.user_rel_key;
-  
+    
+      try {
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('password', password);
+    
+        const response = await fetch('https://4970-41-223-51-230.ngrok-free.app/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formData,
+          mode: 'cors'  // Assurez-vous que mode est défini à 'cors'
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        const accessToken = data.access_token;
+        const userId = data.user_id;
+    
         // Stocker les informations dans des cookies
         document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
         document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
-        document.cookie = `pmeId=${pmeId}; path=/; max-age=${60 * 60 * 24}`;
-  
-        console.log('PME connecté:', accessToken, userId, pmeId);
-      } else {
-        // Pour les clients standard, récupérer uniquement le token et l'ID utilisateur
-        document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
-        document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
-  
-        console.log('Client connecté:', accessToken, userId);
+    
+        toast.success('Connexion réussie');
+        console.log(accessToken);
+        console.log(userId);
+    
+        const redirectPath = location.state?.from?.pathname || '/dashboard';
+        navigate(redirectPath);
+    
+      } catch (error) {
+        console.error('Erreur lors de la connexion:', error);
+        toast.error('Échec de la connexion.');
       }
-  
-      toast.success('Connexion réussie');
-  
-      // Redirection vers la page souhaitée
-      const redirectPath = location.state?.from?.pathname || '/dashboard';
-      navigate(redirectPath);
-    } catch (error) {
-      console.error('Erreur lors de la connexion:', error);
-      setErrorMessage(error.message);
-      toast.error('Échec de la connexion.');
-    }
-  };  
+    };    
 
   
   return (
