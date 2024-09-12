@@ -1,5 +1,6 @@
 /* Conteneur de la barre de recherche et de filtrage */
 .filter-container {
+  margin-top: 70px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -51,7 +52,7 @@
 
   .input-recherche,
   .select-filtre {
-    width: 90%; /* Pleine largeur sur petits écrans */
+    width: 100%; /* Pleine largeur sur petits écrans */
   }
 
   .input-recherche {
