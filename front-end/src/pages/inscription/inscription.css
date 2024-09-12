@@ -24,14 +24,15 @@
   height: 100%;
   flex: 1;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
   padding: 20px;
   background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  /* border-radius: 15px; */
   position: relative;
+}
+
+.title{
+  position: relative;
+  top: 20px;
 }
 
 /* Logo */
@@ -61,6 +62,7 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .lg {
@@ -113,34 +115,42 @@
   align-items: center;
   width: calc(50% - 10px);
   height: 40px;
-  border: 1px solid #004d40;
-  border-radius: 8px;
+  font-size: 14px;
   background-color: #04623b;
-  padding: 0 10px;
+  padding: 0 0 0 10px;
   overflow: hidden;
 }
 
 .input-container i {
   color: #fdb024;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .inputIns, .selectIns, .desc {
   background-color: #04623b;
   border: none!important;
   color: #ffffff;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .inputIns::placeholder, .selectIns::placeholder, .desc::placeholder {
   color: #b2dfdb;
+  font-size: 14px;
 }
 
 .inputIns[type="file"] {
   display: none;
 }
-
+.inputIns[type="text"], .inputIns[type="email"] {
+  position: relative;
+  top: 5px;
+  padding: 0;
+}
+/* .selectIns1, .selectIns2, .selectIns3, .genre{
+  font-size: 14px;
+} */
 .desc, #cmdp {
   width: calc(100% - 20px);
   height: 80px;
@@ -150,10 +160,8 @@
 }
 
 .text-container {
-  display: block;
-  width: 110%;
+  width: 98.3%;
   border: 1px solid #04623b;
-  border-radius: 8px;
   background-color: #04623b;
   padding: 10px;
 }
@@ -172,9 +180,10 @@
   margin: 10px 0;
 }
 
-.divSub {
+.divSub{
   display: flex;
-  justify-content: center;
+  width: 100%;
+  justify-content: center!important;
   margin-bottom: 10px;
 }
 
@@ -196,6 +205,11 @@
   background-color: #d89008;
 }
 
+.cercle{
+  height: 30px!important;
+  width: 30px!important;
+}
+
 /* Style pour les textes "Ou s'inscrire avec" */
 .textInscrireAvecGoogle, .textInscrireAvecFacebook {
   margin-bottom: 5px;
@@ -204,8 +218,8 @@
 .divTextIconGoogle, .divTextIconFacebook {
   gap: 10px;
   margin: 10px;
-  border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 40px;
 }
 
 /* Icône Google pour l'inscription */
@@ -226,6 +240,10 @@
   text-align: center;
 }
 
+.divLogin-linkPme{
+  padding: 0px!important;
+}
+
 /* Style pour les liens */
 .lienPolitique:hover, .login-link:hover {
   color: #fdb024;
@@ -241,6 +259,10 @@
 .bx {
   margin: 0;
   padding: 0 !important;
+  font-size: 17px!important;
+}
+.bxs-home, .bx-home, .bx-home-alt-2, .bx-male-female, .bx-euro{
+  margin-right: 0!important;
 }
 
 .divBtn {
@@ -265,7 +287,7 @@
 /* Style de l'élément label qui sera utilisé comme la case à cocher */
 .labelPolitique {
   position: relative;
-  padding-left: 35px; /* Espace pour la case à cocher */
+  padding-left: 20px; /* Espace pour la case à cocher */
   cursor: pointer;
   /* font-size: 14px; */
   color: #cacaca;
@@ -288,8 +310,8 @@
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   background: #fff;
   border: 2px solid #004d40;
   border-radius: 3px;
@@ -297,12 +319,10 @@
 }
 
 /* Style de la case à cocher quand elle est sélectionnée */
-.custom-checkbox:checked + .labelPolitique::before{
-  background: #004d40;
+.custom-checkbox:checked + .labelPolitique::after{
   border-color: #004d40;
 }
-.inputInsPme:checked + .labelPolitiquePme::before{
-  background: #004d40!important;
+.inputInsPme:checked + .labelPolitiquePme::after{
   border-color: #004d40!important;
 }
 
@@ -310,11 +330,11 @@
 .labelPolitique::after {
   content: '';
   position: absolute;
-  left: 7px;
-  top: 50%;
+  left: 4px;
+  top: 45%;
   transform: translateY(-50%) scale(0);
-  width: 10px;
-  height: 5px;
+  width: 5px;
+  height: 3px;
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -323,12 +343,12 @@
 .labelPolitiquePme::before {
   content: '';
   position: absolute;
-  left: -30px;
+  left: -25px;
   top: 50%;
-  transform: translateY(-50%)!important;
-  width: 20px!important;
-  height: 20px!important;
-  background: #ffffff;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background: #fff;
   border: 2px solid #004d40;
   border-radius: 3px;
   transition: background 0.3s, border-color 0.3s;
@@ -336,11 +356,11 @@
 .labelPolitiquePme::after {
   content: '';
   position: absolute;
-  left: -25px;
-  top: 48%;
+  left: -20px;
+  top: 45%;
   transform: translateY(-50%) scale(0);
-  width: 10px;
-  height: 5px;
+  width: 5px;
+  height: 3px;
   border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
@@ -352,11 +372,13 @@
   transform: translateY(-50%) scale(1) rotate(45deg);
 }
 
-
 /* Responsive Design */
 
 /* Tablettes et plus grandes */
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
+  .divLogin-linkPme{
+    margin-top: 0px!important;
+  }
   .box-container {
     width: 50% !important;
   }
@@ -372,28 +394,25 @@
   .accept {
     margin-left: 30px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: start;
   }
-  /* .divLogin-link2 {
-    margin-top: 10px !important;
-  } */
   .ins {
-    width: 98%;
+    width: 100%;
   }
-  .text-container {
-    width: 95.5% !important;
-  }
+
   .input-containerTablettePolitique {
     position: relative;
     left: 0;
   }
-  .subPME {
+  /* .subPME {
     position: relative;
     left: 25%;
-  }
+  } */
   .form-container {
     height: 50%;
-    margin-left: 30px;
+    width: 99%;
+    margin-left: 5px;
   }
   .checkbox-container {
     width: 100% !important;
@@ -404,19 +423,16 @@
 }
 
 /* Tablettes et petits écrans */
-@media (min-width: 751px) {
+@media (min-width: 791px) {
+  .form-container{
+    left: 0;
+    justify-content: center;
+  }
   .box-container {
-    width: 70%;
+    width: 60%;
   }
   .input-containerMENAGE {
     width: 98.2% !important;
-  }
-  .divLogin-link2 {
-    margin-top: 10px !important;
-  }
-  .subPME {
-    position: relative;
-    left: 25%;
   }
   .input-containerTablettePolitique {
     justify-content: start !important;
@@ -424,11 +440,24 @@
   .accept {
     display: flex;
     justify-content: start;
+    flex-wrap: wrap;
+  }
+  .checkbox-container {
+    width: 100% !important;
+    position: relative;
+    left: -3px;
+  }
+  .checkbox-containerPme{
+    left: -8px;
   }
 }
 
 /* Mobile */
-@media (max-width: 750px) {
+@media (max-width: 790px) {
+  .stack-container{
+    width: 90%;
+    left: 6%;
+  }
   .box-container {
     left: -10px;
   }
@@ -452,9 +481,6 @@
     display: flex;
     justify-content: start;
   }
-  /* .divLogin-link2 {
-    margin-top: 10px !important;
-  } */
   .ins {
     width: 98%;
   }
@@ -472,9 +498,15 @@
   .form-container {
     height: 50%;
     margin-left: 30px;
+    left: -4px;
   }
   .checkbox-container {
     width: 100% !important;
+    position: relative;
+    /* left: -10px; */
+  }
+  .checkbox-containerPme{
+    left: -80px;
   }
   .labelPolitique, .login-link {
     font-size: 16px;
@@ -483,6 +515,10 @@
 
 /* Très petit écran */
 @media (max-width: 700px) {
+  .stack-container{
+    left: 0;
+    right: 0;
+  }
   .box-container {
     width: 100%;
   }
@@ -492,15 +528,16 @@
   .accept {
     margin-left: 20px;
   }
-  /* .divLogin-link2 {
-    margin-top: 10px !important;
-  } */
+
   .ins {
-    width: 98%;
+    width: 92%;
+    position: relative;
+    left: 22px;
   }
   .form-container {
     height: 50%;
     margin-left: 30px;
+    left: 8px;
   }
   .form-container2 {
     gap: 10px;
@@ -515,6 +552,14 @@
   .stack-container {
     width: 100%;
     position: relative;
+  }
+  .checkbox-container {
+    width: 100% !important;
+    position: relative;
+    left: 0px;
+  }
+  .checkbox-containerPme{
+    left: -13px;
   }
   .input-container, .selectIns {
     font-size: 14px;

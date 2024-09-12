@@ -1,42 +1,69 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
-}
-
+/* Conteneur principal */
 .home {
-  padding-top: 70px; /* Compense la hauteur de la navbar */
-  min-height: 100vh;
+  padding: 10px 20px;
+  background-color: #f0f4f8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
-  justify-items: center;
-  justify-content:space-around;
-  }
-  
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Augmenté la taille min */
-    width: 100%;
-    justify-items: center;
-    gap: 20px;
-  }
-
-  /* Bouton "Voir plus" */
-.voir-plus-container {
-  text-align: center;
+  align-items: center;
+  position: relative;
+  top: 120px;
 }
 
+/* Conteneur des filtres et des cartes */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux cartes de se réorganiser en fonction de l'espace disponible */
+  gap: 20px; /* Espacement entre les cartes */
+  justify-content: center; /* Centre les cartes horizontalement */
+  margin-top: 30px; /* Augmente l'espacement au-dessus des cartes */
+}
+
+/* Style des cartes PME */
+.pme-card {
+  background-color: #fff; /* Fond blanc pour les cartes */
+  border: 1px solid #e0e0e0; /* Bordure plus douce */
+  padding: 15px; /* Ajoute du padding interne */
+  border-radius: 12px; /* Coins plus arrondis */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+  overflow: hidden; /* Assure que le contenu ne déborde pas des coins arrondis */
+  width: 250px; /* Largeur légèrement plus large pour les cartes */
+  height: 200px; /* Hauteur augmentée */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transitions pour les effets au survol */
+}
+
+.pme-card:hover {
+  transform: translateY(-10px); /* Élévation plus marquée au survol */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+}
+
+/* Conteneur du bouton "Voir plus" */
+.voir-plus-container {
+  margin-top: 40px; /* Augmente l'espacement au-dessus du bouton */
+}
+
+/* Style du bouton "Voir plus" */
 .voir-plus-button {
-  background-color: #fdb024;
-  color: white;
-  padding: 7px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  background-color: #0056b3; /* Couleur de fond plus foncée */
+  color: #fff; /* Couleur du texte */
+  border: 1px solid #004494; /* Bordure assortie */
+  padding: 12px 24px; /* Padding augmenté */
+  border-radius: 8px; /* Coins arrondis du bouton */
+  font-size: 18px; /* Taille de la police augmentée */
+  font-weight: bold; /* Texte en gras pour plus d'impact */
+  cursor: pointer; /* Curseur en forme de main pour indiquer que c'est cliquable */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transitions pour les effets au survol */
 }
 
 .voir-plus-button:hover {
-  background-color: #fdb024;
-  color: #00804b;
+  background-color: #003d7a; /* Couleur plus sombre au survol */
+  transform: scale(1.05); /* Légère augmentation de la taille au survol */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile au survol */
+}
+
+/* Style du titre de la carte */
+.card-title {
+  font-size: 1.1rem; /* Taille de police légèrement augmentée */
+  font-weight: 600; /* Texte en semi-gras pour plus de visibilité */
+  color: #333; /* Couleur de texte sombre pour une meilleure lisibilité */
+  margin-bottom: 10px; /* Espacement en dessous du titre */
 }

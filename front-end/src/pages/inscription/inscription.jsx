@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
@@ -189,7 +189,7 @@ function Inscription() {
       
       <div className="box-container">
         <div className="lg">
-          <img src="src/assets/logo.jpg" id="lg" />
+          <Link to="/"><img title="Click pour revenir sur l'acceuil" src="src/assets/logo.jpg" id="lg" /></Link>
         </div>
         <div className="button-group">
           <button className="client" onClick={() =>
@@ -215,7 +215,7 @@ function Inscription() {
         ) : (
           <PmeForm onSubmit={onSubmitPme} isLoading={isLoading} idFileRef={idFileRef} logoFileRef={logoFileRef}/>
         )}
-        <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-link2' : ''}`}>
+        <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-linkPme' : ''}`}>
             <a href='/connexion' className="login-link" >Vous êtes déjà inscrit? Connectez-vous</a>
         </div>
 

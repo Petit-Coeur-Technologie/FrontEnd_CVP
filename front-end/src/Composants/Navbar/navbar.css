@@ -1,51 +1,88 @@
-*{
-    padding: 0%;
-    margin: 0%;
-    box-sizing: border-box;
-}
-
-.nav{
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-    top: 0;
-}
-
-.nav-content {
-    width: 100%;
-    background-color: #00804b;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 30px;
-    /* margin-bottom: 10px; */
-}
-
-#logo{
-    width: 30px;
-    height: auto;
-}
-
-
-.NavLink:hover{
-    font-weight: bolder;
-    color: #fdb024!important;
-    background-color: none!important;
-    text-decoration: none!important;
-}
-
-
-.nav .login {
+/* Style général pour la barre de navigation */
+.nav {
+    background-color: #333; /* Couleur de fond sombre pour la navigation */
+    padding: 10px 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-}
-
-.ListeNavbar{
+    justify-content: space-between;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre portée pour un effet d'élévation */
+    position: fixed;
+    z-index: 100;
+  }
+  
+  /* Conteneur du contenu de la barre de navigation */
+  .nav-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Style pour le logo */
+  .navLogo img {
+    height: 40px; /* Hauteur du logo */
+    width: auto; /* Largeur automatique pour conserver les proportions */
+    margin-right: 20px; /* Espace entre le logo et les éléments suivants */
+  }
+  
+  /* Liste des liens de navigation */
+  .ListeNavbar {
     list-style: none;
     display: flex;
-    gap: 1rem;
-}
+    margin: 0;
+    padding: 0;
+    flex: 1; /* Permet à la liste de s'étendre pour occuper l'espace disponible */
+    justify-content: center;
+  }
+  
+  .NavLink {
+    margin-right: 20px; /* Espace entre les liens */
+  }
+  
+  .NavLink a {
+    text-decoration: none; /* Supprime le soulignement des liens */
+    color: #fff; /* Couleur par défaut des liens */
+    font-weight: 500; /* Poids de police moyen */
+    font-size: 16px; /* Taille de la police */
+    transition: color 0.3s ease; /* Transition douce pour les changements de couleur */
+  }
+  
+  .NavLink a:hover {
+    color: #fdb024; /* Couleur au survol */
+  }
+  
+  /* Style pour l'icône utilisateur et le bouton de déconnexion */
+  .login {
+    display: flex;
+    align-items: center;
+  }
+  
+  .bx {
+    font-size: 24px; /* Taille de l'icône */
+    margin-right: 10px; /* Espace entre l'icône et le bouton */
+    cursor: pointer; /* Curseur en forme de main pour indiquer que c'est cliquable */
+    transition: color 0.3s ease; /* Transition douce pour les changements de couleur */
+  }
+  
+  .bx:hover {
+    color: #fdb024; /* Couleur de l'icône au survol */
+  }
+  
+  button {
+    background-color: #fdb024; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px; /* Coins arrondis du bouton */
+    cursor: pointer; /* Curseur en forme de main pour le bouton */
+    font-size: 16px; /* Taille de la police */
+    transition: background-color 0.3s ease; /* Transition douce pour les changements de couleur */
+  }
+  
+  button:hover {
+    background-color: #e5a800; /* Couleur de fond au survol */
+  }
+  .active{
+    background-color: #333;
+  }
+  

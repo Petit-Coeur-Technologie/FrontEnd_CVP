@@ -61,7 +61,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
         ))}
       </select>
       
-      <select value={note} onChange={(e) => setNote(e.target.value)}>
+      <select className="option" value={note} onChange={(e) => setNote(e.target.value)}>
         <option value="">Toutes les notes</option>
         <option value="1">1 étoile et plus</option>
         <option value="2">2 étoiles et plus</option>
