@@ -4,7 +4,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 16px; /* Espacement entre les éléments */
-  padding: 16px;
+  padding: 5px;
   background-color: #fff; /* Fond blanc pour les filtres */
   border-radius: 8px; /* Coins arrondis */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre légère */
@@ -51,7 +51,7 @@
 
   .input-recherche,
   .select-filtre {
-    width: 100%; /* Pleine largeur sur petits écrans */
+    width: 90%; /* Pleine largeur sur petits écrans */
   }
 
   .input-recherche {
