@@ -106,7 +106,7 @@ padding-right: 76px;
 
 .active {
   /* Style des éléments actifs */
-  background-color: var(--gris) !important;
+  /*background-color: var(--gris) !important;*/
   color: var(--vert);
   position: relative;
 }

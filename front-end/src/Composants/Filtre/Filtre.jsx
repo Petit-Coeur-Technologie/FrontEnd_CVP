@@ -45,7 +45,6 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
         onChange={(e) => setSearchText(e.target.value)}
       />
       
-      {/* Filtre par zones dynamiques */}
       <select value={zone} className="select-filtre" onChange={(e) => setZone(e.target.value)}>
         <option value="">Toutes les zones</option>
         {zones.map((z, index) => (
@@ -53,7 +52,6 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
         ))}
       </select>
       
-      {/* Filtre par tarifs dynamiques */}
       <select value={tarif} className="select-filtre" onChange={(e) => setTarif(e.target.value)}>
         <option value="">Tous les tarifs</option>
         {tarifs.map((t, index) => (
@@ -61,7 +59,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
         ))}
       </select>
       
-      <select value={note} onChange={(e) => setNote(e.target.value)}>
+      <select value={note} className="select-filtre" onChange={(e) => setNote(e.target.value)}>
         <option value="">Toutes les notes</option>
         <option value="1">1 étoile et plus</option>
         <option value="2">2 étoiles et plus</option>
