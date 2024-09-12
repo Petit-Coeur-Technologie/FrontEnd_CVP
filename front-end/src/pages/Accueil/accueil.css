@@ -1,42 +1,46 @@
-*{
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
-}
-
+/* Conteneur principal */
 .home {
-  padding-top: 70px; /* Compense la hauteur de la navbar */
-  min-height: 100vh;
+  padding: 10px 20px;
+  background-color: #f0f4f8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
   justify-items: center;
-  justify-content:space-around;
   }
   
   .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Augmenté la taille min */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     width: 100%;
     justify-items: center;
     gap: 20px;
+    margin-top: 30px; /* Ajout d'une marge en bas pour espacer la pagination */
   }
-
-  /* Bouton "Voir plus" */
-.voir-plus-container {
-  text-align: center;
-}
-
-.voir-plus-button {
-  background-color: #fdb024;
-  color: white;
-  padding: 7px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.voir-plus-button:hover {
-  background-color: #fdb024;
-  color: #00804b;
-}
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajout d'une marge en haut pour plus d'espacement */
+    margin-bottom: 20px;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 10px; /* Réduction de la marge horizontale pour plus de cohérence */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+  
+  .pagination button.active {
+    background-color: #0056b3;
+  }
+  

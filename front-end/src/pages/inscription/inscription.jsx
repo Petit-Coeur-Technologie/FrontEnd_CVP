@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
@@ -151,7 +151,7 @@ function Inscription() {
     formData.append('update_at', new Date().toISOString());
     formData.append('is_actif', true);
   
-    const urlPME = 'https://ville-propre.onrender.com/pme';
+    const urlPME = 'https://4970-41-223-51-230.ngrok-free.app/pme';
   
     try {
         console.log('Envoi des données à l\'API...');
@@ -184,12 +184,12 @@ function Inscription() {
     <div className="stack-container">
       <div className="right-container">
         <h2 className="title">Inscription</h2>
-        <img src="src/assets/background.avif" className="logoInscription" alt="background" />
+        {/* <img src="src/assets/background.avif" className="logoInscription" alt="background" /> */}
       </div>
       
       <div className="box-container">
         <div className="lg">
-          <img src="src/assets/logo.jpg" id="lg" />
+          <Link to="/"><img title="Click pour revenir sur l'acceuil" src="src/assets/logo.jpg" id="lg" /></Link>
         </div>
         <div className="button-group">
           <button className="client" onClick={() =>
@@ -197,7 +197,7 @@ function Inscription() {
             Client
           </button>
 
-          <button className="pme" onClick={() => setFormType('pme')}
+          <button className='pme' onClick={() => setFormType('pme')}
             style={{ opacity: formType === 'pme' ? 1 : 0.5 }}>
             PME
           </button>
@@ -215,9 +215,10 @@ function Inscription() {
         ) : (
           <PmeForm onSubmit={onSubmitPme} isLoading={isLoading} idFileRef={idFileRef} logoFileRef={logoFileRef}/>
         )}
-        <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-link2' : ''}`}>
+        <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-linkPme' : ''}`}>
             <a href='/connexion' className="login-link" >Vous êtes déjà inscrit? Connectez-vous</a>
         </div>
+
       </div>
     </div>
   );

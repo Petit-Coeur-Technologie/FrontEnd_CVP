@@ -7,6 +7,7 @@
   width: 100%;
   /* position: fixed; */
   overflow: hidden;
+  position: fixed;
 }
 
 .BarLaterale {
@@ -91,6 +92,7 @@ padding-right: 76px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px 0 10px 5px;
 }
 
 .menuBarLaterale1 .liClass:hover, .menuBarLaterale2 .liClass:hover {
@@ -106,7 +108,7 @@ padding-right: 76px;
 
 .active {
   /* Style des éléments actifs */
-  background-color: var(--gris) !important;
+  /*background-color: var(--gris) !important;*/
   color: var(--vert);
   position: relative;
 }
@@ -226,7 +228,7 @@ border-radius: 50%;
 }
 
 .divVoirInfoProfil {
-  height: 80%;
+  height: 330px;
   width: 220px;
   background-color: #ffffff; /* Couleur de fond blanche pour un look propre */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
@@ -384,6 +386,7 @@ padding: 0;
   box-shadow: 3px 1px 3px var(--gris);
 }
 
+
 .divDonnes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -392,7 +395,11 @@ padding: 0;
   max-height: 400px;
   overflow-y: scroll;
 }
-
+.abonneNonTrouve{
+  position: relative;
+  left: 450px;
+  padding: 10px;
+}
 .donnees {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -446,22 +453,43 @@ padding: 0;
   transition: all 0.3s ease; 
 }
 
-.btnDetails{
+.divBtnDetails{
   background-color: var(--vert);
   border: none;
+  position: absolute;
+  bottom: 20px;
   color: var(--blanc);
-  padding: 5px;
   border-radius: 10px;
   margin-top: 5px;
   width: 80%;
+  height: 30px;
   cursor: pointer;
+}
+.divBtnDetails:hover{
+  background-color: var(--bleuclair);
+  transition: all .2s ease-in-out;
+  transform: scale(1.1);
+}
+
+.btnDetails{
+  background-color: var(--vert);
+  background-color: var(--vert);
+  border: none;
+  width: 100%;
+  bottom: 20px;
+  color: var(--blanc);
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 100%;
 }
 .btnDetails:hover{
   background-color: var(--bleuclair);
   transition: all .2s ease-in-out;
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   font-weight: bold;
 }
+
 @media (max-width:908px){
   .divDonnes {
       display: grid;

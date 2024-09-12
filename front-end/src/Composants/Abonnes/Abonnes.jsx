@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, Suspense, lazy } from 'react';
 import profilImg from '../../assets/moi.png'; // Importe une image de profil par défaut
 
 const Abonnes = () => {
   const [abonnes, setAbonnes] = useState([]);
+  const [clientQuartiers, setClientQuartiers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedAbonne, setSelectedAbonne] = useState(null);
@@ -12,43 +13,34 @@ const Abonnes = () => {
   const [newComment, setNewComment] = useState('');
   const [userId, setUserId] = useState(null);
   const [accessToken, setAccessToken] = useState('');
-  const [pmeId, setPmeId] = useState(null); // Nouvel état pour stocker pme_id
 
+  // Obtention des cookies
   useEffect(() => {
-    // Fonction pour obtenir les cookies
     const getCookie = (name) => {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
       if (parts.length === 2) return parts.pop().split(';').shift();
     };
-
-    const fetchUserData = () => {
       const userIdFromCookie = getCookie('userId');
       const tokenFromCookie = getCookie('authToken');
-      const pmeIdFromCookie = getCookie('pmeId'); // Renommé pour éviter confusion
+  
+      if (userIdFromCookie) setUserId(userIdFromCookie);
+      if (tokenFromCookie) setAccessToken(tokenFromCookie);
+    })
 
-      if (userIdFromCookie) {
-        setUserId(userIdFromCookie);
-      }
-      
-      if (tokenFromCookie) {
-        setAccessToken(tokenFromCookie);
-      }
-      if (pmeIdFromCookie) { // Mise à jour de l'état pmeId
-        setPmeId(pmeIdFromCookie);
-      }
-    };
+  useEffect(()=>{
+    console.log("L'id de l'utilisateur recupérer dans abonnés : "+userId);
+    console.log("Le token de l'utilisateur recupérer dans abonnés : "+accessToken);
+  })
+  
 
-    fetchUserData();
-  }, []);
-
+  // Récupération des abonnés
   useEffect(() => {
-    if (!userId || !accessToken || !pmeId) return; // Assure que userId, accessToken et pmeId sont définis
+    if (!userId || !accessToken) return;
   
     const fetchAbonnes = async () => {
       try {
-        console.log(`Envoi de la requête à : https://ville-propre.onrender.com/abonnement/${pmeId}/client`);
-        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${pmeId}/client`, {
+        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${userId}/client`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -60,73 +52,115 @@ const Abonnes = () => {
           throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
         }
   
-        const data = await response.json(); // Utilisez await pour obtenir les données JSON
-        setAbonnes(data); // Mettez à jour l'état avec les données récupérées
-  
-        console.log('Récupération des abonnés réussie...');
-        console.log(data); // Affiche les données pour vérification
+        const data = await response.json();
+        console.log('Données reçues:', data); // Vérifie la structure des données
+        setAbonnes(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des abonnés:', error.message);
       }
     };
   
     fetchAbonnes();
-  }, [userId, accessToken, pmeId]);
+  }, [userId, accessToken]);
   
   
+  
+  // Récupération des quartiers
+  useEffect(() => {
+    if (!userId) return;
 
-    const URL_COPIE_PIECE = "https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/copie_pi/";
+    const fetchQuartiers = async () => {
+      try {
+        const response = await fetch(`https://ville-propre.onrender.com/quartiers`);
+        if (!response.ok) {
+          throw new Error(`Erreur réseau lors de la récupération des quartiers. Code: ${response.status}`);
+        }
+        const quartiers = await response.json();
+        setClientQuartiers(quartiers);
+        console.log('Récupération des quartiers réussie...');
+        console.log(quartiers);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des quartiers:', error.message);
+      }
+    };
+    fetchQuartiers();
+  }, [userId]);
 
-  
+
+  // Comparer les quartiers des abonnés avec les quartiers récupérés
+  useEffect(() => {
+    if (abonnes.length > 0 && clientQuartiers.length > 0) {
+      abonnes.forEach((abonne) => {
+        const quartierId = abonne.utilisateur.quartier_id;
+        const quartier = clientQuartiers.find(q => q.id === quartierId);
+        if (quartier) {
+          console.log(`L'abonné ${abonne.utilisateur.nom_prenom} est dans le quartier : ${quartier.quartier}`);
+        }
+      });
+    }
+  }, [abonnes, clientQuartiers]);
+
+  // Fonction pour obtenir le nom du quartier à partir de l'ID
+  const getQuartierNameById = useCallback((quartierId) => {
+    const quartier = clientQuartiers.find(q => q.id === quartierId);
+    return quartier ? quartier.quartier : 'Inconnu'; // Retourne 'Inconnu' si le quartier n'est pas trouvé
+  }, [clientQuartiers]);
+
   // Filtre les abonnés en fonction du terme de recherche
-  // const filteredAbonnes = abonnes.filter((abonne) =>
-  //   abonne.Nom_complet.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //   abonne.Tel.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
+  const filteredAbonnes = useMemo(() => {
+    return abonnes.filter((abonne) => {
+      const nomPrenom = abonne.utilisateur.nom_prenom.toLowerCase();
+      const tel = abonne.utilisateur.tel.toLowerCase();
+      const searchTermLower = searchTerm.toLowerCase();
+      
+      return nomPrenom.includes(searchTermLower) || tel.includes(searchTermLower);
+    });
+  }, [abonnes, searchTerm]);
 
+  const URL_COPIE_PIECE = "https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/copie_pi/";
 
   // Gère le changement du terme de recherche
-  const handleSearchChange = (event) => {
+  const handleSearchChange = useCallback((event) => {
     setSearchTerm(event.target.value);
-  };
+  }, []);
 
   // Gère la sélection d'un abonné pour afficher les détails
-  const handleDetailler = (index) => {
+  const handleDetailler = useCallback((index) => {
     setSelectedAbonne(abonnes[index]);
     setPopupVisible(true);
     setShowCommentsPopup(false);
     setShowAddCommentPopup(false);
-  };
+  }, [abonnes]);
 
   // Ferme tous les popups
-  const closeAllPopups = () => {
+  const closeAllPopups = useCallback(() => {
     setPopupVisible(false);
     setSelectedAbonne(null);
-  };
+  }, []);
 
   // Ferme le popup d'ajout de commentaire
-  const fermerPopupCommentaire = () => {
+  const fermerPopupCommentaire = useCallback(() => {
     setShowAddCommentPopup(false);
-  };
+  }, []);
 
   // Ferme le popup des commentaires
-  const fermerPopupVoirCommentaire = () => {
+  const fermerPopupVoirCommentaire = useCallback(() => {
     setShowCommentsPopup(false);
-  };
+  }, []);
 
-  const handleShowComments = () => {
+  const handleShowComments = useCallback(() => {
     setShowCommentsPopup(true);
-  };
+  }, []);
 
-  const handleAddComment = () => {
+  const handleAddComment = useCallback(() => {
     setShowAddCommentPopup(true);
-  };
+  }, []);
 
-  const handleNewCommentChange = (event) => {
+  const handleNewCommentChange = useCallback((event) => {
     setNewComment(event.target.value);
-  };
+  }, []);
 
-  const handleAddCommentSubmit = () => {
+  const handleAddCommentSubmit = useCallback(() => {
     if (!newComment.trim()) {
       alert('Le commentaire ne peut pas être vide.');
       return;
@@ -139,7 +173,7 @@ const Abonnes = () => {
       }));
       setNewComment('');
     }
-  };
+  }, [newComment, selectedAbonne]);
 
 
   return (
@@ -159,24 +193,22 @@ const Abonnes = () => {
 
       {/* Liste des abonnés filtrés */}
       <div className='divDonnes'>
-        {abonnes.map((abonne, index) => (
-          <div className='donnees' key={index}>
-            <div className='divImageProfil'>
-            <img src={`${URL_COPIE_PIECE}${abonne.utilisateur.copie_pi}`} alt="profil" /> {/* Utilisation d'une image par défaut si aucune image de profil n'est fournie */}
+        {filteredAbonnes.length > 0 ? (
+          filteredAbonnes.map((abonne, index) => (
+            <div className='donnees' key={index}>
+              <div className='divImageProfil'>
+                <img src={`${URL_COPIE_PIECE}${abonne.utilisateur.copie_pi}`} alt="profil" />
+              </div>
+              <p>{abonne.utilisateur.nom_prenom}</p>
+              <address>{getQuartierNameById(abonne.utilisateur.quartier_id)}</address>
+              <p>{abonne.utilisateur.tel}</p>
+              <p>{abonne.utilisateur.role}</p>
+              <div className='divBtnDetails'><button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button></div>
             </div>
-            <p>
-            {/* {
-              `${URL_COPIE_PIECE}${abonne.utilisateur.copie_pi}`
-            } */}
-            </p>
-            <p>{abonne.utilisateur.nom_prenom}</p> {/* Nom de l'abonné */}
-            <address>{abonne.utilisateur.quartier_id}</address> {/* Adresse */}
-            <p>{abonne.utilisateur.tel}</p> {/* Numéro de téléphone */}
-            <p>{abonne.utilisateur.role}</p> {/* Type (Ménage, Entreprise, etc.) */}
-            <button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button> {/* Bouton pour voir les détails */}
-          </div>
-          
-        ))}
+          ))
+        ) : (
+          <p className='abonneNonTrouve'>Aucun utilisateur trouvé</p>
+        )}
       </div>
 
       {/* Popup des détails de l'abonné */}
@@ -191,7 +223,7 @@ const Abonnes = () => {
               </div>
             </div>
             <p><span className='label'>Nom complet:</span> {selectedAbonne.utilisateur.nom_prenom}</p>
-            <p><span className='label'>Adresse:</span> {selectedAbonne.utilisateur.quartier_id}</p>
+            <p><span className='label'>Adresse:</span> {getQuartierNameById(selectedAbonne.utilisateur.quartier_id)}</p>
             <p><span className='label'>Téléphone:</span> {selectedAbonne.utilisateur.tel}</p>
             <p><span className='label'>Type:</span> {selectedAbonne.utilisateur.role}</p>
             <p><span className='label'>Genre:</span> {selectedAbonne.utilisateur.genre || 'Non spécifié'}</p>
