@@ -14,7 +14,7 @@
   display: flex;
   flex-wrap: wrap; /* Permet aux cartes de se réorganiser en fonction de l'espace disponible */
   gap: 20px; /* Espacement entre les cartes */
-  justify-content: center; /* Centre les cartes horizontalement */
+  justify-content: space-evenly; /* Centre les cartes horizontalement */
   margin-top: 30px; /* Augmente l'espacement au-dessus des cartes */
 }
 

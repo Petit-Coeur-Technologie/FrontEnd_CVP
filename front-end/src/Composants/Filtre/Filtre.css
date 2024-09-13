@@ -3,7 +3,7 @@
   display: flex;
   gap: 15px; /* Espacement entre les éléments du filtre */
   width: 100%;
-  padding: 10px;
+  padding: 10px 15px;
   background-color: #fff; /* Couleur de fond blanche pour le conteneur */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère autour du conteneur */
   position: fixed;
@@ -15,7 +15,7 @@
 .input-recherche {
   /* padding: 10px; */
   font-size: 16px;
-  border: 1px solid #ddd; /* Bordure légère */
+  border: 1px solid #767575; /* Bordure légère */
   border-radius: 4px; /* Coins arrondis pour le champ */
   outline: none; /* Supprime le contour par défaut */
   transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */

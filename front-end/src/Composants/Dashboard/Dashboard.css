@@ -106,7 +106,7 @@ padding-right: 76px;
   padding: 15px 0 15px 10px;
 }
 
-.active {
+.menuBarLaterale1 .active, .menuBarLaterale2 .active {
   /* Style des éléments actifs */
   background-color: var(--gris) !important;
   color: var(--vert);

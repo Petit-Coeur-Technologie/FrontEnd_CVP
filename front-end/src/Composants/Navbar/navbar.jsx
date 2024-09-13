@@ -41,7 +41,8 @@ const Navbar = () => {
                 <ul className='ListeNavbar'>
                     <li className='NavLink'>
                         <NavLink to="/" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#fff',
+                                color: isActive ? '#fdb024' : '#fff',
+                                backgroundColor: isActive ? '#00804' : '#00804b',
                         })}> Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
