@@ -26,7 +26,7 @@
 .menu-icon {
     display: none; /* Masquer par défaut sur grands écrans */
     cursor: pointer;
-    color: white;
+    color: #fdb024;
     font-size: 1.5rem;
 }
 
@@ -81,12 +81,11 @@
     position: fixed;
     left: -100%; /* Hors de l'écran par défaut */
     top: 0;
-    width: 250px;
+    width: 55%;
     height: 100%;
-    background-color: #00804b;
-    transition: left 0.3s ease;
+    background-color: #ffffff;
+    transition: left 0.6s ease-out;
     z-index: 2;
-    padding-top: 60px;
 }
 
 .sidebar.open {
@@ -119,7 +118,7 @@
 }
 
 /* Responsivité */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .nav {
         flex-direction: row;
         justify-content: space-between;

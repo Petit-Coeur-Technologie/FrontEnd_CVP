@@ -79,7 +79,7 @@ function Pmes() {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? 'active' : ''}
+            className={`Btnpage ${currentPage === index + 1 ? 'active' : ''}`}
           >
             {index + 1}
           </button>
