@@ -19,17 +19,17 @@ function Accueil() {
       .then((data) => {
         setPmes(data);
         setFilteredPmes(data); // Par défaut, afficher toutes les PMEs
-        
+
         // Extraire les zones uniques
-        const uniqueZones = [...new Set(data.map(pme => pme.zone_intervention))];
+        const uniqueZones = [...new Set(data.map((pme) => pme.zone_intervention))];
         setZones(uniqueZones);
 
         // Extraire les tarifs uniques
-        const uniqueTarifs = [...new Set(data.map(pme => pme.tarif_mensuel))];
+        const uniqueTarifs = [...new Set(data.map((pme) => pme.tarif_mensuel))];
         setTarifs(uniqueTarifs);
 
         // Extraire les notes uniques
-        const uniqueNotes = [...new Set(data.map(pme => pme.rating))];
+        const uniqueNotes = [...new Set(data.map((pme) => pme.rating))];
         setNotes(uniqueNotes);
       })
       .catch((error) => {
@@ -37,48 +37,94 @@ function Accueil() {
       });
   }, []);
 
-    // Calcul de la pagination basée sur les résultats filtrés
-    const indexOfLastPme = currentPage * pmesPerPage;
-    const indexOfFirstPme = indexOfLastPme - pmesPerPage;
-    const currentPmes = filteredPmes.slice(indexOfFirstPme, indexOfLastPme); // Utiliser les PMEs filtrées pour la pagination
-  
-    const totalPages = Math.ceil(filteredPmes.length / pmesPerPage); // Basé sur les PMEs filtrées
-  
-    // Fonction pour changer de page
-    const handlePageChange = (pageNumber) => {
-      setCurrentPage(pageNumber);
-    };
-  
-    // Chaque fois que les résultats filtrés changent, on remet la pagination à la première page
-    useEffect(() => {
-      setCurrentPage(1);
-    }, [filteredPmes]);
+  // Calcul de la pagination basée sur les résultats filtrés
+  const indexOfLastPme = currentPage * pmesPerPage;
+  const indexOfFirstPme = indexOfLastPme - pmesPerPage;
+  const currentPmes = filteredPmes.slice(indexOfFirstPme, indexOfLastPme);
+
+  const totalPages = Math.ceil(filteredPmes.length / pmesPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredPmes]);
 
   return (
     <div className="home">
-      <Filtre 
-        list={pmes} 
-        setFilteredResults={setFilteredPmes} 
-        zones={zones} 
-        tarifs={tarifs} 
-        notes={notes} 
+      {/* Section de bienvenue */}
+      <section className="welcome-section">
+        <h1>Bienvenue sur Ville Propre</h1>
+        <p>
+          Nous sommes fiers de connecter les entreprises de gestion des déchets avec les ménages
+          et les PME pour rendre notre ville plus propre et plus écologique.
+        </p>
+      </section>
+
+      {/* Filtre et cartes PME */}
+      <Filtre
+        list={pmes}
+        setFilteredResults={setFilteredPmes}
+        zones={zones}
+        tarifs={tarifs}
+        notes={notes}
       />
       <div className="cards-container">
         {filteredPmes.slice(0, 10).map((pme) => (
           <PmeCard key={pme.id} pme={pme} />
         ))}
       </div>
+
+      {filteredPmes.length === 0 && (
+        <div className='inexistant'>
+          <p>Aucune PME ne correspond à votre recherche.</p>
+        </div>
+      )}
+
+
+      {/* Pagination */}
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? 'active' : ''}
+            className={`Btnpage ${currentPage === index + 1 ? 'active' : ''}`}
           >
             {index + 1}
           </button>
         ))}
       </div>
+
+      {/* À propos de nous */}
+      <section className="about-section">
+        <h2>À propos de nous</h2>
+        <p>
+          Ville Propre est une plateforme dédiée à améliorer la gestion des déchets
+          dans les zones urbaines. Nous collaborons avec de nombreuses PME et entreprises
+          locales pour offrir des services fiables et accessibles à tous.
+        </p>
+      </section>
+
+      {/* Nos services */}
+      <section className="services-section">
+        <h2>Nos services</h2>
+        <div className="services-list">
+          <div className="service">
+            <h3>Gestion des Déchets Ménagers</h3>
+            <p>Un service de collecte adapté aux besoins des ménages, simple et abordable.</p>
+          </div>
+          <div className="service">
+            <h3>Collecte pour PME</h3>
+            <p>Solutions sur mesure pour les petites et moyennes entreprises.</p>
+          </div>
+          <div className="service">
+            <h3>Recyclage et Réutilisation</h3>
+            <p>Promouvoir des pratiques de recyclage responsables pour un avenir durable.</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

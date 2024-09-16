@@ -156,6 +156,7 @@ export default function Profil() {
             value={formData.nom_prenom || ''}
             onChange={handleInputChange}
             placeholder="Nom utilisateur"
+            className='profilEdit'
           />
           <input
             type="email"
@@ -163,6 +164,7 @@ export default function Profil() {
             value={formData.utilisateur?.email || ''}
             onChange={handleInputChange}
             placeholder="Email"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -170,12 +172,14 @@ export default function Profil() {
             value={formData.utilisateur?.quartier_id || ''}
             onChange={handleInputChange}
             placeholder="Adresse"
+            className='profilEdit'
           />
           <textarea
             name="description"
             value={formData.description || ''}
             onChange={handleInputChange}
             placeholder="Description"
+            className='profilEdit profilTextarea'
           />
           <input
             type="text"
@@ -183,6 +187,7 @@ export default function Profil() {
             value={formData.tarif_abonnement || ''}
             onChange={handleInputChange}
             placeholder="Tarif abonnement"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -190,6 +195,7 @@ export default function Profil() {
             value={formData.tarif_mensuel || ''}
             onChange={handleInputChange}
             placeholder="Tarif mensuel"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -197,6 +203,7 @@ export default function Profil() {
             value={formData.utilisateur?.genre || ''}
             onChange={handleInputChange}
             placeholder="Genre"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -204,6 +211,7 @@ export default function Profil() {
             value={formData.nom_pme || ''}
             onChange={handleInputChange}
             placeholder="Nom Pme"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -211,6 +219,7 @@ export default function Profil() {
             value={formData.utilisateur?.role || ''}
             onChange={handleInputChange}
             placeholder="Role"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -218,6 +227,7 @@ export default function Profil() {
             value={formData.utilisateur?.tel || ''}
             onChange={handleInputChange}
             placeholder="Tel"
+            className='profilEdit'
           />
           <input
             type="text"
@@ -225,6 +235,7 @@ export default function Profil() {
             value={formData.zone_intervention || ''}
             onChange={handleInputChange}
             placeholder="Zone intervention"
+            className='profilEdit'
           />
           <button onClick={handleSave} className='btnSave'>Sauvegarder</button>
           <button onClick={handleEditToggle} className='btnCancel'>Annuler</button>

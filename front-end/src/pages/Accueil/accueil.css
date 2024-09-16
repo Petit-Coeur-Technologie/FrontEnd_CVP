@@ -1,10 +1,12 @@
 /* Conteneur principal */
 .home {
+  margin-top: 50px;
   padding: 10px 20px;
-  background-color: #f0f4f8; /* Couleur de fond légèrement plus claire */
+ background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
   justify-items: center;
+  min-height: 100vh;
   }
   
   .cards-container {
@@ -12,9 +14,37 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     width: 100%;
     justify-items: center;
-    gap: 20px;
+    gap: 10px;
     margin-top: 30px; /* Ajout d'une marge en bas pour espacer la pagination */
   }
+
+  .inexistant{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #f00;
+  }
+
+  .search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 20px auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+
+  .sort-dropdown {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+  }  
   
   .pagination {
     display: flex;
@@ -22,25 +52,134 @@
     margin-top: 20px; /* Ajout d'une marge en haut pour plus d'espacement */
     margin-bottom: 20px;
   }
-  
-  .pagination button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 0 10px; /* Réduction de la marge horizontale pour plus de cohérence */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+
+  .Btnpage{
+    background: #fdb024;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
   }
   
-  
-  .pagination button:hover {
-    background-color: #0056b3;
+  .Btnpage:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
   
   .pagination button.active {
-    background-color: #0056b3;
+    background-color: #fdb024;
   }
-  
+
+/* Section de bienvenue */
+.welcome-section {
+  text-align: center;
+  padding: 50px;
+  background-color: #4FB97F; /* Nuance plus claire du vert */
+  color: #ffffff;
+}
+
+.welcome-section h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.welcome-section p {
+  font-size: 18px;
+}
+
+/* Section À propos de nous */
+.about-section {
+  padding: 40px 20px;
+  background-color: #d1d1d1;
+}
+
+.about-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Section des services */
+.services-section {
+  padding: 40px 20px;
+  background-color: #ffffff;
+}
+
+.services-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.services-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows services to wrap on smaller screens */
+}
+
+.service {
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%; /* Adjust width for larger screens */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.service h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.service p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .service {
+    width: 45%; /* Adjust width on medium screens (tablets) */
+  }
+
+  .about-section h2, .services-section h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service {
+    width: 100%; /* Full width on small screens (mobile) */
+  }
+
+  .about-section, .services-section {
+    padding: 20px 10px;
+  }
+
+  .about-section p, .services-section p {
+    font-size: 15px;
+  }
+
+  .welcome-section h1 {
+    font-size: 28px;
+  }
+
+  .welcome-section p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-section h1 {
+    font-size: 24px;
+  }
+
+  .welcome-section p {
+    font-size: 14px;
+  }
+
+  .about-section p, .services-section p {
+    font-size: 14px;
+  }
+}

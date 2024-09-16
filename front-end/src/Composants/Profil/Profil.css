@@ -41,9 +41,7 @@
 }
 
 /* Style pour les champs de formulaire en mode édition */
-input[type="text"],
-input[type="email"],
-textarea {
+.profilEdit {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -53,7 +51,7 @@ textarea {
   box-sizing: border-box;
 }
 
-textarea {
+.profilTextarea {
   resize: vertical;
 }
 
