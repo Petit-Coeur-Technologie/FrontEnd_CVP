@@ -56,9 +56,11 @@ export default function Dashboard() {
 
     const userIdFromCookie = getCookie('userId');
     const tokenFromCookie = getCookie('authToken');
+    const roleFromCookie = getCookie('role');
 
     if (userIdFromCookie) setUserId(userIdFromCookie);
     if (tokenFromCookie) setAccessToken(tokenFromCookie);
+    if (roleFromCookie) setUserRole(roleFromCookie);
   }, []);
 
   // Log des données d'utilisateur pour vérification
@@ -73,7 +75,8 @@ export default function Dashboard() {
 
     const fetchAbonnes = async () => {
       try {
-        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${userId}/client`, {
+        // console.log(` c'est le lien : https://ville-propre.onrender.com/abonnements/${userId}/client`);
+        const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/client`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -103,7 +106,7 @@ export default function Dashboard() {
       // Retirer l'élément 'Abonnés' et ajouter 'Mon Abonnement'
       return [
         { name: 'Home', path: 'home', icon: 'bxs-home' },
-        { name: 'Mon Abonnement', path: 'mon-abonnement', icon: 'bx-list-ul' },
+        { name: 'Mon Abonnement', path: 'monabonnement', icon: 'bx-list-ul' },
         { name: 'Calendrier', path: 'calendrier', icon: 'bxs-calendar' },
         { name: 'Messagerie', path: 'messagerie', icon: 'bxs-message-rounded-detail' }
       ];
@@ -112,6 +115,10 @@ export default function Dashboard() {
       return [];
     }
   };
+
+  useEffect(()=>{
+    console.log("valeur Stocké dans userRole "+userRole);
+  })
 
   return (
     <div className='conteneur'>

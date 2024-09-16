@@ -151,7 +151,7 @@ function Inscription() {
     formData.append('update_at', new Date().toISOString());
     formData.append('is_actif', true);
   
-    const urlPME = 'https://4970-41-223-51-230.ngrok-free.app/pme';
+    const urlPME = 'https://ville-propre.onrender.com/pme';
   
     try {
         console.log('Envoi des données à l\'API...');

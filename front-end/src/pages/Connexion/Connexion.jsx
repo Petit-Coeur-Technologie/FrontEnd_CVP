@@ -30,7 +30,7 @@ export default function Connexion() {
         formData.append('username', username);
         formData.append('password', password);
     
-        const response = await fetch('https://4970-41-223-51-230.ngrok-free.app/login', {
+        const response = await fetch('https://ville-propre.onrender.com/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -46,14 +46,17 @@ export default function Connexion() {
         const data = await response.json();
         const accessToken = data.access_token;
         const userId = data.user_id;
+        const role = data.role;
     
         // Stocker les informations dans des cookies
         document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
         document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `role=${role}; path=/; max-age=${60 * 60 * 24}`;
     
         toast.success('Connexion réussie');
-        console.log(accessToken);
-        console.log(userId);
+        // console.log(accessToken);
+        // console.log(userId);
+        // console.log('Role envoyé dans connexion '+role);
     
         const redirectPath = location.state?.from?.pathname || '/dashboard';
         navigate(redirectPath);
