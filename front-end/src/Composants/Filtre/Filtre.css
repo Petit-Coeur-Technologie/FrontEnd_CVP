@@ -1,52 +1,61 @@
-/* Conteneur principal du filtre */
+/* Conteneur de la barre de recherche et de filtrage */
 .filter-container {
+  margin-top: 70px;
   display: flex;
-  gap: 15px; /* Espacement entre les éléments du filtre */
-  width: 100%;
-  padding: 10px 15px;
-  background-color: #fff; /* Couleur de fond blanche pour le conteneur */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère autour du conteneur */
-  position: fixed;
-  top: 61px;
-  z-index: 100;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px; /* Espacement entre les éléments */
+  padding: 5px;
+  background-color: #fff; /* Fond blanc pour les filtres */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre légère */
 }
 
-/* Champ de recherche */
+/* Style du champ de recherche */
 .input-recherche {
-  /* padding: 10px; */
+  width: 300px; /* Largeur fixe */
+  padding: 10px;
+  border: 1px solid #ccc; /* Bordure légère */
+  border-radius: 4px;
   font-size: 16px;
-  border: 1px solid #767575; /* Bordure légère */
-  border-radius: 4px; /* Coins arrondis pour le champ */
-  outline: none; /* Supprime le contour par défaut */
-  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
-  height: 40px;
-  margin-bottom: 0px!important;
+  color: #333; /* Texte sombre pour la lisibilité */
+  background-color: #f9f9f9; /* Fond légèrement gris */
+  transition: border-color 0.3s ease;
 }
 
 .input-recherche:focus {
-  border-color: #007bff; /* Bordure bleue au focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Ombre légère au focus */
+  border-color: #00804B; /* Bordure verte lors du focus */
+  outline: none; /* Retirer le contour par défaut */
 }
 
-/* Menu déroulant (select) */
+/* Style des sélecteurs */
 .select-filtre {
   padding: 10px;
+  border: 1px solid #ccc; /* Bordure légère */
+  border-radius: 4px;
   font-size: 16px;
-  border: 1px solid #ddd; /* Bordure légère */
-  border-radius: 4px; /* Coins arrondis pour le menu */
-  background-color: #fff; /* Couleur de fond blanche pour le menu */
-  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
-  height: 40px;
+  color: #333; /* Texte sombre pour la lisibilité */
+  background-color: #f9f9f9; /* Fond légèrement gris */
+  transition: border-color 0.3s ease;
 }
 
 .select-filtre:focus {
-  border-color: #007bff; /* Bordure bleue au focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Ombre légère au focus */
+  border-color: #00804B; /* Bordure verte lors du focus */
+  outline: none; /* Retirer le contour par défaut */
 }
 
-/* Options du menu déroulant */
-.option {
-  padding: 10px;
-  font-size: 16px;
-  height: 40px;
+/* Responsivité */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+  }
+
+  .input-recherche,
+  .select-filtre {
+    width: 100%; /* Pleine largeur sur petits écrans */
+  }
+
+  .input-recherche {
+    margin-bottom: 10px; /* Espacement vertical entre les champs */
+  }
 }

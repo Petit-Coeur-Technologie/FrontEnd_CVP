@@ -1,45 +1,56 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
+import logo from '/src/assets/th.jpeg';
 
 const Navbar = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'affichage de la barre latérale
     const navigate = useNavigate();
 
-    // Fonction utilitaire pour obtenir la valeur d'un cookie
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
     };
 
-    // Fonction pour vérifier si l'utilisateur est connecté
     const isAuthenticated = () => {
-        const token = getCookie('authToken'); // Récupérer le token du cookie
-        return !!token; // Retourne true si le token existe, sinon false
+        const token = getCookie('authToken');
+        console.log("Token dans Navbar : ", token);
+        return !!token;
     };
 
     const handleUserIconClick = () => {
         if (isAuthenticated()) {
-            navigate('/dashboard'); // Rediriger vers le tableau de bord si l'utilisateur est connecté
+            navigate('/dashboard');
         } else {
-            navigate('/connexion'); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+            navigate('/connexion');
         }
     };
 
     const handleLogout = () => {
-        // Supprimer le cookie d'authentification
         document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-        // Rediriger vers la page d'accueil après la déconnexion
         navigate('/');
     };
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen); // Afficher/masquer la barre latérale
+    };
+
     return (
-        <div className="nav">
-            <div className="nav-content">
-                <div className="navLogo">
-                    <img src="\src\assets\logo.jpg" alt="" id='logo' />
-                </div>
-                <ul className='ListeNavbar'>
-                    <li className='NavLink'>
+        <div className='nav'>
+            {/* Icône de menu */}
+            <div className="menu-icon" onClick={toggleSidebar}>
+                <i className='bx bx-menu'></i>
+            </div>
+
+            {/* Logo */}
+            <div className="navLogo">
+                <img src={logo} alt="" id='logo' />
+            </div>
+            <div>
+                {/* Liste de Navigation par défaut pour les grands écrans */}
+                <ul className="nav-items">
+                <li className='NavLink'>
                         <NavLink to="/" style={({ isActive }) => ({
                                 color: isActive ? '#fdb024' : '#fff',
                                 backgroundColor: isActive ? '#00804' : '#00804b',
@@ -48,32 +59,78 @@ const Navbar = () => {
                     <li className='NavLink'>
                         <NavLink to="/sens" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#fff',
+                            textDecoration:isActive?"none":"none",
                         })}> Sensibilisation </NavLink>
                     </li>
                     <li className='NavLink'>
                         <NavLink to="/a-propos" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#fff',
+                            textDecoration:isActive?"none":"none",
                         })}> À propos </NavLink>
                     </li>
                     <li className='NavLink'>
                         <NavLink to="/contact" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#fff',
-                        })}> Contact </NavLink>
+                            textDecoration:isActive?"none":"none",
+                        })} > Contact </NavLink>
                     </li>
                 </ul>
-                <div className="login">
-                    <i
-                        className='bx bxs-user'
-                        style={{ color: '#fdb024' }}
-                        onClick={handleUserIconClick}
-                    ></i>
-                    {isAuthenticated() && (
-                        <button onClick={handleLogout}>Déconnexion</button>
-                    )}
-                </div>
             </div>
+
+            {/* Icône de connexion */}
+            <div className="login">
+                <i
+                    className='bx bxs-user'
+                    style={{ color: '#fdb024' }}
+                    onClick={handleUserIconClick}
+                ></i>
+                {isAuthenticated() && (
+                    <button onClick={handleLogout}>Déconnexion</button>
+                )}
+            </div>
+
+            {/* Barre latérale pour petits écrans */}
+            <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+                <ul className='ListeSidebar'>
+                    <li className='NavLink'>
+                        <i className='bx bx-home-alt'></i>
+                        <NavLink to="/" style={({ isActive }) => ({
+                            color: isActive ? '#fdb024' : '#fff',
+                            textDecoration:isActive?"none":"none",
+                        })}
+                        className="listeNav"> Accueil </NavLink>
+                    </li>
+                    <li className='NavLink'>
+                        <i className='bx bx-bulb'></i>
+                        <NavLink to="/sens" style={({ isActive }) => ({
+                            color: isActive ? '#fdb024' : '#fff',
+                            textDecoration:isActive?"none":"none",
+                        })}
+                        className="listeNav"> Sensibilisation </NavLink>
+                    </li>
+                    <li className='NavLink'>
+                        <i className='bx bx-info-circle'></i>
+                        <NavLink to="/a-propos" style={({ isActive }) => ({
+                            color: isActive ? '#fdb024' : '#fff',
+                            textDecoration:isActive?"none":"none",
+                        })}
+                        className="listeNav"> À propos </NavLink>
+                    </li>
+                    <li className='NavLink'>
+                        <i className='bx bx-phone'></i>
+                        <NavLink to="/contact" style={({ isActive }) => ({
+                            color: isActive ? '#fdb024' : '#fff',
+                            textDecoration:isActive?"none":"none",
+                        })}
+                        className="listeNav"> Contact </NavLink>
+                    </li>
+                </ul>
+            </div>
+
+            {/* Superposition sombre */}
+            {isSidebarOpen && <div className="overlay" onClick={toggleSidebar}></div>}
         </div>
     );
-}
+};
 
 export default Navbar;

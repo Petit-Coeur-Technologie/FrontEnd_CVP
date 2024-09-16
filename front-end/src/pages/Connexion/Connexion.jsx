@@ -7,15 +7,15 @@ import "./Connexion.css";
 import toast from 'react-hot-toast';
 
 export default function Connexion() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation(); // Récupération de l'URL de redirection
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation(); // Récupération de l'URL de redirection
 
-    // Expression régulière pour valider le mot de passe
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  // Expression régulière pour valider le mot de passe
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -86,17 +86,17 @@ export default function Connexion() {
               <button className="btnConnexion" type="submit">Se Connecter</button>
               {errorMessage && <p className='pErreur'>{errorMessage}</p>}
 
-              <div className="divIcone">
-                <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
-                <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
-              </div>
+                <div className="divIcone">
+                  <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
+                  <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
+                </div>
 
-              <div id="divmot2">
-                <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription"> Inscrivez-Vous!</a></p>
+                <div id="divmot2">
+                  <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription"> Inscrivez-Vous!</a></p>
+                </div>
               </div>
-            </div>
-        </form>
-        )}
+            </form>
+          )}
       </div>
     </div>
   );
