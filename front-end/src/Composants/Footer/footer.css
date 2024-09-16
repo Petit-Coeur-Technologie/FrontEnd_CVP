@@ -1,4 +1,5 @@
 * {
+<<<<<<< HEAD
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -59,3 +60,49 @@
     }
   }
   
+=======
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.foot {
+  height: 80px;
+  background-color: #00804b;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.foot-container {
+  width: 100%;
+  display: flex; /* Utiliser flex pour centrer */
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+}
+
+.mailien {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+}
+
+.mailien:hover {
+  color: #fdb024;
+}
+
+/*Responsivité*/
+/* Styles pour les écrans de moins de 768px */
+@media (max-width: 767px) {
+  .foot {
+    width: 100%;
+  }
+
+  .foot-container {
+    width: 100%;
+    display: flex; /* Utilisation de flex pour centrer */
+    align-items: center;
+    justify-content: center;
+  }
+}
+>>>>>>> 9d666660e3802b01cbc0dec5a0429afebe6e2c4e

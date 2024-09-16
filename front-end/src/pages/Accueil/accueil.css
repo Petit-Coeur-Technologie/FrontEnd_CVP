@@ -1,69 +1,185 @@
 /* Conteneur principal */
 .home {
+  margin-top: 50px;
   padding: 10px 20px;
-  background-color: #f0f4f8; /* Couleur de fond légèrement plus claire */
+ background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
-  top: 120px;
+  justify-items: center;
+  min-height: 100vh;
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    width: 100%;
+    justify-items: center;
+    gap: 10px;
+    margin-top: 30px; /* Ajout d'une marge en bas pour espacer la pagination */
+  }
+
+  .inexistant{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #f00;
+  }
+
+  .search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 20px auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+
+  .sort-dropdown {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+  }  
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajout d'une marge en haut pour plus d'espacement */
+    margin-bottom: 20px;
+  }
+
+  .Btnpage{
+    background: #fdb024;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .Btnpage:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pagination button.active {
+    background-color: #fdb024;
+  }
+
+/* Section de bienvenue */
+.welcome-section {
+  text-align: center;
+  padding: 50px;
+  background-color: #4FB97F; /* Nuance plus claire du vert */
+  color: #ffffff;
 }
 
-/* Conteneur des filtres et des cartes */
-.cards-container {
+.welcome-section h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.welcome-section p {
+  font-size: 18px;
+}
+
+/* Section À propos de nous */
+.about-section {
+  padding: 40px 20px;
+  background-color: #d1d1d1;
+}
+
+.about-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Section des services */
+.services-section {
+  padding: 40px 20px;
+  background-color: #ffffff;
+}
+
+.services-section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.services-list {
   display: flex;
-  flex-wrap: wrap; /* Permet aux cartes de se réorganiser en fonction de l'espace disponible */
-  gap: 20px; /* Espacement entre les cartes */
-  justify-content: space-evenly; /* Centre les cartes horizontalement */
-  margin-top: 30px; /* Augmente l'espacement au-dessus des cartes */
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows services to wrap on smaller screens */
 }
 
-/* Style des cartes PME */
-.pme-card {
-  background-color: #fff; /* Fond blanc pour les cartes */
-  border: 1px solid #e0e0e0; /* Bordure plus douce */
-  padding: 15px; /* Ajoute du padding interne */
-  border-radius: 12px; /* Coins plus arrondis */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
-  overflow: hidden; /* Assure que le contenu ne déborde pas des coins arrondis */
-  width: 250px; /* Largeur légèrement plus large pour les cartes */
-  height: 200px; /* Hauteur augmentée */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transitions pour les effets au survol */
+.service {
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%; /* Adjust width for larger screens */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.pme-card:hover {
-  transform: translateY(-10px); /* Élévation plus marquée au survol */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+.service h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-/* Conteneur du bouton "Voir plus" */
-.voir-plus-container {
-  margin-top: 40px; /* Augmente l'espacement au-dessus du bouton */
+.service p {
+  font-size: 14px;
+  line-height: 1.4;
 }
 
-/* Style du bouton "Voir plus" */
-.voir-plus-button {
-  background-color: #0056b3; /* Couleur de fond plus foncée */
-  color: #fff; /* Couleur du texte */
-  border: 1px solid #004494; /* Bordure assortie */
-  padding: 12px 24px; /* Padding augmenté */
-  border-radius: 8px; /* Coins arrondis du bouton */
-  font-size: 18px; /* Taille de la police augmentée */
-  font-weight: bold; /* Texte en gras pour plus d'impact */
-  cursor: pointer; /* Curseur en forme de main pour indiquer que c'est cliquable */
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transitions pour les effets au survol */
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .service {
+    width: 45%; /* Adjust width on medium screens (tablets) */
+  }
+
+  .about-section h2, .services-section h2 {
+    font-size: 24px;
+  }
 }
 
-.voir-plus-button:hover {
-  background-color: #003d7a; /* Couleur plus sombre au survol */
-  transform: scale(1.05); /* Légère augmentation de la taille au survol */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile au survol */
+@media (max-width: 768px) {
+  .service {
+    width: 100%; /* Full width on small screens (mobile) */
+  }
+
+  .about-section, .services-section {
+    padding: 20px 10px;
+  }
+
+  .about-section p, .services-section p {
+    font-size: 15px;
+  }
+
+  .welcome-section h1 {
+    font-size: 28px;
+  }
+
+  .welcome-section p {
+    font-size: 16px;
+  }
 }
 
-/* Style du titre de la carte */
-.card-title {
-  font-size: 1.1rem; /* Taille de police légèrement augmentée */
-  font-weight: 600; /* Texte en semi-gras pour plus de visibilité */
-  color: #333; /* Couleur de texte sombre pour une meilleure lisibilité */
-  margin-bottom: 10px; /* Espacement en dessous du titre */
+@media (max-width: 480px) {
+  .welcome-section h1 {
+    font-size: 24px;
+  }
+
+  .welcome-section p {
+    font-size: 14px;
+  }
+
+  .about-section p, .services-section p {
+    font-size: 14px;
+  }
 }
