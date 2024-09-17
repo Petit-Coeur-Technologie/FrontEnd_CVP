@@ -58,16 +58,18 @@ export default function Dashboard() {
     const tokenFromCookie = getCookie('authToken');
     const roleFromCookie = getCookie('role');
 
-    if (userIdFromCookie) setUserId(userIdFromCookie);
+    if (userIdFromCookie){
+      setUserId(userIdFromCookie);
+    } 
     if (tokenFromCookie) setAccessToken(tokenFromCookie);
     if (roleFromCookie) setUserRole(roleFromCookie);
   }, []);
 
   // Log des données d'utilisateur pour vérification
-  useEffect(() => {
-    console.log("L'id de l'utilisateur récupéré dans Dashboard : " + userId);
-    console.log("Le token de l'utilisateur récupéré dans Dashboard : " + accessToken);
-  }, [userId, accessToken]);
+  // useEffect(() => {
+  //   console.log("L'id de l'utilisateur récupéré dans Dashboard : " + userId);
+  //   console.log("Le token de l'utilisateur récupéré dans Dashboard : " + accessToken);
+  // }, [userId, accessToken]);
 
   // Appel API pour récupérer les abonnés et rôle de l'utilisateur
   useEffect(() => {
@@ -89,8 +91,8 @@ export default function Dashboard() {
         }
 
         const data = await response.json();
-        console.log('Données reçues:', data); // Vérifie la structure des données
-        setUserRole(data.utilisateur.role);
+        console.log('Données reçues dans dashboard :', data); // Vérifie la structure des données
+        setUserRole(data.utilisateur.role); 
       } catch (error) {
         console.error('Erreur lors de la récupération des abonnés:', error.message);
       }
@@ -116,9 +118,9 @@ export default function Dashboard() {
     }
   };
 
-  useEffect(()=>{
-    console.log("valeur Stocké dans userRole "+userRole);
-  })
+  // useEffect(()=>{
+  //   console.log("valeur Stocké dans userRole "+userRole);
+  // })
 
   return (
     <div className='conteneur'>

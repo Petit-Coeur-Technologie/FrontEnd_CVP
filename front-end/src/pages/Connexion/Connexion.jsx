@@ -57,6 +57,7 @@ export default function Connexion() {
         // console.log(accessToken);
         // console.log(userId);
         // console.log('Role envoyé dans connexion '+role);
+        // console.log(data);
     
         const redirectPath = location.state?.from?.pathname || '/dashboard';
         navigate(redirectPath);
