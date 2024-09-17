@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
+import myLogo from '/src/assets/th.jpeg';
+import background from '/src/assets/background.avif';
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
 import ClientForm from "./ClientForm";
@@ -151,7 +153,7 @@ function Inscription() {
     formData.append('update_at', new Date().toISOString());
     formData.append('is_actif', true);
   
-    const urlPME = 'https://4970-41-223-51-230.ngrok-free.app/pme';
+    const urlPME = 'https://ville-propre.onrender.com/pme';
   
     try {
         console.log('Envoi des données à l\'API...');
@@ -182,14 +184,14 @@ function Inscription() {
 
   return (
     <div className="stack-container">
-      <div className="right-container">
+      <div className="right-container" style={{ backgroundImage: `url(${background})` }}>
         <h2 className="title">Inscription</h2>
-        {/* <img src="src/assets/background.avif" className="logoInscription" alt="background" /> */}
+       { /*<img src={background} className="logoInscription" alt="" />*/}
       </div>
       
       <div className="box-container">
         <div className="lg">
-          <Link to="/"><img title="Click pour revenir sur l'acceuil" src="src/assets/logo.jpg" id="lg" /></Link>
+          <Link to="/"><img title="Click pour revenir sur l'acceuil" src={myLogo} id="lg" /></Link>
         </div>
         <div className="button-group">
           <button className="client" onClick={() =>

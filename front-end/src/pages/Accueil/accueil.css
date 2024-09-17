@@ -2,77 +2,56 @@
 .home {
   margin-top: 50px;
   padding: 10px 20px;
- background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
+  background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
   justify-items: center;
   min-height: 100vh;
-  }
-  
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    width: 100%;
-    justify-items: center;
-    gap: 10px;
-    margin-top: 30px; /* Ajout d'une marge en bas pour espacer la pagination */
-  }
+}
 
-  .inexistant{
-    text-align: center;
-    margin-top: 20px;
-    font-size: 18px;
-    color: #f00;
-  }
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  width: 100%;
+  justify-items: center;
+  gap: 10px;
+  margin-top: 30px; /* Ajout d'une marge en bas pour espacer la pagination */
+}
 
-  .search-bar {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 20px auto;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
+.inexistant {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #f00;
+}
 
-  .sort-dropdown {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    margin: 20px;
-    border-radius: 5px;
-    font-size: 16px;
-  }  
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Ajout d'une marge en haut pour plus d'espacement */
-    margin-bottom: 20px;
-  }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Ajout d'une marge en haut pour plus d'espacement */
+  margin-bottom: 20px;
+}
 
-  .Btnpage{
-    background: #fdb024;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .Btnpage:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .pagination button.active {
-    background-color: #fdb024;
-  }
+.Btnpage {
+  background: #fdb024;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.Btnpage:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pagination button.active {
+  background-color: #fdb024;
+}
 
 /* Section de bienvenue */
 .welcome-section {
   text-align: center;
   padding: 50px;
-  background-color: #4FB97F; /* Nuance plus claire du vert */
+  background-color: #4fb97f; /* Nuance plus claire du vert */
   color: #ffffff;
 }
 
@@ -88,7 +67,7 @@
 /* Section À propos de nous */
 .about-section {
   padding: 40px 20px;
-  background-color: #d1d1d1;
+  background-color: #f9e9cc;
 }
 
 .about-section h2 {
@@ -104,7 +83,7 @@
 /* Section des services */
 .services-section {
   padding: 40px 20px;
-  background-color: #ffffff;
+  background-color: #f2fcf8;
 }
 
 .services-section h2 {
@@ -117,6 +96,7 @@
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap; /* Allows services to wrap on smaller screens */
+  background-color: #f2fcf8;
 }
 
 .service {
@@ -143,7 +123,8 @@
     width: 45%; /* Adjust width on medium screens (tablets) */
   }
 
-  .about-section h2, .services-section h2 {
+  .about-section h2,
+  .services-section h2 {
     font-size: 24px;
   }
 }
@@ -153,11 +134,13 @@
     width: 100%; /* Full width on small screens (mobile) */
   }
 
-  .about-section, .services-section {
+  .about-section,
+  .services-section {
     padding: 20px 10px;
   }
 
-  .about-section p, .services-section p {
+  .about-section p,
+  .services-section p {
     font-size: 15px;
   }
 
@@ -179,7 +162,8 @@
     font-size: 14px;
   }
 
-  .about-section p, .services-section p {
+  .about-section p,
+  .services-section p {
     font-size: 14px;
   }
 }
