@@ -15,6 +15,23 @@
     padding: 40px;
     max-width: 400px;
     text-align: center;
+    position: relative;
+  }
+  .input-containerConnexion{
+    background-color: #04623b;
+    margin-bottom: 10px;
+    padding: 0 6px;
+  }
+  .bxs-envelope{
+    pad: 5px;
+  }
+  
+  .bx-homeConnexion{
+    position: absolute!important;
+    top: 130px;
+    left: 60px;
+    height: 30px;
+    width: 30px;
   }
   
   .h2Con {
@@ -40,27 +57,30 @@
     margin-bottom: 20px;
     border-radius: 50%;
   }
-  
+  .divFormulaire{
+    display: flex;
+    flex-direction: column;
+  }
   .input {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
-    border-radius: 5px;
     font-size: 16px;
     border: none;
     outline: none;
     background-color: #04623b;
+    color: white;
   }
   ::placeholder{
     color: #b2dfdb;
   }
   
   .inputEmail {
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   
   .inputMdp {
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
   
   .mdpOublie {
@@ -81,6 +101,8 @@
   .btnConnexion {
     width: 220px;
     height: 40px;
+    position: relative;
+    left: 40px;
     border: none;
     background-color: #fdb024;
     color: #004d40;
@@ -104,8 +126,11 @@
     display: flex;
     justify-content: center;
     margin-top: 15px;
+    width: 330px;
+    position: relative;
+    left: -5px;
   }
-  
+ 
   .divIcone a {
     text-decoration: none;
     margin: 0 10px;
@@ -228,4 +253,5 @@
     text-decoration: none;
     /* font-size: 14px; */
   }
+
   

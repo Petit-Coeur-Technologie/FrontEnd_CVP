@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
+import {Link, useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
 import myImage from '/src/assets/th.jpeg';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
 
@@ -77,14 +77,15 @@ export default function Connexion() {
             <img className="imageBmw" src={myImage} alt="pct" />
           </div>
         </div>
+        <Link title="Clicker pour revenir sur l'acceuil" to="/"><i class='bx bx-home bx-homeConnexion' ></i></Link>
         {showForgotPassword ? 
         (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
         ) : (
         <form onSubmit={handleSubmit}>
           <div className='divFormulaire'>
-              <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required />
-              <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <div className="input-containerConnexion"><i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i><input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required /></div>
+              <div className="input-containerConnexion"><i className='bx bxs-lock' style={{ color: '#fdb024' }}></i><input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
               <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
               <button className="btnConnexion" type="submit">Se Connecter</button>
               {errorMessage && <p className='pErreur'>{errorMessage}</p>}
