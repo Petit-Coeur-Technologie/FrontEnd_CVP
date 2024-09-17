@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Filtre.css';
-import "boxicons/css/boxicons.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   const [searchText, setSearchText] = useState("");
@@ -63,7 +64,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button className="filter-btn" onClick={() => setShowPopup(!showPopup)}>
-        <i className='bx bxs-filter' style={{ color: '#fff' }}></i>
+        <FontAwesomeIcon icon={faFilter} /> {/* Icône de filtre */}
           Filtrer
         </button>
       </div>
