@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Filtre.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   const [searchText, setSearchText] = useState("");
@@ -62,6 +64,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button className="filter-btn" onClick={() => setShowPopup(!showPopup)}>
+        <FontAwesomeIcon icon={faFilter} /> {/* Icône de filtre */}
           Filtrer
         </button>
       </div>
@@ -90,15 +93,6 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
             <option value="4">4 étoiles et plus</option>
             <option value="5">5 étoiles</option>
           </select>
-          <div className="boutonsFiltre">
-            <button className="apply-btn" onClick={() => setShowPopup(false)}>
-              Filtrer
-            </button>
-
-            <button className="annuler" onClick={() => setShowPopup(false)}>
-              Annuler
-            </button>
-          </div>
         </div>
       )}
 

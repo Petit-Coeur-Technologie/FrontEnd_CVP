@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
+import { Link,useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
 import myImage from '/src/assets/th.jpeg';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
 
@@ -30,13 +30,12 @@ export default function Connexion() {
         formData.append('username', username);
         formData.append('password', password);
     
-        const response = await fetch('https://4970-41-223-51-230.ngrok-free.app/login', {
+        const response = await fetch('https://ville-propre.onrender.com/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded'
           },
-          body: formData,
-          mode: 'cors'  // Assurez-vous que mode est défini à 'cors'
+          body: formData
         });
     
         if (!response.ok) {
@@ -71,7 +70,7 @@ export default function Connexion() {
         <h2 className="h2Con">Connexion</h2>
         <div className='divMereImageBmw'>
           <div className="divImageBmw">
-            <img className="imageBmw" src={myImage} alt="pct" />
+           <Link to="/"> <img className="imageBmw" src={myImage} alt="pct" /> </Link> 
           </div>
         </div>
         {showForgotPassword ? 
