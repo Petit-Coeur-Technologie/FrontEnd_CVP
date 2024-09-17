@@ -98,32 +98,32 @@ const Navbar = () => {
             {/* Barre latérale pour petits écrans */}
             <div className={`sidebarNav ${isSidebarOpen ? 'open' : ''}`}>
                 <ul className='ListeSidebarNav'>
-                    <li className='NavLink'>
-                        <i className='bx bx-home-alt'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-home-alt iconeNav' ></i>
                         <NavLink to="/" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> Accueil </NavLink>
                     </li>
-                    <li className='NavLink'>
-                        <i className='bx bx-bulb'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-bulb iconeNav'></i>
                         <NavLink to="/sens" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> Sensibilisation </NavLink>
                     </li>
-                    <li className='NavLink'>
-                        <i className='bx bx-info-circle'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-info-circle iconeNav'></i>
                         <NavLink to="/a-propos" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> À propos </NavLink>
                     </li>
-                    <li className='NavLink'>
-                        <i className='bx bx-phone'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-phone iconeNav'></i>
                         <NavLink to="/contact" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",

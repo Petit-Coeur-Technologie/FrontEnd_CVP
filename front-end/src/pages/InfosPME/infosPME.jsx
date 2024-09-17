@@ -93,10 +93,6 @@ function InfosPme() {
             toast('Une erreur est survenue');
         }
     };
-    
-    if (!pme) {
-        return <div>Loading...</div>;
-    }
 
     function renderStars(rating) {
         const stars = [];
