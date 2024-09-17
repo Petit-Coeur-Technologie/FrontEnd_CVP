@@ -7,6 +7,7 @@
   .pmes {
     padding-top: 70px; /* Compense la hauteur de la navbar */
     min-height: 100vh;
+    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
     }
     
     .cardspmes {

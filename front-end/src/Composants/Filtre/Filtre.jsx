@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './Filtre.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import "boxicons/css/boxicons.min.css";
 
 const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   const [searchText, setSearchText] = useState("");
@@ -54,6 +57,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   return (
     <div className="filter-container">
       <div className="searchFilter">
+        <i class='bx bx-search-alt' ></i>
         <input
           type="text"
           placeholder="Recherche..."
@@ -62,42 +66,37 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button className="filter-btn" onClick={() => setShowPopup(!showPopup)}>
+          <FontAwesomeIcon icon={faFilter} /> {/* Icône de filtre */}
           Filtrer
         </button>
       </div>
       {showPopup && (
-        <div className="showPopup">
+        <div className="showPopupOverlay">
+          <div className="showPopup">
 
-          <select value={zone} className="select-filtre" onChange={(e) => setZone(e.target.value)}>
-            <option value="">Toutes les zones</option>
-            {zones.map((z, index) => (
-              <option key={index} value={z}>{z}</option>
-            ))}
-          </select>
+            <select value={zone} className="select-filtre" onChange={(e) => setZone(e.target.value)}>
+              <option value="">Toutes les zones</option>
+              {zones.map((z, index) => (
+                <option key={index} value={z}>{z}</option>
+              ))}
+            </select>
 
-          <select value={tarif} className="select-filtre" onChange={(e) => setTarif(e.target.value)}>
-            <option value="">Tous les tarifs</option>
-            {tarifs.map((t, index) => (
-              <option key={index} value={t}>{t} FG et moins</option>
-            ))}
-          </select>
+            <select value={tarif} className="select-filtre" onChange={(e) => setTarif(e.target.value)}>
+              <option value="">Tous les tarifs</option>
+              {tarifs.map((t, index) => (
+                <option key={index} value={t}>{t} FG et moins</option>
+              ))}
+            </select>
 
-          <select value={note} className="select-filtre" onChange={(e) => setNote(e.target.value)}>
-            <option value="">Toutes les notes</option>
-            <option value="1">1 étoile et plus</option>
-            <option value="2">2 étoiles et plus</option>
-            <option value="3">3 étoiles et plus</option>
-            <option value="4">4 étoiles et plus</option>
-            <option value="5">5 étoiles</option>
-          </select>
-          <div className="boutonsFiltre">
-            <button className="apply-btn" onClick={() => setShowPopup(false)}>
-              Filtrer
-            </button>
-
-            <button className="annuler" onClick={() => setShowPopup(false)}>
-              Annuler
-            </button>
+            <select value={note} className="select-filtre" onChange={(e) => setNote(e.target.value)}>
+              <option value="">Toutes les notes</option>
+              <option value="1">1 étoile et plus</option>
+              <option value="2">2 étoiles et plus</option>
+              <option value="3">3 étoiles et plus</option>
+              <option value="4">4 étoiles et plus</option>
+              <option value="5">5 étoiles</option>
+            </select>
+            <button type="button" onClick={() => setShowPopup(false)}>Appliquer et fermer</button>
           </div>
         </div>
       )}
@@ -108,8 +107,8 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
         {note && <button className="BtnSelect" onClick={() => removeFilter('note')}>Note: {note} ✖</button>}
 
         <button className="clear-btn" onClick={clearFilters}>
-        Effacer les filtres
-      </button>
+          Effacer les filtres
+        </button>
       </div>
     </div>
   );

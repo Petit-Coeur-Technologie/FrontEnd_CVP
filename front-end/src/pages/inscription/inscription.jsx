@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
+import myLogo from '/src/assets/th.jpeg';
+import background from '/src/assets/background.avif';
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
 import ClientForm from "./ClientForm";
@@ -182,14 +184,14 @@ function Inscription() {
 
   return (
     <div className="stack-container">
-      <div className="right-container">
+      <div className="right-container" style={{ backgroundImage: `url(${background})` }}>
         <h2 className="title">Inscription</h2>
-        {/* <img src="src/assets/background.avif" className="logoInscription" alt="background" /> */}
+       { /*<img src={background} className="logoInscription" alt="" />*/}
       </div>
       
       <div className="box-container">
         <div className="lg">
-          <img title="Click pour revenir sur l'acceuil" src="src/assets/logo.jpg" id="lg" />
+          <Link to="/"><img title="Click pour revenir sur l'acceuil" src={myLogo} id="lg" /></Link>
         </div>
 
         <div className='divHomeIconRetourAcceuil'>

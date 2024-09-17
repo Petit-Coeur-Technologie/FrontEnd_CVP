@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import logo from '/src/assets/th.jpeg';
@@ -6,7 +6,6 @@ import logo from '/src/assets/th.jpeg';
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'affichage de la barre latérale
     const navigate = useNavigate();
-    const [profil,setProfil]=useState(null)
 
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
@@ -20,32 +19,6 @@ const Navbar = () => {
         return !!token;
     };
 
-    const apiProfil='';
-
-    const fetchProfil=()=>{
-        const token=getCookie('authToken');
-        if(token){
-            fetch(apiProfil,{
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then(response=>response.json())
-            .then(data=>{
-                setProfil(data); //Stocker les informations du profil
-            })
-            .catch(error=>{
-                console.error('Erreur lors de la récupération du profil:',error);
-            });
-        }
-    };
-
-    useEffect(()=>{
-        if (isAuthenticated()){
-            fetchProfil(); //Récupérer le profil si l'utilisateur est connecté
-        }
-    },[]);
-
     const handleUserIconClick = () => {
         if (isAuthenticated()) {
             navigate('/dashboard');
@@ -56,7 +29,6 @@ const Navbar = () => {
 
     const handleLogout = () => {
         document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-        setProfil(null);
         navigate('/');
     };
 
@@ -113,54 +85,45 @@ const Navbar = () => {
 
             {/* Profil utilisateur ou icône de connexion */}
             <div className="login">
-                {isAuthenticated() && profil ? (
-                    <div className="user-profile">
-                        <img
-                            src={profil.avatar || '/default-avatar.png'} // Image du profil ou avatar par défaut
-                            alt="User Avatar"
-                            className="user-avatar"
-                        />
-                        <span className="user-name">{profil.name}</span> {/* Nom de l'utilisateur */}
-                        <button onClick={handleLogout}>Se déconnecter</button>
-                    </div>
-                ) : (
-                    <i
-                        className='bx bxs-user'
-                        style={{ color: '#fdb024' }}
-                        onClick={handleUserIconClick}
-                    ></i>
+                <i
+                    className='bx bxs-user'
+                    style={{ color: '#fdb024' }}
+                    onClick={handleUserIconClick}
+                ></i>
+                {isAuthenticated() && (
+                    <button onClick={handleLogout}>Déconnexion</button>
                 )}
             </div>
 
             {/* Barre latérale pour petits écrans */}
-            <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-                <ul className='ListeSidebar'>
-                    <li className='NavLink'>
-                        <i className='bx bx-home-alt'></i>
+            <div className={`sidebarNav ${isSidebarOpen ? 'open' : ''}`}>
+                <ul className='ListeSidebarNav'>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-home-alt iconeNav' ></i>
                         <NavLink to="/" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> Accueil </NavLink>
                     </li>
-                    <li className='NavLink'>
-                        <i className='bx bx-bulb'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-bulb iconeNav'></i>
                         <NavLink to="/sens" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> Sensibilisation </NavLink>
                     </li>
-                    <li className='NavLink'>
-                        <i className='bx bx-info-circle'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-info-circle iconeNav'></i>
                         <NavLink to="/a-propos" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> À propos </NavLink>
                     </li>
-                    <li className='NavLink'>
-                        <i className='bx bx-phone'></i>
+                    <li className='sidebarNavLink'>
+                        <i className='bx bx-phone iconeNav'></i>
                         <NavLink to="/contact" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#006837',
                             textDecoration: isActive ? "none" : "none",

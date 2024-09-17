@@ -58,7 +58,7 @@
     gap: 10px;
 }
 
-.login button {
+.Btnlogin {
     border: none;
     color: white;
     cursor: pointer;
@@ -77,7 +77,7 @@
 }
 
 /* Barre latérale */
-.sidebar {
+.sidebarNav {
     position: fixed;
     left: -100%; /* Hors de l'écran par défaut */
     top: 0;
@@ -88,17 +88,17 @@
     z-index: 2;
 }
 
-.sidebar.open {
+.sidebarNav.open {
     left: 0; /* Afficher la barre latérale */
 }
 
-.ListeSidebar {
+.ListeSidebarNav {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.ListeSidebar .NavLink {
+.sidebarNavLink .NavLink {
     display: flex;
     align-items: center;
     padding: 15px;
@@ -107,14 +107,23 @@
     font-size: 1.2rem;
 }
 
-.ListeSidebar .NavLink:hover {
+.NavLink:hover {
     background-color: #006837;
     color: #fdb024;
 }
 
-.ListeSidebar .listeNav i {
+.sidebarNavLink:hover {
+    color: #fdb024;
+}
+
+.iconeNav {
     margin-right: 10px; /* Espace entre l'icône et le texte */
     font-size: 1.5rem;
+    color: #00804b;
+}
+
+.iconeNav:hover {
+    color: #fdb024;
 }
 
 /* Responsivité */

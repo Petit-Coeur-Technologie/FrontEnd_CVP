@@ -8,7 +8,6 @@
   gap: 15px; /* Espacement entre les éléments du filtre */
   width: 100%;
   padding: 10px;
-  background-color: #ffffff; /* Couleur de fond blanche pour le conteneur */
 }
 
 .searchFilter{
@@ -19,17 +18,16 @@
   justify-content: center;
   width: 100%;
   padding: 10px;
-  background-color: #ffffff; /* Couleur de fond blanche pour le conteneur */
 }
 
 /* Style du champ de recherche */
 .input-recherche {
   padding: 20px;
-  width:90%;
+  width:100%;
   font-size: 16px;
   border: 1px solid #ddd; /* Bordure légère */
   color: black;
-  border-radius: 4px; /* Coins arrondis pour le champ */
+  border-radius: 40px; /* Coins arrondis pour le champ */
   outline: none; /* Supprime le contour par défaut */
   transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
   background-color: #f2fcf8;
@@ -39,18 +37,33 @@
 .input-recherche:focus, .filter-btn:focus, .select-filtre:focus {
   border-color: #4fb97f; /* Bordure bleue au focus */
   box-shadow: 0 0 5px #4fb97f; /* Ombre légère au focus */
+  outline: none;
 }
 
 .filter-btn{
-  width: 10%;
+  width: 100px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd; /* Bordure légère */
   border-radius: 50px; /* Coins arrondis pour le menu */
-  background-color: #fff; /* Couleur de fond blanche pour le menu */
+  background-color: #4fb97f; /* Couleur de fond blanche pour le menu */
+  color: white;
   transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
   height: 40px;
-  
+  outline: none;
+}
+
+.showPopupOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Toujours au-dessus de l'arrière-plan */
 }
 
 .showPopup {
@@ -75,30 +88,12 @@
   border: 1px solid #ccc; /* Bordure légère */
   border-radius: 4px;
   font-size: 16px;
-  color: #333; /* Texte sombre pour la lisibilité */
-  background-color: #f9f9f9; /* Fond légèrement gris */
-  transition: border-color 0.3s ease;
-}
-
-.boutonsFiltre{
-  display: flex;
-  flex-direction: row;
-}
-
-.apply-btn {
-  width: 50%;
-  background-color: #00804b;
-  border: none;
-  padding: 10px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 5px 0;
-}
-
-.annuler{
-  background-color: #fdb024;
-  width: 50%;
+  border: 1px solid #ddd; /* Bordure légère */
+  border-radius: 4px; /* Coins arrondis pour le menu */
+  background-color: #fff; /* Couleur de fond blanche pour le menu */
+  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
+  height: 40px;
+  outline: none;
 }
 
 .BtnSelect {

@@ -34,7 +34,7 @@ function PmeCard({ pme }) {
                 </div>
                 <div className="card-button">
                     <Link to={`/pmes/${pme.id}`}>
-                        <button type="button">Continuer</button>
+                        <button type="button">Détails</button>
                     </Link>
                 </div>
             </div>
