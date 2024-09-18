@@ -54,31 +54,19 @@ const Navbar = () => {
                         <NavLink to="/" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#fff',
                             textDecoration: isActive ? "none" : "none",
-                        })}> Accueil </NavLink>
-                    </li>
-                    <li className='NavLink'>
-                        <NavLink to="/pmes" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#fff',
-                            textDecoration: isActive ? "none" : "none",
-                        })}> Pmes </NavLink>
+                        })} className='lienNav'> Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
                         <NavLink to="/sens" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#fff',
                             textDecoration: isActive ? "none" : "none",
-                        })}> Sensibilisation </NavLink>
-                    </li>
-                    <li className='NavLink'>
-                        <NavLink to="/a-propos" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#fff',
-                            textDecoration: isActive ? "none" : "none",
-                        })}> À propos </NavLink>
+                        })} className='lienNav'> Sensibilisation </NavLink>
                     </li>
                     <li className='NavLink'>
                         <NavLink to="/contact" style={({ isActive }) => ({
                             color: isActive ? '#fdb024' : '#fff',
                             textDecoration: isActive ? "none" : "none",
-                        })} > Contact </NavLink>
+                        })} className='lienNav' > Contact </NavLink>
                     </li>
                 </ul>
             </div>
@@ -113,14 +101,6 @@ const Navbar = () => {
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> Sensibilisation </NavLink>
-                    </li>
-                    <li className='sidebarNavLink'>
-                        <i className='bx bx-info-circle iconeNav'></i>
-                        <NavLink to="/a-propos" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#006837',
-                            textDecoration: isActive ? "none" : "none",
-                        })}
-                            className="listeNav"> À propos </NavLink>
                     </li>
                     <li className='sidebarNavLink'>
                         <i className='bx bx-phone iconeNav'></i>

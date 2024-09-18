@@ -99,7 +99,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                  {/* -------- Pour la selection de la ville, la commun et le quartier si c'est un Client -------------------------------*/}
                 {/* Pour la selection de la ville */}
               <div className="input-container input-containerSelect input-containerTablette">
-                    <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
+                    <i class='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
@@ -116,7 +116,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                         </div>
                         <div className="input-container input-containerSelect input-containerTablette">
-                        <i className='bx bx-home'></i>
+                        <i class='bx bx-location-plus' ></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -134,7 +134,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                         </div>
                         <div className="input-container input-containerSelect input-containerTablette">
-                        <i className='bx bx-home-alt-2'></i>
+                        <i class='bx bx-current-location' ></i>
                     <div >
                         <select
                             id="quartierClt"

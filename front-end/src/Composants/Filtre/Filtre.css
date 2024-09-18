@@ -1,4 +1,4 @@
-/* Conteneur principal du filtre */
+/* Conteneur de la barre de recherche et de filtrage */
 .filter-container {
   margin-top: 10px;
   display: flex;
@@ -7,40 +7,65 @@
   justify-content: center;
   gap: 15px; /* Espacement entre les éléments du filtre */
   width: 100%;
-  padding: 10px;
 }
 
-.searchFilter{
+.searchFilter {
   display: flex;
   flex-direction: column;
   gap: 15px; /* Espacement entre les éléments du filtre */
   justify-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10px;
 }
 
 /* Champ de recherche */
-.input-recherche {
-  padding: 20px;
-  width:100%;
-  font-size: 16px;
+
+.BtnSearch {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
   border: 1px solid #ddd; /* Bordure légère */
-  color: black;
   border-radius: 40px; /* Coins arrondis pour le champ */
   outline: none; /* Supprime le contour par défaut */
   transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
   background-color: #f2fcf8;
-  height: 40px;
+  height: auto;
 }
 
-.input-recherche:focus, .filter-btn:focus, .select-filtre:focus {
+.BtnSearch.focused {
   border-color: #4fb97f; /* Bordure bleue au focus */
   box-shadow: 0 0 5px #4fb97f; /* Ombre légère au focus */
   outline: none;
 }
 
-.filter-btn{
+.bx-search-alt{
+  font-size: 20px;
+  color:#fdb024;
+}
+
+.input-recherche {
+  width: 90%;
+  margin-left: 10px;
+  font-size: 16px;
+  color: black;
+  border: none;
+  border-radius: 0 40px 40px 0;
+  outline: none; /* Supprime le contour par défaut */
+  background-color: #f2fcf8;
+  height: 40px;
+}
+
+
+.filter-btn:focus,
+.select-filtre:focus {
+  border-color: #4fb97f; /* Bordure bleue au focus */
+  box-shadow: 0 0 5px #4fb97f; /* Ombre légère au focus */
+  outline: none;
+}
+
+.filter-btn {
   width: 100px;
   padding: 10px;
   font-size: 16px;
@@ -53,7 +78,7 @@
   outline: none;
 }
 
-.showPopupOverlay{
+.showPopupOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -82,9 +107,11 @@
   box-shadow: 0 2px 10px #00000046;
 }
 
-/* Menu déroulant (select) */
+/* Style des sélecteurs */
 .select-filtre {
   padding: 10px;
+  border: 1px solid #ccc; /* Bordure légère */
+  border-radius: 4px;
   font-size: 16px;
   border: 1px solid #ddd; /* Bordure légère */
   border-radius: 4px; /* Coins arrondis pour le menu */
@@ -92,6 +119,11 @@
   transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
   height: 40px;
   outline: none;
+}
+
+.BtnFermerFiltre {
+  background-color: #fdb024;
+  color: #fff;
 }
 
 .BtnSelect {
@@ -103,8 +135,7 @@
   color: white;
 }
 
-
-.clear-btn{
+.clear-btn {
   background-color: #d10000;
   border: none;
   padding: 10px;

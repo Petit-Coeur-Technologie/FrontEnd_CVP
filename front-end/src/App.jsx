@@ -1,4 +1,5 @@
 import React from 'react';
+import './Styles/style.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Inscription from './pages/inscription/inscription.jsx';
 import Accueil from './pages/Accueil/accueil.jsx';
@@ -12,6 +13,7 @@ import './App.css';
 import 'boxicons/css/boxicons.min.css';
 import Messagerie from './Composants/Messagerie/Messagerie.jsx';
 import Abonnes from './Composants/Abonnes/Abonnes.jsx';
+import MonAbonnement from './Composants/MonAbonnement.jsx';
 import Home from './Composants/Home/Home.jsx';
 import Calendrier from './Composants/Calendrier/Calendrier.jsx';
 import Notification from './Composants/Notifications/Notifications.jsx';
@@ -42,13 +44,13 @@ function App() {
         <Route path='/' element={<Accueil />} />
         <Route path='/inscription' element={<Inscription />} />
         <Route path='/sens' element={<Sensibilisation />} />
-        <Route path='/pmes' element={<Pmes />} />
         <Route path='/pmes/:id' element={<InfosPme/>}/>
 
         {/* Route protégée avec PrivateRoute */}
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<Home />} />
             <Route path="abonnes" element={<Abonnes />} />
+            <Route path="monabonnement" element={<MonAbonnement />} />
             <Route path="home" element={<Home />} />
             <Route path="calendrier" element={<Calendrier />} />
             <Route path="messagerie" element={<Messagerie />} />

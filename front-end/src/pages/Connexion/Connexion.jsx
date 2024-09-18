@@ -45,14 +45,18 @@ export default function Connexion() {
         const data = await response.json();
         const accessToken = data.access_token;
         const userId = data.user_id;
+        const role = data.role;
     
         // Stocker les informations dans des cookies
         document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
         document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
+        document.cookie = `role=${role}; path=/; max-age=${60 * 60 * 24}`;
     
         toast.success('Connexion réussie');
-        console.log(accessToken);
-        console.log(userId);
+        // console.log(accessToken);
+        // console.log(userId);
+        // console.log('Role envoyé dans connexion '+role);
+        // console.log(data);
     
         const redirectPath = location.state?.from?.pathname || '/dashboard';
         navigate(redirectPath);
@@ -73,14 +77,15 @@ export default function Connexion() {
            <Link to="/"> <img className="imageBmw" src={myImage} alt="pct" /> </Link> 
           </div>
         </div>
+        <Link title="Clicker pour revenir sur l'acceuil" to="/"><i class='bx bx-home bx-homeConnexion' ></i></Link>
         {showForgotPassword ? 
         (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
         ) : (
         <form onSubmit={handleSubmit}>
           <div className='divFormulaire'>
-              <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required />
-              <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <div className="input-containerConnexion"><i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i><input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required /></div>
+              <div className="input-containerConnexion"><i className='bx bxs-lock' style={{ color: '#fdb024' }}></i><input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
               <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
               <button className="btnConnexion" type="submit">Se Connecter</button>
               {errorMessage && <p className='pErreur'>{errorMessage}</p>}

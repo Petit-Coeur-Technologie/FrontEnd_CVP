@@ -7,6 +7,7 @@
 .nav {
     position: fixed;
     width: 100%;
+    height: 65px;
     z-index: 2;
     top: 0;
     background-color: #00804b;
@@ -15,10 +16,15 @@
     justify-content: space-between;
     padding: 5px 30px;
 }
+.navLogo{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+}
 
 /* Logo */
 #logo {
-    width: 35px;
+    width: 40px;
     margin: 0%;
 }
 
@@ -98,13 +104,21 @@
     margin: 0;
 }
 
-.sidebarNavLink .NavLink {
+.lienNav {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.sidebarNavLink {
     display: flex;
     align-items: center;
     padding: 15px;
     color: #fff;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 20px;
 }
 
 .NavLink:hover {
@@ -131,6 +145,7 @@
     .nav {
         flex-direction: row;
         justify-content: space-between;
+        height: auto;
     }
 
     /* Afficher le menu sur les petits écrans */

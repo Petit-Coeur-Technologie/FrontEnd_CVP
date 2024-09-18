@@ -59,7 +59,7 @@ function Accueil() {
         <h1>Bienvenue sur Ville Propre</h1>
         <p>
           Nous sommes fiers de connecter les entreprises de gestion des déchets avec les ménages
-          et les PME pour rendre notre ville plus propre et plus écologique.
+            pour rendre notre ville plus propre et plus écologique.
         </p>
       </section>
 
@@ -99,10 +99,10 @@ function Accueil() {
 
       {/* À propos de nous */}
       <section className="about-section">
-        <h2>À propos de nous</h2>
+        <h2>Ville propre: Ensemble pour un avenir plus vert</h2>
         <p>
           Ville Propre est une plateforme dédiée à améliorer la gestion des déchets
-          dans les zones urbaines. Nous collaborons avec de nombreuses PME et entreprises
+          dans les zones urbaines. Nous collaborons avec de nombreuses entreprises
           locales pour offrir des services fiables et accessibles à tous.
         </p>
       </section>
