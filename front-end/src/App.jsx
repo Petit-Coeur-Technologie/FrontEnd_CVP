@@ -44,6 +44,7 @@ function App() {
         <Route path='/' element={<Accueil />} />
         <Route path='/inscription' element={<Inscription />} />
         <Route path='/sens' element={<Sensibilisation />} />
+        <Route path='/pmes' element={<Pmes />} />
         <Route path='/pmes/:id' element={<InfosPme/>}/>
 
         {/* Route protégée avec PrivateRoute */}

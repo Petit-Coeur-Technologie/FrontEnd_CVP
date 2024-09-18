@@ -10,10 +10,8 @@ function InfosPme() {
     const [pme, setPme] = useState(null);
     const [souscrit, setSouscrit] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        // Récupération des détails de la PME
         fetch(`https://ville-propre.onrender.com/pmes/${id}`)
             .then((response) => response.json())
             .then((data) => {
@@ -23,76 +21,12 @@ function InfosPme() {
             .catch((error) => {
                 console.error("Error fetching PME details:", error);
             });
-    
-        // Vérifier l'authentification à l'initialisation
-        checkAuth();
-    
+
     }, [id]);
 
-    
-    const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    };
-
-    const checkAuth = () => {
-        const token = getCookie('authToken');
-        if (token) {
-            // Vérifie si le token existe pour l'authentification
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
-    };
-
-    const generateUniqueSubscriptionNumber = () => {
-        return 'AB' + Math.floor(Math.random() * 1000000);
-    };
-
-    const Souscription = async () => {
-        const token = getCookie('authToken');
-        console.log("Token utilisé pour la souscription:", token);
-    
-        if (!isAuthenticated) {
-            setShowLoginModal(true);
-            return;
-        }
-    
-        const souscriptionData = {
-            pme_id: id,
-            num_abonnement: generateUniqueSubscriptionNumber(),
-            tarif_abonnement: pme.tarif_abonnement,
-            status_abonnement: "pending",
-            debut_abonnement: new Date().toISOString(),
-            fin_abonnement: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString()
-        };
-    
-        try {
-            const response = await fetch('https://ville-propre.onrender.com/abonnement', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(souscriptionData),
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error("Response Error Data:", errorData);
-                throw new Error("L'abonnement a échoué!");
-            }
-    
-            const data = await response.json();
-            console.log("Souscription a réussi:", data);
-            setSouscrit(true);
-            toast("Vous vous êtes abonné avec succès!");
-        } catch (error) {
-            console.error('Une erreur est survenue', error);
-            toast('Une erreur est survenue');
-        }
-    };
+    if (!pme) {
+        return <div>Loading...</div>;
+    }
 
     function renderStars(rating) {
         const stars = [];
@@ -108,11 +42,69 @@ function InfosPme() {
         return stars;
     }
 
+    const urlaboné = 'https://ville-propre.onrender.com/abonnement';
+
+    const generateUniqueSubscriptionNumber = () => {
+        return 'AB' + Math.floor(Math.random() * 1000000);
+    };
+
+    // Fonction pour récupérer le token d'authentification
+    const getAuthToken = () => {
+        return localStorage.getItem('authToken'); // Récupère le token depuis le stockage local
+    };
+
+    const Souscription = () => {
+        const token = getAuthToken(); // Utiliser getAuthToken pour récupérer le token
+
+        if (!token) {
+            // Si aucun token, afficher un modal de connexion ou rediriger vers la page de connexion
+            setShowLoginModal(true);
+            return;
+        }
+
+        const souscriptionData = {
+            pme_id: id,  // Identifiant de la PME
+            num_abonnement: generateUniqueSubscriptionNumber(),  // Numéro unique pour l'abonnement
+            tarif_abonnement: pme.tarif_abonnement,  // Tarif de l'abonnement
+            status_abonnement: "pending",  // Statut de l'abonnement
+            debut_abonnement: new Date().toISOString(),  // Date de début de l'abonnement
+            fin_abonnement: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString()  // Date de fin de l'abonnement (par exemple, un mois après la date de début)
+        };
+
+        fetch(urlaboné, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(souscriptionData),
+            credentials: 'include' // Ajouter cette ligne pour inclure les cookies
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then((data) => {
+                        console.error("Response Error Data:", data);  // Log des données d'erreur
+                        throw new Error("L'abonnement a échoué!");
+                    });
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Subscription successful:", data);
+                setSouscrit(true);
+                toast("Vous vous êtes abonné avec succès!");
+            })
+            .catch(er => {
+                console.error('Une erreur est survenue', er);
+                toast('Une erreur est survenue');
+            });
+    };
+
     return (
         <div className="infosPME">
             <div className="infosPME_header">
                 <img
-                    src={`https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/logo_pme/${pme.logo_pme}`}
+                    src={`https://ville-propre.onrender.com/static/Uploads/logo_pme/${pme.logo_pme}`}
                     alt={pme.nom_pme}
                     className="pme-logo"
                 />
@@ -129,17 +121,19 @@ function InfosPme() {
                         type="button"
                         className="AbonnementBtn"
                         onClick={Souscription}
-                        disabled={souscrit}
+                        disabled={souscrit} // Désactiver le bouton si déjà abonné
                     >
                         {souscrit ? "Abonné" : "S'abonner"}
                     </button>
                 </div>
             </div>
+            {/* Afficher le popup de connexion si showLoginModal est vrai */}
             {showLoginModal && (
                 <LoginModal
                     onClose={() => setShowLoginModal(false)}
                     onLogin={() => {
                         setShowLoginModal(false);
+                        // Redirection vers la page de connexion avec l'URL de la page d'abonnement en tant que état
                         navigate('/connexion', { state: { from: { pathname: window.location.pathname } } });
                     }}
                 />
