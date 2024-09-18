@@ -188,7 +188,7 @@ const Abonnes = () => {
           <input
             type="text"
             placeholder='Rechercher ...'
-            className='txtRechercher inputAbonnes'
+            className='txtRechercherAbonne'
             value={searchTerm} // Corrigé : Liaison avec l'état "searchTerm"
             onChange={handleSearchChange} // Appelle la fonction de recherche lorsqu'on tape dans l'input
           />

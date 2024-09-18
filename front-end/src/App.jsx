@@ -1,4 +1,5 @@
 import React from 'react';
+import './Styles/style.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Inscription from './pages/inscription/inscription.jsx';
 import Accueil from './pages/Accueil/accueil.jsx';

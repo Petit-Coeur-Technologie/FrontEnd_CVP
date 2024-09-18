@@ -124,7 +124,7 @@ export default function Dashboard() {
 
   return (
     <div className='conteneur'>
-      <div className='BarLaterale'>
+      <div className='BarLateraleDashboard'>
         <div className='divApp'>
           <div className='LogoDiv'>
             <img src="src/Fichiers/logo.png" alt="logo" className='logoApp'/>
@@ -165,8 +165,8 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      <div className='navBar'>
-        <p className='revoir'>{navText}</p>
+      <div className='navBarDashboard'>
+        <p className='revoirDashboard'>{navText}</p>
         <div className='divNotification'>
           <li onClick={() => handleProfileClick('Notifications')}>
             <Link to="notifications">
@@ -211,7 +211,7 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      <div className='content'>
+      <div className='contentFilsDashboard'>
         <Outlet />
       </div>
     </div>
