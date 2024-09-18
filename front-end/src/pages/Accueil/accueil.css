@@ -11,10 +11,10 @@
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   width: 100%;
   justify-items: center;
-  gap: 20px;
+  gap: 30px 20px; /* 20px vertical, 10px horizontal */
   margin-top: 30px; /* Ajout d'une marge en bas pour espacer la pagination */
 }
 
@@ -92,19 +92,31 @@
 }
 
 .services-list {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap; /* Allows services to wrap on smaller screens */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Deux cartes par ligne */
+    gap: 20px; /* Espacement entre les cartes */
   background-color: #f2fcf8;
 }
 
 .service {
   padding: 20px;
   border-radius: 8px;
-  width: 30%; /* Adjust width for larger screens */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  background-color: #ffffff; /* Assurez-vous que les cartes ont un fond blanc */
+  position: relative; /* Pour positionner l'image */
+  overflow: hidden; /* Pour que l'image ne dépasse pas les bords */
+}
+
+.service img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover; /* Assurez-vous que l'image couvre bien la carte */
+  z-index: -1; /* Placer l'image derrière le contenu */
 }
 
 .service h3 {
@@ -120,7 +132,7 @@
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .service {
-    width: 45%; /* Adjust width on medium screens (tablets) */
+    width: 50%; /* Adjust width on medium screens (tablets) */
   }
 
   .about-section h2,
@@ -155,20 +167,5 @@
 
   .welcome-section p {
     font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .welcome-section h1 {
-    font-size: 24px;
-  }
-
-  .welcome-section p {
-    font-size: 14px;
-  }
-
-  .about-section p,
-  .services-section p {
-    font-size: 14px;
   }
 }

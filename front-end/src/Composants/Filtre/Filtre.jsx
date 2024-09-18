@@ -57,9 +57,8 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
 
   return (
     <div className="filter-container">
-      <div className="searchFilter">
         <div className={`BtnSearch ${isFocused?'focused' : ''}`} >
-        <i class='bx bx-search-alt' ></i>
+        <i className='bx bx-search-alt' ></i>
         <input
           type="text"
           placeholder="Recherche..."
@@ -74,7 +73,6 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
           <FontAwesomeIcon icon={faFilter} /> {/* Icône de filtre */}
           Filtrer
         </button>
-      </div>
       {showPopup && (
         <div className="showPopupOverlay">
           <div className="showPopup">
