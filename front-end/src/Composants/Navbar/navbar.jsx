@@ -68,6 +68,12 @@ const Navbar = () => {
                             textDecoration: isActive ? "none" : "none",
                         })} className='lienNav' > Contact </NavLink>
                     </li>
+                    <li className='NavLink'>
+                        <NavLink to="/pmes" style={({ isActive }) => ({
+                            color: isActive ? '#fdb024' : '#fff',
+                            textDecoration: isActive ? "none" : "none",
+                        })} className='lienNav'> Pmes </NavLink>
+                    </li>
                 </ul>
             </div>
 
