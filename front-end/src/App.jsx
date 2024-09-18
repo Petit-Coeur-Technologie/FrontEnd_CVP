@@ -23,7 +23,6 @@ import Details from './Composants/Details/Details.jsx';
 import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
-import Pmes from './pages/PMES/pmes.jsx';
 // import PrivateRoute from './Composants/PrivateRoute.jsx'; 
 
 function App() {
@@ -44,8 +43,7 @@ function App() {
         <Route path='/' element={<Accueil />} />
         <Route path='/inscription' element={<Inscription />} />
         <Route path='/sens' element={<Sensibilisation />} />
-        <Route path='/pmes' element={<Pmes />} />
-        <Route path='/pmes/:id' element={<InfosPme/>}/>
+        <Route path='/:id' element={<InfosPme/>}/>
 
         {/* Route protégée avec PrivateRoute */}
           <Route path="/dashboard" element={<Dashboard />}>
