@@ -5,7 +5,7 @@
 }
 
 .foot {
-  padding: 20px;
+  padding: 10px 20px;
   height: auto;
   background-color: #00804b;
   width: 100%;
@@ -15,11 +15,27 @@
 }
 
 .foot-container {
+  margin: 0%;
+  padding: 0%;
   width: 100%;
   display: flex; /* Utiliser flex pour centrer */
   align-items: center; /* Centre verticalement */
-  justify-content: center; /* Centre horizontalement */
 }
+
+/* Section Contacts */
+.foot1 {
+  width: 45%;
+}
+
+.ctcSection h2 {
+  margin-bottom: 20px;
+}
+
+.ctcSection p, .mailien {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
 
 .mailien {
   text-decoration: none;
@@ -31,22 +47,41 @@
   color: #fdb024;
 }
 
-.foot1{
-  width: 60%;
-}
-
-.ctcSection{
-
-}
 
 .foot2{
-  width: 40%;
+  width: auto;
+  padding: 20px;
+}
+
+
+.socialSection {
+  background-color: rgba(0, 0, 0, 0.4); /* Couleur noire transparente */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.socialSection h2 {
+  margin-bottom: 10px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 15px;
+}
+
+.socialIcon {
+  color: #FDB024; /* Jaune */
+  text-decoration: none;
+}
+
+.socialIcon:hover {
+  color: white;
 }
 
 .cmtSection{
   right: 20%;
   padding: 20px;
-  width: 60%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -54,6 +89,7 @@
 }
 
 .cmtMail{
+  width: 250px;
   padding: 0 20px;
   height: 30px;
   font-size: 16px;
@@ -64,13 +100,24 @@
   background-color: rgba(0, 0, 0, 0.448);
 }
 
+.cmtSection h2 {
+  margin-bottom: 10px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .cmtFoot{
+  width: 250px;
   padding: 0 20px;
   font-size: 16px;
   resize: none;
   outline: none;
   border: none;
-  height: 50px;
+  height: 80px;
   background-color: rgba(0, 0, 0, 0.448);
 }
 
@@ -80,17 +127,67 @@
   text-align: center;
 }
 
-/*Responsivité*/
+.btnCmtFoot:hover {
+  background-color: #ffd700;
+}
+
+/* Liste de raccourcis */
+.shortcuts {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.shortcuts ul {
+  list-style: none;
+}
+
+.shortcuts ul li {
+  display: inline;
+  margin-right: 15px;
+}
+
+.shortcuts ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.shortcuts ul li a:hover {
+  color: #fdb024;
+}
+
+/* Section Copyright */
+.copyright {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.copyright p {
+  font-size: 14px;
+}
+
 /* Styles pour les écrans de moins de 768px */
+/* Responsivité */
 @media (max-width: 767px) {
-  .foot {
+  .foot-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .foot1, .foot2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cmtMail, .cmtFoot {
     width: 100%;
   }
 
-  .foot-container {
+  .btnCmtFoot {
     width: 100%;
-    display: flex; /* Utilisation de flex pour centrer */
-    align-items: center;
-    justify-content: center;
+  }
+
+  .shortcuts ul li {
+    display: block;
+    margin-bottom: 5px;
   }
 }
