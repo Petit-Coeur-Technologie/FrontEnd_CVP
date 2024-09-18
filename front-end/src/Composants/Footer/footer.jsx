@@ -21,8 +21,6 @@ const Footer = () => {
             <textarea name="" id="" className='cmtFoot' placeholder='Commentaire...' required></textarea>
             <button type="submit" className='btnCmtFoot'>Envoyer</button>
           </section>
-
-
         </div>
       </div>
     </div>

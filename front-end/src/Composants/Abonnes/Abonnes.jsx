@@ -40,7 +40,7 @@ const Abonnes = () => {
   
     const fetchAbonnes = async () => {
       try {
-        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${userId}/client`, {
+        const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/client`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -53,7 +53,7 @@ const Abonnes = () => {
         }
   
         const data = await response.json();
-        console.log('Données reçues:', data); // Vérifie la structure des données
+        console.log('Données reçues dans Abonnés  :', data); // Vérifie la structure des données
         setAbonnes(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des abonnés:', error.message);
@@ -93,9 +93,9 @@ const Abonnes = () => {
       abonnes.forEach((abonne) => {
         const quartierId = abonne.utilisateur.quartier_id;
         const quartier = clientQuartiers.find(q => q.id === quartierId);
-        if (quartier) {
-          console.log(`L'abonné ${abonne.utilisateur.nom_prenom} est dans le quartier : ${quartier.quartier}`);
-        }
+        // if (quartier) {
+        //   console.log(`L'abonné ${abonne.utilisateur.nom_prenom} est dans le quartier : ${quartier.quartier}`);
+        // }
       });
     }
   }, [abonnes, clientQuartiers]);
@@ -116,6 +116,10 @@ const Abonnes = () => {
       return nomPrenom.includes(searchTermLower) || tel.includes(searchTermLower);
     });
   }, [abonnes, searchTerm]);
+  useEffect(()=>{
+    console.log("Valeurs tocké dans abonnés : "+abonnes);
+    console.log("Valeurs tocké dans filteredAbonnes : "+filteredAbonnes);
+  },[])
 
   const URL_COPIE_PIECE = "https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/copie_pi/";
 
@@ -184,7 +188,7 @@ const Abonnes = () => {
           <input
             type="text"
             placeholder='Rechercher ...'
-            className='txtRechercher inputAbonnes'
+            className='txtRechercherAbonne'
             value={searchTerm} // Corrigé : Liaison avec l'état "searchTerm"
             onChange={handleSearchChange} // Appelle la fonction de recherche lorsqu'on tape dans l'input
           />

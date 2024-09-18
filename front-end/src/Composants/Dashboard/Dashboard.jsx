@@ -56,16 +56,20 @@ export default function Dashboard() {
 
     const userIdFromCookie = getCookie('userId');
     const tokenFromCookie = getCookie('authToken');
+    const roleFromCookie = getCookie('role');
 
-    if (userIdFromCookie) setUserId(userIdFromCookie);
+    if (userIdFromCookie){
+      setUserId(userIdFromCookie);
+    } 
     if (tokenFromCookie) setAccessToken(tokenFromCookie);
+    if (roleFromCookie) setUserRole(roleFromCookie);
   }, []);
 
   // Log des données d'utilisateur pour vérification
-  useEffect(() => {
-    console.log("L'id de l'utilisateur récupéré dans Dashboard : " + userId);
-    console.log("Le token de l'utilisateur récupéré dans Dashboard : " + accessToken);
-  }, [userId, accessToken]);
+  // useEffect(() => {
+  //   console.log("L'id de l'utilisateur récupéré dans Dashboard : " + userId);
+  //   console.log("Le token de l'utilisateur récupéré dans Dashboard : " + accessToken);
+  // }, [userId, accessToken]);
 
   // Appel API pour récupérer les abonnés et rôle de l'utilisateur
   useEffect(() => {
@@ -73,7 +77,8 @@ export default function Dashboard() {
 
     const fetchAbonnes = async () => {
       try {
-        const response = await fetch(`https://ville-propre.onrender.com/abonnement/${userId}/client`, {
+        // console.log(` c'est le lien : https://ville-propre.onrender.com/abonnements/${userId}/client`);
+        const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/client`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -86,8 +91,8 @@ export default function Dashboard() {
         }
 
         const data = await response.json();
-        console.log('Données reçues:', data); // Vérifie la structure des données
-        setUserRole(data.utilisateur.role);
+        console.log('Données reçues dans dashboard :', data); // Vérifie la structure des données
+        setUserRole(data.utilisateur.role); 
       } catch (error) {
         console.error('Erreur lors de la récupération des abonnés:', error.message);
       }
@@ -103,7 +108,7 @@ export default function Dashboard() {
       // Retirer l'élément 'Abonnés' et ajouter 'Mon Abonnement'
       return [
         { name: 'Home', path: 'home', icon: 'bxs-home' },
-        { name: 'Mon Abonnement', path: 'mon-abonnement', icon: 'bx-list-ul' },
+        { name: 'Mon Abonnement', path: 'monabonnement', icon: 'bx-list-ul' },
         { name: 'Calendrier', path: 'calendrier', icon: 'bxs-calendar' },
         { name: 'Messagerie', path: 'messagerie', icon: 'bxs-message-rounded-detail' }
       ];
@@ -113,9 +118,13 @@ export default function Dashboard() {
     }
   };
 
+  // useEffect(()=>{
+  //   console.log("valeur Stocké dans userRole "+userRole);
+  // })
+
   return (
     <div className='conteneur'>
-      <div className='BarLaterale'>
+      <div className='BarLateraleDashboard'>
         <div className='divApp'>
           <div className='LogoDiv'>
             <img src="src/Fichiers/logo.png" alt="logo" className='logoApp'/>
@@ -156,8 +165,8 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      <div className='navBar'>
-        <p className='revoir'>{navText}</p>
+      <div className='navBarDashboard'>
+        <p className='revoirDashboard'>{navText}</p>
         <div className='divNotification'>
           <li onClick={() => handleProfileClick('Notifications')}>
             <Link to="notifications">
@@ -202,7 +211,7 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      <div className='content'>
+      <div className='contentFilsDashboard'>
         <Outlet />
       </div>
     </div>

@@ -1,4 +1,5 @@
 
+
 .conteneur {
   /* Conteneur principl pour la barre latérale et le navBar */
   display: flex;
@@ -10,7 +11,7 @@
   position: fixed;
 }
 
-.BarLaterale {
+.BarLateraleDashboard {
   /* Style de la barre latérale */
   background-color: var(--blanc);
   height: 100%;
@@ -106,9 +107,9 @@ padding-right: 76px;
   padding: 15px 0 15px 10px;
 }
 
-.active {
+.menuBarLaterale1 .active, .menuBarLaterale2 .active {
   /* Style des éléments actifs */
-  /*background-color: var(--gris) !important;*/
+  background-color: var(--gris) !important;
   color: var(--vert);
   position: relative;
 }
@@ -129,7 +130,7 @@ padding-right: 76px;
   color: var(--rouge) !important;
 }
 
-.navBar {
+.navBarDashboard {
   /* Style pour la barre de navigation */
   background-color: var(--blanc);
   box-shadow: 0px 0px 3px var(--blanc);
@@ -309,7 +310,7 @@ padding: 0;
 }
 
 
-.content {
+.contentFilsDashboard {
   /* Styliser le conteneur des fichiers filles */
   position: absolute;
   width: calc(100% - 130px);
@@ -320,7 +321,7 @@ padding: 0;
   overflow-y: auto;
 }
 
-.revoir{
+.revoirDashboard{
   margin-left: 10px;
 }
 
@@ -348,7 +349,7 @@ padding: 0;
   position: relative;
 }
 
-.txtRechercher {
+.txtRechercherAbonne {
   /* Style pour l'input text */
   width: 100%;
   padding: 10px 15px;
@@ -362,26 +363,26 @@ padding: 0;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.txtRechercher:focus {
-  border-color: var(--bleu);
+.txtRechercherAbonne:focus {
+  border-color: var(--bleu)!important;
   box-shadow: 0 0 10px rgba(14, 80, 160, 0.2);
   outline: none;
 }
 
-.txtRechercher::placeholder {
+.txtRechercherAbonne::placeholder {
   color: var(--grisclair);
   font-style: italic;
 }
 
-.txtRechercher:valid {
+.txtRechercherAbonne:valid {
   border-color: var(--vert);
 }
 
-.txtRechercher:invalid {
+.txtRechercherAbonne:invalid {
   border-color: var(--rouge);
 }
 
-.txtRechercher:hover {
+.txtRechercherAbonne:hover {
   border-color: rgb(169, 168, 168);
   box-shadow: 3px 1px 3px var(--gris);
 }
@@ -454,7 +455,6 @@ padding: 0;
 }
 
 .divBtnDetails{
-  background-color: var(--vert);
   border: none;
   position: absolute;
   bottom: 20px;
@@ -466,7 +466,7 @@ padding: 0;
   cursor: pointer;
 }
 .divBtnDetails:hover{
-  background-color: var(--bleuclair);
+  /* background-color: var(--bleuclair); */
   transition: all .2s ease-in-out;
   transform: scale(1.1);
 }
@@ -501,7 +501,7 @@ padding: 0;
   .BarLaterale .nomApp {
       display: none;
   }
-  .BarLaterale {
+  .BarLateraleDashboard {
       width: 50px !important;
       overflow-x: hidden;
   }
@@ -532,7 +532,7 @@ padding: 0;
   .active i {
       color: var(--vert) !important;
   }
-  .content {
+  .contentFilsDashboard {
       width: calc(100% - 25px) !important;
       left: 35px;
   }

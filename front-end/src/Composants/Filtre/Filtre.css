@@ -1,4 +1,4 @@
-/* Conteneur principal du filtre */
+/* Conteneur de la barre de recherche et de filtrage */
 .filter-container {
   margin-top: 10px;
   display: flex;
@@ -107,9 +107,11 @@
   box-shadow: 0 2px 10px #00000046;
 }
 
-/* Menu déroulant (select) */
+/* Style des sélecteurs */
 .select-filtre {
   padding: 10px;
+  border: 1px solid #ccc; /* Bordure légère */
+  border-radius: 4px;
   font-size: 16px;
   border: 1px solid #ddd; /* Bordure légère */
   border-radius: 4px; /* Coins arrondis pour le menu */
