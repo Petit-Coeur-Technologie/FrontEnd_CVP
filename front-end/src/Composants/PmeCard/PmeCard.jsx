@@ -33,7 +33,7 @@ function PmeCard({ pme }) {
                     {renderStars(pme.rating)}
                 </div>
                 <div className="card-button">
-                    <Link to={`/pmes/${pme.id}`}>
+                    <Link to={`/${pme.id}`}>
                         <button type="button">Détails</button>
                     </Link>
                 </div>
