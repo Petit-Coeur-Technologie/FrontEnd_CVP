@@ -10,6 +10,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   const [tarif, setTarif] = useState("");
   const [note, setNote] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [isFocused, setIsFocused]=useState(false);
 
   useEffect(() => {
     filterResults();
@@ -57,6 +58,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   return (
     <div className="filter-container">
       <div className="searchFilter">
+        <div className={`BtnSearch ${isFocused?'focused' : ''}`} >
         <i class='bx bx-search-alt' ></i>
         <input
           type="text"
@@ -64,7 +66,10 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
           className="input-recherche"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          onFocus={()=>setIsFocused(true)}
+          onBlur={()=>setIsFocused(false)}
         />
+        </div>
         <button className="filter-btn" onClick={() => setShowPopup(!showPopup)}>
           <FontAwesomeIcon icon={faFilter} /> {/* Icône de filtre */}
           Filtrer
@@ -96,7 +101,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
               <option value="4">4 étoiles et plus</option>
               <option value="5">5 étoiles</option>
             </select>
-            <button type="button" onClick={() => setShowPopup(false)}>Appliquer et fermer</button>
+            <button className="BtnFermerFiltre" onClick={() => setShowPopup(false)}>Appliquer et fermer</button>
           </div>
         </div>
       )}
