@@ -112,16 +112,20 @@ function Accueil() {
         <h2>Nos services</h2>
         <div className="services-list">
           <div className="service">
-            <h3>Gestion des Déchets Ménagers</h3>
-            <p>Un service de collecte adapté aux besoins des ménages, simple et abordable.</p>
+            <h3>Abonnement</h3>
+            <p>Abonnez-vous facilement à des services adaptés à vos besoins et suivez vos abonnements en toute simplicité.</p>
           </div>
           <div className="service">
-            <h3>Collecte pour PME</h3>
-            <p>Solutions sur mesure pour les petites et moyennes entreprises.</p>
+            <h3>Paiement et suivi automatisé</h3>
+            <p>Bénéficiez d'une gestion et d'un suivi instantané des paiements en toute sécurité.</p>
+          </div>
+          <div className="service">
+            <h3>Gestion des déchets ménagers</h3>
+            <p>Optimisez la gestion des collectes en suivant les passages réguliers et assurez une collecte efficace. </p>
           </div>
           <div className="service">
             <h3>Recyclage et Réutilisation</h3>
-            <p>Promouvoir des pratiques de recyclage responsables pour un avenir durable.</p>
+            <p>Informez-vous sur les bonnes pratiques de recyclage pour un avenir durable et contribuez à un environnement plus propre.</p>
           </div>
         </div>
       </section>
