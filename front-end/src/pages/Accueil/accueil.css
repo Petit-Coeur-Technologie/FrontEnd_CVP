@@ -167,7 +167,7 @@
   }
 }
 
-@media(max-width:550px){
+@media(max-width:600px){
   .services-list {
     display: grid;
     grid-template-columns: repeat(1, 1fr); /* Deux cartes par ligne */
