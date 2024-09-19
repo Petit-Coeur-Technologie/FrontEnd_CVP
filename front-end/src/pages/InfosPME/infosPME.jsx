@@ -13,7 +13,7 @@ function InfosPme() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        fetch(`https://ville-propre.onrender.com/pmes/${id}`)
+        fetch(`https://ville-propre.onrender.com/pme/${id}`)
             .then((response) => response.json())
             .then((data) => {
                 setPme(data);

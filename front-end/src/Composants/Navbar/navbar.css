@@ -27,6 +27,8 @@
 #logo{
     width: 30px;
     height: auto;
+    border: 0px solid white ;
+    border-radius: 360px;
 }
 
 
@@ -48,4 +50,9 @@
     list-style: none;
     display: flex;
     gap: 1rem;
+}
+@media (max-width:450px){
+    .nav-content{
+    font-size: 10px;
+}
 }
