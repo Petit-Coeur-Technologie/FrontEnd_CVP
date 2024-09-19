@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './accueil.css';
 import PmeCard from '../../Composants/PmeCard/PmeCard';
 import Filtre from '../../Composants/Filtre/Filtre';
+import abonnement from '/src/assets/abonnement.png'
+import gestion from '/src/assets/gestion.png'
+import payement from '/src/assets/payement.png'
+import sensibilisation from '/src/assets/sensibilisation.png'
+
 
 function Accueil() {
   const [pmes, setPmes] = useState([]);
@@ -59,7 +64,7 @@ function Accueil() {
         <h1>Bienvenue sur Ville Propre</h1>
         <p>
           Nous sommes fiers de connecter les entreprises de gestion des déchets avec les ménages
-            pour rendre notre ville plus propre et plus écologique.
+          pour rendre notre ville plus propre et plus écologique.
         </p>
       </section>
 
@@ -112,24 +117,32 @@ function Accueil() {
         <h2>Nos services</h2>
         <div className="services-list">
           <div className="service">
-            <img src="" alt="" />
-            <h3>Abonnement</h3>
-            <p>Abonnez-vous facilement à des services adaptés à vos besoins et suivez vos abonnements en toute simplicité.</p>
+            <img src={abonnement} alt="" />
+            <div className='details'>
+              <h3>Abonnement</h3>
+              <p>Abonnez-vous facilement à des services adaptés à vos besoins et suivez vos abonnements en toute simplicité.</p>
+            </div>
           </div>
           <div className="service">
-          <img src="" alt="" />
-            <h3>Paiement et suivi automatisé</h3>
-            <p>Bénéficiez d'une gestion et d'un suivi instantané des paiements en toute sécurité.</p>
+            <img src={payement} alt="" />
+            <div className='details'>
+              <h3>Paiement et suivi automatisé</h3>
+              <p>Bénéficiez d'une gestion et d'un suivi instantané des paiements en toute sécurité.</p>
+            </div>
           </div>
           <div className="service">
-          <img src="" alt="" />
-            <h3>Gestion des déchets ménagers</h3>
-            <p>Optimisez la gestion des collectes en suivant les passages réguliers et assurez une collecte efficace. </p>
+            <img src={gestion} alt="" />
+            <div className='details'>
+              <h3>Gestion des déchets ménagers</h3>
+              <p>Optimisez la gestion des collectes en suivant les passages réguliers et assurez une collecte efficace. </p>
+            </div>
           </div>
           <div className="service">
-          <img src="" alt="" />
-            <h3>Recyclage et Réutilisation</h3>
-            <p>Informez-vous sur les bonnes pratiques de recyclage pour un avenir durable et contribuez à un environnement plus propre.</p>
+            <img src={sensibilisation} alt="" />
+            <div className='details'>
+              <h3>Recyclage et Réutilisation</h3>
+              <p>Informez-vous sur les bonnes pratiques de recyclage pour un avenir durable et contribuez à un environnement plus propre.</p>
+            </div>
           </div>
         </div>
       </section>
