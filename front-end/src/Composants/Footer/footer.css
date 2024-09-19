@@ -5,7 +5,6 @@
 }
 
 .foot {
-  padding: 10px 20px;
   height: auto;
   background-color: #00804b;
   width: 100%;
@@ -19,45 +18,47 @@
   padding: 0%;
   width: 100%;
   display: flex; /* Utiliser flex pour centrer */
+  flex-direction: column;
   align-items: center; /* Centre verticalement */
 }
 
 /* Section Contacts */
 .foot1 {
-  width: 45%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.ctcSection{
+  width: 30%;
 }
 
 .ctcSection h2 {
   margin-bottom: 20px;
 }
 
-.ctcSection p, .mailien {
+.ctcSection p {
   font-size: 16px;
   margin-bottom: 8px;
 }
-
 
 .mailien {
   text-decoration: none;
   text-align: center;
   color: white;
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .mailien:hover {
   color: #fdb024;
 }
 
-
-.foot2{
-  width: auto;
-  padding: 20px;
-}
-
-
 .socialSection {
-  background-color: rgba(0, 0, 0, 0.4); /* Couleur noire transparente */
-  padding: 20px;
-  border-radius: 10px;
+  width: 30%;
 }
 
 .socialSection h2 {
@@ -70,7 +71,7 @@
 }
 
 .socialIcon {
-  color: #FDB024; /* Jaune */
+  color: #fdb024; /* Jaune */
   text-decoration: none;
 }
 
@@ -78,18 +79,19 @@
   color: white;
 }
 
-.cmtSection{
-  right: 20%;
-  padding: 20px;
-  width: 90%;
+.iconeFoot{
+  font-size: 50px;
+}
+
+.cmtSection {
+  width: 30%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: rgba(0, 0, 0, 0.448);
 }
 
-.cmtMail{
-  width: 250px;
+.cmtMail {
+  width: 90%;
   padding: 0 20px;
   height: 30px;
   font-size: 16px;
@@ -100,28 +102,19 @@
   background-color: rgba(0, 0, 0, 0.448);
 }
 
-.cmtSection h2 {
-  margin-bottom: 10px;
-}
-
-.comment-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.cmtFoot{
-  width: 250px;
+.cmtFoot {
+  width: 90%;
   padding: 0 20px;
   font-size: 16px;
   resize: none;
   outline: none;
   border: none;
   height: 80px;
+  color: white;
   background-color: rgba(0, 0, 0, 0.448);
 }
 
-.btnCmtFoot{
+.btnCmtFoot {
   width: 100px;
   padding: 5px;
   text-align: center;
@@ -132,36 +125,44 @@
 }
 
 /* Liste de raccourcis */
-.shortcuts {
-  margin-top: 20px;
-  text-align: center;
+.foot2 {
+  width: 100%;
+  height: auto;
+  padding: 10px 20px;
+  background-color: #4fb97f;
 }
 
-.shortcuts ul {
+.ulLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
   list-style: none;
 }
 
-.shortcuts ul li {
+.liLinks {
   display: inline;
-  margin-right: 15px;
 }
 
-.shortcuts ul li a {
+.listeLinks {
   text-decoration: none;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
-.shortcuts ul li a:hover {
-  color: #fdb024;
+.listeLinks:hover {
+  color: #00804b;
 }
 
 /* Section Copyright */
-.copyright {
-  margin-top: 10px;
+.foot3 {
+  width: 100%;
+  height: auto;
+  padding:20px;
   text-align: center;
 }
 
-.copyright p {
+.copyright {
   font-size: 14px;
 }
 
@@ -173,12 +174,14 @@
     align-items: center;
   }
 
-  .foot1, .foot2 {
+  .foot1,
+  .foot2 {
     width: 100%;
     text-align: center;
   }
 
-  .cmtMail, .cmtFoot {
+  .cmtMail,
+  .cmtFoot {
     width: 100%;
   }
 
