@@ -9,6 +9,23 @@
   min-height: 100vh;
 }
 
+/* Section de bienvenue */
+.welcome-section {
+  text-align: center;
+  padding: 50px;
+  background-color: #4fb97f; /* Nuance plus claire du vert */
+  color: #ffffff;
+}
+
+.welcome-section h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.welcome-section p {
+  font-size: 18px;
+}
+
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -47,23 +64,6 @@
   background-color: #fdb024;
 }
 
-/* Section de bienvenue */
-.welcome-section {
-  text-align: center;
-  padding: 50px;
-  background-color: #4fb97f; /* Nuance plus claire du vert */
-  color: #ffffff;
-}
-
-.welcome-section h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.welcome-section p {
-  font-size: 18px;
-}
-
 /* Section À propos de nous */
 .about-section {
   padding: 40px 20px;
@@ -82,7 +82,7 @@
 
 /* Section des services */
 .services-section {
-  padding: 40px 20px;
+  padding: 40px 0;
   background-color: #f2fcf8;
 }
 
@@ -138,17 +138,7 @@
   line-height: 1.4;
 }
 
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-
-  .about-section h2,
-  .services-section h2 {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .home {
     margin-top: 50px;
   }
@@ -170,4 +160,32 @@
   .welcome-section p {
     font-size: 16px;
   }
+
+  .service {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width:600px){
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Deux cartes par ligne */
+    gap: 20px; /* Espacement entre les cartes */
+  }
+
+}
+
+@media(min-width:1300px){
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Deux cartes par ligne */
+    gap: 20px; /* Espacement entre les cartes */
+  }
+
+  .service {
+    display: flex;
+    flex-direction: column;
+  }
+
 }

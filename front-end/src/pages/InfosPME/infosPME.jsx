@@ -116,7 +116,7 @@ function InfosPme() {
         <div className="infosPME">
             <div className="infosPME_header">
                 <img
-                    src={`https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/logo_pme/${pme.logo_pme}`}
+                    src={`https://ville-propre.onrender.com/static/Uploads/logo_pme/${pme.logo_pme}`}
                     alt={pme.nom_pme}
                     className="pme-logo"
                 />
@@ -148,6 +148,11 @@ function InfosPme() {
                     }}
                 />
             )}
+
+            <div className="infosPME_comments">
+                
+
+            </div>
         </div>
     );
 }

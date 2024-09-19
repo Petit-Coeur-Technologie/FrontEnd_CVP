@@ -8,7 +8,7 @@
     transition: box-shadow 0.3s, transform 0.3s;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Assure que le footer reste en bas */
+    justify-content: space-evenly; /* Assure que le footer reste en bas */
   }
   
   .pme-card:hover {
@@ -36,13 +36,14 @@
   }
   
   .card-description {
+    width: 100%;
     font-size: 1em;
     color: #555;
     line-height: 1.6;
     overflow: hidden; /* Cache le texte débordant */
     text-overflow: ellipsis; /* Affiche les points de suspension pour le texte débordant */
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limite le texte à deux lignes */
+    -webkit-line-clamp: 3; /* Limite le texte à deux lignes */
     -webkit-box-orient: vertical;
     margin-bottom: 10px; /* Espacement avant le footer */
   }
