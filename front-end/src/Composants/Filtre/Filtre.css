@@ -1,4 +1,6 @@
+/* Conteneur de la barre de recherche et de filtrage */
 .filter-container {
+<<<<<<< HEAD
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -24,4 +26,149 @@
     overflow: auto;
     
     }
+=======
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  gap: 15px; /* Espacement entre les éléments du filtre */
+  width: 100%;
+}
+
+.searchFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espacement entre les éléments du filtre */
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Champ de recherche */
+
+.BtnSearch {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #ddd; /* Bordure légère */
+  border-radius: 40px; /* Coins arrondis pour le champ */
+  outline: none; /* Supprime le contour par défaut */
+  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
+  background-color: #f2fcf8;
+  height: auto;
+}
+
+.BtnSearch.focused {
+  border-color: #4fb97f; /* Bordure bleue au focus */
+  box-shadow: 0 0 5px #4fb97f; /* Ombre légère au focus */
+  outline: none;
+}
+
+.bx-search-alt{
+  font-size: 20px;
+  color:#fdb024;
+}
+
+.input-recherche {
+  width: 90%;
+  margin-left: 10px;
+  font-size: 16px;
+  color: black;
+  border: none;
+  border-radius: 0 40px 40px 0;
+  outline: none; /* Supprime le contour par défaut */
+  background-color: #f2fcf8;
+  height: 40px;
+}
+
+
+.filter-btn:focus,
+.select-filtre:focus {
+  border-color: #4fb97f; /* Bordure bleue au focus */
+  box-shadow: 0 0 5px #4fb97f; /* Ombre légère au focus */
+  outline: none;
+}
+
+.filter-btn {
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd; /* Bordure légère */
+  border-radius: 50px; /* Coins arrondis pour le menu */
+  background-color: #4fb97f; /* Couleur de fond blanche pour le menu */
+  color: white;
+  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
+  height: 40px;
+  outline: none;
+}
+
+.showPopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Couleur semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Toujours au-dessus de l'arrière-plan */
+}
+
+.showPopup {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px #00000046;
+}
+
+/* Style des sélecteurs */
+.select-filtre {
+  padding: 10px;
+  border: 1px solid #ccc; /* Bordure légère */
+  border-radius: 4px;
+  font-size: 16px;
+  border: 1px solid #ddd; /* Bordure légère */
+  border-radius: 4px; /* Coins arrondis pour le menu */
+  background-color: #fff; /* Couleur de fond blanche pour le menu */
+  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
+  height: 40px;
+  outline: none;
+}
+
+.BtnFermerFiltre {
+  background-color: #fdb024;
+  color: #fff;
+}
+
+.BtnSelect {
+  background-color: #4fb97f;
+  border: none;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  color: white;
+}
+
+.clear-btn {
+  background-color: #d10000;
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px 0;
+>>>>>>> e1f62e7b22e096f2566b12cd6f1fb5163e7a6d9a
 }

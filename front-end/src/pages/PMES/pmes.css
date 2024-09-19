@@ -7,6 +7,7 @@
   .pmes {
     padding-top: 70px; /* Compense la hauteur de la navbar */
     min-height: 100vh;
+    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
     }
     
     .cardspmes {
@@ -24,23 +25,13 @@
     margin-top: 20px;
   }
   
-  .pagination button {
-    background-color: #007bff;
+  .Btnpage {
     color: white;
     border: none;
     padding: 10px 15px;
-    margin: 0 5px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-  }
-  
-  .pagination button:hover {
-    background-color: #0056b3;
-  }
-  
-  .pagination button.active {
-    background-color: #0056b3;
   }
   

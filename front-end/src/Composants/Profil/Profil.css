@@ -1,235 +1,105 @@
-:root {
-  --primary-color: #4a90e2;
-  --secondary-color: #f5f5f5;
-  --text-color: #333;
-  --background-light: #fff;
-  --background-dark: #2c2c2c;
-  --border-radius: 10px;
-}
 
-.profilContainer {
-  width: 100%;
-  max-width: 1100px;
-  background-color: var(--background-light);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: background-color 0.3s ease-in-out;
-}
-
-
-.dark, .dark .profileDetails p {
-  background-color: #333;
-  color: white;
-}
-
-.divgestionProfil{
-  width: 100%;
-  text-align: center;
-}
-.divgestionProfil h4 {
-  margin: 10px; 
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
-  text-transform: capitalize; 
-  font-family: 'Arial', sans-serif;
-}
-
-.profilContainerChildMere{
-  width: 100%;
-  display: flex;
-  align-items: center!important;
-  justify-content: center!important;
-}
-
-.profilContainerChild {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-  
-  .imageProfil {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%; /* Pour s'assurer que l'image est ronde */
-    object-fit: contain; /* Assure que toute l'image est visible dans la div */
-    background-color: #f0f0f0; /* Optionnel: ajoute un fond pour mieux visualiser */
-  }
-
-.imageUpload .btnChangerdProfil {
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-  padding: 8px 16px;
-  border-radius: var(--border-radius)!important;
-  cursor: pointer;
-  background-color: transparent;
-  transition: all 0.3s ease-in-out;
-}
-
-.imageUpload .btnChangerdProfil:hover {
-  background-color: var(--primary-color);
-  color: var(--background-light);
-}
-
-.themeToggle, .notificationsToggle, .downloadProfile {
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.btnthemeToggle, .btnnotificationsToggle , .btndownloadProfile {
-  padding: 10px 20px;
-  border: none;
-  border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  color: var(--background-light);
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.btnthemeToggle:hover, .btnnotificationsToggle:hover, .btndownloadProfile:hover {
-  background-color: #256cbd;
-}
-
-.avatarGallery {
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.avatarGallery h5 {
-  margin-bottom: 10px;
-  color: var(--text-color);
-}
-
-.avatarOptions img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: 5px;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
-}
-
-.avatarOptions img:hover {
-  transform: scale(1.1);
-  border: 2px solid var(--primary-color);
-}
-
-.selectedAvatar {
-  border: 2px solid var(--primary-color);
-}
-
-.profileDetails {
-  width: 100%;
-  margin-top: 20px;
-  text-align: center;
-}
-
-.profileDetailsP {
-  margin: 5px 0;
-  color: var(--text-color);
-}
-
-.inputprofileDetails, .taprofileDetails {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0;
-  border: 1px solid var(--secondary-color);
-  border-radius: var(--border-radius);
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-}
-
-.btnprofileDetails {
-  margin-top: 10px;
-  padding: 10px;
-  /* width: 100%; */
-  border: none;
-  border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  color: var(--background-light);
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.btnprofileDetails :hover {
-  background-color: #256cbd;
-}
-
-.popup2 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup2 {
+.chargementProfil, .erreurModification{
   position: relative;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
+  margin-top: 50px;
+}
+.erreurModification{
+  left: 400px;
+}
+
+
+/* Style global pour le conteneur des détails du profil */
+.profileDetails {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
 }
 
-.popup2 p {
+/* Style pour l'image de profil */
+.imageProfilContainer {
+  text-align: center;
   margin-bottom: 20px;
 }
 
-.popup2 button {
-  margin-right: 10px;
-  padding: 10px 15px;
-  background-color: #007BFF;
-  color: white;
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+/* Style pour les paragraphes de détails du profil */
+.profileDetailsP {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+/* Style pour les champs de formulaire en mode édition */
+.profilEdit {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.profilTextarea {
+  resize: vertical;
+}
+
+/* Style pour les boutons */
+button {
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.popup2 .btnAnnuler {
-  background-color: #DC3545;
+/* Style pour le bouton de sauvegarde */
+.btnSave {
+  background-color: #28a745;
+  color: white;
 }
 
-.popup2 button:hover {
-  opacity: 0.8;
+.btnSave:hover {
+  background-color: #218838;
 }
 
+/* Style pour le bouton d'annulation */
+.btnCancel {
+  background-color: #dc3545;
+  color: white;
+}
 
-.popup-content2 {
-  background-color: var(--background-light);
-  padding: 20px;
-  border-radius: var(--border-radius);
+.btnCancel:hover {
+  background-color: #c82333;
+}
+
+/* Style pour le bouton de modification */
+.btnEdit {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnEdit:hover {
+  background-color: #0056b3;
+}
+
+/* Style pour le message de chargement */
+.chargementProfil {
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  color: #666;
 }
 
-.btnpopup-content2 {
-  margin: 10px;
-  padding: 8px 16px;
-  border: none;
-  border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  color: var(--background-light);
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.btnpopup-content2:hover {
-  background-color: darken(var(--primary-color), 10%);
-}

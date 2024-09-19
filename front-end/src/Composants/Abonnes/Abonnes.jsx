@@ -1,96 +1,184 @@
-import React, { useState } from 'react'; // Importe React et le hook useState
-// Importe une image de profil par défaut
-import profilImg from '../../assets/moi.png'
+import React, { useState, useEffect, useMemo, useCallback, Suspense, lazy } from 'react';
+import profilImg from '../../assets/moi.png'; // Importe une image de profil par défaut
 
-// Déclare le composant principal "Abonnes"
 const Abonnes = () => {
-  // Déclaration des états
-  const [tousDonnees, settousDonnees] = useState(''); // État pour gérer le texte de recherche
-  const [popupVisible, setPopupVisible] = useState(false); // État pour contrôler la visibilité du popup de détails
-  const [selectedAbonne, setSelectedAbonne] = useState(null); // État pour stocker l'abonné sélectionné
-  const [showCommentsPopup, setShowCommentsPopup] = useState(false); // État pour afficher le popup des commentaires
-  const [showAddCommentPopup, setShowAddCommentPopup] = useState(false); // État pour afficher le popup pour ajouter un commentaire
-  const [commentaires, setCommentaires] = useState({}); // État pour stocker les commentaires par abonné
-  const [newComment, setNewComment] = useState(''); // État pour gérer le texte du nouveau commentaire
+  const [abonnes, setAbonnes] = useState([]);
+  const [clientQuartiers, setClientQuartiers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [selectedAbonne, setSelectedAbonne] = useState(null);
+  const [showCommentsPopup, setShowCommentsPopup] = useState(false);
+  const [showAddCommentPopup, setShowAddCommentPopup] = useState(false);
+  const [commentaires, setCommentaires] = useState({});
+  const [newComment, setNewComment] = useState('');
+  const [userId, setUserId] = useState(null);
+  const [accessToken, setAccessToken] = useState('');
 
-  // Données statiques des abonnés (à remplacer par des données dynamiques si nécessaire)
-  const abonnes = [
-    // Liste d'objets représentant les abonnés avec leurs informations
-      { Nom_complet: 'Alpha Sény Camara', Tel: '611 58 07 55', addresse: 'Enta fassa', Type: 'Ménage', profil: profilImg, Genre: 'Homme', Email: 'alphaseny.camara.224@gmail.com' },
-      { Nom_complet: 'Fatoumata Kourouma', Tel: '666 87 11 40', addresse: 'Matoto', Type: 'Ménage', profil: profilImg, Genre: 'Femme', Email: 'fatoumata12@gmail.com' },
-      { Nom_complet: 'Alya Yattara', Tel: '655 78 56 19', addresse: 'Matam', Type: 'Entreprise', profil: profilImg, Genre: 'Homme', Email: 'alya.655@gmail.com' },
-      { Nom_complet: 'Mamoudou komara', Tel: '611 67 87 34', addresse: 'Madina', Type: 'Ménage', profil: profilImg, Genre: 'Homme' },
-      { Nom_complet: 'Fodé bamba', Tel: '624 56 11 91', addresse: 'Lambangni', Type: 'Ménage', profil: profilImg, Genre: 'Homme', Email: 'fode.bamba624@gmail.com' },
-      { Nom_complet: 'Boutouraby cissé', Tel: '622 87 34 11', addresse: 'Enta fassa', Type: 'Entreprise', profil: profilImg },
-      { Nom_complet: 'Alimatou Bah', Tel: '666 45 33 18', addresse: 'Dubréka', Type: 'Ménage', profil: profilImg },
-      { Nom_complet: 'Kadiatou camara', Tel: '610 99 10 31', addresse: 'Dixinn', Type: 'Entreprise', profil: profilImg, Genre: 'Femme', Email: 'kadiatou.cra.610@gmail.com' },
-      { Nom_complet: 'Idrissa camara', Tel: '610 98 66 12', addresse: 'Dubréka', Type: 'Entreprise', profil: profilImg },
-      { Nom_complet: 'Anette kader ermer', Tel: '664 75 93 61', addresse: 'Kipé', Type: 'Ménage', profil: profilImg, Genre: 'Femme' },
-      { Nom_complet: 'Thierno souleymane diallo', Tel: '610 83 53 36', addresse: 'Cosa', Type: 'Ménage', profil: profilImg, Genre: 'Homme', Email: 'baillo30387@gmail.com' },
-      { Nom_complet: 'Fatoumata binta diallo', Tel: '611 76 34 00', addresse: 'Ratoma', Type: 'Ménage', profil: profilImg, Genre: 'Femme', Email: 'fatoumatabinta611@gmail.com' }
-    ];
+  // Obtention des cookies
+  useEffect(() => {
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+      const userIdFromCookie = getCookie('userId');
+      const tokenFromCookie = getCookie('authToken');
+  
+      if (userIdFromCookie) setUserId(userIdFromCookie);
+      if (tokenFromCookie) setAccessToken(tokenFromCookie);
+    })
 
-  // Filtrer les abonnés en fonction du texte de recherche
-  const filteredAbonnes = abonnes.filter((abonne) =>
-    abonne.Nom_complet.toLowerCase().includes(tousDonnees.toLowerCase()) ||
-    abonne.Tel.toLowerCase().includes(tousDonnees.toLowerCase())
-  );
+  useEffect(()=>{
+    console.log("L'id de l'utilisateur recupérer dans abonnés : "+userId);
+    console.log("Le token de l'utilisateur recupérer dans abonnés : "+accessToken);
+  })
+  
 
-  // Gérer les changements dans le champ de recherche
-  const handleSearchChange = (event) => {
-    settousDonnees(event.target.value); // Met à jour l'état du texte de recherche
-  };
+  // Récupération des abonnés
+  useEffect(() => {
+    if (!userId || !accessToken) return;
+  
+    const fetchAbonnes = async () => {
+      try {
+        const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/client`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        console.log('Données reçues dans Abonnés  :', data); // Vérifie la structure des données
+        setAbonnes(data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des abonnés:', error.message);
+      }
+    };
+  
+    fetchAbonnes();
+  }, [userId, accessToken]);
+  
+  
+  
+  // Récupération des quartiers
+  useEffect(() => {
+    if (!userId) return;
 
-  // Afficher le popup avec les détails de l'abonné sélectionné
-  const handleDetailler = (index) => {
-    setSelectedAbonne(abonnes[index]); // Sélectionne l'abonné à afficher
-    setPopupVisible(true); // Affiche le popup de détails
-    setShowCommentsPopup(false); // Masque les autres popups
-    setShowAddCommentPopup(false); 
-  };
+    const fetchQuartiers = async () => {
+      try {
+        const response = await fetch(`https://ville-propre.onrender.com/quartiers`);
+        if (!response.ok) {
+          throw new Error(`Erreur réseau lors de la récupération des quartiers. Code: ${response.status}`);
+        }
+        const quartiers = await response.json();
+        setClientQuartiers(quartiers);
+        console.log('Récupération des quartiers réussie...');
+        console.log(quartiers);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des quartiers:', error.message);
+      }
+    };
+    fetchQuartiers();
+  }, [userId]);
 
-  // Fermer tous les popups
-  const closeAllPopups = () => {
-    setPopupVisible(false); // Masque le popup de détails
-    setSelectedAbonne(null); // Réinitialise l'abonné sélectionné
-  };
 
-  // Fermer le popup pour ajouter un commentaire
-  const fermerPopupCommentaire = () => {
-    setShowAddCommentPopup(false); 
-  };
-
-  // Fermer le popup des commentaires
-  const fermerPopupVoirCommentaire = () => {
-    setShowCommentsPopup(false); 
-  };
-
-  // Ouvrir le popup des commentaires
-  const handleShowComments = () => {
-    setShowCommentsPopup(true);
-  };
-
-  // Ouvrir le popup pour ajouter un commentaire
-  const handleAddComment = () => {
-    setShowAddCommentPopup(true);
-  };
-
-  // Gérer les changements dans le champ de texte pour un nouveau commentaire
-  const handleNewCommentChange = (event) => {
-    setNewComment(event.target.value); // Met à jour l'état du nouveau commentaire
-  };
-
-  // Ajouter un commentaire pour l'abonné sélectionné
-  const handleAddCommentSubmit = () => {
-    if (selectedAbonne) {
-      const abonneEmail = selectedAbonne.Email; // Récupère l'email de l'abonné pour identifier les commentaires
-      setCommentaires(prevCommentaires => ({
-        ...prevCommentaires, // Conserve les anciens commentaires
-        [abonneEmail]: [...(prevCommentaires[abonneEmail] || []), newComment] // Ajoute le nouveau commentaire
-      }));
-      setNewComment(''); // Réinitialise le champ de texte du commentaire
+  // Comparer les quartiers des abonnés avec les quartiers récupérés
+  useEffect(() => {
+    if (abonnes.length > 0 && clientQuartiers.length > 0) {
+      abonnes.forEach((abonne) => {
+        const quartierId = abonne.utilisateur.quartier_id;
+        const quartier = clientQuartiers.find(q => q.id === quartierId);
+        // if (quartier) {
+        //   console.log(`L'abonné ${abonne.utilisateur.nom_prenom} est dans le quartier : ${quartier.quartier}`);
+        // }
+      });
     }
-  };
+  }, [abonnes, clientQuartiers]);
+
+  // Fonction pour obtenir le nom du quartier à partir de l'ID
+  const getQuartierNameById = useCallback((quartierId) => {
+    const quartier = clientQuartiers.find(q => q.id === quartierId);
+    return quartier ? quartier.quartier : 'Inconnu'; // Retourne 'Inconnu' si le quartier n'est pas trouvé
+  }, [clientQuartiers]);
+
+  // Filtre les abonnés en fonction du terme de recherche
+  const filteredAbonnes = useMemo(() => {
+    return abonnes.filter((abonne) => {
+      const nomPrenom = abonne.utilisateur.nom_prenom.toLowerCase();
+      const tel = abonne.utilisateur.tel.toLowerCase();
+      const searchTermLower = searchTerm.toLowerCase();
+      
+      return nomPrenom.includes(searchTermLower) || tel.includes(searchTermLower);
+    });
+  }, [abonnes, searchTerm]);
+  useEffect(()=>{
+    console.log("Valeurs tocké dans abonnés : "+abonnes);
+    console.log("Valeurs tocké dans filteredAbonnes : "+filteredAbonnes);
+  },[])
+
+  const URL_COPIE_PIECE = "https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/copie_pi/";
+
+  // Gère le changement du terme de recherche
+  const handleSearchChange = useCallback((event) => {
+    setSearchTerm(event.target.value);
+  }, []);
+
+  // Gère la sélection d'un abonné pour afficher les détails
+  const handleDetailler = useCallback((index) => {
+    setSelectedAbonne(abonnes[index]);
+    setPopupVisible(true);
+    setShowCommentsPopup(false);
+    setShowAddCommentPopup(false);
+  }, [abonnes]);
+
+  // Ferme tous les popups
+  const closeAllPopups = useCallback(() => {
+    setPopupVisible(false);
+    setSelectedAbonne(null);
+  }, []);
+
+  // Ferme le popup d'ajout de commentaire
+  const fermerPopupCommentaire = useCallback(() => {
+    setShowAddCommentPopup(false);
+  }, []);
+
+  // Ferme le popup des commentaires
+  const fermerPopupVoirCommentaire = useCallback(() => {
+    setShowCommentsPopup(false);
+  }, []);
+
+  const handleShowComments = useCallback(() => {
+    setShowCommentsPopup(true);
+  }, []);
+
+  const handleAddComment = useCallback(() => {
+    setShowAddCommentPopup(true);
+  }, []);
+
+  const handleNewCommentChange = useCallback((event) => {
+    setNewComment(event.target.value);
+  }, []);
+
+  const handleAddCommentSubmit = useCallback(() => {
+    if (!newComment.trim()) {
+      alert('Le commentaire ne peut pas être vide.');
+      return;
+    }
+    if (selectedAbonne) {
+      const abonneEmail = selectedAbonne.Email;
+      setCommentaires((prevCommentaires) => ({
+        ...prevCommentaires,
+        [abonneEmail]: [...(prevCommentaires[abonneEmail] || []), newComment]
+      }));
+      setNewComment('');
+    }
+  }, [newComment, selectedAbonne]);
+
 
   return (
     <div className={`abonnesConteneur ${popupVisible || showCommentsPopup || showAddCommentPopup ? 'blurBackground' : ''}`}>
@@ -100,8 +188,8 @@ const Abonnes = () => {
           <input
             type="text"
             placeholder='Rechercher ...'
-            className='txtRechercher inputAbonnes'
-            value={tousDonnees} // Lier la valeur de l'input à l'état "tousDonnees"
+            className='txtRechercherAbonne'
+            value={searchTerm} // Corrigé : Liaison avec l'état "searchTerm"
             onChange={handleSearchChange} // Appelle la fonction de recherche lorsqu'on tape dans l'input
           />
         </form>
@@ -109,18 +197,22 @@ const Abonnes = () => {
 
       {/* Liste des abonnés filtrés */}
       <div className='divDonnes'>
-        {filteredAbonnes.map((abonne, index) => (
-          <div className='donnees' key={index}>
-            <div className='divImageProfil'>
-              <img src={abonne.profil} alt="profil" /> {/* Image de profil de l'abonné */}
+        {filteredAbonnes.length > 0 ? (
+          filteredAbonnes.map((abonne, index) => (
+            <div className='donnees' key={index}>
+              <div className='divImageProfil'>
+                <img src={`${URL_COPIE_PIECE}${abonne.utilisateur.copie_pi}`} alt="profil" />
+              </div>
+              <p>{abonne.utilisateur.nom_prenom}</p>
+              <address>{getQuartierNameById(abonne.utilisateur.quartier_id)}</address>
+              <p>{abonne.utilisateur.tel}</p>
+              <p>{abonne.utilisateur.role}</p>
+              <div className='divBtnDetails'><button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button></div>
             </div>
-            <p>{abonne.Nom_complet}</p> {/* Nom de l'abonné */}
-            <address>{abonne.addresse}</address> {/* Adresse */}
-            <p>{abonne.Tel}</p> {/* Numéro de téléphone */}
-            <p>{abonne.Type}</p> {/* Type (Ménage, Entreprise, etc.) */}
-            <button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button> {/* Bouton pour voir les détails */}
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className='abonneNonTrouve'>Aucun utilisateur trouvé</p>
+        )}
       </div>
 
       {/* Popup des détails de l'abonné */}
@@ -130,57 +222,49 @@ const Abonnes = () => {
             <span className='closePopup' onClick={closeAllPopups}>&times;</span> {/* Bouton pour fermer le popup */}
             <div className='voirImages'>
               <div className='detailsImage'>
-                <img src={selectedAbonne.profil} alt="profil" /> {/* Image du profil dans le popup */}
+                <img src={`${URL_COPIE_PIECE}${selectedAbonne.profil}`} alt="profil" />
+                {/* Utilisation d'une image par défaut si aucune image de profil n'est fournie */}
               </div>
             </div>
-            <p><span className='label'>Nom complet:</span> {selectedAbonne.Nom_complet}</p>
-            <p><span className='label'>Adresse:</span> {selectedAbonne.addresse}</p>
-            <p><span className='label'>Téléphone:</span> {selectedAbonne.Tel}</p>
-            <p><span className='label'>Type:</span> {selectedAbonne.Type}</p>
-            <p><span className='label'>Genre:</span> {selectedAbonne.Genre || 'Non spécifié'}</p>
-            <p><span className='label'>Email:</span> {selectedAbonne.Email || 'Non spécifié'}</p>
+            <p><span className='label'>Nom complet:</span> {selectedAbonne.utilisateur.nom_prenom}</p>
+            <p><span className='label'>Adresse:</span> {getQuartierNameById(selectedAbonne.utilisateur.quartier_id)}</p>
+            <p><span className='label'>Téléphone:</span> {selectedAbonne.utilisateur.tel}</p>
+            <p><span className='label'>Type:</span> {selectedAbonne.utilisateur.role}</p>
+            <p><span className='label'>Genre:</span> {selectedAbonne.utilisateur.genre || 'Non spécifié'}</p>
+            <p><span className='label'>Email:</span> {selectedAbonne.utilisateur.email || 'Non spécifié'}</p>
             <div className='divBtnVoirEnvoyer'>
-              <button type="button" className='voirCommentaire' onClick={handleShowComments}>commentaires</button>
+              <button type="button" className='voirCommentaire' onClick={handleShowComments}>Commentaires</button>
               <button type="button" className='envoyeCommentaire' onClick={handleAddComment}>Envoyer un commentaire</button>
             </div>
           </div>
         </div>
-      )}
+)}
 
       {/* Popup pour voir les commentaires */}
       {showCommentsPopup && selectedAbonne && (
         <div className='popup popupCommentaireAbonnee'>
           <div className='popupContent'>
             <span className='closePopup' onClick={fermerPopupVoirCommentaire}>&times;</span>
-            <h4 className='h4commentaire'>Commentaires pour {selectedAbonne.Nom_complet}</h4>
-            <div className='commentsList'>
-              {(commentaires[selectedAbonne.Email] || []).map((comment, index) => (
-                <p key={index}>{comment}</p> // Affiche chaque commentaire
-              ))}
-            </div>
-            <div>
-              <button type="button" className='modifierCommentaire'>Modifier</button>
-              <button type="button" className='supprimerCommentaire'>Supprimer</button>
-            </div>
+            <h4 className='h4commentaire'>Commentaires pour {selectedAbonne.Email}:</h4>
+            {commentaires[selectedAbonne.Email]?.map((comment, index) => (
+              <p key={index} className='commentaire'>{comment}</p>
+            ))}
           </div>
         </div>
       )}
 
       {/* Popup pour ajouter un commentaire */}
       {showAddCommentPopup && selectedAbonne && (
-        <div className='popup popupCommentaireAbonnee'>
+        <div className='popup'>
           <div className='popupContent'>
             <span className='closePopup' onClick={fermerPopupCommentaire}>&times;</span>
-            <h4 className='h4commentaire'>Commentaire pour {selectedAbonne.Nom_complet}</h4>
+            <h4 className='h4commentaire'>Ajouter un commentaire pour {selectedAbonne.Email}:</h4>
             <textarea
-              value={newComment} // Lie la valeur du textarea à l'état "newComment"
-              onChange={handleNewCommentChange} // Met à jour le texte du commentaire lorsqu'il change
+              value={newComment}
+              onChange={handleNewCommentChange}
               placeholder='Écrire un commentaire...'
-              className='textareaEcrireCommentaire'
             />
-              <div>
-                <button type="button" className='btnEnvoyerCommentaire' onClick={handleAddCommentSubmit}>Envoyer</button> {/* Bouton pour soumettre le commentaire */}
-              </div>
+            <button onClick={handleAddCommentSubmit}>Ajouter</button>
           </div>
         </div>
       )}
@@ -188,5 +272,4 @@ const Abonnes = () => {
   );
 };
 
-// Exporte le composant Abonnes
 export default Abonnes;

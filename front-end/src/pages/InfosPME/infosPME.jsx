@@ -13,7 +13,12 @@ function InfosPme() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
+<<<<<<< HEAD
         fetch(`https://ville-propre.onrender.com/pme/${id}`)
+=======
+        // Récupération des détails de la PME
+        fetch(`https://ville-propre.onrender.com/pmes/${id}`)
+>>>>>>> e1f62e7b22e096f2566b12cd6f1fb5163e7a6d9a
             .then((response) => response.json())
             .then((data) => {
                 setPme(data);
@@ -22,11 +27,13 @@ function InfosPme() {
             .catch((error) => {
                 console.error("Error fetching PME details:", error);
             });
-
+    
         // Vérifier l'authentification à l'initialisation
         checkAuth();
+    
     }, [id]);
 
+    
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -82,7 +89,7 @@ function InfosPme() {
             }
     
             const data = await response.json();
-            console.log("Subscription successful:", data);
+            console.log("Souscription a réussi:", data);
             setSouscrit(true);
             toast("Vous vous êtes abonné avec succès!");
         } catch (error) {
@@ -113,7 +120,7 @@ function InfosPme() {
         <div className="infosPME">
             <div className="infosPME_header">
                 <img
-                    src={`https://ville-propre.onrender.com/static/Uploads/logo_pme/${pme.logo_pme}`}
+                    src={`https://github.com/Petit-Coeur-Technologie/con_vi_propre_API/blob/main/static/Uploads/logo_pme/${pme.logo_pme}`}
                     alt={pme.nom_pme}
                     className="pme-logo"
                 />

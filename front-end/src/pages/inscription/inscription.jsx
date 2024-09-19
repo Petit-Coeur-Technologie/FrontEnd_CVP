@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
+import myLogo from '/src/assets/th.jpeg';
+import background from '/src/assets/background.avif';
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
 import ClientForm from "./ClientForm";
@@ -182,22 +184,27 @@ function Inscription() {
 
   return (
     <div className="stack-container">
-      <div className="right-container">
+      <div className="right-container" style={{ backgroundImage: `url(${background})` }}>
         <h2 className="title">Inscription</h2>
-        <img src="src/assets/background.avif" className="logoInscription" alt="background" />
+       { /*<img src={background} className="logoInscription" alt="" />*/}
       </div>
       
       <div className="box-container">
         <div className="lg">
-          <img src="src/assets/logo.jpg" id="lg" />
+          <Link to="/"><img title="Click pour revenir sur l'acceuil" src={myLogo} id="lg" /></Link>
         </div>
+
+        <div className='divHomeIconRetourAcceuil'>
+        <Link to="/"><i class='bx bx-home' ></i></Link>
+        </div>
+
         <div className="button-group">
           <button className="client" onClick={() =>
             setFormType('client')} style={{ opacity: formType === 'client' ? 1 : 0.5 }}>
             Client
           </button>
 
-          <button className="pme" onClick={() => setFormType('pme')}
+          <button className='pme' onClick={() => setFormType('pme')}
             style={{ opacity: formType === 'pme' ? 1 : 0.5 }}>
             PME
           </button>
@@ -215,9 +222,10 @@ function Inscription() {
         ) : (
           <PmeForm onSubmit={onSubmitPme} isLoading={isLoading} idFileRef={idFileRef} logoFileRef={logoFileRef}/>
         )}
-        <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-link2' : ''}`}>
+        <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-linkPme' : ''}`}>
             <a href='/connexion' className="login-link" >Vous êtes déjà inscrit? Connectez-vous</a>
         </div>
+
       </div>
     </div>
   );
