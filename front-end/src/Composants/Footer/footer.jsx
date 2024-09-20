@@ -30,14 +30,14 @@ const Footer = () => {
         <div className='foot1'>
           {/* Section Contacts */}
           <section className='ctcSection'>
-            <h2>Contacts</h2>
-            <p>Adresse: 123 Rue Lorem, Ipsum City</p>
-            <p>Téléphone: +123 456 789</p>
+            <h2 className='titreContact'>Contacts</h2>
+            <p className='localisation'>Adresse: 123 Rue Lorem, Ipsum City</p>
+            <p className='tel'>Téléphone: +123 456 789</p>
             <a href="mailto:lorem@gmail.com" className='mailien'>E-mail: lorem@gmail.com</a>
           </section>
 
           <section className='socialSection'>
-            <h2>Suivez-nous</h2>
+            <h2 className='titreSocial'>Suivez-nous</h2>
             <div className='socialIcons'>
               <a href="#" className='socialIcon'> <i className='bx bxl-facebook iconeFoot' style={{ color: '#fdb024' }} ></i></a>
               <a href="#" className='socialIcon'><i className='bx bxl-instagram iconeFoot' style={{ color: '#fdb024' }} ></i></a>

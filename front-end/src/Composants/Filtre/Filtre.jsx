@@ -10,7 +10,9 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
   const [tarif, setTarif] = useState("");
   const [note, setNote] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  const [isFocused, setIsFocused]=useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const isActive = searchText || zone || tarif || note;
 
   useEffect(() => {
     filterResults();
@@ -57,7 +59,7 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
 
   return (
     <div className="filter-container">
-        <div className={`BtnSearch ${isFocused?'focused' : ''}`} >
+      <div className={`BtnSearch ${isFocused ? 'focused' : ''}`} >
         <i className='bx bx-search-alt' ></i>
         <input
           type="text"
@@ -65,14 +67,16 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
           className="input-recherche"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          onFocus={()=>setIsFocused(true)}
-          onBlur={()=>setIsFocused(false)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
-        </div>
+      </div>
+      <div className="button-filtre">
         <button className="filter-btn" onClick={() => setShowPopup(!showPopup)}>
           <FontAwesomeIcon icon={faFilter} /> {/* Icône de filtre */}
           Filtrer
         </button>
+      </div>
       {showPopup && (
         <div className="showPopupOverlay">
           <div className="showPopup">
@@ -109,9 +113,11 @@ const Filtre = ({ list, setFilteredResults, zones, tarifs, notes }) => {
         {tarif && <button className="BtnSelect" onClick={() => removeFilter('tarif')}>Tarif: {tarif} ✖</button>}
         {note && <button className="BtnSelect" onClick={() => removeFilter('note')}>Note: {note} ✖</button>}
 
-        <button className="clear-btn" onClick={clearFilters}>
-          Effacer les filtres
-        </button>
+        {isActive && (
+          <button className="clear-btn" onClick={clearFilters}>
+            Effacer les filtres
+          </button>
+        )}
       </div>
     </div>
   );

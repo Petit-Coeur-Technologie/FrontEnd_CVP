@@ -116,7 +116,7 @@ function InfosPme() {
         <div className="infosPME">
             <div className="infosPME_header">
                 <img
-                    src={`https://ville-propre.onrender.com/static/Uploads/logo_pme/${pme.logo_pme}`}
+                    src={pme.logo_pme}
                     alt={pme.nom_pme}
                     className="pme-logo"
                 />
@@ -150,7 +150,7 @@ function InfosPme() {
             )}
 
             <div className="infosPME_comments">
-                
+
 
             </div>
         </div>
