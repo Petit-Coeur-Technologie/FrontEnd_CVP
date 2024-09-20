@@ -21,7 +21,7 @@ function PmeCard({ pme }) {
         <div className="pme-card">
             <div className='pmeLogo'>
             <img
-              src={`https://ville-propre.onrender.com/Uploads/logo_pme/${pme.logo_pme}`}
+              src={pme.logo_pme}
               alt=""     
                 className="card-logo"
             />

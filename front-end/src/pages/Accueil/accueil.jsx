@@ -2,60 +2,57 @@ import React, { useState, useEffect } from 'react';
 import './accueil.css';
 import PmeCard from '../../Composants/PmeCard/PmeCard';
 import Filtre from '../../Composants/Filtre/Filtre';
-import abonnement from '/src/assets/abonnement.png'
-import gestion from '/src/assets/gestion.png'
-import payement from '/src/assets/payement.png'
-import sensibilisation from '/src/assets/sensibilisation.png'
-
+import abonnement from '/src/assets/abonnement.png';
+import gestion from '/src/assets/gestion.png';
+import payement from '/src/assets/payement.png';
+import sensibilisation from '/src/assets/sensibilisation.png';
+import loading from '/src/assets/loading.png';
 
 function Accueil() {
-  const [pmes, setPmes] = useState([]);
-  const [filteredPmes, setFilteredPmes] = useState([]);
+  const [pmes, setPmes] = useState([]); // Toutes les PME non filtrées
+  const [filteredPmes, setFilteredPmes] = useState([null]); // PME filtrées
   const [zones, setZones] = useState([]);
   const [tarifs, setTarifs] = useState([]);
   const [notes, setNotes] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const pmesPerPage = 10;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch('https://ville-propre.onrender.com/pmes')
       .then((response) => response.json())
       .then((data) => {
-        setPmes(data);
-        setFilteredPmes(data); // Par défaut, afficher toutes les PMEs
+        setPmes(data); // Charge toutes les PME
+        setFilteredPmes(data); // Initialise les PME filtrées avec toutes les PME
+        setIsLoading(false);
 
-        // Extraire les zones uniques
-        const uniqueZones = [...new Set(data.map((pme) => pme.zone_intervention))];
-        setZones(uniqueZones);
-
-        // Extraire les tarifs uniques
-        const uniqueTarifs = [...new Set(data.map((pme) => pme.tarif_mensuel))];
-        setTarifs(uniqueTarifs);
-
-        // Extraire les notes uniques
-        const uniqueNotes = [...new Set(data.map((pme) => pme.rating))];
-        setNotes(uniqueNotes);
+        // Extraire les valeurs uniques pour les filtres
+        setZones([...new Set(data.map((pme) => pme.zone_intervention))]);
+        setTarifs([...new Set(data.map((pme) => pme.tarif_mensuel))]);
+        setNotes([...new Set(data.map((pme) => pme.rating))]);
       })
       .catch((error) => {
         console.error('Error fetching PMEs:', error);
+        setIsLoading(false);
       });
   }, []);
 
-  // Calcul de la pagination basée sur les résultats filtrés
+  // Pagination des PME filtrées
   const indexOfLastPme = currentPage * pmesPerPage;
   const indexOfFirstPme = indexOfLastPme - pmesPerPage;
   const currentPmes = filteredPmes.slice(indexOfFirstPme, indexOfLastPme);
-
   const totalPages = Math.ceil(filteredPmes.length / pmesPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filteredPmes]);
+  // Méthode pour filtrer les PME
+  const handleFilter = (filteredResults) => {
+    setFilteredPmes(filteredResults);
+    setCurrentPage(1); // Réinitialiser à la première page après filtrage
+  };
 
   return (
     <div className="home">
@@ -70,24 +67,31 @@ function Accueil() {
 
       {/* Filtre et cartes PME */}
       <Filtre
-        list={pmes}
-        setFilteredResults={setFilteredPmes}
+        list={pmes} // Passer la liste complète des PME
+        setFilteredResults={handleFilter} // Utiliser la méthode de filtrage
         zones={zones}
         tarifs={tarifs}
         notes={notes}
       />
-      <div className="cards-container">
-        {filteredPmes.slice(0, 10).map((pme) => (
-          <PmeCard key={pme.id} pme={pme} />
-        ))}
-      </div>
 
-      {filteredPmes.length === 0 && (
-        <div className='inexistant'>
-          <p>Aucune PME ne correspond à votre recherche.</p>
+      {/* Affichage des PME */}
+      {isLoading ? (
+        <div className='loading'>
+          <img src={loading} className='loadingSpin' alt='Chargement...' />
+        </div>
+      ) : (
+        <div className="cards-container">
+          {filteredPmes.length === 0 ? (
+            <div className='inexistant'>
+              <p>Aucune PME ne correspond à votre recherche.</p>
+            </div>
+          ) : (
+            currentPmes.map((pme) => (
+              <PmeCard key={pme.id} pme={pme} />
+            ))
+          )}
         </div>
       )}
-
 
       {/* Pagination */}
       <div className="pagination">

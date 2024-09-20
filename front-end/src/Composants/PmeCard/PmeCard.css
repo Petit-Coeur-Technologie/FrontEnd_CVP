@@ -4,11 +4,11 @@
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
+    padding: 5px 20px;
     transition: box-shadow 0.3s, transform 0.3s;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Assure que le footer reste en bas */
+    justify-content: space-evenly; /* Assure que le footer reste en bas */
   }
   
   .pme-card:hover {
@@ -17,32 +17,33 @@
   }
 
   .pmeLogo{
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 100px;
+    height: 130px;
     position: relative;
   }
   
   .card-logo {
-    width:90%;
-    height: auto;
+    width:auto;
+    height: 100%;
     position: absolute;
   }
   
   .card-title {
-    font-size: 1.6em;
-    margin-bottom: 5px; /* Moins d'espace sous le titre */
     color: #222;
     font-weight: 600;
   }
   
   .card-description {
-    font-size: 1em;
+    width: 100%;
+    font-size: 14px;
     color: #555;
     line-height: 1.6;
     overflow: hidden; /* Cache le texte débordant */
     text-overflow: ellipsis; /* Affiche les points de suspension pour le texte débordant */
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limite le texte à deux lignes */
+    -webkit-line-clamp: 3; /* Limite le texte à deux lignes */
     -webkit-box-orient: vertical;
     margin-bottom: 10px; /* Espacement avant le footer */
   }
@@ -64,7 +65,7 @@
   }
   
   .card-button button {
-    background-color: #00804b;
+    background-color: #4fb97f;
     color: white;
     padding: 7px 10px;
     border: none;
