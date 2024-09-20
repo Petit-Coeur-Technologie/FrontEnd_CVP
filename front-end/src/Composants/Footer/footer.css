@@ -8,126 +8,109 @@
   height: auto;
   background-color: #00804b;
   width: 100%;
-  display: flex;
-  justify-content: center;
   color: white;
 }
 
 .foot-container {
-  margin: 0%;
-  padding: 0%;
   width: 100%;
-  display: flex; /* Utiliser flex pour centrer */
+  display: flex; 
   flex-direction: column;
-  align-items: center; /* Centre verticalement */
+  align-items: center; 
 }
 
-/* Section Contacts */
 .foot1 {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Deux cartes par ligne */
+  justify-content: center; /* Centre la grille */
+  justify-items: center; /* Centre les éléments dans chaque cellule */
+  padding: 20px 25px;
+  gap: 20px 10px; /* Espace entre les sections */
+}
+
+
+.ctcSection {
   display: flex;
-  flex-direction: row;
-  justify-items: center;
-  justify-content: center;
-  padding: 20px;
+  flex-direction: column;
+  margin-right: 20px; /* Espace à droite de la section Contacts */
 }
 
-.ctcSection{
-  width: 30%;
+.titreContact, .feedback, .titreSocial {
+  margin-bottom: 10px; 
 }
 
-.ctcSection h2 {
-  margin-bottom: 20px;
-}
-
-.ctcSection p {
-  font-size: 16px;
-  margin-bottom: 8px;
+.localisation,.tel{
+  margin-bottom: 15px; /* Espace sous le lien */
 }
 
 .mailien {
   text-decoration: none;
-  text-align: center;
   color: white;
   font-size: 16px;
-  margin-bottom: 8px;
 }
 
 .mailien:hover {
   color: #fdb024;
 }
 
-.socialSection {
-  width: 30%;
+.iconeFoot {
+  font-size: 35px!important; 
+  color: #fdb024; 
+  transition: transform 0.3s ease; 
 }
 
-.socialSection h2 {
-  margin-bottom: 10px;
+.iconeFoot:hover {
+  transform: scale(1.1); 
+}
+
+.cmtSection {
+  width: 400px;
+}
+
+.cmtMail, .cmtFoot {
+  width: 100%;
+  padding: 10px 15px; 
+  margin: 5px;
+  font-size: 16px;
+  resize: none; 
+  outline: none;
+  border: 2px solid #4fb97f; 
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6); 
+  border-radius: 5px; 
+  transition: border-color 0.3s ease; 
+}
+
+.cmtMail:focus, .cmtFoot:focus {
+  border-color: #ffffff; 
+}
+
+.btnCmtFoot {
+  width: 120px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  background-color: #4fb97f; 
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  border-radius: 5px; 
+}
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
 }
 
 .socialIcons {
   display: flex;
-  gap: 15px;
+  flex-direction: row;
+  gap: 25px;
+  margin-top: 25px;
 }
 
-.socialIcon {
-  color: #fdb024; /* Jaune */
-  text-decoration: none;
-}
-
-.socialIcon:hover {
-  color: white;
-}
-
-.iconeFoot{
-  font-size: 50px;
-}
-
-.cmtSection {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.cmtMail {
-  width: 90%;
-  padding: 0 20px;
-  height: 30px;
-  font-size: 16px;
-  resize: none;
-  outline: none;
-  border: none;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.448);
-}
-
-.cmtFoot {
-  width: 90%;
-  padding: 0 20px;
-  font-size: 16px;
-  resize: none;
-  outline: none;
-  border: none;
-  height: 80px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.448);
-}
-
-.btnCmtFoot {
-  width: 100px;
-  padding: 5px;
-  text-align: center;
-}
-
-.btnCmtFoot:hover {
-  background-color: #ffd700;
-}
-
-/* Liste de raccourcis */
 .foot2 {
   width: 100%;
-  height: auto;
   padding: 10px 20px;
   background-color: #4fb97f;
 }
@@ -141,10 +124,6 @@
   list-style: none;
 }
 
-.liLinks {
-  display: inline;
-}
-
 .listeLinks {
   text-decoration: none;
   color: rgb(0, 0, 0);
@@ -154,43 +133,72 @@
   color: #00804b;
 }
 
-/* Section Copyright */
 .foot3 {
   width: 100%;
-  height: auto;
-  padding:20px;
+  padding: 20px;
   text-align: center;
 }
 
-.copyright {
-  font-size: 14px;
-}
+@media(max-width:700px) {
 
-/* Styles pour les écrans de moins de 768px */
-/* Responsivité */
-@media (max-width: 767px) {
-  .foot-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .foot1,
-  .foot2 {
-    width: 100%;
+  .foot {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Pour aligner verticalement les éléments */
     text-align: center;
   }
 
-  .cmtMail,
-  .cmtFoot {
+  .foot1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligne les sections au centre */
+    gap: 30px 0; /* Espacement entre les sections */
     width: 100%;
   }
 
-  .btnCmtFoot {
-    width: 100%;
+  .ctcSection, .socialSection, .cmtSection {
+    width: 80%; /* Utilise 90% de la largeur disponible */
+    margin: 0 auto; /* Centrer chaque section */
   }
 
-  .shortcuts ul li {
-    display: block;
-    margin-bottom: 5px;
+  .socialIcons {
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .cmtSection {
+    width: 90%; /* Réduit la largeur pour éviter le débordement */
+  }
+
+  .cmtFoot{
+    height: 100px;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
+}
+
+@media(min-width: 1000px) {
+  .foot1 {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+  }
+
+  .ctcSection {
+    margin-right: 40px; /* Ajuste l'espace pour les grands écrans */
+  }
+
+  .socialIcons {
+    flex-direction: row;
+    margin-top: 10%;
+    gap: 10px; /* Ajuste l'espace entre les icônes pour les grands écrans */
+  }
+
+  .copyright {
+    font-size: 16px;
   }
 }

@@ -1,7 +1,7 @@
 /* Conteneur principal */
 .home {
   margin-top: 70px;
-  padding: 10px 20px;
+  padding: 10px 25px;
   background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
   display: flex;
   flex-direction: column;
@@ -24,6 +24,16 @@
 
 .welcome-section p {
   font-size: 18px;
+}
+
+.loading{
+  width: 30%;
+  height: 200px;
+}
+
+.loadingSpin{
+  width: auto;
+  height: 100%;
 }
 
 .cards-container {
@@ -139,9 +149,6 @@
 }
 
 @media (max-width: 850px) {
-  .home {
-    margin-top: 50px;
-  }
 
   .about-section,
   .services-section {
