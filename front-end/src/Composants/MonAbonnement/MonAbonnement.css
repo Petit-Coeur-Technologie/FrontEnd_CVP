@@ -1,0 +1,88 @@
+.divDonnesMonAbonnementMere {
+    height: 100%;
+    background-color: #f8f9fa;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chargementMessage {
+    text-align: center;
+    font-size: 1.2em;
+    color: #6c757d; 
+    margin-bottom: 20px;
+}
+
+.donneesMonAbonnement {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.donneesMonAbonnement:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.divImageProfilMonAbonnement {
+    margin-right: 20px;
+}
+
+.divImageProfilMonAbonnement img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.detailsMonAbonnement {
+    flex-grow: 1;
+}
+
+.numAbonnement {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.nomPme {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.nomPme:hover {
+    text-decoration: underline;
+}
+
+.description {
+    color: #555;
+    margin: 8px 0;
+}
+
+.zoneIntervention {
+    font-style: normal;
+    color: #777;
+}
+
+.date, .tarifMensuel, .tarifAbonnement, .statusAbonnement {
+    margin: 4px 0;
+    font-size: 0.9em;
+}
+
+.tarifMensuel {
+    font-weight: bold;
+}
+
+.tarifAbonnement {
+    font-weight: bold;
+}
+
+.statusAbonnement {
+    font-weight: bold;
+}
