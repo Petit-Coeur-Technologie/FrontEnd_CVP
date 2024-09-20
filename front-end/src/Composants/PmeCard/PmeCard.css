@@ -1,25 +1,31 @@
 .pme-card {
-    width: 300px;
-    height: 220px;
+    width: 280px;
+    height: 350px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 10px 20px;
+    transition: box-shadow 0.3s, transform 0.3s;
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Assure que le footer reste en bas */
   }
   
   .pme-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .pmeLogo{
+    width: 100%;
+    height: 100px;
+    position: relative;
   }
   
   .card-logo {
-    width: 100px;
+    width:90%;
     height: auto;
-    margin-bottom: 15px;
+    position: absolute;
   }
   
   .card-title {

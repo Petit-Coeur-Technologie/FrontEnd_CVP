@@ -7,19 +7,26 @@
 .home {
   padding-top: 70px; /* Compense la hauteur de la navbar */
   min-height: 100vh;
-
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content:space-around;
   }
   
   .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Augmenté la taille min */
-    gap: 20px; /* Espacement entre les cartes */
     width: 100%;
+    justify-items: center;
+    gap: 20px;
   }
 
   /* Bouton "Voir plus" */
 .voir-plus-container {
   text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #f00;
 }
 
 .voir-plus-button {
@@ -30,9 +37,49 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  line-height: 1.6;
 }
 
 .voir-plus-button:hover {
   background-color: #fdb024;
   color: #00804b;
+}
+@media (max-width:450px) {
+  .home{
+    padding-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: space-around;
+    width: 100vh;
+  }
+  .voir-plus-container{
+    padding: 15px;
+  }
+   
+}
+@media (max-width:769px){
+  .cards-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  width: 100%;
+  justify-items: center;
+  gap: 20px;
+  }
+}
+@media(max-width:622px){
+  .home{
+    width: 100vh;
+    
+  }
+}
+@media(max-width:541px){
+  .voir-plus-container{
+    margin: 40px;
+}
+.cards-container {
+  margin: 30px;
+}
+
 }

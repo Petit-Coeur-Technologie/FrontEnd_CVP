@@ -1,5 +1,5 @@
 import React from 'react';
-import './PmeCard.css'
+import './PmeCard.css';  // Assurez-vous que le fichier CSS est bien importé
 import { Link } from 'react-router-dom';
 
 function PmeCard({ pme }) {
@@ -19,11 +19,13 @@ function PmeCard({ pme }) {
 
     return (
         <div className="pme-card">
+            <div className='pmeLogo'>
             <img
               src={`https://ville-propre.onrender.com/Uploads/logo_pme/${pme.logo_pme}`}
               alt=""     
                 className="card-logo"
             />
+            </div>
             <h3 className="card-title">{pme.nom_pme}</h3>
             <p className="card-description">{pme.description}</p>
             <div className="card-footer">
@@ -31,8 +33,8 @@ function PmeCard({ pme }) {
                     {renderStars(pme.rating)}
                 </div>
                 <div className="card-button">
-                    <Link to={`/pmes/${pme.id}`}>
-                        <button type="button">Continuer</button>
+                    <Link to={`/${pme.id}`}>
+                        <button type="button">Détails</button>
                     </Link>
                 </div>
             </div>

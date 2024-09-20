@@ -60,7 +60,7 @@ export default function Dashboard() { // Déclaration du composant fonctionnel D
           {elements_ul_Barlaterale1.map((item, index) => (
             <li
               key={index} // Clé unique pour chaque élément de liste
-              className={activerIndex === index ? 'active' : ''} // Applique la classe 'active' si l'index est actif
+              className={activerIndex === index ? 'active' : 'listeMenu'} // Applique la classe 'active' si l'index est actif
               onClick={() => clicker(index, item.name)} // Gère le clic pour cet élément
             >
               <Link className='liClass' to={item.path}> {/* Lien vers la route correspondante */}
@@ -77,7 +77,7 @@ export default function Dashboard() { // Déclaration du composant fonctionnel D
           {elements_ul_Barlaterale2.map((item2, index2) => (
             <li
               key={index2 + elements_ul_Barlaterale1.length} // Clé unique basée sur l'index du deuxième menu
-              className={`${activerIndex === index2 + elements_ul_Barlaterale1.length ? 'active active2' : ''} ${item2.name === 'Retour' ? 'retour' : ''}`} // Gestion des classes pour le style
+              className={`${activerIndex === index2 + elements_ul_Barlaterale1.length ? 'active active2' : 'listeMenu'} ${item2.name === 'Retour' ? 'retour' : ''}`} // Gestion des classes pour le style
               onClick={() => clicker(index2, item2.name)} // Gère le clic pour cet élément
             >
               <Link className='liClass' to={item2.path}> {/* Lien vers la route correspondante */}

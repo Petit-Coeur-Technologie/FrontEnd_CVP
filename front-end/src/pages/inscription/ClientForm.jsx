@@ -99,7 +99,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                  {/* -------- Pour la selection de la ville, la commun et le quartier si c'est un Client -------------------------------*/}
                 {/* Pour la selection de la ville */}
               <div className="input-container input-containerSelect input-containerTablette">
-                    <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
+                    <i class='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
@@ -116,7 +116,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                         </div>
                         <div className="input-container input-containerSelect input-containerTablette">
-                        <i className='bx bx-home'></i>
+                        <i class='bx bx-location-plus' ></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -134,7 +134,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                         </div>
                         <div className="input-container input-containerSelect input-containerTablette">
-                        <i className='bx bx-home-alt-2'></i>
+                        <i class='bx bx-current-location' ></i>
                     <div >
                         <select
                             id="quartierClt"
@@ -205,7 +205,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 </div>
                 <div className="input-container input-containerMDP input-containerTablette">
                     <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
-                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
+                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmez le mot de passe"
                         {...register("cmdpClt", {
                             required: "Confirmez votre mot de passe",
                             validate: value => value === watch("mdpClt") || "Les mots de passe doivent correspondre"
@@ -213,7 +213,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 </div>
             </div>
             <div className="checkbox-container accept ">
-                <input type="checkbox" name="validate" id="validate" className="inputIns"
+                <input type="checkbox" name="validate" id="validate" className="custom-checkbox"
                     {...register("accept", { required: "Veuillez accepter les politiques de confidentialités!" })} />
                 <label htmlFor="validate" className="labelPolitique">
                     J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>

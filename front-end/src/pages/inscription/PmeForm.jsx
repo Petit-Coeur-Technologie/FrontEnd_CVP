@@ -87,13 +87,13 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
  {/* -------- Pour la selection de la ville, la commun et le quartier si c'est une PME -------------------------------*/}
                 {/* Pour la selection de la ville */}
                 <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
+                <i class='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
                             value={selectedPmeVille}
                             onChange={(e) => handleVilleChange(e, 'pme')}
-                            className="selectIns"
+                            className="selectIns selectIns1"
                         >
                             <option value="ville">Ville</option>
                             {pmeVilles.map(ville => (
@@ -105,7 +105,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
 
  {/* Pour la selection de la commun */}
  <div className="input-container input-container2 input-containerSelect input-containerTablette">
-              <i className='bx bx-home'></i>
+                    <i class='bx bx-location-plus' ></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -124,7 +124,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                     </div>
  {/* Pour la selection du quartier */}
  <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i className='bx bx-home-alt-2'></i>
+                <i class='bx bx-current-location' ></i>
                  <div className="adresse">
                         <select
                             id="quartierPME"
@@ -215,20 +215,20 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                 </div>
                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-lock-alt' style={{ color: '#fdb024' }}></i>
-                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmation de mot de passe"
+                    <input type="password" name="cmdpPME" id="cmdpPME" className="inputIns" placeholder="Confirmez le mot de passe"
                         {...register("cmdpPME", {
                             required: "Confirmez votre mot de passe",
                             validate: value => value === watch("mdpPME") || "Les mots de passe doivent correspondre"
                         })} />
                 </div>
-                <div className="checkbox-container input-containerTablette input-containerTablettePolitique">
-                    <input type="checkbox" name="validate" id="validate" className="inputIns" required />
-                    <label htmlFor="validate" className="labelPolitique">
+                <div className="checkbox-container checkbox-containerPme input-containerTablette input-containerTablettePolitique">
+                    <input type="checkbox" name="validate" id="validate" className="inputIns inputInsPme" required />
+                    <label htmlFor="validate" className="labelPolitique labelPolitiquePme">
                         J'ai lu et j'accepte les <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer" className="lienPolitique">politiques de confidentialité</a>
                     </label>
                 </div>
-                <div className="divSub">
-                    <button type="submit" id="subPME" className="sub" disabled={isLoading}>
+                <div className="divSub divSubPme">
+                    <button type="submit" id="subPME" className="sub subPme " disabled={isLoading}>
                         {isLoading ? 'Chargement...' : 'S\'inscrire'}
                     </button>
                 </div>
