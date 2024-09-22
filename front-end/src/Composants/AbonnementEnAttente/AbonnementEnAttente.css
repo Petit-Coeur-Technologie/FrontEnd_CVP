@@ -1,0 +1,222 @@
+.contentFilsDashboard {
+    left: 45px;
+    width: 93%;
+    overflow: hidden;
+    padding-right: 20px;
+}
+.btnAccepter{
+    background-color: green;
+    color: white;
+}
+.btnAccepter:hover{
+    background-color: rgb(5, 88, 5);
+    color: white;
+}
+.btnRefuser{
+    background-color: red;
+    color: white;
+}
+.btnRefuser:hover{
+    background-color: rgb(166, 10, 10);
+    color: white;
+}
+@media (max-width:1400px) {
+    .divDonnesAbonnementEnAttente{
+        width: 114%!important;
+        height: 100%;
+        
+    }
+}
+@media (min-width:900px) {
+    .donneesAbonnementEnAttenteMere{
+        display: flex;
+        width: 96%;
+    }
+    .divDonnesAbonnementEnAttente{
+        width: 101%;
+        height: 100%;
+    }
+    .donneesAbonnementEnAttente{
+        display: flex;
+        margin:0;
+        width: 80% !important;
+        border-bottom: 1px solid #cbc5c5;
+        margin-bottom: 5px;
+    }
+    .divValidation{
+        display:flex ;
+        flex-direction: column;
+    }
+    .divImageProfil {
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+    }
+    
+    .divImageProfil img {
+        height: 100%;
+        width: 100%;
+    }
+    .divNotification{
+        top: 33px;
+    }
+    .divNotification .bx{
+        height: 0;
+        width: 0;
+        left: -30px;
+    }
+}
+
+@media (max-width:900px) {
+    .donneesAbonnementEnAttenteMere{
+        display: flex;
+    }
+    .divDonnesAbonnementEnAttente{
+        width: 98%;
+        height: 100%;
+    }
+    .donneesAbonnementEnAttente{
+        display: flex;
+        margin:0;
+        width: 100%;
+        border-bottom: 1px solid #cbc5c5;
+        margin-bottom: 5px;
+    }
+    .divValidation{
+        display:flex ;
+        flex-direction: column;
+    }
+    .divImageProfil {
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+    }
+    
+    .divImageProfil img {
+        height: 100%;
+        width: 100%;
+    }
+    .divNotification{
+        top: 33px;
+    }
+    .divNotification .bx{
+        height: 0;
+        width: 0;
+        left: -30px;
+    }
+}
+@media (min-width:771px) {
+    .contentFilsDashboard{
+        left: 145px!important;
+        width: 86%!important;
+        /* background-color: red; */
+    }
+    
+}
+@media (max-width:770px) {
+    .contentFilsDashboard{
+        left: 145px!important;
+        width: 82%!important;
+    }
+    .donneesAbonnementEnAttenteMere{
+        display: flex;
+    }
+    .divDonnesAbonnementEnAttente{
+        width: 101.5%;
+        height: 100%;
+    }
+    .donneesAbonnementEnAttente{
+        display: flex;
+        margin:0;
+        width: 100%;
+        border-bottom: 1px solid #cbc5c5;
+        margin-bottom: 5px;
+    }
+    .divValidation{
+        display:flex ;
+        flex-direction: column;
+    }
+    .divImageProfil {
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+    }
+    
+    .divImageProfil img {
+        height: 100%;
+        width: 100%;
+    }
+    .divNotification{
+        top: 33px;
+    }
+    .divNotification .bx{
+        height: 0;
+        width: 0;
+        left: -30px;
+    }
+}
+/* @media (max-width:771px) {
+    .contentFilsDashboardAutre {
+        left: 45px!important;
+        width: 95%!important;
+    }
+    .nomApp{
+        display: none;
+    }
+} */
+@media (max-width:500px) {
+    .donneesAbonnementEnAttenteMere{
+        display: flex;
+    }
+    .divDonnesAbonnementEnAttente{
+        width: 100%;
+        height: 100%;
+        
+    }
+    .donneesAbonnementEnAttente{
+        display: flex;
+        margin: 0;
+        width: 100%;
+        border-bottom: 1px solid #cbc5c5;
+        padding-bottom: 5px;
+        padding-top: 5px;
+    }
+    .contentFilsDashboard {
+        left: 45px!important;
+        width: 93%!important;
+    }
+    .contentFilsDashboard2 {
+        left: 0px!important;
+        width: 104%!important;
+    }
+    .divValidation{
+        display:flex ;
+        flex-direction: column;
+    }
+    .divImageProfil {
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+    }
+    
+    .divImageProfil img {
+        height: 100%;
+        width: 100%;
+    }
+    .divNotification .bx{
+        top: 2px!important;
+    }
+}
+
