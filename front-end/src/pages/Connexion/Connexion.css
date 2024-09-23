@@ -44,17 +44,16 @@
     justify-content: center;
   }
   .divImageBmw{
-    width: 100px;
-    height: 100px;
     margin: 20px;
-    display: block;
+    display: flex;
     justify-content: center;
+    align-items: center;
     border-radius: 50%;
   }
   .imageBmw {
     width: 100px;
-    height: auto;
-    margin-bottom: 20px;
+    height: 100px;
+    object-fit: cover;
     border-radius: 50%;
   }
   
