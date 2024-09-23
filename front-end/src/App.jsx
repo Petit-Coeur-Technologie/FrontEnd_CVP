@@ -30,7 +30,7 @@ function App() {
 
   
   const location = useLocation();
-
+  
   const hideNavbarAndFooter =
     location.pathname === '/inscription' ||
     location.pathname === '/connexion' ||

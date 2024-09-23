@@ -209,8 +209,8 @@ padding-right: 76px;
 /* Style pour la div contenant la photo de profil */
 position: absolute;
 top: 11px;
-width: 60px;
-height: 60px;
+width: 80px;
+height: 80px;
 right: 40px;
 border-radius: 50%;
 border: 1px solid rgb(171, 171, 171);
@@ -452,6 +452,7 @@ padding: 0;
 .divBtnDetails{
   border: none;
   position: absolute;
+  display: flex;
   bottom: 20px;
   color: var(--blanc);
   border-radius: 10px;
@@ -460,15 +461,8 @@ padding: 0;
   height: 30px;
   cursor: pointer;
 }
-.divBtnDetails:hover{
-  /* background-color: var(--bleuclair); */
-  transition: all .2s ease-in-out;
-  transform: scale(1.1);
-}
 
-.btnDetails{
-  background-color: var(--vert);
-  background-color: var(--vert);
+.btnDetails, .btnAnnulerAbonnement{
   border: none;
   width: 100%;
   bottom: 20px;
@@ -481,9 +475,34 @@ padding: 0;
 .btnDetails:hover{
   background-color: var(--bleuclair);
   transition: all .2s ease-in-out;
-  font-weight: bold;
+}
+.btnDetails{
+  background-color: var(--vert);
 }
 
+.btnAnnulerAbonnement{
+  background-color: var(--rouge);
+}
+.btnAnnulerAbonnement:hover{
+  background-color: var(--bleuclair);
+  transition: all .2s ease-in-out;
+  /* font-weight: bold; */
+}
+
+.divNombreAbonnementEnAttenteDashboard{
+  background-color: rgb(217, 38, 38);
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;top: 10px;
+  left: -25px;
+  color: white;
+}
+.pNombreAbonnementEnAttenteDashboard{
+  font-size: 10px;
+}
 
 @media (max-width:908px){
   .divDonnes {
@@ -567,6 +586,7 @@ padding: 0;
   .donnees p:first-of-type {
     font-size: 1.1em; /* Ajuster la taille de police pour le nom sur mobile */
   }
+  
 }
 
 @media(max-width: 500px) {
@@ -627,6 +647,11 @@ padding: 0;
   }
   .donnees{
     width: 260px;
+  }
+  .divNombreAbonnementEnAttenteDashboard{
+    left: -111px;
+    top: 0;
+    display: flex;
   }
 }
 

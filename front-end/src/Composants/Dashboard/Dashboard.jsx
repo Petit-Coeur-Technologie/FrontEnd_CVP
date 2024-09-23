@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
 import { Link, Outlet, useNavigate } from 'react-router-dom'; 
-import ConfirmationPopup from '../Abonnes/ConfirmationAbonnement.jsx'; // Importer le composant
 import './Dashboard.css'; 
 import { icon } from '@fortawesome/fontawesome-svg-core';
 
@@ -12,6 +11,8 @@ export default function Dashboard() {
   const [profileImage, setProfileImage] = useState("../../src/assets/logo_provisoire.png"); 
   const [userId, setUserId] = useState(null);
   const [accessToken, setAccessToken] = useState('');
+  const [abonnesEnAttente, setAbonnesEnAttente] = useState([]);
+  const [nombreAbonnementEnAttente, setNombreAbonnementEnAttente] = useState(0);
   const [userRole, setUserRole] = useState(null); 
   const [currentAbonnementId, setCurrentAbonnementId] = useState(null); // ID de l'abonnement
   const [showPopup, setShowPopup] = useState(false); // Ajout de l'état showPopup pour gérer le popup
@@ -76,19 +77,12 @@ export default function Dashboard() {
     if (roleFromCookie) setUserRole(roleFromCookie);
   }, []);
 
-  // Log des données d'utilisateur pour vérification
-  // useEffect(() => {
-  //   console.log("L'id de l'utilisateur récupéré dans Dashboard : " + userId);
-  //   console.log("Le token de l'utilisateur récupéré dans Dashboard : " + accessToken);
-  //   console.log("Le role de l'utilisateur récupéré dans Dashboard : " + userRole);
-  // }, [userId, accessToken, userRole]);
-
   // Appel API pour récupérer les abonnés et rôle de l'utilisateur
   useEffect(() => {
     if (!userId || !accessToken) return;
 
     const fetchAbonnes = async () => {
-      try {
+      // try {
         const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/clients`, {
           method: 'GET',
           headers: {
@@ -103,44 +97,48 @@ export default function Dashboard() {
 
         const data = await response.json();
         setUserRole(data.utilisateur.role); 
-      } catch (error) {
-        console.error('Erreur lors de la récupération des abonnés:', error.message);
-      }
+      // } catch (error) {
+      //   console.error('Erreur lors de la récupération des abonnés:', error.message);
+      // }
     };
     fetchAbonnes();
 
   }, [userId, accessToken]);
 
-  // -------------------------POUR LA CONFIRMATION-------------------------------------
-    // Fonction pour envoyer une confirmation d'abonnement via API
-  //   useEffect(() => {
-  //   const sendConfirmation = async (abonnementId, confirmation) => {
-  //     try {
-  //       console.log(`https://ville-propre.onrender.com/abonnements/${abonnementId}/${confirmation}`);
-  //       const response = await fetch(`https://ville-propre.onrender.com/abonnements/${abonnementId}/${confirmation}`, {
-  //         method: 'PUT',
-  //         headers: {
-  //           'Authorization': `Bearer ${accessToken}`,
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({ confirmation })
-  //       });
+
+    // ========================= POUR RECUPERER LE NOMBRE ABONNEMENTS EN ATTENTE =======================
+    useEffect(() => {
+      if (!userId || !accessToken) return;
     
-  //       if (!response.ok) {
-  //         throw new Error(`Erreur réseau: ${response.status}`);
-  //       }
+      const fetchAbonnes = async () => {
+        try {
+          const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/clients`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            }
+          });
     
-  //       const result = await response.json();
-  //       console.log('Réponse API:', result); 
+          if (!response.ok) {
+            throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
+          }
     
-  //       setShowPopup(false); 
-  //       console.log('Confirmation envoyée avec succès!');
-  //     } catch (error) {
-  //       console.error('Erreur lors de l\'envoi de la confirmation:', error.message);
-  //     }
-  //   };  
-  //   sendConfirmation();
-  // }, [userId, accessToken]);
+          const data = await response.json();
+          console.log(data);
+          setAbonnesEnAttente(data);
+  
+          // Comptage des abonnements en attente
+          const abonnementsEnAttente = data.filter((abonne) => abonne.status_abonnement === "pending").length;
+          setNombreAbonnementEnAttente(abonnementsEnAttente);
+        } catch (error) {
+          console.error('Erreur lors de la récupération des abonnés:', error.message);
+        }
+      };
+    
+      fetchAbonnes();
+    }, [userId, accessToken]);
+
 
   // Fonction pour afficher le popup
   const handleAbonnementClick = (abonnementId) => {
@@ -174,9 +172,11 @@ export default function Dashboard() {
     }
   }, [userId, accessToken]);
 
-  // useEffect(()=>{
-  //   console.log("valeur Stocké dans userRole "+userRole);
-  // })
+
+    // Affichage du nombre d'abonnements en attente
+    useEffect(() => {
+      console.log("LE NOMBRE D'ABONNEMENTS EN ATTENTE DANS DASHBOARD : " + nombreAbonnementEnAttente);
+    }, [nombreAbonnementEnAttente]);
 
   return (
     <div className='conteneur'>
@@ -198,6 +198,9 @@ export default function Dashboard() {
               <Link className='liClass' to={item.path}>
                 <i className={`bx ${item.icon}`}></i>
                 {item.name}
+                {item.name === 'Abonnement en attente' && nombreAbonnementEnAttente > 0 && (
+                <div className="divNombreAbonnementEnAttenteDashboard"><p className="pNombreAbonnementEnAttenteDashboard">{nombreAbonnementEnAttente}</p></div>
+                )}
               </Link>
               {activerIndex === index && <span className='activespan'></span>}
             </li>

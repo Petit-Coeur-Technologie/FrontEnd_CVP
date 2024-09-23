@@ -20,17 +20,32 @@
     background-color: rgb(166, 10, 10);
     color: white;
 }
+
+.chargementMessageAbonnes{
+    position: relative;
+    top: 50px;
+    left: 100px;
+}
+.abonneNonTrouve{
+    position: relative!important;
+    top: 0px;
+    left: 100px;
+}
+
 @media (max-width:1400px) {
     .divDonnesAbonnementEnAttente{
-        width: 114%!important;
+        width: 105%!important;
         height: 100%;
-        
+    }
+    .donneesAbonnementEnAttenteMere{
+        display: flex;
+        width: 104%;
     }
 }
 @media (min-width:900px) {
     .donneesAbonnementEnAttenteMere{
         display: flex;
-        width: 96%;
+        width: 104%;
     }
     .divDonnesAbonnementEnAttente{
         width: 101%;
@@ -111,14 +126,12 @@
         left: -30px;
     }
 }
-@media (min-width:771px) {
+/* @media (min-width:771px) {
     .contentFilsDashboard{
         left: 145px!important;
         width: 86%!important;
-        /* background-color: red; */
     }
-    
-}
+} */
 @media (max-width:770px) {
     .contentFilsDashboard{
         left: 145px!important;

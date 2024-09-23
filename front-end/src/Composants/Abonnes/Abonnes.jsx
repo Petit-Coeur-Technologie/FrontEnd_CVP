@@ -126,6 +126,14 @@ const Abonnes = () => {
     setShowAddCommentPopup(false);
   }, [filteredAbonnes]);
 
+  const handleAnnulerAbonnement = useCallback((index) => {
+    // setSelectedAbonne(filteredAbonnes[index]);
+    // setPopupVisible(true);
+    // setShowCommentsPopup(false);
+    // setShowAddCommentPopup(false);
+    alert("Abonnement annuler");
+  }, []);
+
   const closeAllPopups = useCallback(() => {
     setPopupVisible(false);
     setSelectedAbonne(null);
@@ -187,6 +195,7 @@ const Abonnes = () => {
               <p>{abonne.utilisateur.role}</p>
               <div className='divBtnDetails'>
                 <button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button>
+                <button onClick={() => handleAnnulerAbonnement(index)} className='btnAnnulerAbonnement'>Annuler</button>
               </div>
             </div>
           ))
