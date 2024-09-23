@@ -20,6 +20,8 @@
 
 .foot1 {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Deux cartes par ligne */
   justify-content: center; /* Centre la grille */
@@ -74,9 +76,9 @@
   font-size: 16px;
   resize: none; 
   outline: none;
-  border: 2px solid #4fb97f; 
+  border: 2px solid #898989; 
   color: white;
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.407); 
   border-radius: 5px; 
   transition: border-color 0.3s ease; 
 }
@@ -142,7 +144,7 @@
 @media(max-width:700px) {
 
   .foot {
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     justify-content: center;
     align-items: center; /* Pour aligner verticalement les éléments */
@@ -153,7 +155,7 @@
     display: flex;
     flex-direction: column;
     align-items: center; /* Aligne les sections au centre */
-    gap: 30px 0; /* Espacement entre les sections */
+    gap: 50px 0; /* Espacement entre les sections */
     width: 100%;
   }
 
@@ -175,8 +177,16 @@
     height: 100px;
   }
 
+  .foot2{
+    font-size: 10px;
+  }
+
+  .ulLinks {
+    gap: 15px;
+  }
+
   .copyright {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 
