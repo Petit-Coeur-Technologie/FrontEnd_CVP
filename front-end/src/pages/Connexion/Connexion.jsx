@@ -77,7 +77,6 @@ export default function Connexion() {
            <Link to="/"> <img className="imageBmw" src={myImage} alt="pct" /> </Link> 
           </div>
         </div>
-        <Link title="Clicker pour revenir sur l'acceuil" to="/"><i class='bx bx-home bx-homeConnexion' ></i></Link>
         {showForgotPassword ? 
         (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
@@ -94,9 +93,8 @@ export default function Connexion() {
                   <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
                   <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
                 </div>
-
                 <div id="divmot2">
-                  <p className="mot3"> <a href="#"> Pas de compte?</a><a href="/inscription"> Inscrivez-Vous!</a></p>
+                  <p className="mot3">Pas de compte? <a href="/inscription"> Inscrivez-Vous!</a></p>
                 </div>
               </div>
             </form>
