@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .pmes {
+    padding-top: 70px; /* Compense la hauteur de la navbar */
+    min-height: 100vh;
+    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
+    }
+    
+    .cardspmes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px; /* Espacement entre les cartes */
+      width: 100%;
+  
+    }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .Btnpage {
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
