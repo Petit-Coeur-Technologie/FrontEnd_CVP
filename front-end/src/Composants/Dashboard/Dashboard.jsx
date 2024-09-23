@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react'; 
-import { Link, Outlet } from 'react-router-dom'; 
+import { Link, Outlet, useNavigate } from 'react-router-dom'; 
 import './Dashboard.css'; 
+import { icon } from '@fortawesome/fontawesome-svg-core';
 
 export default function Dashboard() { 
   // États locaux pour la gestion des menus, profil, et authentification
   const [activerIndex, setActiverIndex] = useState(0); 
   const [navText, setNavText] = useState('Home'); 
   const [affInfoProfil, setAffInfoProfil] = useState(false); 
-  const [profileImage, setProfileImage] = useState("src/assets/imageProfil.png"); 
+  const [profileImage, setProfileImage] = useState("../../src/assets/logo_provisoire.png"); 
   const [userId, setUserId] = useState(null);
+  const [photoDeProfil, setPhotoDeProfil] = useState('');
   const [accessToken, setAccessToken] = useState('');
+  const [abonnesEnAttente, setAbonnesEnAttente] = useState([]);
+  const [nombreAbonnementEnAttente, setNombreAbonnementEnAttente] = useState(0);
   const [userRole, setUserRole] = useState(null); 
+  const [currentAbonnementId, setCurrentAbonnementId] = useState(null); // ID de l'abonnement
+  const [showPopup, setShowPopup] = useState(false); // Ajout de l'état showPopup pour gérer le popup
+  const [ouvrirBarLatteral, setOuvrirBarLatteral] = useState(false); // Ajout de l'état showPopup pour gérer le popup
 
+
+  const functionOuvrirBarLatteral = () =>{
+    setOuvrirBarLatteral(!ouvrirBarLatteral);
+  }
+  const navigate = useNavigate();
   // Fonction pour gérer le clic sur un élément du menu latéral
   const clicker = (index, text) => {
     setActiverIndex(index);
@@ -37,7 +49,8 @@ export default function Dashboard() {
   const elements_ul_Barlaterale1 = [
     { name: 'Home', path: 'home', icon: 'bxs-home' },
     { name: 'Abonnés', path: 'abonnes', icon: 'bx-list-ul' },
-    { name: 'Calendrier', path: 'calendrier', icon: 'bxs-calendar' },
+    {name: 'Abonnement en attente',path:'abonnementenattente', icon:'bx-list-plus'},
+    {name: 'Calendrier', path: 'calendrier', icon: 'bxs-calendar' },
     { name: 'Messagerie', path: 'messagerie', icon: 'bxs-message-rounded-detail' }
   ];
 
@@ -65,20 +78,52 @@ export default function Dashboard() {
     if (roleFromCookie) setUserRole(roleFromCookie);
   }, []);
 
-  // Log des données d'utilisateur pour vérification
-  // useEffect(() => {
-  //   console.log("L'id de l'utilisateur récupéré dans Dashboard : " + userId);
-  //   console.log("Le token de l'utilisateur récupéré dans Dashboard : " + accessToken);
-  // }, [userId, accessToken]);
+  // ========================= POUR RECUPERER LE INFORMATION DE L'UTILISATEUR CONNECTER =======================
+    // Appel API pour récupérer les abonnés et rôle de l'utilisateur
+    useEffect(() => {
+      if (!userId || !accessToken) return;
+  
+      const fetchAbonnes = async () => {
+        // try {
+          const response = await fetch(`https://ville-propre.onrender.com/users/${userId}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            }
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log(data);
+          console.log("INFORMATION DE L'UTILISATEUR CONNECTER...");
+          if(data.utilisateur.role === "pme"){
+            setPhotoDeProfil(data.logo_pme);
+          }
+          else if(data.role ==="menage"){
+            setPhotoDeProfil(data.copie_pi);
+          }
+          else if(data.utilisateur.role ==="entreprise"){
+            setPhotoDeProfil(data.utilisateur.copie_pi);
+          }
+        // } catch (error) {
+        //   console.error('Erreur lors de la récupération des abonnés:', error.message);
+        // }
+      };
+      fetchAbonnes();
+  
+    }, [userId, accessToken]);
 
   // Appel API pour récupérer les abonnés et rôle de l'utilisateur
   useEffect(() => {
     if (!userId || !accessToken) return;
 
     const fetchAbonnes = async () => {
-      try {
-        // console.log(` c'est le lien : https://ville-propre.onrender.com/abonnements/${userId}/client`);
-        const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/client`, {
+      // try {
+        const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/clients`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -91,14 +136,58 @@ export default function Dashboard() {
         }
 
         const data = await response.json();
-        console.log('Données reçues dans dashboard :', data); // Vérifie la structure des données
+        console.log(data);
+        // photoDeProfil(data.)
         setUserRole(data.utilisateur.role); 
-      } catch (error) {
-        console.error('Erreur lors de la récupération des abonnés:', error.message);
-      }
+      // } catch (error) {
+      //   console.error('Erreur lors de la récupération des abonnés:', error.message);
+      // }
     };
     fetchAbonnes();
+
   }, [userId, accessToken]);
+
+
+    // ========================= POUR RECUPERER LE NOMBRE ABONNEMENTS EN ATTENTE =======================
+    useEffect(() => {
+      if (!userId || !accessToken) return;
+    
+      const fetchAbonnes = async () => {
+        try {
+          const response = await fetch(`https://ville-propre.onrender.com/abonnements/${userId}/clients`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            }
+          });
+    
+          if (!response.ok) {
+            throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
+          }
+    
+          const data = await response.json();
+          console.log(data);
+          setAbonnesEnAttente(data);
+          // Comptage des abonnements en attente
+          const abonnementsEnAttente = data.filter((abonne) => abonne.status_abonnement === "pending").length;
+          setNombreAbonnementEnAttente(abonnementsEnAttente);
+        } catch (error) {
+          console.error('Erreur lors de la récupération des abonnés:', error.message);
+        }
+      };
+    
+      fetchAbonnes();
+    }, [userId, accessToken]);
+
+
+  // Fonction pour afficher le popup
+  const handleAbonnementClick = (abonnementId) => {
+    setCurrentAbonnementId(abonnementId);
+    setShowPopup(true);
+  };
+
+  
 
   // Détermine les éléments de menu à afficher en fonction du rôle de l'utilisateur
   const renderSidebarMenu = () => {
@@ -118,13 +207,22 @@ export default function Dashboard() {
     }
   };
 
-  // useEffect(()=>{
-  //   console.log("valeur Stocké dans userRole "+userRole);
-  // })
+  useEffect(() => {
+    if (userId && accessToken) {
+      navigate('home'); 
+    }
+  }, [userId, accessToken]);
+
+
+    // Affichage du nombre d'abonnements en attente
+    useEffect(() => {
+      console.log("LE NOMBRE D'ABONNEMENTS EN ATTENTE DANS DASHBOARD : " + nombreAbonnementEnAttente);
+      console.log(photoDeProfil);
+    }, []);
 
   return (
     <div className='conteneur'>
-      <div className='BarLateraleDashboard'>
+      <div className={`BarLateraleDashboard ${ouvrirBarLatteral ? 'ouvrirBarLateraleDashboard' : ''}`}>
         <div className='divApp'>
           <div className='LogoDiv'>
             <img src="src/Fichiers/logo.png" alt="logo" className='logoApp'/>
@@ -142,6 +240,9 @@ export default function Dashboard() {
               <Link className='liClass' to={item.path}>
                 <i className={`bx ${item.icon}`}></i>
                 {item.name}
+                {item.name === 'Abonnement en attente' && nombreAbonnementEnAttente > 0 && (
+                <div className="divNombreAbonnementEnAttenteDashboard"><p className="pNombreAbonnementEnAttenteDashboard">{nombreAbonnementEnAttente}</p></div>
+                )}
               </Link>
               {activerIndex === index && <span className='activespan'></span>}
             </li>
@@ -166,17 +267,20 @@ export default function Dashboard() {
       </div>
 
       <div className='navBarDashboard'>
+        <div className="menu-iconDashboard " onClick={functionOuvrirBarLatteral}>
+            <i className='bx bx-menu iconMenuDashboard'></i>
+        </div>
         <p className='revoirDashboard'>{navText}</p>
-        <div className='divNotification'>
+        <div className='divNotification diviconNotificationNavBarDashboard'>
           <li onClick={() => handleProfileClick('Notifications')}>
             <Link to="notifications">
-              <i className='bx bxs-bell'></i>
+              <i className='bx bxs-bell iconNotificationNavBarDashboard'></i>
             </Link>
           </li>
           <span className='incrementationNotification'></span>
         </div>
         <div className='divImage' onClick={toggleAffInfoProfil}>
-          <img src={profileImage} alt="profil" className='imageProfil'/>
+          <img src={photoDeProfil} alt="profil" className='imageProfil'/>
         </div>
       </div>
 
@@ -211,9 +315,19 @@ export default function Dashboard() {
         </ul>
       </div>
 
-      <div className='contentFilsDashboard'>
+        {/* Afficher le popup si showPopup est true */}
+        {showPopup && (
+        <ConfirmationPopup
+          message="Voulez-vous accepter cet abonnement?"
+          onConfirm={() => sendConfirmation(currentAbonnementId, 'accept')}
+          onCancel={() => setShowPopup(false)} // Fermer le popup si l'utilisateur annule
+        />
+      )}
+
+      <div className={`contentFilsDashboard contentFilsDashboardAutre ${ouvrirBarLatteral == true ? 'contentFilsDashboard2' : ''}`}>
         <Outlet />
       </div>
+      
     </div>
   );
 }

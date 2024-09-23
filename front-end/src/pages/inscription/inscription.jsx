@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
-import myLogo from '/src/assets/th.jpeg';
+import myLogo from '/src/assets/logo_provisoire.png';
 import background from '/src/assets/background.avif';
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
@@ -195,7 +195,7 @@ function Inscription() {
         </div>
 
         <div className='divHomeIconRetourAcceuil'>
-        <Link to="/"><i class='bx bx-home' ></i></Link>
+        <Link to="/"><i className='bx bx-home' ></i></Link>
         </div>
 
         <div className="button-group">
