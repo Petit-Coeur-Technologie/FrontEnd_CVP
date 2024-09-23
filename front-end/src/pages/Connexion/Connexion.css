@@ -273,6 +273,9 @@
       height:100vh;
       padding: 100px 40px;
     }
+    .divMereImageBmw{
+      margin-bottom:20px;
+    }
     div.input-containerConnexion{
       margin-bottom:15px;
     }
@@ -294,17 +297,27 @@
       padding:25px 0;
       border-radius:8px;
     }
+    div.divIcone > div, .btnConnexion{
+      border-radius:5px;
+    }
     div.divIcone > div:first-of-type{
       margin-bottom: 15px;
     }
-    div#divmot2{
-       width: 350px;
+    div#divmot2, div#divmot3{
+       width: auto;
+       margin-top:0!important;
+       margin-bottom:30px;
     }
-    div#divmot2 > p.mot3{
+    div#divmot2 > p.mot3,
+    div#divmot3>p.mot4{
        font-size:17px;
        color: #ffffff;
     }
     div#divmot2 > p.mot3 > a{
        text-decoration: underline;
+    }
+    div#divmot3>p.mot4 >a {
+      text-decoration:none;
+      color: #fdb024;
     }
   }

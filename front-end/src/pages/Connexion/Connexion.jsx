@@ -96,6 +96,9 @@ export default function Connexion() {
                 <div id="divmot2">
                   <p className="mot3">Pas de compte? <a href="/inscription"> Inscrivez-Vous!</a></p>
                 </div>
+                <div id="divmot3">
+                  <p className="mot4"> <a href="/"> Retour à l'Accueil</a></p>
+                </div>
               </div>
             </form>
           )}
