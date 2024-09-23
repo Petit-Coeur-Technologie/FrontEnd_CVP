@@ -1,8 +1,7 @@
 .contentFilsDashboard {
-    left: 45px;
-    width: 93%;
     overflow: hidden;
-    padding-right: 20px;
+    background-color: rgb(207, 207, 207);
+    /* padding: 10px 0; */
 }
 .btnAccepter{
     background-color: green;
@@ -29,60 +28,57 @@
 .abonneNonTrouve{
     position: relative!important;
     top: 0px;
-    left: 100px;
+    /* left: 100px; */
 }
 
-@media (max-width:1400px) {
-    .divDonnesAbonnementEnAttente{
-        width: 105%!important;
-        height: 100%;
-    }
-    .donneesAbonnementEnAttenteMere{
-        display: flex;
-        width: 104%;
-    }
+.autreInfos{
+    width: 90%;
+    margin-left: 10px;
 }
-@media (min-width:900px) {
-    .donneesAbonnementEnAttenteMere{
-        display: flex;
-        width: 104%;
-    }
-    .divDonnesAbonnementEnAttente{
-        width: 101%;
-        height: 100%;
-    }
-    .donneesAbonnementEnAttente{
-        display: flex;
-        margin:0;
-        width: 80% !important;
-        border-bottom: 1px solid #cbc5c5;
-        margin-bottom: 5px;
-    }
-    .divValidation{
-        display:flex ;
-        flex-direction: column;
-    }
-    .divImageProfil {
-        height: 60px;
-        width: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 5px;
-    }
-    
-    .divImageProfil img {
-        height: 100%;
-        width: 100%;
-    }
-    .divNotification{
-        top: 33px;
-    }
-    .divNotification .bx{
-        height: 0;
-        width: 0;
-        left: -30px;
-    }
+.autreInfos p:nth-child(1){
+    font-weight: bold;
+}
+
+.donneesAbonnementEnAttenteMere{
+    display: flex;
+    width: 104%;
+    border-bottom: 1px solid #777171;
+}
+.divDonnesAbonnementEnAttente{
+    width: 101%;
+    height: 100%;
+}
+.donneesAbonnementEnAttente{
+    display: flex;
+    margin:0;
+    width: 80% !important;
+    /* margin-bottom: 5px; */
+    padding: 10px 0 0 10px;
+}
+.divValidation{
+    display:flex ;
+    flex-direction: column;
+}
+.divImageProfil {
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+}
+
+.divImageProfil img {
+    height: 100%;
+    width: 100%;
+}
+.divNotification{
+    top: 33px;
+}
+.divNotification .bx{
+    height: 0;
+    width: 0;
+    left: -30px;
 }
 
 @media (max-width:900px) {
@@ -133,10 +129,10 @@
     }
 } */
 @media (max-width:770px) {
-    .contentFilsDashboard{
+    /* .contentFilsDashboard{
         left: 145px!important;
         width: 82%!important;
-    }
+    } */
     .donneesAbonnementEnAttenteMere{
         display: flex;
     }
@@ -203,14 +199,14 @@
         padding-bottom: 5px;
         padding-top: 5px;
     }
-    .contentFilsDashboard {
+    /* .contentFilsDashboard {
         left: 45px!important;
         width: 93%!important;
     }
     .contentFilsDashboard2 {
         left: 0px!important;
         width: 104%!important;
-    }
+    } */
     .divValidation{
         display:flex ;
         flex-direction: column;
@@ -223,7 +219,7 @@
         align-items: center;
         margin: 0 5px;
     }
-    
+    .contentFilsDashboard
     .divImageProfil img {
         height: 100%;
         width: 100%;

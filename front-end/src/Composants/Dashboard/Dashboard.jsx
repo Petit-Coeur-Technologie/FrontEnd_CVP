@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [affInfoProfil, setAffInfoProfil] = useState(false); 
   const [profileImage, setProfileImage] = useState("../../src/assets/logo_provisoire.png"); 
   const [userId, setUserId] = useState(null);
+  const [photoDeProfil, setPhotoDeProfil] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [abonnesEnAttente, setAbonnesEnAttente] = useState([]);
   const [nombreAbonnementEnAttente, setNombreAbonnementEnAttente] = useState(0);
@@ -77,6 +78,45 @@ export default function Dashboard() {
     if (roleFromCookie) setUserRole(roleFromCookie);
   }, []);
 
+  // ========================= POUR RECUPERER LE INFORMATION DE L'UTILISATEUR CONNECTER =======================
+    // Appel API pour récupérer les abonnés et rôle de l'utilisateur
+    useEffect(() => {
+      if (!userId || !accessToken) return;
+  
+      const fetchAbonnes = async () => {
+        // try {
+          const response = await fetch(`https://ville-propre.onrender.com/users/${userId}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            }
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log(data);
+          console.log("INFORMATION DE L'UTILISATEUR CONNECTER...");
+          if(data.utilisateur.role === "pme"){
+            setPhotoDeProfil(data.logo_pme);
+          }
+          else if(data.role ==="menage"){
+            setPhotoDeProfil(data.copie_pi);
+          }
+          else if(data.utilisateur.role ==="entreprise"){
+            setPhotoDeProfil(data.utilisateur.copie_pi);
+          }
+        // } catch (error) {
+        //   console.error('Erreur lors de la récupération des abonnés:', error.message);
+        // }
+      };
+      fetchAbonnes();
+  
+    }, [userId, accessToken]);
+
   // Appel API pour récupérer les abonnés et rôle de l'utilisateur
   useEffect(() => {
     if (!userId || !accessToken) return;
@@ -96,6 +136,8 @@ export default function Dashboard() {
         }
 
         const data = await response.json();
+        console.log(data);
+        // photoDeProfil(data.)
         setUserRole(data.utilisateur.role); 
       // } catch (error) {
       //   console.error('Erreur lors de la récupération des abonnés:', error.message);
@@ -127,7 +169,6 @@ export default function Dashboard() {
           const data = await response.json();
           console.log(data);
           setAbonnesEnAttente(data);
-  
           // Comptage des abonnements en attente
           const abonnementsEnAttente = data.filter((abonne) => abonne.status_abonnement === "pending").length;
           setNombreAbonnementEnAttente(abonnementsEnAttente);
@@ -176,7 +217,8 @@ export default function Dashboard() {
     // Affichage du nombre d'abonnements en attente
     useEffect(() => {
       console.log("LE NOMBRE D'ABONNEMENTS EN ATTENTE DANS DASHBOARD : " + nombreAbonnementEnAttente);
-    }, [nombreAbonnementEnAttente]);
+      console.log(photoDeProfil);
+    }, []);
 
   return (
     <div className='conteneur'>
@@ -238,7 +280,7 @@ export default function Dashboard() {
           <span className='incrementationNotification'></span>
         </div>
         <div className='divImage' onClick={toggleAffInfoProfil}>
-          <img src={profileImage} alt="profil" className='imageProfil'/>
+          <img src={photoDeProfil} alt="profil" className='imageProfil'/>
         </div>
       </div>
 

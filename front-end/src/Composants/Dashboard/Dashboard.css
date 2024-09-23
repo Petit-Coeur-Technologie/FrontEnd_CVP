@@ -3,7 +3,7 @@
 .conteneur {
   /* Conteneur principl pour la barre latérale et le navBar */
   display: flex;
-  background-color: var(--gris);
+  background-color: rgb(207, 207, 207);
   height: 100vh;
   width: 100%;
   /* position: fixed; */
@@ -112,7 +112,7 @@ padding-right: 76px;
 
 .menuBarLaterale1 .active, .menuBarLaterale2 .active {
   /* Style des éléments actifs */
-  background-color: var(--gris) !important;
+  background-color: rgb(207, 207, 207);
   color: var(--vert);
   position: relative;
 }
@@ -209,8 +209,8 @@ padding-right: 76px;
 /* Style pour la div contenant la photo de profil */
 position: absolute;
 top: 11px;
-width: 80px;
-height: 80px;
+width: 60px;
+height: 60px;
 right: 40px;
 border-radius: 50%;
 border: 1px solid rgb(171, 171, 171);
@@ -225,7 +225,7 @@ cursor: pointer;
 /* Style pour l'image de profil */
 width: 100%;
 height: 100%;
-object-fit: cover; /* Cela garantit que l'image couvre tout en restant proportionnée */
+object-fit: contain; /* Cela garantit que l'image couvre tout en restant proportionnée */
 border-radius: 50%;
 }
 
@@ -300,7 +300,6 @@ padding: 0;
   width: 100%;
 }
 
-
 @keyframes voirdivInfoProfil {
 0% {
     right: -220px;
@@ -313,12 +312,13 @@ padding: 0;
 .contentFilsDashboard {
   /* Styliser le conteneur des fichiers filles */
   position: absolute;
-  width: calc(100% - 130px);
   height: calc(100vh - 50px);
-  left: 180px;
   top: 80px;
   transition: all .3s ease-in-out;
-  overflow-y: auto;
+  left: 150px;
+  width: 90%;
+  overflow: hidden;
+  padding-right: 20px;
 }
 
 .abonneDivConteneur {
@@ -333,7 +333,6 @@ padding: 0;
   margin: 20px;
   height: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: calc(100% - 40px); 
 }
 .formulaireRechercheAbonnes {
   /* Styliser le formulaire de recherche */
@@ -387,7 +386,7 @@ padding: 0;
 .divDonnes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 0px;
   overflow-y: auto;
   max-height: 400px;
   overflow-y: scroll;
@@ -504,11 +503,73 @@ padding: 0;
   font-size: 10px;
 }
 
+@media (min-width:1250px){
+  .divDonnes {
+    display: flex!important;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: start;
+    left: -10px;
+  }
+  .donnees {
+    flex: 1 1 calc(25%);
+    margin: 5px;
+    max-width: 230px!important;
+  }
+  
+  .abonnesConteneur{
+    width: 96%!important;
+  }
+}
+
+@media (min-width:1023px){
+  .abonnesConteneur{
+    width: 92%;
+  }
+  .divDonnes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0;
+    overflow-y: auto;
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-left: 45px!important;
+}
+}
 @media (max-width:908px){
   .divDonnes {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contentFilsDashboard{
+    left: 40px;
+    position: fixed;
+    width: 97.5%;
+  }
+  .divDonnes{
+    gap: 0px;
+    /* position: relative;
+    left: -6px; */
+    overflow-x: hidden;
+  }
+  .BarLateraleDashboard{
+    width: 55px;
+    position: fixed;
+    z-index: 5000;
+  }
+  .menuBarLaterale1 .liClass:first-child, .menuBarLaterale2 .liClass:first-child {
+    padding-left: 20px;
+  }
+  .menuBarLaterale1 .liClass, .menuBarLaterale2 .liClass{
+    color: var(--transparant)!important;
+  }
+  .menuBarLaterale1 li i, .menuBarLaterale2 li i {
+    color: var(--noir);
+    opacity: 1;
+  }
+  .nomApp{
+    display: none;
+  }
 }
 
 @media (max-width: 600px) {
@@ -550,11 +611,10 @@ padding: 0;
   .active i {
       color: var(--vert) !important;
   }
-  .contentFilsDashboard {
+  /* .contentFilsDashboard {
       width: calc(100% - 25px);
-      /* left: 35px; */
       height: 100%;
-  }
+  } */
   
   /* Assure que l'icône reste visible */
   .retour .liClass i {
@@ -596,18 +656,22 @@ padding: 0;
     position: absolute;
     transition: left 1s ease-in-out; /* Transition animée */
   }
-  .contentFilsDashboard{
+  /* .contentFilsDashboard{
     left: 45px;
     width: 89%;
     overflow: hidden;
     padding-right: 20px;
-  }
-  .contentFilsDashboard2{
+  } */
+  /* .contentFilsDashboard2{
     left: 0px!important;
     width: 100%;
     padding-right: 20px ;
+  } */
+   
+  .contentFilsDashboard{
+    left: 40px;
   }
-  
+
   .diviconNotificationNavBarDashboard{
     top: 32px!important;
   }
@@ -617,19 +681,20 @@ padding: 0;
 
   /* Conteneur des abonnés : largeur à 95% et position fixe */
   .abonnesConteneur {
-    width: 95% !important;
+    width: 90% !important;
     position: relative;
-    left: 0; /* Aligne à gauche */
+    left: 0px; /* Aligne à gauche */
     z-index: 9999;
   }
-  .contentFilsDashboard2{
+  /* .contentFilsDashboard2{
     width: 100% !important;
-  }
+  } */
   .divDonnes{
     display: flex;
     justify-content: center;
     height: 100%;
     flex-wrap: wrap;
+    gap: 20px ;
   }
 
   /* Icône du menu : affichage et style */
