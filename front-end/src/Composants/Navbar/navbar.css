@@ -1,0 +1,177 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.nav {
+    position: fixed;
+    width: 100%;
+    height: 65px;
+    z-index: 2;
+    top: 0;
+    background-color: #00804b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px;
+}
+.navLogo{
+    margin: 0;
+    padding: 0;
+    height: 40px;
+}
+
+/* Logo */
+#logo {
+    width: 40px;
+    margin: 0%;
+}
+
+/* Icône de menu */
+.menu-icon {
+    display: none; /* Masquer par défaut sur grands écrans */
+    cursor: pointer;
+    color: #fdb024;
+    font-size: 1.5rem;
+}
+
+/* Liste de navigation par défaut pour les grands écrans */
+.nav-items {
+    display: flex; /* Affichage en ligne */
+    align-items: center;
+    list-style: none;
+    margin-left: auto; /* Espace entre logo et liste */
+}
+
+.nav-items .NavLink {
+    padding: 0 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-items .NavLink:hover {
+    color: #fdb024;
+}
+
+/* Icône de connexion et déconnexion */
+.login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Btnlogin {
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Overlay sombre */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: none; /* Masquer par défaut */
+}
+
+/* Barre latérale */
+.sidebarNav {
+    position: fixed;
+    left: -100%; /* Hors de l'écran par défaut */
+    top: 0;
+    width: 70%;
+    height: 100%;
+    background-color: #ffffff;
+    transition: left 0.6s ease-out;
+    z-index: 2;
+}
+
+.sidebarNav.open {
+    left: 0; /* Afficher la barre latérale */
+}
+
+.ListeSidebarNav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lienNav {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebarNavLink {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.listeNav{
+    color: #00804b;
+}
+
+.lienNav:hover {
+    color: #fdb024;
+}
+
+.listeNav:hover {
+    color: #fdb024;
+}
+
+.iconeNav {
+    margin-right: 10px; /* Espace entre l'icône et le texte */
+    font-size: 18px!important;
+    color: #00804b;
+}
+
+/* Responsivité */
+@media (max-width: 700px) {
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        height: auto;
+    }
+
+    .lienNav, .listeNav{
+        font-size: 18px;
+    }
+
+    /* Afficher le menu sur les petits écrans */
+    .menu-icon {
+        display: block; /* Afficher l'icône de menu */
+    }
+
+    /* Masquer les éléments de la liste de navigation par défaut */
+    .nav-items {
+        display: none; /* Masquer la liste de navigation */
+    }
+
+    .navLogo {
+        margin: 0 auto; /* Centrer le logo */
+    }
+
+    .login {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    /* Afficher l'overlay sombre uniquement sur petits écrans */
+    .overlay {
+        display: block;
+    }
+}

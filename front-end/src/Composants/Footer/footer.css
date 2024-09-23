@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.foot {
+  height: auto;
+  background-color: #00804b;
+  width: 100%;
+  color: white;
+}
+
+.foot-container {
+  width: 100%;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+}
+
+.foot1 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Deux cartes par ligne */
+  justify-content: center; /* Centre la grille */
+  justify-items: center; /* Centre les éléments dans chaque cellule */
+  padding: 20px 25px;
+  gap: 20px 10px; /* Espace entre les sections */
+}
+
+
+.ctcSection {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px; /* Espace à droite de la section Contacts */
+}
+
+.titreContact, .feedback, .titreSocial {
+  margin-bottom: 10px; 
+}
+
+.localisation,.tel{
+  margin-bottom: 15px; /* Espace sous le lien */
+}
+
+.mailien {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+}
+
+.mailien:hover {
+  color: #fdb024;
+}
+
+.iconeFoot {
+  font-size: 35px!important; 
+  color: #fdb024; 
+  transition: transform 0.3s ease; 
+}
+
+.iconeFoot:hover {
+  transform: scale(1.1); 
+}
+
+.cmtSection {
+  width: 400px;
+}
+
+.cmtMail, .cmtFoot {
+  width: 100%;
+  padding: 10px 15px; 
+  margin: 5px;
+  font-size: 16px;
+  resize: none; 
+  outline: none;
+  border: 2px solid #898989; 
+  color: white;
+  background-color: rgba(0, 0, 0, 0.407); 
+  border-radius: 5px; 
+  transition: border-color 0.3s ease; 
+}
+
+.cmtMail:focus, .cmtFoot:focus {
+  border-color: #ffffff; 
+}
+
+.btnCmtFoot {
+  width: 120px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  background-color: #4fb97f; 
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  border-radius: 5px; 
+}
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialIcons {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.foot2 {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #4fb97f;
+}
+
+.ulLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  list-style: none;
+}
+
+.listeLinks {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.listeLinks:hover {
+  color: #00804b;
+}
+
+.foot3 {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+@media(max-width:700px) {
+
+  .foot {
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Pour aligner verticalement les éléments */
+    text-align: center;
+  }
+
+  .foot1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligne les sections au centre */
+    gap: 50px 0; /* Espacement entre les sections */
+    width: 100%;
+  }
+
+  .ctcSection, .socialSection, .cmtSection {
+    width: 80%; /* Utilise 90% de la largeur disponible */
+    margin: 0 auto; /* Centrer chaque section */
+  }
+
+  .socialIcons {
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .cmtSection {
+    width: 90%; /* Réduit la largeur pour éviter le débordement */
+  }
+
+  .cmtFoot{
+    height: 100px;
+  }
+
+  .foot2{
+    font-size: 10px;
+  }
+
+  .ulLinks {
+    gap: 15px;
+  }
+
+  .copyright {
+    font-size: 10px;
+  }
+}
+
+@media(min-width: 1000px) {
+  .foot1 {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+  }
+
+  .ctcSection {
+    margin-right: 40px; /* Ajuste l'espace pour les grands écrans */
+  }
+
+  .socialIcons {
+    flex-direction: row;
+    margin-top: 10%;
+    gap: 10px; /* Ajuste l'espace entre les icônes pour les grands écrans */
+  }
+
+  .copyright {
+    font-size: 16px;
+  }
+}

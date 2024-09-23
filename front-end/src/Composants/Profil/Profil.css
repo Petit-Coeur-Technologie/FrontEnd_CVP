@@ -1,0 +1,105 @@
+
+.chargementProfil, .erreurModification{
+  position: relative;
+  left: 50%;
+  margin-top: 50px;
+}
+.erreurModification{
+  left: 400px;
+}
+
+
+/* Style global pour le conteneur des détails du profil */
+.profileDetails {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Style pour l'image de profil */
+.imageProfilContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+/* Style pour les paragraphes de détails du profil */
+.profileDetailsP {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+/* Style pour les champs de formulaire en mode édition */
+.profilEdit {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.profilTextarea {
+  resize: vertical;
+}
+
+/* Style pour les boutons */
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style pour le bouton de sauvegarde */
+.btnSave {
+  background-color: #28a745;
+  color: white;
+}
+
+.btnSave:hover {
+  background-color: #218838;
+}
+
+/* Style pour le bouton d'annulation */
+.btnCancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btnCancel:hover {
+  background-color: #c82333;
+}
+
+/* Style pour le bouton de modification */
+.btnEdit {
+  background-color: #007bff;
+  color: white;
+}
+
+.btnEdit:hover {
+  background-color: #0056b3;
+}
+
+/* Style pour le message de chargement */
+.chargementProfil {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}
+
