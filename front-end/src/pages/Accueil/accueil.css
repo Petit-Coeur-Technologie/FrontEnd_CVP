@@ -27,13 +27,24 @@
 }
 
 .loading{
-  width: 30%;
-  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  margin-bottom: 30px;
 }
 
 .loadingSpin{
-  width: auto;
-  height: 100%;
+  animation: spin 5s linear infinite;/* Animation de rotation*/
+  width: 200px;
+  height: auto;
+}
+
+/* Animation pour le spinner*/
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }
 
 .cards-container {

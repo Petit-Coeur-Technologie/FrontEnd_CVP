@@ -3,7 +3,7 @@ import './Styles/style.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Inscription from './pages/inscription/inscription.jsx';
 import Accueil from './pages/Accueil/accueil.jsx';
-import Sensibilisation from './pages/Sensibilisation/Sensibilisation.jsx';
+// import Sensibilisation from './pages/Sensibilisation/Sensibilisation.jsx';
 import Navbar from './Composants/Navbar/navbar.jsx';
 import Footer from './Composants/Footer/footer.jsx';
 import Dashboard from './Composants/Dashboard/Dashboard.jsx';
@@ -24,10 +24,13 @@ import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
 // import PrivateRoute from './Composants/PrivateRoute.jsx'; 
+import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
+
+
 
 function App() {
 
-  
+
   const location = useLocation();
 
   const hideNavbarAndFooter =
@@ -36,16 +39,17 @@ function App() {
     location.pathname.startsWith('/dashboard');
 
   return (
+    <CheckConnection>
     <div>
-      {!hideNavbarAndFooter && <Navbar />}
+        {!hideNavbarAndFooter && <Navbar />}
 
-      <Routes>
-        <Route path='/' element={<Accueil />} />
-        <Route path='/inscription' element={<Inscription />} />
-        <Route path='/sens' element={<Sensibilisation />} />
-        <Route path='/:id' element={<InfosPme/>}/>
+        <Routes>
+          <Route path='/' element={<Accueil />} />
+          <Route path='/inscription' element={<Inscription />} />
+          {/* <Route path='/sens' element={<Sensibilisation />} /> */}
+          <Route path='/:id' element={<InfosPme />} />
 
-        {/* Route protégée avec PrivateRoute */}
+          {/* Route protégée avec PrivateRoute */}
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<Home />} />
             <Route path="abonnes" element={<Abonnes />} />
@@ -61,11 +65,12 @@ function App() {
             <Route path="details/:index" element={<Details />} />
           </Route>
 
-        <Route path='/connexion' element={<Connexion />} />
-      </Routes>
+          <Route path='/connexion' element={<Connexion />} />
+        </Routes>
 
-      {!hideNavbarAndFooter && <Footer />}
+        {!hideNavbarAndFooter && <Footer />}
     </div>
+    </CheckConnection>
   );
 }
 
