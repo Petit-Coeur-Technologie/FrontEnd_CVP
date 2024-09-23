@@ -67,9 +67,12 @@ function App() {
           </Route>
 
           <Route path='/connexion' element={<Connexion />} />
+
+         {/* Route 404 */}
+         <Route path='/404' element={<PageInexistante />} />
           
           {/* Route pour capturer les chemins inconnus */}
-          <Route path='/*' element={<PageInexistante />} />
+          <Route path='*' element={<PageInexistante />} />
 
         </Routes>
 

@@ -28,7 +28,7 @@ function InfosPme() {
         });
 
         }else{
-            navigate('*')
+            navigate('/404')
         }
 
         // Vérifier l'authentification à l'initialisation

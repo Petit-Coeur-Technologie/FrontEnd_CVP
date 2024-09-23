@@ -195,7 +195,7 @@ function Inscription() {
         </div>
 
         <div className='divHomeIconRetourAcceuil'>
-        <Link to="/"><i class='bx bx-home' ></i></Link>
+        <Link to="/"><i className='bx bx-home' ></i></Link>
         </div>
 
         <div className="button-group">

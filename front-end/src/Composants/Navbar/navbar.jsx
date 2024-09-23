@@ -79,7 +79,7 @@ const Navbar = () => {
                     onClick={handleUserIconClick}
                 ></i>
                 {isAuthenticated() && (
-                    <button onClick={handleLogout}>Déconnexion</button>
+                    <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
                 )}
             </div>
 

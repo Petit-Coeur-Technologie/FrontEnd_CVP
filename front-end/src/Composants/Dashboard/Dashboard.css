@@ -3,7 +3,7 @@
 .conteneur {
   /* Conteneur principl pour la barre latérale et le navBar */
   display: flex;
-  background-color: var(--gris);
+  background-color: rgb(207, 207, 207);
   height: 100vh;
   width: 100%;
   /* position: fixed; */
@@ -106,10 +106,13 @@ padding-right: 76px;
   font-size: 20px;
   padding: 15px 0 15px 10px;
 }
+.menu-iconDashboard{
+  display: none ;
+}
 
 .menuBarLaterale1 .active, .menuBarLaterale2 .active {
   /* Style des éléments actifs */
-  background-color: var(--gris) !important;
+  background-color: rgb(207, 207, 207);
   color: var(--vert);
   position: relative;
 }
@@ -135,19 +138,18 @@ padding-right: 76px;
   background-color: var(--blanc);
   box-shadow: 0px 0px 3px var(--blanc);
   width: 100%;
-  height: 60px;
+  height: 80px;
   position: relative;
   display: flex;
   align-items: center;
   z-index: 2000;
 }
 
+
 .divNotification, .divProfil {
   /* Style pour les icônes de notification et de profil */
   position: absolute;
-  top: 17px;
 }
-
 
 .divNotification {
   /* Style pour la div de notification */
@@ -159,10 +161,9 @@ padding-right: 76px;
 .divNotification .bx {
   /* Style pour l'icon de notification */
   color: var(--noir);
-  font-size: 22px;
+  font-size: 25px;
   position: relative;
-  top: -30px;
-  right: 20px;
+  right: 7px;
 }
 
 .divApp{
@@ -208,8 +209,8 @@ padding-right: 76px;
 /* Style pour la div contenant la photo de profil */
 position: absolute;
 top: 11px;
-width: 40px;
-height: 40px;
+width: 60px;
+height: 60px;
 right: 40px;
 border-radius: 50%;
 border: 1px solid rgb(171, 171, 171);
@@ -261,7 +262,7 @@ border-radius: 50%;
   left: 0;
   right: 0;
 }
-.liClass
+
 .divVoirInfoProfil ul li {
 padding-left: 10px;
 background-color: #ffffff; /* Couleur de fond des éléments li */
@@ -299,7 +300,6 @@ padding: 0;
   width: 100%;
 }
 
-
 @keyframes voirdivInfoProfil {
 0% {
     right: -220px;
@@ -309,20 +309,16 @@ padding: 0;
 }
 }
 
-
 .contentFilsDashboard {
   /* Styliser le conteneur des fichiers filles */
   position: absolute;
-  width: calc(100% - 130px);
   height: calc(100vh - 50px);
-  left: 140px;
-  top: 50px;
+  top: 80px;
   transition: all .3s ease-in-out;
-  overflow-y: auto;
-}
-
-.revoirDashboard{
-  margin-left: 10px;
+  left: 150px;
+  width: 90%;
+  overflow: hidden;
+  padding-right: 20px;
 }
 
 .abonneDivConteneur {
@@ -335,9 +331,8 @@ padding: 0;
   background-color: var(--blanc);
   padding: 20px;
   margin: 20px;
-  border-radius: 10px;
+  height: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: calc(100% - 40px); 
 }
 .formulaireRechercheAbonnes {
   /* Styliser le formulaire de recherche */
@@ -391,21 +386,20 @@ padding: 0;
 .divDonnes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 0px;
   overflow-y: auto;
   max-height: 400px;
   overflow-y: scroll;
 }
 .abonneNonTrouve{
-  position: relative;
-  left: 450px;
   padding: 10px;
+  text-align: center;
+  grid-column: span 2;
 }
 .donnees {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 10px; 
-  /* gap: 10px; */
   width: 300px;
   height: 270px;
   margin: 15px; 
@@ -423,7 +417,7 @@ padding: 0;
   height: 100px;
   border-radius: 50%; 
   border: 2px solid var(--bleuclair);
-  object-fit: cover; 
+  object-fit: contain; 
   margin: 10px 10px 0 10px;
 }
 
@@ -457,6 +451,7 @@ padding: 0;
 .divBtnDetails{
   border: none;
   position: absolute;
+  display: flex;
   bottom: 20px;
   color: var(--blanc);
   border-radius: 10px;
@@ -465,15 +460,8 @@ padding: 0;
   height: 30px;
   cursor: pointer;
 }
-.divBtnDetails:hover{
-  /* background-color: var(--bleuclair); */
-  transition: all .2s ease-in-out;
-  transform: scale(1.1);
-}
 
-.btnDetails{
-  background-color: var(--vert);
-  background-color: var(--vert);
+.btnDetails, .btnAnnulerAbonnement{
   border: none;
   width: 100%;
   bottom: 20px;
@@ -486,24 +474,114 @@ padding: 0;
 .btnDetails:hover{
   background-color: var(--bleuclair);
   transition: all .2s ease-in-out;
-  /* transform: scale(1.1); */
-  font-weight: bold;
+}
+.btnDetails{
+  background-color: var(--vert);
 }
 
+.btnAnnulerAbonnement{
+  background-color: var(--rouge);
+}
+.btnAnnulerAbonnement:hover{
+  background-color: var(--bleuclair);
+  transition: all .2s ease-in-out;
+  /* font-weight: bold; */
+}
+
+.divNombreAbonnementEnAttenteDashboard{
+  background-color: rgb(217, 38, 38);
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;top: 10px;
+  left: -25px;
+  color: white;
+}
+.pNombreAbonnementEnAttenteDashboard{
+  font-size: 10px;
+}
+
+@media (min-width:1250px){
+  .divDonnes {
+    display: flex!important;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: start;
+    left: -10px;
+  }
+  .donnees {
+    flex: 1 1 calc(25%);
+    margin: 5px;
+    max-width: 230px!important;
+  }
+  
+  .abonnesConteneur{
+    width: 96%!important;
+  }
+}
+
+@media (min-width:1023px){
+  .abonnesConteneur{
+    width: 92%;
+  }
+  .divDonnes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0;
+    overflow-y: auto;
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-left: 45px!important;
+}
+}
 @media (max-width:908px){
   .divDonnes {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-    }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contentFilsDashboard{
+    left: 40px;
+    position: fixed;
+    width: 97.5%;
+  }
+  .divDonnes{
+    gap: 0px;
+    /* position: relative;
+    left: -6px; */
+    overflow-x: hidden;
+  }
+  .BarLateraleDashboard{
+    width: 55px;
+    position: fixed;
+    z-index: 5000;
+  }
+  .menuBarLaterale1 .liClass:first-child, .menuBarLaterale2 .liClass:first-child {
+    padding-left: 20px;
+  }
+  .menuBarLaterale1 .liClass, .menuBarLaterale2 .liClass{
+    color: var(--transparant)!important;
+  }
+  .menuBarLaterale1 li i, .menuBarLaterale2 li i {
+    color: var(--noir);
+    opacity: 1;
+  }
+  .nomApp{
+    display: none;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .BarLaterale .nomApp {
-      display: none;
+      display: block;
   }
   .BarLateraleDashboard {
       width: 50px !important;
       overflow-x: hidden;
+  }
+  .ouvrirBarLateraleDashboard {
+    transition: left .3s ease-in-out;
   }
   .active {
       position: relative;
@@ -524,6 +602,7 @@ padding: 0;
       color: var(--vert);
   }
 
+  
   .LogoDiv{
       position: absolute;
       left: 4px;
@@ -532,27 +611,27 @@ padding: 0;
   .active i {
       color: var(--vert) !important;
   }
-  .contentFilsDashboard {
-      width: calc(100% - 25px) !important;
-      left: 35px;
+  /* .contentFilsDashboard {
+      width: calc(100% - 25px);
+      height: 100%;
+  } */
+  
+  /* Assure que l'icône reste visible */
+  .retour .liClass i {
+      z-index: 1;
+      font-size: 20px; 
+      color: var(--rouge); 
   }
   
-      /* Assure que l'icône reste visible */
-      .retour .liClass i {
-          z-index: 1;
-          font-size: 20px; 
-          color: var(--rouge); 
-      }
-  
-      /* Assure que l'élément "Retour" est toujours visible */
-      .retour {
-          color: var(--rouge); 
-      }
-  
-      .retour a .bx {
-          opacity: 1;
-          color:  var(--transparant);; /* Assure que l'icône est de la bonne couleur */
-      }
+  /* Assure que l'élément "Retour" est toujours visible */
+  .retour {
+      color: var(--rouge); 
+  }
+
+  .retour a .bx {
+      opacity: 1;
+      color:  var(--transparant); /* Assure que l'icône est de la bonne couleur */
+  }
   .donnees {
     max-width: 100%; /* Adapter la largeur sur mobile */
     padding: 15px; /* Réduire le padding sur mobile */
@@ -567,7 +646,94 @@ padding: 0;
   .donnees p:first-of-type {
     font-size: 1.1em; /* Ajuster la taille de police pour le nom sur mobile */
   }
+  
 }
+
+@media(max-width: 500px) {
+  /* Masquer la barre latérale du tableau de bord */
+  .ouvrirBarLateraleDashboard {
+    left: -55px; /* Position fermée (cachée) */
+    position: absolute;
+    transition: left 1s ease-in-out; /* Transition animée */
+  }
+  /* .contentFilsDashboard{
+    left: 45px;
+    width: 89%;
+    overflow: hidden;
+    padding-right: 20px;
+  } */
+  /* .contentFilsDashboard2{
+    left: 0px!important;
+    width: 100%;
+    padding-right: 20px ;
+  } */
+   
+  .contentFilsDashboard{
+    left: 40px;
+  }
+
+  .diviconNotificationNavBarDashboard{
+    top: 32px!important;
+  }
+  .iconNotificationNavBarDashboard{
+    top: -15px!important;
+  }
+
+  /* Conteneur des abonnés : largeur à 95% et position fixe */
+  .abonnesConteneur {
+    width: 90% !important;
+    position: relative;
+    left: 0px; /* Aligne à gauche */
+    z-index: 9999;
+  }
+  /* .contentFilsDashboard2{
+    width: 100% !important;
+  } */
+  .divDonnes{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    flex-wrap: wrap;
+    gap: 20px ;
+  }
+
+  /* Icône du menu : affichage et style */
+  .menu-iconDashboard {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+  }
+
+  /* Nom de l'application masqué */
+  .nomApp {
+    display: none;
+  }
+  .donnees{
+    width: 260px;
+  }
+  .divNombreAbonnementEnAttenteDashboard{
+    left: -111px;
+    top: 0;
+    display: flex;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .divContainer {
   overflow: auto;
@@ -741,4 +907,12 @@ transition: filter 0.3s ease;
 }
 .h4commentaire{
   padding-bottom: 10px;
+}
+.chargementMessageAbonnes {
+  text-align: center;
+  font-size: 1.2em;
+  color: #6c757d; 
+  width: 100%!important;
+  position: relative;
+  left: 100%;
 }
