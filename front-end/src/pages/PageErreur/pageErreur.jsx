@@ -4,9 +4,8 @@ import React from 'react';
 const PageErreur = ({onReload}) =>{
     return(
         <div className='error'>
-            <img src="" alt="" />
-            <span>Oups..., il semble qu'il y ait un problème avec la connexion. Veuillez vérifier votre connexion internet.</span>
-            <button onClick={onReload}> Recharger la page</button>
+            <span>Nous avons rencontré un problème lors du chargement des informations. Vérifiez votre connexion puis réessayer.</span>
+            <button onClick={onReload}> Recharger les informations</button>
         </div>
     );
 };

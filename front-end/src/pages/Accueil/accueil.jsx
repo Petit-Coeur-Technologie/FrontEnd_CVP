@@ -15,7 +15,7 @@ function Accueil() {
   const [zones, setZones] = useState([]);
   const [tarifs, setTarifs] = useState([]);
   const [notes, setNotes] = useState([]);
-  const [erreur,setErreur]=useState(false);
+  const [erreur, setErreur] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const pmesPerPage = 10;
@@ -57,13 +57,30 @@ function Accueil() {
     setCurrentPage(1); // Réinitialiser à la première page après filtrage
   };
 
-  const handleReload=()=>{
-    window.location.reload();
+  const handleReload = () => {
+    setIsLoading(true);
+    setErreur(false);
+
+    //Refetch les données sans recharger toute la page
+    fetch('https://ville-propre.onrender.com/pmes')
+      .then((response) => response.json())
+      .then((data) => {
+        setPmes(data);
+        setFilteredPmes(data);
+        setIsLoading(false);
+
+        //Réinitialiser les filtres
+        setZones([...new Set(data.map((pme) => pme.zone_intervention))]);
+        setTarifs([...new Set(data.map((pme) => pme.tarif_mensuel))]);
+        setNotes([...new Set(data.map((pme) => pme.rating))]);
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la tentative de rechargement:', error);
+        setIsLoading(false);
+        setErreur(true);
+      })
   };
 
-  if(erreur){
-    return <PageErreur onReload={handleReload}/>
-  }
 
   return (
     <div className="home">
@@ -84,37 +101,43 @@ function Accueil() {
         </div>
       ) : (
         <>
-          {/* Filtre et cartes PME */}
-          <Filtre
-            list={pmes} // Passer la liste complète des PME
-            setFilteredResults={handleFilter} // Utiliser la méthode de filtrage
-            zones={zones}
-            tarifs={tarifs}
-            notes={notes}
-          />
-          <div className="cards-container">
-            {filteredPmes.length === 0 ? (
-              <div className='inexistant'>
-                <p>Aucune PME ne correspond à votre recherche.</p>
+          {erreur ? (
+            <PageErreur onReload={handleReload} />
+          ) : (
+            <>
+              {/* Filtre et cartes PME */}
+              <Filtre
+                list={pmes} // Passer la liste complète des PME
+                setFilteredResults={handleFilter} // Utiliser la méthode de filtrage
+                zones={zones}
+                tarifs={tarifs}
+                notes={notes}
+              />
+              <div className="cards-container">
+                {filteredPmes.length === 0 ? (
+                  <div className='inexistant'>
+                    <p>Aucune PME ne correspond à votre recherche.</p>
+                  </div>
+                ) : (
+                  currentPmes.map((pme) => (
+                    <PmeCard key={pme.id} pme={pme} />
+                  ))
+                )}
               </div>
-            ) : (
-              currentPmes.map((pme) => (
-                <PmeCard key={pme.id} pme={pme} />
-              ))
-            )}
-          </div>
-                {/* Pagination */}
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`Btnpage ${currentPage === index + 1 ? 'active' : ''}`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+              {/* Pagination */}
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index + 1}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={`Btnpage ${currentPage === index + 1 ? 'active' : ''}`}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
 

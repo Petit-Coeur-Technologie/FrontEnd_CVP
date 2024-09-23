@@ -1,0 +1,9 @@
+.principal{
+    margin-top: 70px;
+    padding: 10px 25px;
+    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    min-height: 100vh;
+}
