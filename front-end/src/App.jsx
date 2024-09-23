@@ -36,6 +36,7 @@ function App() {
 
   const hideNavbarAndFooter =
     location.pathname === '/inscription' ||
+    location.pathname === '/404' ||
     location.pathname === '/connexion' ||
     location.pathname.startsWith('/dashboard');
 
@@ -72,7 +73,7 @@ function App() {
          <Route path='/404' element={<PageInexistante />} />
           
           {/* Route pour capturer les chemins inconnus */}
-          <Route path='*' element={<PageInexistante />} />
+          <Route path='*' element={<Navigate to="/404" replace state={{ from: location.pathname }} />} />
 
         </Routes>
 

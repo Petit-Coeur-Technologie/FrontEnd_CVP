@@ -1,9 +1,13 @@
 .principal{
-    margin-top: 70px;
-    padding: 10px 25px;
-    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    align-items: center;
     min-height: 100vh;
+    gap: 20px;
+    padding: 20px;
+}
+
+.imgErreur{
+    width: 300px!important;
+    height: 300px!important;
 }
