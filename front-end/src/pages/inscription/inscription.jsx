@@ -194,10 +194,7 @@ function Inscription() {
           <Link to="/"><img title="Click pour revenir sur l'acceuil" src={myLogo} id="lg" /></Link>
         </div>
 
-        <div className='divHomeIconRetourAcceuil'>
-        <Link to="/"><i class='bx bx-home' ></i></Link>
-        </div>
-
+      
         <div className="button-group">
           <button className="client" onClick={() =>
             setFormType('client')} style={{ opacity: formType === 'client' ? 1 : 0.5 }}>
