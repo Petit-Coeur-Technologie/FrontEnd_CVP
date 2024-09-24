@@ -50,7 +50,7 @@ function Accueil() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     window.scrollTo({
-      top: 350,
+      top: 300,
       behavior: "smooth",
     });    
   };
