@@ -49,6 +49,10 @@ function Accueil() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({
+      top: 350,
+      behavior: "smooth",
+    });    
   };
 
   // Méthode pour filtrer les PME
