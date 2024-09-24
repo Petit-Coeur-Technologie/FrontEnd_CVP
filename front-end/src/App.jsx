@@ -41,7 +41,7 @@ function App() {
     location.pathname.startsWith('/dashboard');
 
   return (
-    <CheckConnection>
+    // <CheckConnection>
     <div>
         {!hideNavbarAndFooter && <Navbar />}
 
@@ -79,7 +79,7 @@ function App() {
 
         {!hideNavbarAndFooter && <Footer />}
     </div>
-    </CheckConnection>
+    // </CheckConnection>
   );
 };
 

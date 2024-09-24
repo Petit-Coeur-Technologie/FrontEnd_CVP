@@ -60,10 +60,12 @@ function InfosPme() {
     const Souscription = async () => {
         const token = getCookie('authToken');
         console.log("Token utilisé pour la souscription:", token);
+
         if (!isAuthenticated) {
             setShowLoginModal(true);
             return;
         }
+
         const souscriptionData = {
             pme_id: id,
             num_abonnement: generateUniqueSubscriptionNumber(),
@@ -72,6 +74,7 @@ function InfosPme() {
             debut_abonnement: new Date().toISOString(),
             fin_abonnement: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString()
         };
+
         try {
             const response = await fetch('https://ville-propre.onrender.com/abonnement', {
                 method: 'POST',
@@ -81,11 +84,13 @@ function InfosPme() {
                 },
                 body: JSON.stringify(souscriptionData),
             });
+
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error("Response Error Data:", errorData);
                 throw new Error("L'abonnement a échoué!");
             }
+
             const data = await response.json();
             console.log("Souscription a réussi:", data);
             setSouscrit(true);
@@ -95,6 +100,7 @@ function InfosPme() {
             toast('Une erreur est survenue');
         }
     };
+
     if (!pme) {
         return <div>Loading...</div>;
     }

@@ -7,17 +7,12 @@ const PageInexistante = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log("Location state:", location.state);
+    console.log("Location state:", location.state); // Ajoute ceci
 
-    //Si location.state.from est un objet, récupère pathname, sinon prend le string from
-    const previousPath = location.state?.from?.pathname;
+    const previousPath = location.state?.from?.pathname || '/';
 
     const retour = () => {
-        if(location.state?.from?.pathname){
-            navigate(previousPath );
-        }else{
-            window.history.back(); //Retour à la page précédente
-        }
+        navigate(previousPath);
     };
 
     return (
