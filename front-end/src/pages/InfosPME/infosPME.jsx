@@ -33,6 +33,16 @@ function InfosPme() {
             navigate('/404')
         }
 
+        fetch(`https://ville-propre.onrender.com/pme/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setPme(data);
+                console.log("PME Details:", data);
+            })
+            .catch((error) => {
+                console.error("Error fetching PME details:", error);
+            });
+    
         // Vérifier l'authentification à l'initialisation
         checkAuth();
 
