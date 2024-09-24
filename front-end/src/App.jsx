@@ -24,7 +24,7 @@ import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
 // import PrivateRoute from './Composants/PrivateRoute.jsx'; 
-import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
+//import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
 import PageInexistante from './Composants/PageInexistante/pageInexistante.jsx';
 
 
