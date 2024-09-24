@@ -11,6 +11,8 @@ function InfosPme() {
     const [souscrit, setSouscrit] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [commentaire, setCommentaire] = useState(""); // État pour le commentaire
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     useEffect(() => {
         // Récupération des détails de la PME
@@ -26,10 +28,8 @@ function InfosPme() {
     
         // Vérifier l'authentification à l'initialisation
         checkAuth();
-    
     }, [id]);
 
-    
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -39,8 +39,20 @@ function InfosPme() {
     const checkAuth = () => {
         const token = getCookie('authToken');
         if (token) {
-            // Vérifie si le token existe pour l'authentification
+            // Si le token existe, l'utilisateur est authentifié
             setIsAuthenticated(true);
+
+            // Vérifier si l'utilisateur est abonné à la PME
+            fetch(`https://ville-propre.onrender.com/abonnements?user_id=${token}&pme_id=${id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.length > 0 && data[0].status_abonnement === "active") {
+                        setSouscrit(true);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error checking abonnement status:", error);
+                });
         } else {
             setIsAuthenticated(false);
         }
@@ -93,7 +105,55 @@ function InfosPme() {
             toast('Une erreur est survenue');
         }
     };
-    
+
+    const handleCommentChange = (event) => {
+        setCommentaire(event.target.value);  // Gère le changement dans le textarea
+    };
+
+    const submitComment = async (e) => {
+        e.preventDefault();
+
+        if (!isAuthenticated) {
+            toast.error("Vous devez vous connecter pour laisser un commentaire.");
+            setShowLoginModal(true);
+            return;
+        }
+
+        if (!souscrit) {
+            toast.error("Vous devez être abonné à cette PME pour laisser un commentaire.");
+            return;
+        }
+
+        const token = getCookie('authToken');
+        const commentData = {
+            pme_id: id,
+            commentaire: commentaire,
+            date_commentaire: new Date().toISOString(),
+        };
+
+        try {
+            const response = await fetch('https://ville-propre.onrender.com/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(commentData),
+            });
+
+            if (!response.ok) {
+                throw new Error("La soumission du commentaire a échoué!");
+            }
+
+            setIsSubmitted(true);
+            toast("Commentaire envoyé avec succès!");
+            setCommentaire("");  // Réinitialise le champ de commentaire après envoi
+        } catch (error) {
+            console.error('Erreur lors de la soumission du commentaire:', error);
+            toast('Erreur lors de la soumission du commentaire.');
+        }
+    };
+
     if (!pme) {
         return <div>Loading...</div>;
     }
@@ -112,6 +172,7 @@ function InfosPme() {
         return stars;
     }
 
+
     return (
         <div className="infosPME">
             <div className="infosPME_header">
@@ -125,10 +186,12 @@ function InfosPme() {
                     <div className="rating-stars">
                         {renderStars(pme.rating)}
                     </div>
+                    <div className="all-p">
                     <p className="pme-description p">{pme.description}</p>
                     <p className="pme-zone p">Zone d'intervention: {pme.zone_intervention}</p>
                     <p className="pme-tarifs p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
                     <p className="pme-tarifs p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
+                    </div>
                     <button
                         type="button"
                         className="AbonnementBtn"
@@ -150,8 +213,9 @@ function InfosPme() {
             )}
 
             <div className="infosPME_comments">
-
-
+               <div>
+                
+               </div>
             </div>
         </div>
     );
