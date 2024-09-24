@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
-import logo from '/src/assets/th.jpeg';
+import logo from '/src/assets/logo_provisoire.png';
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'affichage de la barre latérale
@@ -57,16 +57,16 @@ const Navbar = () => {
                         })} className='lienNav'> Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="/sens" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#fff',
+                        <NavLink to="" style={({ isActive }) => ({
+                            color: isActive ? 'none' : '#fff',
                             textDecoration: isActive ? "none" : "none",
                         })} className='lienNav'> Sensibilisation </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="/contact" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#fff',
+                        <NavLink to="" style={({ isActive }) => ({
+                            color: isActive ? 'none' : '#fff',
                             textDecoration: isActive ? "none" : "none",
-                        })} className='lienNav' > Contact </NavLink>
+                        })} className='lienNav' > Boutique </NavLink>
                     </li>
                 </ul>
             </div>
@@ -79,7 +79,7 @@ const Navbar = () => {
                     onClick={handleUserIconClick}
                 ></i>
                 {isAuthenticated() && (
-                    <button onClick={handleLogout}>Déconnexion</button>
+                    <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
                 )}
             </div>
 
@@ -96,19 +96,19 @@ const Navbar = () => {
                     </li>
                     <li className='sidebarNavLink'>
                         <i className='bx bx-bulb iconeNav'></i>
-                        <NavLink to="/sens" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#006837',
+                        <NavLink to="" style={({ isActive }) => ({
+                            color: isActive ? 'none' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
                             className="listeNav"> Sensibilisation </NavLink>
                     </li>
                     <li className='sidebarNavLink'>
                         <i className='bx bx-phone iconeNav'></i>
-                        <NavLink to="/contact" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#006837',
+                        <NavLink to="" style={({ isActive }) => ({
+                            color: isActive ? 'none' : '#006837',
                             textDecoration: isActive ? "none" : "none",
                         })}
-                            className="listeNav"> Contact </NavLink>
+                            className="listeNav"> Boutique </NavLink>
                     </li>
                 </ul>
             </div>

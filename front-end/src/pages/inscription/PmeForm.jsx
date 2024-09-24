@@ -87,7 +87,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
  {/* -------- Pour la selection de la ville, la commun et le quartier si c'est une PME -------------------------------*/}
                 {/* Pour la selection de la ville */}
                 <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i class='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
+                <i className='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
@@ -105,7 +105,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
 
  {/* Pour la selection de la commun */}
  <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                    <i class='bx bx-location-plus' ></i>
+                    <i className='bx bx-location-plus' ></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -124,7 +124,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                     </div>
  {/* Pour la selection du quartier */}
  <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i class='bx bx-current-location' ></i>
+                <i className='bx bx-current-location' ></i>
                  <div className="adresse">
                         <select
                             id="quartierPME"

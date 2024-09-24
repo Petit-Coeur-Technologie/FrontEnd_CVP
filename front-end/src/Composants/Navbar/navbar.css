@@ -17,15 +17,19 @@
     padding: 5px 25px;
 }
 .navLogo{
-    margin: 0;
-    padding: 0;
-    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
 }
 
 /* Logo */
 #logo {
     width: 40px;
+    height: 40px;
+    object-fit: cover;
     margin: 0%;
+    border-radius: 50%;
 }
 
 /* Icône de menu */
@@ -62,6 +66,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 }
 
 .Btnlogin {
@@ -109,7 +114,7 @@
     align-items: center;
     color: #fff;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .sidebarNavLink {
@@ -121,23 +126,22 @@
     font-size: 20px;
 }
 
-.NavLink:hover {
-    background-color: #006837;
+.listeNav{
+    color: #00804b;
+}
+
+.lienNav:hover {
     color: #fdb024;
 }
 
-.sidebarNavLink:hover {
+.listeNav:hover {
     color: #fdb024;
 }
 
 .iconeNav {
     margin-right: 10px; /* Espace entre l'icône et le texte */
-    font-size: 1.5rem;
+    font-size: 18px!important;
     color: #00804b;
-}
-
-.iconeNav:hover {
-    color: #fdb024;
 }
 
 /* Responsivité */
@@ -146,6 +150,10 @@
         flex-direction: row;
         justify-content: space-between;
         height: auto;
+    }
+
+    .lienNav, .listeNav{
+        font-size: 18px;
     }
 
     /* Afficher le menu sur les petits écrans */
