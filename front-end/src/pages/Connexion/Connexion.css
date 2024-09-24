@@ -262,7 +262,7 @@
 
   /*>>>>>  LOGIN PAGE <<<<<<*/
   
-  @media (max-width: 600px) and (min-height: 690px){
+  @media (max-width: 600px){
     .stacke{
       width:100vw;
       overflow:hidden;
@@ -290,7 +290,7 @@
     }
     div.divIcone{
       width:100%!important;
-      margin: 25% auto;
+      margin: 18% auto;
     }
     div.divIcone > div{
       width: 100%;
