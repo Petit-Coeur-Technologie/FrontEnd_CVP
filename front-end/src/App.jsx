@@ -1,6 +1,6 @@
 import React from 'react';
 import './Styles/style.css';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import Inscription from './pages/inscription/inscription.jsx';
 import Accueil from './pages/Accueil/accueil.jsx';
 // import Sensibilisation from './pages/Sensibilisation/Sensibilisation.jsx';
@@ -25,6 +25,7 @@ import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
 // import PrivateRoute from './Composants/PrivateRoute.jsx'; 
 import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
+import PageInexistante from './Composants/PageInexistante/pageInexistante.jsx';
 
 
 
@@ -35,6 +36,7 @@ function App() {
 
   const hideNavbarAndFooter =
     location.pathname === '/inscription' ||
+    location.pathname === '/404' ||
     location.pathname === '/connexion' ||
     location.pathname.startsWith('/dashboard');
 
@@ -66,12 +68,19 @@ function App() {
           </Route>
 
           <Route path='/connexion' element={<Connexion />} />
+
+         {/* Route 404 */}
+         <Route path='/404' element={<PageInexistante />} />
+          
+          {/* Route pour capturer les chemins inconnus */}
+          <Route path='*' element={<Navigate to="/404" replace state={{ from: location.pathname }} />} />
+
         </Routes>
 
         {!hideNavbarAndFooter && <Footer />}
     </div>
     </CheckConnection>
   );
-}
+};
 
 export default App;

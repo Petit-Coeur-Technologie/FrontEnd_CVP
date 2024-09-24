@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
-import logo from '/src/assets/th.jpeg';
+import logo from '/src/assets/logo_provisoire.png';
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'affichage de la barre latérale
@@ -79,7 +79,7 @@ const Navbar = () => {
                     onClick={handleUserIconClick}
                 ></i>
                 {isAuthenticated() && (
-                    <button onClick={handleLogout}>Déconnexion</button>
+                    <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
                 )}
             </div>
 

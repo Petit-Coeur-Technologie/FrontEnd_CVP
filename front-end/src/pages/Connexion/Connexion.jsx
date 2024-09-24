@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link,useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
-import myImage from '/src/assets/th.jpeg';
+import myImage from '/src/assets/logo_provisoire.png';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
 
 import "./Connexion.css";
@@ -72,11 +72,9 @@ export default function Connexion() {
     <div className='stacke'>
       <div className='stackeChild'>
         <h2 className="h2Con">Connexion</h2>
-        <div className='divMereImageBmw'>
           <div className="divImageBmw">
            <Link to="/"> <img className="imageBmw" src={myImage} alt="pct" /> </Link> 
           </div>
-        </div>
         {showForgotPassword ? 
         (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
