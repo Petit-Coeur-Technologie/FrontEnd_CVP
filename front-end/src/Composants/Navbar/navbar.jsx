@@ -5,6 +5,7 @@ import logo from '/src/assets/logo_provisoire.png';
 
 const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'affichage de la barre latérale
+    const [isDropOpen, setIsDropOpen] = useState(false);
     const navigate = useNavigate();
 
     const getCookie = (name) => {
@@ -23,9 +24,14 @@ const Navbar = () => {
         if (isAuthenticated()) {
             navigate('/dashboard');
         } else {
-            navigate('/connexion');
+            setIsDropOpen(!isDropOpen); //Afficher/Masquer le menu déroulant au clic sur l'icone
         }
     };
+
+    const handleNavigation = (path) => {
+        setIsDropOpen(false); //Fermer le menu après avoir choisi
+        navigate(path);
+    }
 
     const handleLogout = () => {
         document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
@@ -81,6 +87,13 @@ const Navbar = () => {
                 {isAuthenticated() && (
                     <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
                 )}
+                {isDropOpen && (
+                    <div className='dropdown-menu'>
+                        <button onClick={() => handleNavigation('/connexion')}>Connexion</button>
+                        <button onClick={() => handleNavigation('/inscription')}>Inscription</button>
+                    </div>
+                )}
+                <NavLink to="/connexion"> <button className='btnSeConnecter'> Se connecter</button></NavLink>
             </div>
 
             {/* Barre latérale pour petits écrans */}

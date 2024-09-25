@@ -223,12 +223,12 @@ export default function Dashboard() {
   return (
     <div className='conteneur'>
       <div className={`BarLateraleDashboard ${ouvrirBarLatteral ? 'ouvrirBarLateraleDashboard' : ''}`}>
-        <div className='divApp'>
+        {/* <div className='divApp'>
           <div className='LogoDiv'>
             <img src="src/Fichiers/logo.png" alt="logo" className='logoApp'/>
           </div>
           <p className='nomApp'>Nom de l'app</p>
-        </div>
+        </div> */}
         
         <ul className='menuBarLaterale1'>
           {renderSidebarMenu().map((item, index) => (
@@ -324,7 +324,7 @@ export default function Dashboard() {
         />
       )}
 
-      <div className={`contentFilsDashboard contentFilsDashboardAutre ${ouvrirBarLatteral == true ? 'contentFilsDashboard2' : ''}`}>
+      <div className={`contentFilsDashboardAutre ${ouvrirBarLatteral == true ? 'contentFilsDashboard2' : 'contentFilsDashboard'}`}>
         <Outlet />
       </div>
       
