@@ -174,9 +174,14 @@
 .btnSeConnecter {
   display: block; /* Afficher le bouton sur les grands écrans */
   background-color: #ffffff;
-  width: 150px;
-  text-decoration: none!important;
-  
+  width: 130px;
+  text-decoration-color: #fff!important;
+  margin: 0;
+  padding: 10px;
+  border-radius: 500px;
+}
+.btnSeConnecter:active{
+text-decoration-color: #fff;
 }
 
 .login i {
