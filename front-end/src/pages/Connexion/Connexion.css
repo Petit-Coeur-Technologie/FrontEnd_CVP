@@ -144,10 +144,17 @@
   }
   
   #divmot2 {
-    margin-top: 30px;
+    margin: 30px;
 
   }
-  
+  #divmot3 p.mot4 a {
+      text-decoration:none;
+      color : #db9719
+  }
+  #divmot3 p.mot4 a:hover{
+      color: #ffffff;
+      text-decoration:underline
+  }
   .mot3 {
     font-size: 14px;
     color: #333;
