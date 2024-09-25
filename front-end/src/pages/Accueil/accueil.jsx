@@ -51,7 +51,7 @@ function Accueil() {
     setCurrentPage(pageNumber);
     window.scrollTo({
       top: 300,
-      behavior: "smooth",
+      behavior: "auto",
     });    
   };
 
