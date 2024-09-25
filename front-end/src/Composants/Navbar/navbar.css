@@ -180,9 +180,6 @@
   padding: 10px;
   border-radius: 500px;
 }
-.btnSeConnecter:active{
-text-decoration-color: #fff;
-}
 
 .login i {
   display: none; /* Masquer l'icône de connexion sur les grands écrans */
@@ -226,7 +223,7 @@ text-decoration-color: #fff;
   }
 
   /* Afficher le bouton de connexion uniquement sur les grands écrans */
-  .btnConnexion {
+  .btnSeConnecter  {
     display: none; /* Masquer par défaut */
   }
 
