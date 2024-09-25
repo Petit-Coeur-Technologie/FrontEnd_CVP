@@ -45,7 +45,7 @@
 /* Conteneur de la boîte principale */
 .box-container {
   padding: 20px 10px;
-  height: 100%;
+  height: 100vh;
   background-color: #00804b;
   color: #ffffff;
   position: relative;
@@ -240,9 +240,12 @@
   font-size: 32px;
   text-align: center;
 }
-
-.divLogin-linkPme{
+div.inscriptionForm-wrapper > form {
+   margin-bottom: 30px;
+}
+.divLogin-link.divLogin-linkPme{
   padding: 0px!important;
+  margin-bottom: 30px;
 }
 
 /* Style pour les liens */
@@ -374,18 +377,20 @@
 }
 
 
-.divHomeIconRetourAcceuil{
-  height: 50px;
-  width: 50px;
-  position: absolute;
-  left: 40px;
-  top: 90px;
+
+/* Button Back to home */
+.backtohometext_wrapper{
+   padding-left: 10px;
 }
-.bx-home{
-  width: 100%;
-  height: 100%;
-  font-size: 30px!important;
-  color: #fdb024;
+.backtohometext_wrapper p a{
+  font-size : 18px;
+  text-decoration:none;
+  color: #d89008;
+  font-weight:500;
+}
+.backtohometext_wrapper p a:hover{
+  color:#ffffff;
+  text-decoration:underline;
 }
 /* Responsive Design */
 
@@ -473,9 +478,7 @@
     width: 90%;
     left: 6%;
   }
-  .box-container {
-    left: -10px;
-  }
+  
   .labelPolitique, .login-link, .textInscrireAvec {
     font-size: 13px;
   }
@@ -526,6 +529,9 @@
   .labelPolitique, .login-link {
     font-size: 16px;
   }
+  div.backtohometext_wrapper p{
+       text-align:center;
+  }
 }
 
 /* Très petit écran */
@@ -551,8 +557,6 @@
   }
   .form-container {
     height: 50%;
-    margin-left: 30px;
-    left: 8px;
   }
   .form-container2 {
     gap: 10px;
