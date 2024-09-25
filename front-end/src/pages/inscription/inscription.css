@@ -478,9 +478,7 @@ div.inscriptionForm-wrapper > form {
     width: 90%;
     left: 6%;
   }
-  .box-container {
-    left: -10px;
-  }
+  
   .labelPolitique, .login-link, .textInscrireAvec {
     font-size: 13px;
   }
@@ -531,6 +529,9 @@ div.inscriptionForm-wrapper > form {
   .labelPolitique, .login-link {
     font-size: 16px;
   }
+  div.backtohometext_wrapper p{
+       text-align:center;
+  }
 }
 
 /* Très petit écran */
@@ -556,8 +557,6 @@ div.inscriptionForm-wrapper > form {
   }
   .form-container {
     height: 50%;
-    margin-left: 30px;
-    left: 8px;
   }
   .form-container2 {
     gap: 10px;
