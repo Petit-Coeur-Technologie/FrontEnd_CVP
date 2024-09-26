@@ -24,8 +24,9 @@ import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
 // import PrivateRoute from './Composants/PrivateRoute.jsx'; 
-import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
+// import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
 import PageInexistante from './Composants/PageInexistante/pageInexistante.jsx';
+import AbonnementsEnAttente from './Composants/AbonnementEnAttente/AbonnementEnAttente.jsx';
 
 
 
@@ -65,6 +66,8 @@ function App() {
             <Route path="aide-assistance" element={<AideAssistance />} />
             <Route path="deconnexion" element={<Deconnexion />} />
             <Route path="details/:index" element={<Details />} />
+            <Route path="monabonnement" element={<MonAbonnement />} />
+            <Route path="abonnementenattente" element={<AbonnementsEnAttente />} />
           </Route>
 
           <Route path='/connexion' element={<Connexion />} />

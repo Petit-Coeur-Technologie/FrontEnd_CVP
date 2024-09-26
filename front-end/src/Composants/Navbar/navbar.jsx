@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import logo from '/src/assets/logo_provisoire.png';
 
 const Navbar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // État pour gérer l'affichage de la barre latérale
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isDropOpen, setIsDropOpen] = useState(false);
+    const [profil, setProfil] = useState('');
+    const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
 
     const getCookie = (name) => {
@@ -20,18 +22,71 @@ const Navbar = () => {
         return !!token;
     };
 
+    useEffect(() => {
+        // Suppose we récupère l'ID utilisateur depuis le cookie ou autre source
+        const savedUserId = getCookie('userId');
+        if (savedUserId) {
+            setUserId(savedUserId);
+        }
+    }, []);
+
+    useEffect(() => {
+        const token = getCookie('authToken'); // Récupérer le token ici
+        if (!token) {
+            console.error("Token manquant. L'utilisateur n'est pas authentifié.");
+            return;
+        }
+
+        const ImgProfil = async () => {
+            try {
+                const response = await fetch(`https://ville-propre.onrender.com/users/${userId}`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Erreur réseau. code: ${response.status}`);
+                }
+                const data = await response.json();
+
+                // Dépendamment du rôle, récupérer la bonne photo
+                if (data.utilisateur.role === "pme") {
+                    setProfil(data.logo_pme);
+                } else if (data.utilisateur.role === "menage") {
+                    setProfil(data.copie_pi);
+                } else if (data.utilisateur.role === "entreprise") {
+                    setProfil(data.utilisateur.copie_pi);
+                }
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des informations du profil: ', error.message);
+            }
+        };
+
+        if (userId) {
+            ImgProfil();
+        }
+    }, [userId]); // Ajoutez userId comme dépendance
+
+
     const handleUserIconClick = () => {
         if (isAuthenticated()) {
             navigate('/dashboard');
         } else {
-            setIsDropOpen(!isDropOpen); //Afficher/Masquer le menu déroulant au clic sur l'icone
+            setIsDropOpen(!isDropOpen);
         }
     };
 
+    const handleProfilClick = () => {
+        setIsDropOpen(!isDropOpen);
+    };
+
     const handleNavigation = (path) => {
-        setIsDropOpen(false); //Fermer le menu après avoir choisi
+        setIsDropOpen(false);
         navigate(path);
-    }
+    };
 
     const handleLogout = () => {
         document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
@@ -39,94 +94,80 @@ const Navbar = () => {
     };
 
     const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen); // Afficher/masquer la barre latérale
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
         <div className='nav'>
-            {/* Icône de menu */}
             <div className="menu-icon" onClick={toggleSidebar}>
                 <i className='bx bx-menu'></i>
             </div>
-
-            {/* Logo */}
             <div className="navLogo">
                 <img src={logo} alt="" id='logo' />
             </div>
             <div>
-                {/* Liste de Navigation par défaut pour les grands écrans */}
                 <ul className="nav-items">
                     <li className='NavLink'>
-                        <NavLink to="/" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#fff',
-                            textDecoration: isActive ? "none" : "none",
-                        })} className='lienNav'> Accueil </NavLink>
+                        <NavLink to="/" className='lienNav'> Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="" style={({ isActive }) => ({
-                            color: isActive ? 'none' : '#fff',
-                            textDecoration: isActive ? "none" : "none",
-                        })} className='lienNav'> Sensibilisation </NavLink>
+                        <NavLink to="" className='lienNav'> Sensibilisation </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="" style={({ isActive }) => ({
-                            color: isActive ? 'none' : '#fff',
-                            textDecoration: isActive ? "none" : "none",
-                        })} className='lienNav' > Boutique </NavLink>
+                        <NavLink to="" className='lienNav' > Boutique </NavLink>
                     </li>
                 </ul>
             </div>
 
-            {/* Profil utilisateur ou icône de connexion */}
             <div className="login">
-                <i
-                    className='bx bxs-user'
-                    style={{ color: '#fdb024' }}
-                    onClick={handleUserIconClick}
-                ></i>
-                {isAuthenticated() && (
-                    <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
+                {isAuthenticated() ? (
+                    <>
+                        <div className="navProfil">
+                            <img src={profil} alt="" className='profilImg' onClick={handleProfilClick} />
+                        </div>
+
+                        {isDropOpen && (
+                            <div className='dropdown-menu'>
+                                <button onClick={() => handleNavigation('/dashboard')}>Dashboard</button>
+                                <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <i
+                            className='bx bxs-user'
+                            style={{ color: '#fdb024' }}
+                            onClick={handleUserIconClick}
+                        ></i>
+                        {isDropOpen && (
+                            <div className='dropdown-menu'>
+                                <button onClick={() => handleNavigation('/connexion')}>Connexion</button>
+                                <button onClick={() => handleNavigation('/inscription')}>Inscription</button>
+                            </div>
+                        )}
+                        <NavLink to="/connexion"> <button className='btnSeConnecter'> Se connecter</button></NavLink>
+                    </>
                 )}
-                {isDropOpen && (
-                    <div className='dropdown-menu'>
-                        <button onClick={() => handleNavigation('/connexion')}>Connexion</button>
-                        <button onClick={() => handleNavigation('/inscription')}>Inscription</button>
-                    </div>
-                )}
-                <NavLink to="/connexion"> <button className='btnSeConnecter'> Se connecter</button></NavLink>
             </div>
 
-            {/* Barre latérale pour petits écrans */}
             <div className={`sidebarNav ${isSidebarOpen ? 'open' : ''}`}>
                 <ul className='ListeSidebarNav'>
                     <li className='sidebarNavLink'>
                         <i className='bx bx-home-alt iconeNav' ></i>
-                        <NavLink to="/" style={({ isActive }) => ({
-                            color: isActive ? '#fdb024' : '#006837',
-                            textDecoration: isActive ? "none" : "none",
-                        })}
-                            className="listeNav"> Accueil </NavLink>
+                        <NavLink to="/" className="listeNav"> Accueil </NavLink>
                     </li>
                     <li className='sidebarNavLink'>
                         <i className='bx bx-bulb iconeNav'></i>
-                        <NavLink to="" style={({ isActive }) => ({
-                            color: isActive ? 'none' : '#006837',
-                            textDecoration: isActive ? "none" : "none",
-                        })}
-                            className="listeNav"> Sensibilisation </NavLink>
+                        <NavLink to="" className="listeNav"> Sensibilisation </NavLink>
                     </li>
                     <li className='sidebarNavLink'>
                         <i className='bx bx-phone iconeNav'></i>
-                        <NavLink to="" style={({ isActive }) => ({
-                            color: isActive ? 'none' : '#006837',
-                            textDecoration: isActive ? "none" : "none",
-                        })}
-                            className="listeNav"> Boutique </NavLink>
+                        <NavLink to="" className="listeNav"> Boutique </NavLink>
                     </li>
                 </ul>
             </div>
 
-            {/* Superposition sombre */}
             {isSidebarOpen && <div className="overlay" onClick={toggleSidebar}></div>}
         </div>
     );
