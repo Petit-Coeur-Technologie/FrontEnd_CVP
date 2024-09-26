@@ -7,7 +7,6 @@ import Accueil from './pages/Accueil/accueil.jsx';
 import Navbar from './Composants/Navbar/navbar.jsx';
 import Footer from './Composants/Footer/footer.jsx';
 import Dashboard from './Composants/Dashboard/Dashboard.jsx';
-import Profil from './Composants/Profil/Profil.jsx';
 
 import './App.css';
 import 'boxicons/css/boxicons.min.css';
@@ -27,6 +26,7 @@ import InfosPme from './pages/InfosPME/infosPME.jsx';
 // import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
 import PageInexistante from './Composants/PageInexistante/pageInexistante.jsx';
 import AbonnementsEnAttente from './Composants/AbonnementEnAttente/AbonnementEnAttente.jsx';
+import Profil from './Composants/Profil/Profil.jsx';
 
 
 

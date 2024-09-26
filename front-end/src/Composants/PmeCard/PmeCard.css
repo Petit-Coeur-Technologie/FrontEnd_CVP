@@ -71,17 +71,18 @@
   margin-left: 60px;
 }
 
-.card-button button {
+.btnCard {
   background-color: #4fb97f;
   color: white;
   padding: 7px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
+  font-size: 15px;
+  transition: all 0.5s ease-out;
 }
 
-.card-button button:hover {
+.btnCard:hover,.btnCard:focus {
   background-color: #fdb024;
+  color: #fff;
 }

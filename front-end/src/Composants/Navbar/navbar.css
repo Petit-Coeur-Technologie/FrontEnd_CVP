@@ -32,19 +32,19 @@
   border-radius: 50%;
 }
 
-.navProfil{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
+.navProfil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
-.profilImg{
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    margin: 0%;
-    border-radius: 50%;
+.profilImg {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin: 0%;
+  border-radius: 50%;
 }
 
 /* Icône de menu */
@@ -130,6 +130,7 @@
   color: #fff;
   text-decoration: none;
   font-size: 18px;
+  transition: all 0.5s ease-out;
 }
 
 .sidebarNavLink {
@@ -142,14 +143,12 @@
 }
 
 .listeNav {
+  text-decoration: none;
   color: #00804b;
+  transition: all 0.5s ease-out;
 }
 
-.lienNav:hover {
-  color: #fdb024;
-}
-
-.listeNav:hover {
+.lienNav:hover , .lienNav:focus, .listeNav:hover,.listeNav:focus {
   color: #fdb024;
 }
 
@@ -171,33 +170,58 @@
   z-index: 10;
 }
 
-.dropdown-menu button {
+.btnProfil ,.btnMenu{
   display: block;
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: none;
   background: none;
   text-align: left;
   color: #333;
   cursor: pointer;
+  transition: all 0.5s ease-out;
 }
 
-.dropdown-menu button:hover {
-  background-color: #f0f0f0;
+.btnMenu:hover,.btnProfil:hover,
+.btnMenu:focus,.btnProfil:focus{
+  background-color: #4fb97f;
+  color: #fff;
 }
 
 .btnSeConnecter {
   display: block; /* Afficher le bouton sur les grands écrans */
-  background-color: #ffffff;
+  background-color: #4fb97f;
+  color: #fff;
   width: 130px;
-  text-decoration-color: #fff!important;
   margin: 0;
   padding: 10px;
   border-radius: 500px;
+  transition: all 0.5s ease-out;
+}
+
+.btnSeConnecter:focus,.btnSeConnecter:focus ,
+.btnSeConnecter:hover,.btnSeConnecter:hover{
+  background-color: #fff;
+  color: #00804b;
+}
+
+.lienSeConnecter {
+  text-decoration: none;
 }
 
 .login i {
   display: none; /* Masquer l'icône de connexion sur les grands écrans */
+}
+
+.dropdownProfil {
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
 /* Responsivité */
@@ -237,8 +261,12 @@
     display: block;
   }
 
+  .dropdownProfil {
+    top: 50px;
+  }
+
   /* Afficher le bouton de connexion uniquement sur les grands écrans */
-  .btnSeConnecter  {
+  .btnSeConnecter {
     display: none; /* Masquer par défaut */
   }
 
