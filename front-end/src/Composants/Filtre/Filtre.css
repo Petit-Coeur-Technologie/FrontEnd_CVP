@@ -57,6 +57,10 @@
   height: 40px;
 }
 
+.input-recherche::-webkit-input-placeholder {
+  color: #000;
+}
+
 .button-filtre{
   display: flex;
   justify-content: flex-end;

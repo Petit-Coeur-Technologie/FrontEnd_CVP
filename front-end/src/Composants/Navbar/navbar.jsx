@@ -108,7 +108,10 @@ const Navbar = () => {
             <div>
                 <ul className="nav-items">
                     <li className='NavLink'>
-                        <NavLink to="/" className='lienNav'> Accueil </NavLink>
+                        <NavLink to="/" className='lienNav' style={({ isActive }) => ({
+                            color: isActive ? "#fdb024" : "black", // La couleur active et inactive
+                            textDecoration: "none",
+                        })}> Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
                         <NavLink to="" className='lienNav'> Sensibilisation </NavLink>
@@ -127,9 +130,9 @@ const Navbar = () => {
                         </div>
 
                         {isDropOpen && (
-                            <div className='dropdown-menu'>
-                                <button onClick={() => handleNavigation('/dashboard')}>Dashboard</button>
-                                <button className='btnDeconnexion' onClick={handleLogout}>Déconnexion</button>
+                            <div className='dropdownProfil'>
+                                <button onClick={() => handleNavigation('/dashboard')} className='btnProfil'>Dashboard</button>
+                                <button className='btnProfil' onClick={handleLogout} >Déconnexion</button>
                             </div>
                         )}
                     </>
@@ -142,11 +145,11 @@ const Navbar = () => {
                         ></i>
                         {isDropOpen && (
                             <div className='dropdown-menu'>
-                                <button onClick={() => handleNavigation('/connexion')}>Connexion</button>
-                                <button onClick={() => handleNavigation('/inscription')}>Inscription</button>
+                                <button className='btnMenu' onClick={() => handleNavigation('/connexion')}>Connexion</button>
+                                <button className='btnMenu' onClick={() => handleNavigation('/inscription')}>Inscription</button>
                             </div>
                         )}
-                        <NavLink to="/connexion"> <button className='btnSeConnecter'> Se connecter</button></NavLink>
+                        <NavLink to="/connexion" className="lienSeConnecter"> <button className='btnSeConnecter'> Se connecter</button></NavLink>
                     </>
                 )}
             </div>
