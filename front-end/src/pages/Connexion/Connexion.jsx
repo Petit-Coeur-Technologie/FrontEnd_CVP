@@ -79,26 +79,31 @@ export default function Connexion() {
         (
           <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
         ) : (
-        <form onSubmit={handleSubmit}>
-          <div className='divFormulaire'>
-              <div className="input-containerConnexion"><i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i><input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required /></div>
-              <div className="input-containerConnexion"><i className='bx bxs-lock' style={{ color: '#fdb024' }}></i><input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required /></div>
-              <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
-              <button className="btnConnexion" type="submit">Se Connecter</button>
-              {errorMessage && <p className='pErreur'>{errorMessage}</p>}
-
-                <div className="divIcone">
-                  <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
-                  <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
+        <><form onSubmit={handleSubmit}>
+              <div className='divFormulaire'>
+                <div className="input-containerConnexion">
+                  <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
+                  <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </div>
-                <div id="divmot2">
-                  <p className="mot3">Pas de compte? <a href="/inscription"> Inscrivez-Vous!</a></p>
+                <div className="input-containerConnexion">
+                  <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
+                  <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <div id="divmot3">
-                  <p className="mot4"> <a href="/"> Retour à l'Accueil</a></p>
-                </div>
+                <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>mot de passe oublié?</a>
+                <button className="btnConnexion" type="submit">Se Connecter</button>
+                {errorMessage && <p className='pErreur'>{errorMessage}</p>}
               </div>
             </form>
+            <div className="divIcone">
+                <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
+                <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }}></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
+            </div>
+            <div id="divmot2">
+                <p className="mot3">Pas de compte? <a href="/inscription"> Inscrivez-Vous!</a></p>
+            </div>
+            <div id="divmot3">
+                <p className="mot4"> <a href="/"> Retour à l'Accueil</a></p>
+            </div></>
           )}
       </div>
     </div>
