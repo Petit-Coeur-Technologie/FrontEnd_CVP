@@ -1,6 +1,6 @@
 /* Conteneur principal */
 .home {
-  margin-top: 125px;
+  margin-top: 115px;
   padding: 10px 25px;
   background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
   display: flex;
@@ -15,6 +15,7 @@
   padding: 50px;
   background-color: #4fb97f; /* Nuance plus claire du vert */
   color: #ffffff;
+  margin-bottom:15px;
 }
 
 .welcome-section h1 {
