@@ -1,0 +1,21 @@
+{
+    "utilisateurs":[
+        {
+            "id": 1,
+            "nom": "Diallo",
+            "prenom": "soul",
+            "email":"baillo30387@gmail.com",
+            "motdepasse":"thie30387"
+
+
+        }
+    ],
+    "publications":[
+        {
+            "id": 1,
+            "titre":"applicationPME",
+            "contenu":"contenu"
+        }    
+
+    ]
+}
