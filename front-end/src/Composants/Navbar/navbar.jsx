@@ -76,6 +76,7 @@ const Navbar = () => {
             navigate('/dashboard');
         } else {
             setIsDropOpen(!isDropOpen);
+            navigate('/connexion')
         }
     };
 
@@ -109,12 +110,16 @@ const Navbar = () => {
                 <ul className="nav-items">
                     <li className='NavLink'>
                         <NavLink to="/" className='lienNav' style={({ isActive }) => ({
-                            color: isActive ? "#fdb024" : "black", // La couleur active et inactive
+                            color: isActive ? "#fdb024" : "#fff", // La couleur active et inactive
                             textDecoration: "none",
                         })}> Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="" className='lienNav'> Sensibilisation </NavLink>
+                        <NavLink to="" className='lienNav' style={({ isActive }) => ({
+                            color: isActive ? "#fff" : "fdb024", // La couleur active et inactive
+                            textDecoration: "none",
+                        })}
+                        > Sensibilisation </NavLink>
                     </li>
                     <li className='NavLink'>
                         <NavLink to="" className='lienNav' > Boutique </NavLink>
@@ -143,12 +148,6 @@ const Navbar = () => {
                             style={{ color: '#fdb024' }}
                             onClick={handleUserIconClick}
                         ></i>
-                        {isDropOpen && (
-                            <div className='dropdown-menu'>
-                                <button className='btnMenu' onClick={() => handleNavigation('/connexion')}>Connexion</button>
-                                <button className='btnMenu' onClick={() => handleNavigation('/inscription')}>Inscription</button>
-                            </div>
-                        )}
                         <NavLink to="/connexion" className="lienSeConnecter"> <button className='btnSeConnecter'> Se connecter</button></NavLink>
                     </>
                 )}
