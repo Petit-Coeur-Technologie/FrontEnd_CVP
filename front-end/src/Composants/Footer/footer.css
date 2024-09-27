@@ -76,7 +76,7 @@
   font-size: 16px;
   resize: none; 
   outline: none;
-  border: 2px solid #898989; 
+  border: 2px solid #4fb97f; 
   color: white;
   background-color: rgba(0, 0, 0, 0.407); 
   border-radius: 5px; 
@@ -95,8 +95,13 @@
   background-color: #4fb97f; 
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; 
+  transition: all 0.5s ease-out;
   border-radius: 5px; 
+}
+
+.btnCmtFoot:hover,.btnCmtFoot:focus {
+  background-color: #fff;
+  color: #00804b;
 }
 
 .socialSection {

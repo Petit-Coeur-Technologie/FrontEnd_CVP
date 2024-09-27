@@ -144,10 +144,10 @@
 .inputIns[type="file"] {
   display: none;
 }
-.inputIns[type="text"], .inputIns[type="email"] {
+.inputIns[type="text"], .inputIns[type="email"], .inputIns[type="tel"], .inputIns[type="password"], .file-upload-label {
   position: relative;
-  top: 5px;
-  padding: 0;
+  width: 100%;
+  padding: 0 10px 0 0;
 }
 /* .selectIns1, .selectIns2, .selectIns3, .genre{
   font-size: 14px;

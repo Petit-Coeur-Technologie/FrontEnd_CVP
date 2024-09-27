@@ -7,7 +7,6 @@ import Accueil from './pages/Accueil/accueil.jsx';
 import Navbar from './Composants/Navbar/navbar.jsx';
 import Footer from './Composants/Footer/footer.jsx';
 import Dashboard from './Composants/Dashboard/Dashboard.jsx';
-import Profil from './Composants/Profil/Profil.jsx';
 
 import './App.css';
 import 'boxicons/css/boxicons.min.css';
@@ -24,8 +23,10 @@ import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
 import InfosPme from './pages/InfosPME/infosPME.jsx';
 // import PrivateRoute from './Composants/PrivateRoute.jsx'; 
-import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
+// import CheckConnection from './Composants/CheckConnection/checkConnection.jsx';
 import PageInexistante from './Composants/PageInexistante/pageInexistante.jsx';
+import AbonnementsEnAttente from './Composants/AbonnementEnAttente/AbonnementEnAttente.jsx';
+import Profil from './Composants/Profil/Profil.jsx';
 
 
 
@@ -41,7 +42,7 @@ function App() {
     location.pathname.startsWith('/dashboard');
 
   return (
-    <CheckConnection>
+    // <CheckConnection>
     <div>
         {!hideNavbarAndFooter && <Navbar />}
 
@@ -65,6 +66,8 @@ function App() {
             <Route path="aide-assistance" element={<AideAssistance />} />
             <Route path="deconnexion" element={<Deconnexion />} />
             <Route path="details/:index" element={<Details />} />
+            <Route path="monabonnement" element={<MonAbonnement />} />
+            <Route path="abonnementenattente" element={<AbonnementsEnAttente />} />
           </Route>
 
           <Route path='/connexion' element={<Connexion />} />
@@ -79,7 +82,7 @@ function App() {
 
         {!hideNavbarAndFooter && <Footer />}
     </div>
-    </CheckConnection>
+    // </CheckConnection>
   );
 };
 

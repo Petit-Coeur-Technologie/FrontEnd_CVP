@@ -182,7 +182,7 @@ const Abonnes = () => {
 
       <div className='divDonnes'>
         {chargement ? (
-          <p className="chargementMessageAbonnes">Veuillez patienter quelques secondes...</p>
+          <p className="chargementMessageAbonne">Veuillez patienter quelques secondes...</p>
         ) : filteredAbonnes.length > 0 ? (
           filteredAbonnes.map((abonne, index) => (
             <div className='donnees' key={index}>
