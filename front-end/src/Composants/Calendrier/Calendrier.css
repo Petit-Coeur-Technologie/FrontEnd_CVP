@@ -378,10 +378,14 @@
 .react-calendar__navigation {
   background-color: #4CAF50; /* Couleur de fond verte pour les boutons de navigation */
   color: white; /* Texte blanc */
+  margin-bottom: 0px !important;
+  height: 50px!important;
+  border-bottom: 2px solid #ffffff;
 }
 
 .react-calendar__navigation__label {
   color: white; /* Couleur du texte de l'étiquette du mois */
+  padding: 5px 0!important;
 }
 
 .react-calendar__navigation__label:hover {
