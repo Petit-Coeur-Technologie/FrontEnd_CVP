@@ -8,6 +8,7 @@ const phonePatternPme = /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 
 function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
+
     const [pmeVilles, setPmeVilles] = useState([]);
     const [pmeCommunes, setPmeCommunes] = useState([]);
     const [pmeQuartiers, setPmeQuartiers] = useState([]);
@@ -18,10 +19,11 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
     const [pmeIdFile, setPmeIdFile] = useState("Pièce d'identité");
     const [pmeLogoFile, setPmeLogoFile] = useState("Logo");
 
+
     useEffect(() => {
         fetch('https://ville-propre.onrender.com/villes')
-            .then(response => response.json())
-            .then(data => setPmeVilles(data))
+            .then((response) => {response.json()})
+            .then((data) => setPmeVilles(data))
             .catch(error => console.error('Erreur lors de la récupération des villes:', error));
     }, []);
 

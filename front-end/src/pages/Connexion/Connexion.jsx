@@ -9,6 +9,7 @@ export default function Connexion() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,8 +19,9 @@ export default function Connexion() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+    setIsLoadingBtn(true);
     if (!passwordRegex.test(password)) {
+      setIsLoadingBtn(false);
       setErrorMessage('Le mot de passe doit contenir 1 majuscule, 1 minuscule, minimum 8 caractères et un caractère spécial!');
       return;
     }
@@ -27,11 +29,11 @@ export default function Connexion() {
     const formData = new URLSearchParams();
     formData.append('username', username);
     formData.append('password', password);
-  
+    setIsLoadingBtn(true);
     try {
       const response = await fetch('https://ville-propre.onrender.com/login', {
         method: 'POST',
-        headers: {
+        headers:{
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: formData
@@ -52,7 +54,6 @@ export default function Connexion() {
       document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
       document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
       document.cookie = `role=${role}; path=/; max-age=${60 * 60 * 24}`;
-  
       toast.success('Connexion réussie');
 
       console.log(data);  
@@ -62,6 +63,9 @@ export default function Connexion() {
     } catch (error) {
       console.error('Erreur lors de la connexion:', error.message);
       setErrorMessage('Une erreur s\'est produite lors de la connexion.'); // Affiche un message d'erreur
+    }
+    finally{
+      setIsLoadingBtn(false);
     }
   };
   
@@ -109,7 +113,7 @@ export default function Connexion() {
                   />
                 </div>
                 <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>Mot de passe oublié?</a>
-                <button className="btnConnexion" type="submit">Se Connecter</button>
+                <button className="btnConnexion" type="submit">{isLoadingBtn ? 'Chargement...' : 'Se Connecter'}</button>
                 {errorMessage && <p className='pErreur'>{errorMessage}</p>}
                 
                 <div className="divIcone">

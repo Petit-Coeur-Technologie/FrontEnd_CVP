@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './AbonnementEnAttente.css';
+import { toast } from 'react-hot-toast';
 
 const AbonnementsEnAttente = () => {
   const [abonnes, setAbonnes] = useState([]);
@@ -99,6 +100,7 @@ const AbonnementsEnAttente = () => {
           abonne.id === idAbonnement ? { ...abonne, status_abonnement: 'actif' } : abonne
         )
       );
+      toast.success("Abonnement accecpté");
 
     } catch (error) {
       console.error('Erreur lors de l\'acceptation de l\'abonnement:', error.message);

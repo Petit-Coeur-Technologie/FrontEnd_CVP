@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Profil.css';
 import toast from 'react-hot-toast';
 
@@ -8,7 +8,9 @@ export default function Profil() {
   const [accessToken, setAccessToken] = useState('');
   const [pmeId, setPmeId] = useState(null);
   const [profileInfo, setProfileInfo] = useState({});
-  const [profileImage, setProfileImage] = useState("src/Fichiers/imageProfil.png");
+  const [clientQuartiers, setClientQuartiers] = useState([]);
+  const [profileImage, setProfileImage] = useState("");
+  const [profileRole, setProfileRole] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -35,42 +37,51 @@ export default function Profil() {
   fetchUserData();
 }, []);
 
-
-  // Hook useEffect pour récupérer les informations du profil lorsque les dépendances changent
-  useEffect(() => {
-    const fetchProfileInfo = async () => {
-      if (!accessToken || !userId || !pmeId) return;
-
+  // ========================= POUR RECUPERER LE INFORMATION DE L'UTILISATEUR CONNECTER =======================
+    // Appel API pour récupérer les abonnés et rôle de l'utilisateur
+    useEffect(() => {
+      if (!userId || !accessToken) return;
+  
       setLoading(true);
-      setError(null);
-
-      try {
-        // Appel API pour obtenir les informations du profil
-        const response = await fetch(`https://ville-propre.onrender.com/pme/${pmeId}`, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        // Gestion des erreurs HTTP
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const data = await response.json();
-        setProfileInfo(data);
-        setProfileImage(data.profileImage || "src/Fichiers/imageProfil.png");
-        console.log(data);
-        setFormData(data); // Initialiser les données du formulaire avec les données du profil
-      } catch (error) {
-        setError('Erreur lors de la récupération des informations du profil.');
-        console.error('Erreur lors de la récupération des informations du profil :', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfileInfo();
-  }, [accessToken, userId, pmeId]);
+      const fetchAbonnes = async () => {
+        try {
+          const response = await fetch(`https://ville-propre.onrender.com/users/${userId}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            }
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log(data);
+          setProfileInfo(data);
+          console.log("INFORMATION DE L'UTILISATEUR CONNECTER DANS PROFIL...");
+          if(data.utilisateur.role === "pme"){
+            setProfileImage(data.logo_pme);
+            setProfileRole(data.utilisateur.role);
+          }
+          else if(data.utilisateur.role ==="entreprise"){
+            setProfileImage(data.utilisateur.copie_pi);
+            setProfileRole(data.utilisateur.role);
+          }
+          else if(data.role ==="menage"){
+            setProfileImage(data.copie_pi);
+            setProfileRole(data.role);
+          }
+        } catch (error) {
+          console.error('Erreur lors de la récupération des abonnés:', error.message);
+        }
+        finally{
+          setLoading(false)
+        }
+      };
+      fetchAbonnes();
+    }, [userId, accessToken]);
 
   // Fonction pour gérer les changements dans les champs du formulaire
   const handleInputChange = (e) => {
@@ -83,8 +94,26 @@ export default function Profil() {
 
   // Fonction pour basculer entre le mode édition et le mode affichage
   const handleEditToggle = () => {
-    setIsEditing((prev) => !prev);
+    setIsEditing((prev) => {
+      if (!prev) { // Si nous passons à l'édition
+        setFormData({
+          nom_prenom: profileInfo.utilisateur?.nom_prenom || '',
+          email: profileInfo.utilisateur?.email || '',
+          quartier_id: profileInfo.quartier_id || '',
+          description: profileInfo.description || '',
+          tarif_abonnement: profileInfo.tarif_abonnement || '',
+          tarif_mensuel: profileInfo.tarif_mensuel || '',
+          genre: profileInfo.utilisateur?.genre || '',
+          nom_pme: profileInfo.nom_pme || '',
+          role: profileInfo.utilisateur?.role || '',
+          tel: profileInfo.utilisateur?.tel || '',
+          zone_intervention: profileInfo.zone_intervention || '',
+        });
+      }
+      return !prev; // Bascule l'état d'édition
+    });
   };
+  
 
   // Fonction pour sauvegarder les modifications dans le profil
   const handleSave = async () => {
@@ -129,7 +158,36 @@ export default function Profil() {
       console.error('Erreur lors de la mise à jour des informations du profil :', error);
     }
   };  
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchQuartiers = async () => {
+      try {
+        const response = await fetch(`https://ville-propre.onrender.com/quartiers`);
+        if (!response.ok) throw new Error(`Erreur réseau: ${response.status}`);
+        const quartiers = await response.json();
+        setClientQuartiers(quartiers);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des quartiers:', error.message);
+      }
+    };
+
+    fetchQuartiers();
+  }, [userId]);
+
+  const getQuartierNameById = useCallback((quartierId) => {
+    const quartier = clientQuartiers.find(q => q.id === quartierId);
+    return quartier ? quartier.quartier : 'Inconnu';
+  }, [clientQuartiers]);
+
+  const handleSearchChange = useCallback((event) => {
+    setSearchTerm(event.target.value);
+  }, []);
   
+  useEffect(()=>{
+    console.log("ROLE RECUPERER DANS PROFIL... : "+profileRole);
+  })
 
   // Affichage pendant le chargement des données
   if (loading) {
@@ -143,119 +201,58 @@ export default function Profil() {
 
   return (
     <div className="profileDetails">
-      {/* Affichage de l'image de profil */}
-      <div className="imageProfilContainer">
-        <img src={profileImage} alt="profil" className='profileImage' />
-      </div>
-      {/* Affichage ou édition des informations du profil */}
-      {isEditing ? (
+  {/* Affichage de l'image de profil */}
+  <div className="imageProfilContainer">
+    <img src={profileImage} alt="profil" className="profileImage" />
+  </div>
+  {/* Affichage ou édition des informations du profil */}
+  {isEditing ? (
+    <>
+      <input type="text" name="nom_prenom" value={formData.nom_prenom || ''} onChange={handleInputChange} placeholder="Nom utilisateur" className="profilEdit" />
+      <input type="email" name="email" value={formData.email || ''} onChange={handleInputChange} placeholder="Email" className="profilEdit" />
+      <input type="text" name="quartier_id" value={formData.quartier_id || ''} onChange={handleInputChange} placeholder="Adresse" className="profilEdit" />
+      <textarea name="description" value={formData.description || ''} onChange={handleInputChange} placeholder="Description" className="profilEdit profilTextarea" />
+      {profileRole =="pme" && <input type="text" name="tarif_abonnement" value={formData.tarif_abonnement || ''} onChange={handleInputChange} placeholder="Tarif abonnement" className="profilEdit" />}
+      {profileRole =="pme" && <input type="text" name="tarif_mensuel" value={formData.tarif_mensuel || ''} onChange={handleInputChange} placeholder="Tarif mensuel" className="profilEdit" />}
+      <input type="text" name="genre" value={formData.genre || ''} onChange={handleInputChange} placeholder="Genre" className="profilEdit" />
+      {profileRole =="pme" && <input type="text" name="nom_pme" value={formData.nom_pme || ''} onChange={handleInputChange} placeholder="Nom Pme" className="profilEdit" />}
+      <input type="text" name="role" value={formData.role || ''} onChange={handleInputChange} placeholder="Role" className="profilEdit" />
+      <input type="text" name="tel" value={formData.tel || ''} onChange={handleInputChange} placeholder="Tel" className="profilEdit" />
+      {profileRole == "pme" && <input type="text" name="zone_intervention" value={formData.zone_intervention || ''} onChange={handleInputChange} placeholder="Zone intervention" className="profilEdit" />}
+
+      <button onClick={handleSave} className="btn btnSave">Sauvegarder</button>
+      <button onClick={handleEditToggle} className="btn btnCancel">Annuler</button>
+    </>
+  ) : (
+    <>
+      {/* Utilisation conditionnelle en fonction du rôle */}
+      {profileRole === 'menage' ? (
         <>
-          <input
-            type="text"
-            name="nom_prenom"
-            value={formData.nom_prenom || ''}
-            onChange={handleInputChange}
-            placeholder="Nom utilisateur"
-            className='profilEdit'
-          />
-          <input
-            type="email"
-            name="email"
-            value={formData.utilisateur?.email || ''}
-            onChange={handleInputChange}
-            placeholder="Email"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="quartier_id"
-            value={formData.utilisateur?.quartier_id || ''}
-            onChange={handleInputChange}
-            placeholder="Adresse"
-            className='profilEdit'
-          />
-          <textarea
-            name="description"
-            value={formData.description || ''}
-            onChange={handleInputChange}
-            placeholder="Description"
-            className='profilEdit profilTextarea'
-          />
-          <input
-            type="text"
-            name="tarif_abonnement"
-            value={formData.tarif_abonnement || ''}
-            onChange={handleInputChange}
-            placeholder="Tarif abonnement"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="tarif_mensuel"
-            value={formData.tarif_mensuel || ''}
-            onChange={handleInputChange}
-            placeholder="Tarif mensuel"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="genre"
-            value={formData.utilisateur?.genre || ''}
-            onChange={handleInputChange}
-            placeholder="Genre"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="nom_pme"
-            value={formData.nom_pme || ''}
-            onChange={handleInputChange}
-            placeholder="Nom Pme"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="role"
-            value={formData.utilisateur?.role || ''}
-            onChange={handleInputChange}
-            placeholder="Role"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="tel"
-            value={formData.utilisateur?.tel || ''}
-            onChange={handleInputChange}
-            placeholder="Tel"
-            className='profilEdit'
-          />
-          <input
-            type="text"
-            name="zone_intervention"
-            value={formData.zone_intervention || ''}
-            onChange={handleInputChange}
-            placeholder="Zone intervention"
-            className='profilEdit'
-          />
-          <button onClick={handleSave} className='btnSave'>Sauvegarder</button>
-          <button onClick={handleEditToggle} className='btnCancel'>Annuler</button>
+          <p className="profileDetailsP"><span>Nom utilisateur : </span>{profileInfo.nom_prenom || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Email : </span>{profileInfo.email || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Adresse : </span>{getQuartierNameById(profileInfo.quartier_id) || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Genre : </span>{profileInfo.genre || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Tel : </span>{profileInfo.tel || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Role : </span>{profileInfo.role || 'Non spécifié'}</p>
         </>
       ) : (
         <>
-          <p className='profileDetailsP'>Nom utilisateur : {profileInfo.utilisateur?.nom_prenom || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Email : {profileInfo.utilisateur?.email || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Adresse : {profileInfo.utilisateur?.quartier_id || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Description : {profileInfo.description || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Tarif abonnement : {profileInfo.tarif_abonnement || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Tarif mensuel : {profileInfo.tarif_mensuel || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Genre : {profileInfo.utilisateur?.genre || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Nom Pme : {profileInfo.nom_pme || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Role : {profileInfo.utilisateur?.role || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Tel : {profileInfo.utilisateur?.tel || 'Non spécifié'}</p>
-          <p className='profileDetailsP'>Zone intervention : {profileInfo.zone_intervention || 'Non spécifié'}</p>
-          <button onClick={handleEditToggle} className='btnEdit'>Modifier</button>
+          <p className="profileDetailsP"><span>Nom utilisateur : </span>{profileInfo.utilisateur?.nom_prenom || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Email : </span>{profileInfo.utilisateur?.email || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Adresse : </span>{getQuartierNameById(profileInfo.quartier_id) || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Description : </span>{profileInfo.description || 'Non spécifié'}</p>
+          {profileRole =="pme" && <p className="profileDetailsP"><span>Tarif abonnement : </span>{profileInfo.tarif_abonnement || 'Non spécifié'}</p>}
+          {profileRole =="pme" && <p className="profileDetailsP"><span>Tarif mensuel : </span>{profileInfo.tarif_mensuel || 'Non spécifié'}</p>}
+          <p className="profileDetailsP"><span>Genre : </span>{profileInfo.utilisateur?.genre || 'Non spécifié'}</p>
+          {profileRole =="pme" && <p className="profileDetailsP"><span>Nom Pme : </span>{profileInfo.nom_pme || 'Non spécifié'}</p>}
+          <p className="profileDetailsP"><span>Role : </span>{profileInfo.utilisateur?.role || 'Non spécifié'}</p>
+          <p className="profileDetailsP"><span>Tel : </span>{profileInfo.utilisateur?.tel || 'Non spécifié'}</p>
+          {profileRole == "pme" && <p className="profileDetailsP"><span>Zone intervention : </span>{profileInfo.zone_intervention || 'Non spécifié'}</p>}
         </>
       )}
-    </div>
+      <button onClick={handleEditToggle} className="btnEdit">Modifier</button>
+    </>
+  )}
+</div>
   );
 }

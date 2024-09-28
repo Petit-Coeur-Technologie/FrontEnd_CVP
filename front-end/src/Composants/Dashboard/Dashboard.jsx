@@ -19,7 +19,6 @@ export default function Dashboard() {
   const [showPopup, setShowPopup] = useState(false); // Ajout de l'état showPopup pour gérer le popup
   const [ouvrirBarLatteral, setOuvrirBarLatteral] = useState(false); // Ajout de l'état showPopup pour gérer le popup
 
-
   const functionOuvrirBarLatteral = () =>{
     setOuvrirBarLatteral(!ouvrirBarLatteral);
   }
@@ -71,11 +70,9 @@ export default function Dashboard() {
     const tokenFromCookie = getCookie('authToken');
     const roleFromCookie = getCookie('role');
 
-    if (userIdFromCookie){
-      setUserId(userIdFromCookie);
-    } 
+    if (userIdFromCookie){setUserId(userIdFromCookie);} 
     if (tokenFromCookie) setAccessToken(tokenFromCookie);
-    if (roleFromCookie) setUserRole(roleFromCookie);
+    if (roleFromCookie) {setUserRole(roleFromCookie);}
   }, []);
 
   // ========================= POUR RECUPERER LE INFORMATION DE L'UTILISATEUR CONNECTER =======================
@@ -98,8 +95,6 @@ export default function Dashboard() {
           }
   
           const data = await response.json();
-          console.log(data);
-          console.log("INFORMATION DE L'UTILISATEUR CONNECTER...");
           if(data.utilisateur.role === "pme"){
             setPhotoDeProfil(data.logo_pme);
           }
@@ -115,7 +110,7 @@ export default function Dashboard() {
       };
       fetchAbonnes();
   
-    }, [userId, accessToken]);
+    }, [userId]);
 
   // Appel API pour récupérer les abonnés et rôle de l'utilisateur
   useEffect(() => {
@@ -136,9 +131,6 @@ export default function Dashboard() {
         }
 
         const data = await response.json();
-        console.log(data);
-        // photoDeProfil(data.)
-        setUserRole(data.utilisateur.role); 
       // } catch (error) {
       //   console.error('Erreur lors de la récupération des abonnés:', error.message);
       // }
@@ -167,7 +159,6 @@ export default function Dashboard() {
           }
     
           const data = await response.json();
-          console.log(data);
           setAbonnesEnAttente(data);
           // Comptage des abonnements en attente
           const abonnementsEnAttente = data.filter((abonne) => abonne.status_abonnement === "pending").length;
@@ -212,13 +203,6 @@ export default function Dashboard() {
       navigate('home'); 
     }
   }, [userId, accessToken]);
-
-
-    // Affichage du nombre d'abonnements en attente
-    useEffect(() => {
-      console.log("LE NOMBRE D'ABONNEMENTS EN ATTENTE DANS DASHBOARD : " + nombreAbonnementEnAttente);
-      console.log(photoDeProfil);
-    }, []);
 
   return (
     <div className='conteneur'>
