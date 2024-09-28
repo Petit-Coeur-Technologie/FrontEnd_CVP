@@ -4,6 +4,7 @@ import "./infosPME.css";
 import toast from "react-hot-toast";
 import LoginModal from "../../Composants/Souscription/souscription";
 import myImage from '/src/assets/logo_provisoire.png';
+import Loading from "../Loading/loading";
 
 
 function InfosPme() {
@@ -15,6 +16,7 @@ function InfosPme() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [commentaire, setCommentaire] = useState(""); // État pour le commentaire
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // Récupération des détails de la PME
@@ -22,12 +24,14 @@ function InfosPme() {
             .then((response) => response.json())
             .then((data) => {
                 setPme(data);
+                setIsLoading(false);
                 console.log("PME Details:", data);
             })
             .catch((error) => {
                 console.error("Error fetching PME details:", error);
+                setIsLoading(false);
             });
-    
+
         // Vérifier l'authentification à l'initialisation
         checkAuth();
     }, [id]);
@@ -67,12 +71,12 @@ function InfosPme() {
     const Souscription = async () => {
         const token = getCookie('authToken');
         console.log("Token utilisé pour la souscription:", token);
-    
+
         if (!isAuthenticated) {
             setShowLoginModal(true);
             return;
         }
-    
+
         const souscriptionData = {
             pme_id: id,
             num_abonnement: generateUniqueSubscriptionNumber(),
@@ -81,7 +85,7 @@ function InfosPme() {
             debut_abonnement: new Date().toISOString(),
             fin_abonnement: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString()
         };
-    
+
         try {
             const response = await fetch('https://ville-propre.onrender.com/abonnement', {
                 method: 'POST',
@@ -91,13 +95,13 @@ function InfosPme() {
                 },
                 body: JSON.stringify(souscriptionData),
             });
-    
+
             if (!response.ok) {
                 const errorData = await response.json();
                 console.error("Response Error Data:", errorData);
                 throw new Error("L'abonnement a échoué!");
             }
-    
+
             const data = await response.json();
             console.log("Souscription a réussi:", data);
             setSouscrit(true);
@@ -156,10 +160,6 @@ function InfosPme() {
         }
     };
 
-    if (!pme) {
-        return <div>Loading...</div>;
-    }
-
     function renderStars(rating) {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
@@ -177,75 +177,81 @@ function InfosPme() {
 
     return (
         <div className="infosPME">
-            <div className="infosPME_header">
-                <img
-                    src={pme.logo_pme}
-                    alt={pme.nom_pme}
-                    className="pme-logo"
-                />
-                <div className="pme-info">
-                    <h1 className="pme-title">{pme.nom_pme}</h1>
-                    <div className="rating-stars">
-                        {renderStars(pme.rating)}
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <>
+                    <div className="infosPME_header">
+                        <img
+                            src={pme.logo_pme}
+                            alt={pme.nom_pme}
+                            className="pme-logo"
+                        />
+                        <div className="pme-info">
+                            <h1 className="pme-title">{pme.nom_pme}</h1>
+                            <div className="rating-stars">
+                                {renderStars(pme.rating)}
+                            </div>
+                            <div className="all-p">
+                                <p className="pPme p">{pme.description}</p>
+                                <p className="pPme p">Zone d'intervention: {pme.zone_intervention}</p>
+                                <p className="pPme p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
+                                <p className="pPme p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
+                            </div>
+                            <button
+                                type="button"
+                                className="AbonnementBtn"
+                                onClick={Souscription}
+                                disabled={souscrit}
+                            >
+                                {souscrit ? "Abonné" : "S'abonner"}
+                            </button>
+                        </div>
                     </div>
-                    <div className="all-p">
-                    <p className="pme-description p">{pme.description}</p>
-                    <p className="pme-zone p">Zone d'intervention: {pme.zone_intervention}</p>
-                    <p className="pme-tarifs p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
-                    <p className="pme-tarifs p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
-                    </div>
-                    <button
-                        type="button"
-                        className="AbonnementBtn"
-                        onClick={Souscription}
-                        disabled={souscrit}
-                    >
-                        {souscrit ? "Abonné" : "S'abonner"}
-                    </button>
-                </div>
-            </div>
-            {showLoginModal && (
-                <LoginModal
-                    onClose={() => setShowLoginModal(false)}
-                    onLogin={() => {
-                        setShowLoginModal(false);
-                        navigate('/connexion', { state: { from: { pathname: window.location.pathname } } });
-                    }}
-                />
-            )}
+                    {showLoginModal && (
+                        <LoginModal
+                            onClose={() => setShowLoginModal(false)}
+                            onLogin={() => {
+                                setShowLoginModal(false);
+                                navigate('/connexion', { state: { from: { pathname: window.location.pathname } } });
+                            }}
+                        />
+                    )}
 
-            <div className="commentaires">
-               <div className="comment1">
-                <div className="commentaire1">
-                <img className="comment-img1" src={myImage} alt="pct" />
-                <p> thierno souleymane Bailo Diallo</p>
-                </div>
-                <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                <div className="rating-stars">
-                        {renderStars(pme.rating)}
+                    <div className="commentaires">
+                        <div className="comment1">
+                            <div className="commentaire1">
+                                <img className="comment-img1" src={myImage} alt="pct" />
+                                <p> thierno souleymane Bailo Diallo</p>
+                            </div>
+                            <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                            <div className="rating-stars">
+                                {renderStars(pme.rating)}
+                            </div>
+                        </div>
+                        <div className="comment2">
+                            <div className="commentaire2">
+                                <img className="comment-img2" src={myImage} alt="pct" />
+                                <p> Aliou Diallo</p>
+                            </div>
+                            <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                            <div className="rating-stars">
+                                {renderStars(pme.rating)}
+                            </div>
+                        </div>
+                        <div className="comment3">
+                            <div className="commentaire3">
+                                <img className="comment-img3" src={myImage} alt="pct" />
+                                <p> Amadou Oury Diallo</p>
+                            </div>
+                            <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                            <div className="rating-stars">
+                                {renderStars(pme.rating)}
+                            </div>
+                        </div>
                     </div>
-               </div>
-               <div className="comment2">
-                  <div className="commentaire2">
-                  <img className="comment-img2" src={myImage} alt="pct" />
-                  <p> Aliou Diallo</p>                  
-                </div>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                <div className="rating-stars">
-                        {renderStars(pme.rating)}
-                    </div>
-               </div>
-               <div className="comment3">
-               <div className="commentaire3">
-               <img className="comment-img3" src={myImage} alt="pct" />
-               <p> Amadou Oury Diallo</p>
-                </div>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                <div className="rating-stars">
-                        {renderStars(pme.rating)}
-                    </div>
-               </div>
-            </div>
+                </>
+            )}
         </div>
     );
 }
