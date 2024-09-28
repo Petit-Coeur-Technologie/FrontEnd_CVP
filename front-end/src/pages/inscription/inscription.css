@@ -475,8 +475,7 @@ div.inscriptionForm-wrapper > form {
 /* Mobile */
 @media (max-width: 790px) {
   .stack-container{
-    width: 90%;
-    left: 6%;
+    width: 100%;
   }
   
   .labelPolitique, .login-link, .textInscrireAvec {
