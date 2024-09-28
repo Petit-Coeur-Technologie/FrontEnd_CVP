@@ -230,7 +230,6 @@ border-radius: 50%;
 }
 
 .divVoirInfoProfil {
-  height: 330px;
   width: 220px;
   background-color: #ffffff; /* Couleur de fond blanche pour un look propre */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
@@ -247,7 +246,11 @@ border-radius: 50%;
 .affInfoProfil {
   right: 0px !important; /* Légèrement à droite pour ne pas toucher le bord */
 }
-
+.divVoirInfoProfil.affInfoProfil{
+   margin-top:15px;
+   overflow:hidden;
+   height: 350px;
+}
 .divVoirInfoProfil ul {
   list-style-type: none; /* Supprimer les puces par défaut */
   padding: 0;
