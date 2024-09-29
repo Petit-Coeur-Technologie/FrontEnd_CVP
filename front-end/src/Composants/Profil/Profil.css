@@ -15,7 +15,7 @@
 
 /* Style global pour le conteneur des détails du profil */
 .profileDetails {
-  
+  overflow-y: scroll;
   width: 96%;
   height: 100%;
   margin: 0;

@@ -1,19 +1,17 @@
 .classRolePme {
     padding: 5px;
     background-color: #f9f9f9; /* Couleur de fond plus douce */
-    /* border: 1px solid #e0e0e0;  */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Ombre légère pour donner de la profondeur */
     color: #333; /* Couleur de texte pour un bon contraste */
     transition: background-color 0.3s ease; /* Effet de transition pour les interactions */
     height: 100%;
-    /* width: 97%; */
+    width: 86%;
+    position: fixed;
+    left: 130px;
   }
 
   .divGraphique {
     height: 100%; /* Taille du graphique */
     background-color: #fff; /* Fond blanc propre */
-    /* border: 1px solid #ccc;  */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Ombre subtile mais plus marquée */
     padding: 10px; /* Ajout d'un peu de padding pour aérer le contenu */
     transition: box-shadow 0.3s ease; /* Transition d'ombre au survol */
   }  
@@ -109,22 +107,21 @@
   @media (min-width:950px) {
     .classRolePme {
         width: 89.7%;
-        position: fixed;
-        left: 120px;
       }
   }
-  @media (max-width:950px) {
-    .classRolePme {
-        width: 87.5%;
-        position: fixed;
-        left: 120px;
-      }
-  }
+
   @media (max-width:860px) {
     .classRolePme {
-        width: 98.8%;
+        width: 98.5%;
         position: relative;
         left: 11px;
+      }
+  }
+  @media (max-width:600px) {
+    .classRolePme {
+        width: 97%;
+        position: relative;
+        left: 10px;
       }
   }
   @media (max-width:500px) {

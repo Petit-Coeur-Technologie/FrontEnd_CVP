@@ -11,6 +11,8 @@ export default function Dashboard() {
   const [profileImage, setProfileImage] = useState("../../src/assets/logo_provisoire.png"); 
   const [userId, setUserId] = useState(null);
   const [photoDeProfil, setPhotoDeProfil] = useState('');
+  const [imageDefautChargement, setImageDefautChargement] = useState(true);
+  const [imageDefaut, setImageDefaut] = useState("../../src/assets/imageDefaut.png");
   const [accessToken, setAccessToken] = useState('');
   const [abonnesEnAttente, setAbonnesEnAttente] = useState([]);
   const [nombreAbonnementEnAttente, setNombreAbonnementEnAttente] = useState(0);
@@ -78,6 +80,7 @@ export default function Dashboard() {
   // ========================= POUR RECUPERER LE INFORMATION DE L'UTILISATEUR CONNECTER =======================
     // Appel API pour récupérer les abonnés et rôle de l'utilisateur
     useEffect(() => {
+      setImageDefautChargement(true)
       if (!userId || !accessToken) return;
   
       const fetchAbonnes = async () => {
@@ -106,6 +109,9 @@ export default function Dashboard() {
           }
         // } catch (error) {
         //   console.error('Erreur lors de la récupération des abonnés:', error.message);
+        // }
+        // finally{
+        //   setImageDefautChargement(true);
         // }
       };
       fetchAbonnes();
@@ -169,7 +175,7 @@ export default function Dashboard() {
       };
     
       fetchAbonnes();
-    }, [userId, accessToken]);
+    }, [userId, accessToken, nombreAbonnementEnAttente, abonnesEnAttente]);
 
 
   // Fonction pour afficher le popup
@@ -203,6 +209,15 @@ export default function Dashboard() {
       navigate('home'); 
     }
   }, [userId, accessToken]);
+
+  useEffect(() => {
+    if(photoDeProfil){
+      setImageDefautChargement(false);
+    }
+    console.log("Image de profil:", photoDeProfil);
+    console.log("Chargement de l'image par défaut:", imageDefautChargement);
+  }, [photoDeProfil, imageDefautChargement]);
+  
 
   return (
     <div className='conteneur'>
@@ -264,7 +279,7 @@ export default function Dashboard() {
           <span className='incrementationNotification'></span>
         </div>
         <div className='divImage' onClick={toggleAffInfoProfil}>
-          <img src={photoDeProfil} alt="profil" className='imageProfil'/>
+          <img className='imageProfil' src={imageDefautChargement || !photoDeProfil ? imageDefaut : photoDeProfil} alt="profil" />
         </div>
       </div>
 

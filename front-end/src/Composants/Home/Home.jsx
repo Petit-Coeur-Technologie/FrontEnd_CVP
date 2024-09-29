@@ -13,7 +13,6 @@ import {
   ArcElement
 } from "chart.js";
 import './Home.css';
-import toast from "react-hot-toast";
 
 ChartJS.register(
   BarElement,
@@ -79,9 +78,7 @@ const Home = () => {
 
       const data = await response.json();
       processChartData(data);
-      toast.success("Données récupérées avec succès"); // Notification de succès
     } catch (error) {
-      toast.error("Problème de connexion");
       console.error("Erreur lors de la récupération des données : ", error);
     } finally {
       setLoadingData(false); // Indiquer que le chargement des données est terminé
