@@ -253,7 +253,10 @@
   .navLogo {
     margin: 0 auto; /* Centrer le logo */
   }
-
+  #logo{
+    width:60px;
+    height:60px;
+  }
   .login {
     display: flex;
     justify-content: flex-end;
