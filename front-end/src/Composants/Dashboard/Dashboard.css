@@ -1,5 +1,3 @@
-
-
 .conteneur {
   /* Conteneur principl pour la barre latérale et le navBar */
   display: flex;
@@ -76,11 +74,6 @@
 }
 .menuBarLaterale1 .liClass:first-child{
 padding-right: 76px;
-}
-
-.menuBarLaterale1 li:hover, .menuBarLaterale2 li:hover {
-transition: all .3s ease;
-transform: translateX(5px);
 }
 
 .menuBarLaterale2 .liClass:first-child{
@@ -230,13 +223,14 @@ border-radius: 50%;
 }
 
 .divVoirInfoProfil {
-  width: 220px;
+  height: 350px;
+  width: 160px;
   background-color: #ffffff; /* Couleur de fond blanche pour un look propre */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour donner de la profondeur */
   /* border-radius: 10px 0px 0px 10px;  */
   z-index: 300;
   position: absolute;
-  top: 60px;
+  top: 80.5px;
   right: -220px;
   overflow-y: auto;
   transition: right 1s ease; /* Animation fluide pour l'apparition */
@@ -278,7 +272,6 @@ text-decoration: none;
 width: 100%;
 }
 
-
 .divVoirInfoProfil ul li:first-child {
 position: relative;
 height: 50px; /* Assurez-vous que la première `li` a la même hauteur */
@@ -287,7 +280,7 @@ height: 50px; /* Assurez-vous que la première `li` a la même hauteur */
 .divVoirInfoProfil ul li:hover {
 background-color: #e0e0e0; /* Couleur de fond au survol */
 cursor: pointer; /* Changer le curseur au survol */
-transform: translateX(5px); /* Légère animation de translation */
+/* transform: translateX(5px);  */
 }
 
 .divVoirInfoProfil ul li i {
@@ -497,8 +490,9 @@ padding: 0;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  position: relative;top: 10px;
-  left: -25px;
+  position: relative;
+  top: 20px;
+  left: 10px;
   color: white;
 }
 .pNombreAbonnementEnAttenteDashboard{
@@ -554,6 +548,12 @@ padding: 0;
     overflow-y: scroll;
     margin-left: 45px!important;
 }
+.divNotification{
+  top: 30px;
+}
+.iconNotificationNavBarDashboard{
+  top: -15px;
+}
 }
 @media (max-width:908px){
   .divDonnes {
@@ -589,6 +589,18 @@ padding: 0;
   .nomApp{
     display: none;
   }
+  .divNotification{
+    top: 30px;
+  }
+  .iconNotificationNavBarDashboard{
+    top: -15px;
+  }
+  .active i {
+    color: var(--vert) !important;
+  }
+  .menuBarLaterale1 .liClass i:hover, .menuBarLaterale2 .liClass i:hover:nth-child(1){
+    color: var(--vert)!important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -620,7 +632,6 @@ padding: 0;
   .menuBarLaterale1 li i:hover, .menuBarLaterale2 li i:hover {
       color: var(--vert);
   }
-
   .LogoDiv{
       position: absolute;
       left: 4px;
@@ -629,10 +640,6 @@ padding: 0;
   .active i {
       color: var(--vert) !important;
   }
-  /* .contentFilsDashboard {
-      width: calc(100% - 25px);
-      height: 100%;
-  } */
   
   /* Assure que l'icône reste visible */
   .retour .liClass i {
@@ -729,9 +736,11 @@ padding: 0;
     width: 260px;
   }
   .divNombreAbonnementEnAttenteDashboard{
-    left: -111px;
-    top: 0;
-    display: flex;
+    top: -10px;
+    left: -118px;
+  }
+  .active i {
+    color: var(--vert) !important;
   }
 }
 .chargementMessageAbonne {

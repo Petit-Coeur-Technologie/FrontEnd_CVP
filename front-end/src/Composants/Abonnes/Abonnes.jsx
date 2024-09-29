@@ -4,6 +4,7 @@ import profilImg from '../../assets/moi.png';
 const Abonnes = () => {
   const [abonnes, setAbonnes] = useState([]);
   const [clientQuartiers, setClientQuartiers] = useState([]);
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [popupVisible, setPopupVisible] = useState(false);
   const [selectedAbonne, setSelectedAbonne] = useState(null);
@@ -50,8 +51,6 @@ const Abonnes = () => {
         }
   
         const data = await response.json();
-        console.log(data); 
-        console.log("===============DONNE RECU DANS DATA=================")
         if (Array.isArray(data)) {
           setAbonnes(data);
         } else {
@@ -85,12 +84,6 @@ const Abonnes = () => {
       return isAbonnementActif && (nomPrenom.includes(searchTermLower) || tel.includes(searchTermLower));
     });
   }, [abonnes, searchTerm]);
-    
-
-  useEffect(()=>{
-    console.log(abonnes);
-    console.log("===============DONNE RECU DANS ABONNEMENT=================")
-  },[abonnes])
 
 
   useEffect(() => {
