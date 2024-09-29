@@ -1,5 +1,5 @@
 import React from "react";
-import './Loading.css';
+import './loading.css';
 import loading from '/src/assets/loading.png';
 
 const Loading=()=>{
