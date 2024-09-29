@@ -426,3 +426,42 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
+
+
+
+@media screen and (max-width:700px){
+   .conteneurCalendrier{
+       flex-direction : column;
+       align-items: center;
+   }
+   div.calendarbottom-btn{
+      margin-top:8px;
+      display:flex;
+      flex-direction:column;
+      align-items: center;
+   }
+   div.calendarbottom-btn .cal-btm-btn{
+        width: 221px;
+        height: 40px;
+        text-align: center;
+        font-size: 15px;
+   }
+   .listeEvenement{
+       max-width:350px;
+       width: 350px;
+       height:auto;
+       max-height:fit-content;
+   }
+   .listeEvenement .lesEvenements{
+       position:relative;
+   }
+   .listeEvenement .lesEvenements > h3{
+       font-size: 15px;
+   }
+   .listeEvenement .lesEvenements .searchevent-wrapper{
+       display: flex;
+       justify-content: center;
+   }
+
+}
