@@ -7,7 +7,7 @@
 .nav {
   position: fixed;
   width: 100%;
-  height: 65px;
+  height: 85px;
   z-index: 2;
   top: 0;
   background-color: #00804b;
@@ -15,6 +15,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 25px;
 }
 .navLogo {
   display: flex;
@@ -25,8 +29,8 @@
 
 /* Logo */
 #logo {
-  width: 40px;
-  height: 40px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   margin: 0%;
   border-radius: 50%;
@@ -70,6 +74,17 @@
   font-size: 1rem;
   display: flex;
   align-items: center;
+    padding: 0 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+@media (max-width:450px){
+    .nav-content{
+    font-size: 10px;
+}
 }
 
 .nav-items .NavLink:hover {
@@ -129,7 +144,7 @@
   align-items: center;
   color: #fff;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
   transition: all 0.5s ease-out;
 }
 

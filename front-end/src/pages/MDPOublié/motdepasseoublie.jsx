@@ -52,7 +52,7 @@ export default function MotDePasseOublie({ onClose }) {
   };
 
   return (
-    <Box className="boxe"
+    <div className="boxe"
       width={"400px"}
       sx={{
         bgcolor: "#00804b",
@@ -63,9 +63,13 @@ export default function MotDePasseOublie({ onClose }) {
     >
       {step === 1 && (
         <>
-          <Typography className='mdp' variant='h5'>Mot de passe oublié</Typography>
+         <div>
+         <div className='mdp'>
+         <h1>Mot de passe oublié</h1>
+         </div>
+          <div>
           <form onSubmit={handleSubmitEmail}>
-            <Stack direction={"column"} gap={2}>
+            <div direction={"column"} gap={2}>
               <TextField
                 type="email"
                 label="Entrez votre mail"
@@ -85,17 +89,22 @@ export default function MotDePasseOublie({ onClose }) {
               />
               <Button className="envoyer" variant="contained" type="submit">Envoyer</Button>
               {message && <Typography color="primary" className="mot2">{message}</Typography>}
-            </Stack>
+            </div>
           </form>
+          </div>
           <Button className="fermer" onClick={onClose}>Fermer</Button>
+          </div> 
+          
         </>
       )}
 
       {step === 2 && (
         <>
-          <Typography variant='h5' className="mot2">Entrez le code de vérification</Typography>
+          <div className="mot2">
+            <h2>Entrez le code de vérification</h2>
+            </div>
           <form onSubmit={handleSubmitCode}>
-            <Stack direction={"row"} gap={1}>
+            <div direction={"row"} gap={1}>
               {codeParts.map((part, index) => (
                 <TextField
                   key={index}
@@ -108,7 +117,7 @@ export default function MotDePasseOublie({ onClose }) {
                   sx={{ width: '50px', textAlign: 'center' }}
                 />
               ))}
-            </Stack>
+            </div>
             <Button className="envoyer" variant="contained" type="submit" sx={{ mt: 2 }}>Vérifier</Button>
             {message && <Typography color="primary" className="mot2">{message}</Typography>}
           </form>
@@ -123,6 +132,6 @@ export default function MotDePasseOublie({ onClose }) {
           {/* Logique de redirection */}
         </>
       )}
-    </Box>
+    </div>
   );
 }
