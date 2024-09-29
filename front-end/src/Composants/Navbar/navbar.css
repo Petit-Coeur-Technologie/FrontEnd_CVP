@@ -240,8 +240,11 @@
   /* Afficher le menu sur les petits écrans */
   .menu-icon {
     display: block; /* Afficher l'icône de menu */
+    
   }
-
+  .menu-icon .bx.bx-menu{
+    font-size:30px!important;
+  }
   /* Masquer les éléments de la liste de navigation par défaut */
   .nav-items {
     display: none; /* Masquer la liste de navigation */
@@ -255,7 +258,9 @@
     display: flex;
     justify-content: flex-end;
   }
-
+  .login .bx.bxs-user{
+     font-size:25px!important;
+  }
   /* Afficher l'overlay sombre uniquement sur petits écrans */
   .overlay {
     display: block;
