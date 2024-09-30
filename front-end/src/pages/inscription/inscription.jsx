@@ -6,7 +6,7 @@ import background from '/src/assets/background.avif';
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
 import ClientForm from "./ClientForm";
-import PmeForm from "./PmeForm";
+import PmeForm from "./PmeForm"
 
 function Inscription() {
   const navigate = useNavigate();

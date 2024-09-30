@@ -6,7 +6,7 @@ import "boxicons/css/boxicons.min.css";
 const passwordPme = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
 const phonePatternPme = /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 
-function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
+function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
     const [pmeVilles, setPmeVilles] = useState([]);
@@ -22,7 +22,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
 
     useEffect(() => {
         fetch('https://ville-propre.onrender.com/villes')
-            .then((response) => {response.json()})
+            .then((response) => { response.json() })
             .then((data) => setPmeVilles(data))
             .catch(error => console.error('Erreur lors de la récupération des villes:', error));
     }, []);
@@ -86,10 +86,10 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                         <option value="femme">Femme</option>
                     </select>
                 </div>
- {/* -------- Pour la selection de la ville, la commun et le quartier si c'est une PME -------------------------------*/}
+                {/* -------- Pour la selection de la ville, la commun et le quartier si c'est une PME -------------------------------*/}
                 {/* Pour la selection de la ville */}
                 <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i className='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
+                    <i className='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
                             id="ville"
@@ -98,15 +98,16 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                             className="selectIns selectIns1"
                         >
                             <option value="ville">Ville</option>
-                            {pmeVilles.map(ville => (
+                            {pmeVilles && pmeVilles.map(ville => (
                                 <option key={ville.id} value={ville.id}>{ville.ville}</option>
                             ))}
-                        </select>
-                        </div>
-                    </div>
 
- {/* Pour la selection de la commun */}
- <div className="input-container input-container2 input-containerSelect input-containerTablette">
+                        </select>
+                    </div>
+                </div>
+
+                {/* Pour la selection de la commun */}
+                <div className="input-container input-container2 input-containerSelect input-containerTablette">
                     <i className='bx bx-location-plus' ></i>
                     <div className="adresse">
                         <select
@@ -123,11 +124,11 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                             ))}
                         </select>
                     </div>
-                    </div>
- {/* Pour la selection du quartier */}
- <div className="input-container input-container2 input-containerSelect input-containerTablette">
-                <i className='bx bx-current-location' ></i>
-                 <div className="adresse">
+                </div>
+                {/* Pour la selection du quartier */}
+                <div className="input-container input-container2 input-containerSelect input-containerTablette">
+                    <i className='bx bx-current-location' ></i>
+                    <div className="adresse">
                         <select
                             id="quartierPME"
                             {...register("quartierPME", { required: "Ce champ est obligatoire" })}
@@ -150,7 +151,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
 
                 {/* ------------------------------------------------------------------------------------------------- */}
 
-              <div className="input-container input-containerTablette">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-phone' style={{ color: '#fdb024' }}></i>
                     <span style={{ marginRight: '5px' }}>+224</span>
                     <input type="tel" name="telPME" id="telPME" placeholder="Numéro de téléphone" className="inputIns"
@@ -160,7 +161,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-id-card' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="copie_pi" id="copie_pi_pme" className="file-upload inputIns"
-                       ref={idFileRef} onChange={(e) => handlePmeFileChange(e, 'idFile')} />
+                        ref={idFileRef} onChange={(e) => handlePmeFileChange(e, 'idFile')} />
                     <label htmlFor="copie_pi_pme" className="file-upload-label">
                         {pmeIdFile}
                     </label>
@@ -178,7 +179,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef}) {
                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="logo_pme" id="logo_pme" className="file-upload inputIns"
-                       ref={logoFileRef} onChange={(e) => handlePmeFileChange(e, 'logoFile')} />
+                        ref={logoFileRef} onChange={(e) => handlePmeFileChange(e, 'logoFile')} />
                     <label htmlFor="logo_pme" className="file-upload-label">
                         {pmeLogoFile}
                     </label>
