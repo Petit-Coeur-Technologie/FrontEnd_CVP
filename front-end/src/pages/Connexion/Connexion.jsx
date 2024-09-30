@@ -46,6 +46,9 @@ export default function Connexion() {
   
       const data = await response.json();
       console.log(data); // Assure-toi que cette ligne s'exécute
+      toast.success("Connexion réussie");
+      const redirectPath = location.state?.from?.pathname || '/dashboard';
+      navigate(redirectPath);
   
       const accessToken = data.access_token;
       const userId = data.user_id;

@@ -206,12 +206,15 @@
 .btnSeConnecter {
   display: block; /* Afficher le bouton sur les grands écrans */
   background-color: #4fb97f;
+  border: none;
   color: #fff;
   width: 130px;
   margin: 0;
   padding: 10px;
+  font-size: 16px;
   border-radius: 500px;
   transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 .btnSeConnecter:focus,.btnSeConnecter:focus ,
@@ -255,8 +258,11 @@
   /* Afficher le menu sur les petits écrans */
   .menu-icon {
     display: block; /* Afficher l'icône de menu */
+    
   }
-
+  .menu-icon .bx.bx-menu{
+    font-size:30px!important;
+  }
   /* Masquer les éléments de la liste de navigation par défaut */
   .nav-items {
     display: none; /* Masquer la liste de navigation */
@@ -265,12 +271,17 @@
   .navLogo {
     margin: 0 auto; /* Centrer le logo */
   }
-
+  #logo{
+    width:60px;
+    height:60px;
+  }
   .login {
     display: flex;
     justify-content: flex-end;
   }
-
+  .login .bx.bxs-user{
+     font-size:25px!important;
+  }
   /* Afficher l'overlay sombre uniquement sur petits écrans */
   .overlay {
     display: block;
