@@ -206,12 +206,15 @@
 .btnSeConnecter {
   display: block; /* Afficher le bouton sur les grands écrans */
   background-color: #4fb97f;
+  border: none;
   color: #fff;
   width: 130px;
   margin: 0;
   padding: 10px;
+  font-size: 16px;
   border-radius: 500px;
   transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 .btnSeConnecter:focus,.btnSeConnecter:focus ,
