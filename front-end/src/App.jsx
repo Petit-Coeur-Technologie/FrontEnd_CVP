@@ -19,7 +19,6 @@ import Home from './Composants/Home/Home.jsx';
 import Calendrier from './Composants/Calendrier/Calendrier.jsx';
 import Notification from './Composants/Notifications/Notifications.jsx';
 import AideAssistance from './Composants/Aide/AideAssistance.jsx';
-import Deconnexion from './Composants/Deconnexion/Deconnexion.jsx';
 import Details from './Composants/Details/Details.jsx';
 import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
@@ -59,7 +58,6 @@ function App() {
             <Route path="profil" element={<Profil />} />
             <Route path="notifications" element={<Notification />} />
             <Route path="aide-assistance" element={<AideAssistance />} />
-            <Route path="deconnexion" element={<Deconnexion />} />
             <Route path="details/:index" element={<Details />} />
           </Route>
 

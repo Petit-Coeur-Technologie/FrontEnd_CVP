@@ -1,0 +1,13 @@
+.noConnection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  gap: 20px;
+  padding: 20px;
+}
+
+.ImgConnection {
+  width: auto;
+  height: 300px;
+}

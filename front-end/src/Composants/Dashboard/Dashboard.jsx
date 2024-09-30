@@ -217,6 +217,21 @@ export default function Dashboard() {
     console.log("Image de profil:", photoDeProfil);
     console.log("Chargement de l'image par défaut:", imageDefautChargement);
   }, [photoDeProfil, imageDefautChargement]);
+
+  const handleLogout = () => {
+    // Supprimer le cookie d'authentification
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    document.cookie = 'userId=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    document.cookie = 'role=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+
+    // Réinitialiser les états liés à l'authentification
+    setAccessToken('');
+    setUserId(null);
+    setUserRole(null);
+    
+    // Rediriger vers la page d'accueil
+    navigate('/');
+};
   
 
   return (
@@ -305,11 +320,9 @@ export default function Dashboard() {
               <span>Aide/Assistance</span>
             </Link>
           </li>
-          <li onClick={() => handleProfileClick('Déconnexion')}>
-            <Link to="deconnexion">
-              <i className='bx bxs-log-out'></i>
-              <span>Déconnexion</span>
-            </Link>
+          <li onClick={handleLogout}>
+            <i className='bx bxs-log-out'></i>
+            <span>Déconnexion</span>
           </li>
         </ul>
       </div>
