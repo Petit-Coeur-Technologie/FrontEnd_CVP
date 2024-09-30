@@ -1,80 +1,88 @@
 .pme-card {
-    width: 280px;
-    height: 350px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    padding: 5px 20px;
-    transition: box-shadow 0.3s, transform 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly; /* Assure que le footer reste en bas */
-  }
-  
-  .pme-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  }
+  display: flex;
+  flex-direction: column; /* Affiche les éléments en colonne */
+  align-items: center; /* Centre horizontalement tous les éléments dans la carte */
+  width: 280px;
+  height: 350px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  padding: 5px 20px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  justify-content: space-evenly; /* Assure que le footer reste en bas */
+}
 
-  .pmeLogo{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 130px;
-    position: relative;
-  }
-  
-  .card-logo {
-    width:auto;
-    height: 100%;
-    position: absolute;
-  }
-  
-  .card-title {
-    color: #222;
-    font-weight: 600;
-  }
-  
-  .card-description {
-    width: 100%;
-    font-size: 14px;
-    color: #555;
-    line-height: 1.6;
-    overflow: hidden; /* Cache le texte débordant */
-    text-overflow: ellipsis; /* Affiche les points de suspension pour le texte débordant */
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limite le texte à deux lignes */
-    -webkit-box-orient: vertical;
-    margin-bottom: 10px; /* Espacement avant le footer */
-  }
-  
-  .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto; /* S'assure que le footer se positionne en bas */
-    margin: 0%;
-  }
-  
-  .rating-stars {
-    display: flex;
-  }
-  
-  .card-button {
-    margin-left: 10px;
-  }
-  
-  .card-button button {
-    background-color: #4fb97f;
-    color: white;
-    padding: 7px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .card-button button:hover {
-    background-color: #fdb024;
-  }  
+.pme-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.pmeLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid;
+  overflow: hidden;
+}
+
+.card-logo {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  object-fit: cover; /* Maintient la proportion de l'image tout en remplissant le conteneur */
+}
+
+.card-title {
+  width: 100%; /* Prend toute la largeur disponible */
+  text-align: left; /* Aligne le texte à droite */
+  color: #222;
+  font-weight: 600;
+}
+
+.card-description {
+  width: 100%;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  overflow: hidden; /* Cache le texte débordant */
+  text-overflow: ellipsis; /* Affiche les points de suspension pour le texte débordant */
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limite le texte à deux lignes */
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px; /* Espacement avant le footer */
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  margin-top: auto; /* S'assure que le footer se positionne en bas */
+  margin: 0%;
+}
+
+.rating-stars {
+  display: flex;
+}
+
+.card-button {
+  margin-left: 60px;
+}
+
+.btnCard {
+  background-color: #4fb97f;
+  color: white;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.5s ease-out;
+}
+
+.btnCard:hover,.btnCard:focus {
+  background-color: #fdb024;
+  color: #fff;
+}

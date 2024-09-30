@@ -57,6 +57,10 @@
   height: 40px;
 }
 
+.input-recherche::-webkit-input-placeholder {
+  color: #000;
+}
+
 .button-filtre{
   display: flex;
   justify-content: flex-end;
@@ -80,11 +84,13 @@
   border-radius: 50px; /* Coins arrondis pour le menu */
   background-color: #4fb97f; /* Couleur de fond blanche pour le menu */
   color: white;
-  transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
+  transition: border-color 0.3s ease, background-color 1s; /* Transition douce pour la couleur de la bordure */
   height: 40px;
   outline: none;
 }
-
+.filter-btn:hover{
+   background-color:#fdb024;
+  }
 .showPopupOverlay {
   position: fixed;
   top: 0;

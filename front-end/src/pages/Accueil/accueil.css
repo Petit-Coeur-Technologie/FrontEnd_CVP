@@ -1,6 +1,6 @@
 /* Conteneur principal */
 .home {
-  margin-top: 70px;
+  margin-top: 115px;
   padding: 10px 25px;
   background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
   display: flex;
@@ -15,6 +15,7 @@
   padding: 50px;
   background-color: #4fb97f; /* Nuance plus claire du vert */
   color: #ffffff;
+  margin-bottom:15px;
 }
 
 .welcome-section h1 {
@@ -27,13 +28,24 @@
 }
 
 .loading{
-  width: 30%;
-  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  margin-bottom: 30px;
 }
 
 .loadingSpin{
-  width: auto;
-  height: 100%;
+  animation: spin 5s linear infinite;/* Animation de rotation*/
+  width: 200px;
+  height: auto;
+}
+
+/* Animation pour le spinner*/
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }
 
 .cards-container {
@@ -59,18 +71,24 @@
   margin-bottom: 20px;
 }
 
-.Btnpage {
-  background: #fdb024;
+.pagination .Btnpage {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
 }
 
 .Btnpage:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fdb024;
 }
 
-.pagination button.active {
+.Btnpage.active {
   background-color: #fdb024;
 }
 
@@ -171,6 +189,9 @@
   .service {
     display: flex;
     flex-direction: column;
+  }
+  .pagination .Btnpage{
+    padding: 8px 15px;
   }
 }
 

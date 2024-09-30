@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import myImage from '/src/assets/th.jpeg';
+import { Link,useNavigate, useLocation } from 'react-router-dom'; // Importation du hook useNavigate et useLocation
+import myImage from '/src/assets/logo_provisoire.png';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
+
 import "./Connexion.css";
 import toast from 'react-hot-toast';
 
@@ -12,7 +13,7 @@ export default function Connexion() {
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); // Récupération de l'URL de redirection
 
   // Expression régulière pour valider le mot de passe
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -45,6 +46,9 @@ export default function Connexion() {
   
       const data = await response.json();
       console.log(data); // Assure-toi que cette ligne s'exécute
+      toast.success("Connexion réussie");
+      const redirectPath = location.state?.from?.pathname || '/dashboard';
+      navigate(redirectPath);
   
       const accessToken = data.access_token;
       const userId = data.user_id;
@@ -56,9 +60,6 @@ export default function Connexion() {
       document.cookie = `role=${role}; path=/; max-age=${60 * 60 * 24}`;
       toast.success('Connexion réussie');
 
-      console.log(data);  
-      const redirectPath = location.state?.from?.pathname || '/dashboard';
-      navigate(redirectPath);
   
     } catch (error) {
       console.error('Erreur lors de la connexion:', error.message);
@@ -74,71 +75,38 @@ export default function Connexion() {
     <div className='stacke'>
       <div className='stackeChild'>
         <h2 className="h2Con">Connexion</h2>
-        <div className='divMereImageBmw'>
           <div className="divImageBmw">
-            <Link to="/">
-              <img className="imageBmw" src={myImage} alt="pct" />
-            </Link>
+           <Link to="/"> <img className="imageBmw" src={myImage} alt="pct" /> </Link> 
           </div>
-        </div>
-        <Link title="Clicker pour revenir sur l'accueil" to="/">
-          <i className='bx bx-home bx-homeConnexion'></i>
-        </Link>
         {showForgotPassword ? 
-          (
-            <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
-          ) : (
-            <form onSubmit={handleSubmit}>
+        (
+          <MotDePasseOublie onClose={() => setShowForgotPassword(false)} />
+        ) : (
+        <><form onSubmit={handleSubmit}>
               <div className='divFormulaire'>
                 <div className="input-containerConnexion">
                   <i className='bx bxs-envelope' style={{ color: '#fdb024' }}></i>
-                  <input
-                    className="input inputEmail"
-                    type="email"
-                    placeholder='E-mail...'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
+                  <input className="input inputEmail" type="email" placeholder='E-mail...' value={username} onChange={(e) => setUsername(e.target.value)} required />
                 </div>
                 <div className="input-containerConnexion">
                   <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
-                  <input
-                    className="input inputMdp"
-                    type="password"
-                    placeholder='Mot de Passe...'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <input className="input inputMdp" type="password" placeholder='Mot de Passe...' value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <a href='#' className="mdpOublie" onClick={() => setShowForgotPassword(true)}>Mot de passe oublié?</a>
                 <button className="btnConnexion" type="submit">{isLoadingBtn ? 'Chargement...' : 'Se Connecter'}</button>
                 {errorMessage && <p className='pErreur'>{errorMessage}</p>}
-                
-                <div className="divIcone">
-                  <div className="divTextIconGoogle">
-                    <div className="cercle cercleGoogle">
-                      <i className="bx bxl-google google-icon"></i>
-                    </div>
-                    <p className="textInscrireAvecGoogle">Connexion avec Google</p>
-                  </div>
-                  <div className="divTextIconFacebook">
-                    <div className="cercle">
-                      <i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }}></i>
-                    </div>
-                    <p className="textInscrireAvecFacebook">Connexion avec Facebook</p>
-                  </div>
-                </div>
-
-                <div id="divmot2">
-                  <p className="mot3">
-                    <a href="#">Pas de compte?</a>
-                    <a href="/inscription">Inscrivez-Vous!</a>
-                  </p>
-                </div>
               </div>
             </form>
+            <div className="divIcone">
+                <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
+                <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }}></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
+            </div>
+            <div id="divmot2">
+                <p className="mot3">Pas de compte? <a href="/inscription"> Inscrivez-Vous!</a></p>
+            </div>
+            <div id="divmot3">
+                <p className="mot4"> <a href="/"> Retour à l'Accueil</a></p>
+            </div></>
           )}
       </div>
     </div>

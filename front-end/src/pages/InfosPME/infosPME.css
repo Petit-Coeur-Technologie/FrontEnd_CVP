@@ -1,15 +1,24 @@
-/* Style global pour la section d'informations sur la PME */
+  /* Style global pour la section d'informations sur la PME */
 .infosPME {
     margin: 0 auto;
-    padding-top: 70px; /* Compense la hauteur de la navbar */
+    padding-top: 90px; /* Compense la hauteur de la navbar */
     min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Style pour l'en-tête avec logo et informations */
 .infosPME_header {
     display: flex;
     flex-direction: row;
-    margin-bottom: 30px;
+    border: 1px solid rgb(0, 255, 34);
+    border-radius: 50px;
+    width: 55%;
+    height: 60vh;
+    justify-content: center;
+    text-align: center;
 }
 
 /* Style pour le logo de la PME */
@@ -17,13 +26,16 @@
     width: 150px;
     height: 150px;
     border-radius: 8px;
-    margin-right: 30px;
+    margin-left: 20px;
+    margin-top: 120px;
     object-fit: cover;
+    margin-right: 20px;
 }
 
 /* Style pour les informations de la PME */
 .pme-info {
     flex: 1;
+    padding: 30px;
 }
 
 /* Style pour le titre de la PME */
@@ -32,14 +44,17 @@
     color: #333333;
     margin-bottom: 10px;
     font-weight: bold;
+    display: flex;
+    justify-content: start;
 }
 
 /* Style pour la description de la PME */
-.pme-description, .pme-zone, .pme-tarifs {
+.pPme {
     font-size: 18px;
     color: #555555;
     margin-bottom: 10px;
     line-height: 1.5;
+    text-align: start;
 }
 
 /* Style pour la section des commentaires */
@@ -48,7 +63,6 @@
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Style pour la zone de texte des commentaires */
@@ -88,6 +102,121 @@
     text-decoration: none;
 }
 
-.attente{
-    padding-top: 70px; /* Compense la hauteur de la navbar */
+.btn-souley{
+    display: flex;
+    justify-content: center;
+    
+}
+.comment-pme{
+    width: 771px;
+    height: 127px;
+    resize: none;
+    padding: 10px 15px; 
+    margin: 5px;
+    font-size: 16px; 
+    outline: none;
+    border: 2px solid #4fb97f; 
+    color:black;
+    background-color: white; 
+    border-radius: 5px; 
+    transition: border-color 0.3s ease;
+}
+
+.btn-souley2{
+    background-color: #28a745;
+}
+.rating-stars {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+}
+p{
+    text-align: start;
+}
+.commentaires{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 30%;
+    height: 30vh;
+    /* border:1px solid #007bff; */
+    display: block;
+    overflow-y: auto;
+    
+}
+.comment1{
+    /* border:1px solid black ; */
+    width: 90%;
+    height: 90%;
+    /* margin: 10px; */
+    overflow-y: auto;
+    
+}
+.comment2{
+    /* border:1px solid black ; */
+    width: 90%;
+    height: 90%;
+    /* margin: 10px; */
+    overflow-y: auto;
+}
+.comment3{
+    /* border:1px solid black ; */
+    width: 90%;
+    height: 90%;
+    /* margin: 10px; */
+    margin-right:5px ;
+    overflow-y: auto;
+}
+.comment-img1{
+    width: 50px;
+    height: 25px;
+}
+.comment-img2{
+    width: 50px;
+    height: 25px;
+}
+.comment-img3{
+    width: 50px;
+    height: 25px;
+}
+
+
+
+
+@media(max-width:830px){
+   .infosPME{
+    width: 90%;
+    min-height: 100vh;
+   } 
+   .infosPME_header{
+    width: 100%;
+    
+   }
+   .pme-title{
+    display: flex;
+    justify-content: start;
+   }
+   .pme-logo{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items:center ;
+    margin-top: 0;
+    
+   }
+   .pme-info{
+    padding: 20px;
+   }
+   .AbonnementBtn {
+    display: flex;
+}
+.pme-description, .pme-zone, .pme-tarifs {
+    font-size: 26px;
+}
+.infosPME_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
 }

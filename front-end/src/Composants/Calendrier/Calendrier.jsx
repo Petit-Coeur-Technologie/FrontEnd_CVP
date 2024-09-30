@@ -234,24 +234,28 @@ export default function Calendrier() {
             highlightDates().includes(date.toDateString()) ? 'highlight' : null
           }
         />
-        <button onClick={handleAjouterEvenement} className='btn'>Ajouter un événement</button>
-        <select onChange={handleExportSelection} className='exportSelect'>
-          <option value=''>Exporte</option>
-          <option value='excel'>Exporter en Excel</option>
-          <option value='word'>Exporter en Word</option>
-        </select>
+        <div className="calendarbottom-btn">
+            <button onClick={handleAjouterEvenement} className='cal-btm-btn'>Ajouter un événement</button>
+            <select onChange={handleExportSelection} className='cal-btm-btn exportSelect'>
+              <option value=''>Exportation</option>
+              <option value='excel'>Exporter en Excel</option>
+              <option value='word'>Exporter en Word</option>
+            </select>
+        </div>
       </div>
 
       <div className='listeEvenement'>
         <div className='lesEvenements'>
           <h3>Événements pour {date.toDateString()}</h3>
-          <input
-            type='text'
-            placeholder='Rechercher des événements...'
-            value={chercheEvenement}
-            onChange={(e) => setchercheEvenement(e.target.value)}
-            className='chercherEvenement'
-          />
+          <div className="searchevent-wrapper">
+                <input
+                  type='text'
+                  placeholder='Rechercher des événements...'
+                  value={chercheEvenement}
+                  onChange={(e) => setchercheEvenement(e.target.value)}
+                  className='chercherEvenement'
+                />
+          </div>
           <div className='divSuppTousSelection'>
             <select onChange={handleActionChange} className='actionSelectionne' value={popupSuppEvenements}>
               <option value=''>Actions</option>

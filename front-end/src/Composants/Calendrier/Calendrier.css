@@ -378,10 +378,14 @@
 .react-calendar__navigation {
   background-color: #4CAF50; /* Couleur de fond verte pour les boutons de navigation */
   color: white; /* Texte blanc */
+  margin-bottom: 0px !important;
+  height: 50px!important;
+  border-bottom: 2px solid #ffffff;
 }
 
 .react-calendar__navigation__label {
   color: white; /* Couleur du texte de l'étiquette du mois */
+  padding: 5px 0!important;
 }
 
 .react-calendar__navigation__label:hover {
@@ -422,3 +426,42 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
+
+
+
+@media screen and (max-width:700px){
+   .conteneurCalendrier{
+       flex-direction : column;
+       align-items: center;
+   }
+   div.calendarbottom-btn{
+      margin-top:8px;
+      display:flex;
+      flex-direction:column;
+      align-items: center;
+   }
+   div.calendarbottom-btn .cal-btm-btn{
+        width: 221px;
+        height: 40px;
+        text-align: center;
+        font-size: 15px;
+   }
+   .listeEvenement{
+       max-width:350px;
+       width: 350px;
+       height:auto;
+       max-height:fit-content;
+   }
+   .listeEvenement .lesEvenements{
+       position:relative;
+   }
+   .listeEvenement .lesEvenements > h3{
+       font-size: 15px;
+   }
+   .listeEvenement .lesEvenements .searchevent-wrapper{
+       display: flex;
+       justify-content: center;
+   }
+
+}

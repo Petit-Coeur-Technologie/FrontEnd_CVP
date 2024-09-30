@@ -190,9 +190,9 @@ export default function Profil() {
   })
 
   // Affichage pendant le chargement des données
-  if (loading) {
-    return <p className='chargementProfil'>Chargement...</p>;
-  }
+  // if (loading) {
+  //   return <p className='chargementProfil'>Chargement...</p>;
+  // }
 
   // Affichage en cas d'erreur
   // if (error) {

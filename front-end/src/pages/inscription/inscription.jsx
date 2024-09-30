@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
 import "./inscription.css";
-import myLogo from '/src/assets/th.jpeg';
+import myLogo from '/src/assets/logo_provisoire.png';
 import background from '/src/assets/background.avif';
 import "boxicons/css/boxicons.min.css";
 import { toast } from 'react-hot-toast';
@@ -189,15 +189,12 @@ function Inscription() {
        { /*<img src={background} className="logoInscription" alt="" />*/}
       </div>
       
-      <div className="box-container">
+      <div className="box-container inscriptionForm-wrapper">
         <div className="lg">
           <Link to="/"><img title="Click pour revenir sur l'acceuil" src={myLogo} id="lg" /></Link>
         </div>
 
-        <div className='divHomeIconRetourAcceuil'>
-        <Link to="/"><i className='bx bx-home' ></i></Link>
-        </div>
-
+      
         <div className="button-group">
           <button className="client" onClick={() =>
             setFormType('client')} style={{ opacity: formType === 'client' ? 1 : 0.5 }}>
@@ -223,9 +220,11 @@ function Inscription() {
           <PmeForm onSubmit={onSubmitPme} isLoading={isLoading} idFileRef={idFileRef} logoFileRef={logoFileRef}/>
         )}
         <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-linkPme' : ''}`}>
-            <a href='/connexion' className="login-link" >Vous êtes déjà inscrit? Connectez-vous</a>
+           <p> Vous êtes déjà inscrit?  <a href='/connexion' className="login-link" >Connectez-vous</a></p>
         </div>
-
+        <div className="backtohometext_wrapper">
+            <p> <a href="/">Retour à l'Acceuil</a></p>
+        </div>
       </div>
     </div>
   );
