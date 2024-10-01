@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
 }
 
 /* Style pour l'en-tête avec logo et informations */

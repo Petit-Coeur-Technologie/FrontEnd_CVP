@@ -8,6 +8,7 @@ import payement from '/src/assets/payement.png';
 import sensibilisation from '/src/assets/sensibilisation.png';
 import loading from '/src/assets/loading.png';
 import PageErreur from '../PageErreur/pageErreur';
+import toast from 'react-hot-toast';
 
 function Accueil() {
   const [pmes, setPmes] = useState([]); // Toutes les PME non filtrées
@@ -80,6 +81,7 @@ function Accueil() {
       })
       .catch((error) => {
         console.error('Erreur lors de la tentative de rechargement:', error);
+        toast.error("Erreur lors de la tentative de rechargement!")
         setIsLoading(false);
         setErreur(true);
       })

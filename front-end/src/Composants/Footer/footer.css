@@ -13,9 +13,9 @@
 
 .foot-container {
   width: 100%;
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
 .foot1 {
@@ -30,18 +30,20 @@
   gap: 20px 10px; /* Espace entre les sections */
 }
 
-
 .ctcSection {
   display: flex;
   flex-direction: column;
   margin-right: 20px; /* Espace à droite de la section Contacts */
 }
 
-.titreContact, .feedback, .titreSocial {
-  margin-bottom: 10px; 
+.titreContact,
+.feedback,
+.titreSocial {
+  margin-bottom: 10px;
 }
 
-.localisation,.tel{
+.localisation,
+.tel {
   margin-bottom: 15px; /* Espace sous le lien */
 }
 
@@ -56,35 +58,37 @@
 }
 
 .iconeFoot {
-  font-size: 35px!important; 
-  color: #fdb024; 
-  transition: transform 0.3s ease; 
+  font-size: 35px !important;
+  color: #fdb024;
+  transition: transform 0.3s ease;
 }
 
 .iconeFoot:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 .cmtSection {
   width: 400px;
 }
 
-.cmtMail, .cmtFoot {
+.cmtMail,
+.cmtFoot {
   width: 100%;
-  padding: 10px 15px; 
+  padding: 10px 15px;
   margin: 5px;
   font-size: 16px;
-  resize: none; 
+  resize: none;
   outline: none;
-  border: 2px solid #4fb97f; 
+  border: 2px solid #4fb97f;
   color: white;
-  background-color: rgba(0, 0, 0, 0.407); 
-  border-radius: 5px; 
-  transition: border-color 0.3s ease; 
+  background-color: rgba(0, 0, 0, 0.407);
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
 }
 
-.cmtMail:focus, .cmtFoot:focus {
-  border-color: #ffffff; 
+.cmtMail:focus,
+.cmtFoot:focus {
+  border-color: #ffffff;
 }
 
 .btnCmtFoot {
@@ -92,14 +96,15 @@
   padding: 10px;
   text-align: center;
   color: white;
-  background-color: #4fb97f; 
+  background-color: #4fb97f;
   border: none;
   cursor: pointer;
   transition: all 0.5s ease-out;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
-.btnCmtFoot:hover,.btnCmtFoot:focus {
+.btnCmtFoot:hover,
+.btnCmtFoot:focus {
   background-color: #fff;
   color: #00804b;
 }
@@ -146,8 +151,11 @@
   text-align: center;
 }
 
-@media(max-width:700px) {
+.copyright {
+  text-align: center;
+}
 
+@media (max-width: 700px) {
   .foot {
     font-size: 13px;
     display: flex;
@@ -164,7 +172,14 @@
     width: 100%;
   }
 
-  .ctcSection, .socialSection, .cmtSection {
+  .localisation,
+  .tel {
+    text-align: center;
+  }
+
+  .ctcSection,
+  .socialSection,
+  .cmtSection {
     width: 80%; /* Utilise 90% de la largeur disponible */
     margin: 0 auto; /* Centrer chaque section */
   }
@@ -178,12 +193,12 @@
     width: 90%; /* Réduit la largeur pour éviter le débordement */
   }
 
-  .cmtFoot{
+  .cmtFoot {
     height: 100px;
   }
 
-  .foot2{
-    font-size: 10px;
+  .foot2 {
+    font-size: 11px;
   }
 
   .ulLinks {
@@ -191,16 +206,16 @@
   }
 
   .copyright {
-    font-size: 10px;
+    font-size: 11px;
   }
 }
 
-@media(min-width: 1000px) {
+@media (min-width: 1000px) {
   .foot1 {
     display: flex;
-    flex-direction: row; 
-    justify-content: space-between; 
-    align-items: flex-start; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .ctcSection {
