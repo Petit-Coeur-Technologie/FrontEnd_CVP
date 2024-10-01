@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import LoginModal from "../../Composants/Souscription/souscription";
 import myImage from '/src/assets/logo_provisoire.png';
 import Loading from "../Loading/loading";
+import PageErreur from "../PageErreur/pageErreur";
 
 
 function InfosPme() {
@@ -17,6 +18,7 @@ function InfosPme() {
     const [commentaire, setCommentaire] = useState(""); // État pour le commentaire
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [erreur, setErreur] = useState(false);
 
     useEffect(() => {
         // Récupération des détails de la PME
@@ -30,6 +32,7 @@ function InfosPme() {
             .catch((error) => {
                 console.error("Error fetching PME details:", error);
                 setIsLoading(false);
+                setErreur(true);
             });
 
         // Vérifier l'authentification à l'initialisation
@@ -112,54 +115,6 @@ function InfosPme() {
         }
     };
 
-    const handleCommentChange = (event) => {
-        setCommentaire(event.target.value);  // Gère le changement dans le textarea
-    };
-
-    const submitComment = async (e) => {
-        e.preventDefault();
-
-        if (!isAuthenticated) {
-            toast.error("Vous devez vous connecter pour laisser un commentaire.");
-            setShowLoginModal(true);
-            return;
-        }
-
-        if (!souscrit) {
-            toast.error("Vous devez être abonné à cette PME pour laisser un commentaire.");
-            return;
-        }
-
-        const token = getCookie('authToken');
-        const commentData = {
-            pme_id: id,
-            commentaire: commentaire,
-            date_commentaire: new Date().toISOString(),
-        };
-
-        try {
-            const response = await fetch('https://ville-propre.onrender.com/comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(commentData),
-            });
-
-            if (!response.ok) {
-                throw new Error("La soumission du commentaire a échoué!");
-            }
-
-            setIsSubmitted(true);
-            toast("Commentaire envoyé avec succès!");
-            setCommentaire("");  // Réinitialise le champ de commentaire après envoi
-        } catch (error) {
-            console.error('Erreur lors de la soumission du commentaire:', error);
-            toast('Erreur lors de la soumission du commentaire.');
-        }
-    };
-
     function renderStars(rating) {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
@@ -175,81 +130,126 @@ function InfosPme() {
     }
 
 
+    const handleOnReload = () => {
+        setIsLoading(true)
+        setErreur(false)
+
+        // Récupération des détails de la PME
+        fetch(`https://ville-propre.onrender.com/pmes/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setPme(data);
+                setIsLoading(false);
+                console.log("PME Details:", data);
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la tentative de rechargement:", error);
+                toast.error('Erreur lors de la tentative de rechargement des informations!')
+                setIsLoading(false);
+                setErreur(true);
+            });
+
+        // Vérifier l'authentification à l'initialisation
+        checkAuth();
+
+    }
+
     return (
         <div className="infosPME">
             {isLoading ? (
-                <Loading />
+                <>
+                    <Loading />
+                    <span>Chargement des informations en cours...</span>
+                </>
             ) : (
                 <>
-                    <div className="infosPME_header">
-                        <img
-                            src={pme.logo_pme}
-                            alt={pme.nom_pme}
-                            className="pme-logo"
-                        />
-                        <div className="pme-info">
-                            <h1 className="pme-title">{pme.nom_pme}</h1>
-                            <div className="rating-stars">
-                                {renderStars(pme.rating)}
-                            </div>
-                            <div className="all-p">
-                                <p className="pPme p">{pme.description}</p>
-                                <p className="pPme p">Zone d'intervention: {pme.zone_intervention}</p>
-                                <p className="pPme p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
-                                <p className="pPme p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
-                            </div>
-                            <button
-                                type="button"
-                                className="AbonnementBtn"
-                                onClick={Souscription}
-                                disabled={souscrit}
-                            >
-                                {souscrit ? "Abonné" : "S'abonner"}
-                            </button>
-                        </div>
-                    </div>
-                    {showLoginModal && (
-                        <LoginModal
-                            onClose={() => setShowLoginModal(false)}
-                            onLogin={() => {
-                                setShowLoginModal(false);
-                                navigate('/connexion', { state: { from: { pathname: window.location.pathname } } });
-                            }}
-                        />
-                    )}
+                    {erreur ? (
+                        <PageErreur onReload={handleOnReload} />
 
-                    <div className="commentaires">
-                        <div className="comment1">
-                            <div className="commentaire1">
-                                <img className="comment-img1" src={myImage} alt="pct" />
-                                <p> thierno souleymane Bailo Diallo</p>
+                    ) : (
+                        <>
+                            <div className="infosPME_header">
+                                <img
+                                    src={pme.logo_pme}
+                                    alt={pme.nom_pme}
+                                    className="pme-logo"
+                                />
+                                <div className="pme-info">
+                                    <h1 className="pme-title">{pme.nom_pme}</h1>
+                                    <div className="rating-stars">
+                                        {renderStars(pme.rating)}
+                                    </div>
+                                    <div className="all-p">
+                                        <p className="pPme p">{pme.description}</p>
+                                        <p className="pPme p">Zone d'intervention: {pme.zone_intervention}</p>
+                                        <p className="pPme p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
+                                        <p className="pPme p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="AbonnementBtn"
+                                        onClick={Souscription}
+                                        disabled={souscrit}
+                                    >
+                                        {souscrit ? "Abonné" : "S'abonner"}
+                                    </button>
+                                </div>
                             </div>
-                            <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                            <div className="rating-stars">
-                                {renderStars(pme.rating)}
+                            {showLoginModal && (
+                                <LoginModal
+                                    onClose={() => setShowLoginModal(false)}
+                                    onLogin={() => {
+                                        setShowLoginModal(false);
+                                        navigate('/connexion', { state: { from: { pathname: window.location.pathname } } });
+                                    }}
+                                />
+                            )}
+
+                            <div className="commentaires">
+                                <div className="comment1">
+                                    <div className="commentaire1">
+                                        <img className="comment-img1" src={myImage} alt="pct" />
+                                        <strong>Thierno souleymane Bailo Diallo </strong>
+                                    </div>
+                                    <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                                    <div className="rating-stars1">
+                                        <div> {renderStars(pme.rating)}</div>
+
+                                        <div className="date1"> <p className="date2"> 14/08/2024</p></div>
+                                    </div>
+
+                                </div>
+                                <div className="comment2">
+                                    <div className="commentaire2">
+                                        <img className="comment-img2" src={myImage} alt="pct" />
+                                        <strong><p>Aliou Diallo</p> </strong>
+                                    </div>
+                                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                                    <div className="rating-stars2">
+                                        <div> {renderStars(pme.rating)}</div>
+
+                                        <div className="date1"> <p className="date2"> 10/09/2024</p></div>
+                                    </div>
+
+                                </div>
+                                <div className="comment3">
+                                    <div className="commentaire3">
+                                        <img className="comment-img3" src={myImage} alt="pct" />
+                                        <strong>Amadou Oury Diallo </strong>
+                                    </div>
+                                    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                                    <div className="rating-stars3">
+                                        <div> {renderStars(pme.rating)}  </div>
+
+                                        <div className="date1"> <p className="date3"> 19/03/2024</p> </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
-                        <div className="comment2">
-                            <div className="commentaire2">
-                                <img className="comment-img2" src={myImage} alt="pct" />
-                                <p> Aliou Diallo</p>
-                            </div>
-                            <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                            <div className="rating-stars">
-                                {renderStars(pme.rating)}
-                            </div>
-                        </div>
-                        <div className="comment3">
-                            <div className="commentaire3">
-                                <img className="comment-img3" src={myImage} alt="pct" />
-                                <p> Amadou Oury Diallo</p>
-                            </div>
-                            <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                            <div className="rating-stars">
-                                {renderStars(pme.rating)}
-                            </div>
-                        </div>
-                    </div>
+
+                        </>
+                    )
+                    }
                 </>
             )}
         </div>

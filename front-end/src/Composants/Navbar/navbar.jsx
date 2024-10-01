@@ -109,20 +109,16 @@ const Navbar = () => {
             <div>
                 <ul className="nav-items">
                     <li className='NavLink'>
-                        <NavLink to="/" className='lienNav' style={({ isActive }) => ({
-                            color: isActive ? "#fdb024" : "#fff", // La couleur active et inactive
-                            textDecoration: "none",
-                        })}> Accueil </NavLink>
+                        <NavLink to="/" className={({ isActive }) => isActive ? 'lienNav active' : 'lienNav'}
+                        > Accueil </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="" className='lienNav' style={({ isActive }) => ({
-                            color: isActive ? "#fff" : "fdb024", // La couleur active et inactive
-                            textDecoration: "none",
-                        })}
+                        <NavLink to="" 
+                        className={({ isActive }) => isActive ? 'lienNav ' : 'lienNav'}
                         > Sensibilisation </NavLink>
                     </li>
                     <li className='NavLink'>
-                        <NavLink to="" className='lienNav' > Boutique </NavLink>
+                        <NavLink to="" className={({ isActive }) => isActive ? 'lienNav' : 'lienNav'} > Boutique </NavLink>
                     </li>
                 </ul>
             </div>

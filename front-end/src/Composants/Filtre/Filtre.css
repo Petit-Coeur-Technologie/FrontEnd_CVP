@@ -87,6 +87,7 @@
   transition: border-color 0.3s ease, background-color 1s; /* Transition douce pour la couleur de la bordure */
   height: 40px;
   outline: none;
+  cursor: pointer;
 }
 .filter-btn:hover{
    background-color:#fdb024;
@@ -132,11 +133,17 @@
   transition: border-color 0.3s ease; /* Transition douce pour la couleur de la bordure */
   height: 40px;
   outline: none;
+  cursor: pointer;
 }
 
 .BtnFermerFiltre {
+  padding: 10px;
+  border: 1px solid #fdb024; /* Bordure légère */
+  border-radius: 4px;
+  outline: none;
   background-color: #fdb024;
   color: #fff;
+  cursor: pointer;
 }
 
 .BtnSelect {
