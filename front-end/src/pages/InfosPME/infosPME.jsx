@@ -254,6 +254,19 @@ function InfosPme() {
                     </div>
                     
                </div>
+               <div className="comment3">
+               <div className="commentaire3">
+               <img className="comment-img3" src={myImage} alt="pct" />
+               <strong>Amadou Oury Diallo </strong>
+                </div>
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
+                <div className="rating-stars3">
+                    <div> {renderStars(pme.rating)}  </div>
+                        
+                        <div className="date1"> <p className="date3"> 19/03/2024</p> </div> 
+                    </div>
+                    
+               </div>
             </div>
         </div>
     );
