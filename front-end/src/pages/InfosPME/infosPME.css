@@ -7,7 +7,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f2fcf8; /* Couleur de fond légèrement plus claire */
 }
 
 /* Style pour l'en-tête avec logo et informations */
@@ -17,7 +16,7 @@
     border: 1px solid rgb(0, 255, 34);
     border-radius: 50px;
     width: 55%;
-    height: 60vh;
+    height: auto;
     justify-content: center;
     text-align: center;
 }
@@ -135,10 +134,10 @@ p{
     text-align: start;
 }
 .commentaires{
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 50px;
-    width: 30%;
-    height: 30vh;
+    width: 50%;
+    height: 50vh;
     /* border:1px solid #007bff; */
     display: block;
     overflow-y: auto;
@@ -147,25 +146,40 @@ p{
 .comment1{
     /* border:1px solid black ; */
     width: 90%;
-    height: 90%;
+    height: auto;
     /* margin: 10px; */
     overflow-y: auto;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    
     
 }
 .comment2{
     /* border:1px solid black ; */
     width: 90%;
-    height: 90%;
+    height: auto;
     /* margin: 10px; */
     overflow-y: auto;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    
 }
 .comment3{
     /* border:1px solid black ; */
     width: 90%;
-    height: 90%;
+    height: auto;
     /* margin: 10px; */
     margin-right:5px ;
     overflow-y: auto;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 .comment-img1{
     width: 50px;
@@ -178,6 +192,42 @@ p{
 .comment-img3{
     width: 50px;
     height: 25px;
+}
+.commentaire1{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.commentaire2{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.commentaire3{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-stars1{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    
+}
+
+.date1{
+    margin-right: 30px;
+}
+.rating-stars2{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.rating-stars3{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 
