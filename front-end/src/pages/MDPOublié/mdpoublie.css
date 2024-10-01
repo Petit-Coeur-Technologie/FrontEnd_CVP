@@ -1,0 +1,26 @@
+.envoyer{
+    background-color: #fdb024!important;   
+}
+.fermer1{
+    margin: 15px !important;
+}
+.mot3{
+    margin: 10px !important;
+    color: beige !important;
+}
+
+.mdp1{
+    color: white;
+    margin: 10px;
+    display:flex ;
+
+}
+.mot2{
+    color: white;
+    margin: 10px;
+}
+
+.mot1{
+    margin: 10px !important;
+    color: beige !important;
+}

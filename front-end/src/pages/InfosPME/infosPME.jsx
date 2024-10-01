@@ -218,32 +218,41 @@ function InfosPme() {
                <div className="comment1">
                 <div className="commentaire1">
                 <img className="comment-img1" src={myImage} alt="pct" />
-                <p> thierno souleymane Bailo Diallo</p>
+                <strong>Thierno souleymane Bailo Diallo </strong>
                 </div>
                 <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                <div className="rating-stars">
-                        {renderStars(pme.rating)}
+                <div className="rating-stars1">
+                    <div> {renderStars(pme.rating)}</div>
+                       
+                       <div className="date1"> <p className="date2"> 14/08/2024</p></div> 
                     </div>
-               </div>
+                
+                </div>
                <div className="comment2">
                   <div className="commentaire2">
                   <img className="comment-img2" src={myImage} alt="pct" />
-                  <p> Aliou Diallo</p>                  
+                  <strong><p>Aliou Diallo</p> </strong>
                 </div>
                 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                <div className="rating-stars">
-                        {renderStars(pme.rating)}
+                <div className="rating-stars2">
+                    <div> {renderStars(pme.rating)}</div>
+                       
+                       <div className="date1"> <p className="date2"> 10/09/2024</p></div> 
                     </div>
+                   
                </div>
                <div className="comment3">
                <div className="commentaire3">
                <img className="comment-img3" src={myImage} alt="pct" />
-               <p> Amadou Oury Diallo</p>
+               <strong>Amadou Oury Diallo </strong>
                 </div>
                 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
-                <div className="rating-stars">
-                        {renderStars(pme.rating)}
+                <div className="rating-stars3">
+                    <div> {renderStars(pme.rating)}  </div>
+                        
+                        <div className="date1"> <p className="date3"> 19/03/2024</p> </div> 
                     </div>
+                    
                </div>
             </div>
         </div>
