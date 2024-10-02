@@ -27,7 +27,7 @@ export default function MotDePasseOublie({ onClose }) {
       const response = await fetch(`https://ville-propre.onrender.com/resset-password/${phoneNumber}`);
       
       if (!response.ok) {
-        throw new Error('Le numéro de téléphone n\'existe pas');
+        throw new Error('Le numéro de téléphone n\'est pas associé à un compte');
       }
 
       const data = await response.json();
@@ -35,7 +35,7 @@ export default function MotDePasseOublie({ onClose }) {
       setStep(2);
     } catch (error) {
       console.error('Erreur:', error);
-      setMessage('Erreur lors de la vérification du code.');
+      setMessage('Le numéro de téléphone n\'est pas associé à un compte');
     }
 };
 
@@ -150,8 +150,9 @@ useEffect(()=>{
       // Si la réponse est correcte, traiter les données
       const data = await response.json();
       console.log(data);
-      setMessage("Le mot de passe a été modifié avec succès");
       navigate('/connexion');
+      setMessage("Le mot de passe a été modifié avec succès");
+      
       
       // Optionnel : Redirection après succès
       setTimeout(() => {
@@ -265,6 +266,9 @@ useEffect(()=>{
             />
             <Button className="envoyer" variant="contained" type="submit" sx={{ mt: 2 }}>Réinitialiser</Button>
             {message && <Typography color="primary" className="mot3">{message}</Typography>}
+            <div>
+              <a href="/connexion"> Connexion</a>
+            </div>
           </form>
         </>
       )}
