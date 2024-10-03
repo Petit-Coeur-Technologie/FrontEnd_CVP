@@ -4,8 +4,8 @@ import "./infosPME.css";
 import toast from "react-hot-toast";
 import LoginModal from "../../Composants/Souscription/souscription";
 import myImage from '/src/assets/logo_provisoire.png';
-import Loading from "../Loading/loading";
 import PageErreur from "../PageErreur/pageErreur";
+import SkeletonPme from "../../Composants/Skeleton/SkeletonPme";
 
 
 function InfosPme() {
@@ -158,8 +158,7 @@ function InfosPme() {
         <div className="infosPME">
             {isLoading ? (
                 <>
-                    <Loading />
-                    <span>Chargement des informations en cours...</span>
+                    <SkeletonPme/>
                 </>
             ) : (
                 <>
@@ -208,7 +207,7 @@ function InfosPme() {
                             <div className="commentaires">
                                 <div className="comment1">
                                     <div className="commentaire1">
-                                        <img className="comment-img1" src={myImage} alt="pct" />
+                                        <img className="comment-img" src={myImage} alt="pct" />
                                         <strong>Thierno souleymane Bailo Diallo </strong>
                                     </div>
                                     <p className="ecriture"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
@@ -220,8 +219,8 @@ function InfosPme() {
 
                                 </div>
                                 <div className="comment2">
-                                    <div className="commentaire2">
-                                        <img className="comment-img2" src={myImage} alt="pct" />
+                                    <div className="commentaire1">
+                                        <img className="comment-img" src={myImage} alt="pct" />
                                         <strong><p>Aliou Diallo</p> </strong>
                                     </div>
                                     <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>
@@ -233,8 +232,8 @@ function InfosPme() {
 
                                 </div>
                                 <div className="comment3">
-                                    <div className="commentaire3">
-                                        <img className="comment-img3" src={myImage} alt="pct" />
+                                    <div className="commentaire1">
+                                        <img className="comment-img" src={myImage} alt="pct" />
                                         <strong>Amadou Oury Diallo </strong>
                                     </div>
                                     <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, soluta! Repudiandae facere explicabo, nisi assumenda laboriosam, ratione possimus hic esse unde dicta magnam ipsum tempora inventore, quibusdam eius placeat molestias.</p>

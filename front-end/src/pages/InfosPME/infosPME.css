@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 /* Style pour l'en-tête avec logo et informations */
@@ -136,8 +137,8 @@ p{
 .commentaires{
     margin-top: 30px;
     margin-bottom: 50px;
-    width: 50%;
-    height: 50vh;
+    width: 55%;
+    height:50vh ;
     /* border:1px solid #007bff; */
     display: block;
     overflow-y: auto;
@@ -181,29 +182,14 @@ p{
     flex-direction: column;
     margin-bottom: 15px;
 }
-.comment-img1{
+.comment-img{
     width: 50px;
-    height: 25px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
-.comment-img2{
-    width: 50px;
-    height: 25px;
-}
-.comment-img3{
-    width: 50px;
-    height: 25px;
-}
+
 .commentaire1{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.commentaire2{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.commentaire3{
     display: flex;
     align-items: center;
     gap: 10px;
