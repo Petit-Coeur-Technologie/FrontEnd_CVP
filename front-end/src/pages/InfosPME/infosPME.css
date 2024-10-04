@@ -168,43 +168,15 @@ div.commentaires{
     overflow-y: auto;
     
 }
-.comment1{
-    /* border:1px solid black ; */
-    width: 90%;
-    height: auto;
-    /* margin: 10px; */
-    overflow-y: auto;
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
 
-    
-    
-}
-.comment2{
+.comment1, .comment2, .comment3{
     /* border:1px solid black ; */
-    width: 90%;
-    height: auto;
     /* margin: 10px; */
     overflow-y: auto;
     gap: 10px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
-    
-}
-.comment3{
-    /* border:1px solid black ; */
-    width: 90%;
-    height: auto;
-    /* margin: 10px; */
-    margin-right:5px ;
-    overflow-y: auto;
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 15px;     
 }
 .comment-img{
     width: 50px;
