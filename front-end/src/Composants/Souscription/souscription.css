@@ -14,7 +14,7 @@
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 40%;
     text-align: center;
 }
 
@@ -36,13 +36,15 @@ button.souscriptionmodal-btn {
     transition: background-color 0.45s, color 0.45s;
 }
 
+
 button.souscriptionmodal-btn.connexion-btn{
-     background-color: #28a745;
+     background-color: #218838;
      margin-top:15px;
      margin-bottom: 8px;
 }
+
 button.souscriptionmodal-btn.connexion-btn:hover{
-     background-color: #00FF00;
+     background-color: #28a745;
      font-weight: bold;
 }
 button.souscriptionmodal-btn.annuler-btn{
@@ -54,4 +56,10 @@ button.souscriptionmodal-btn.annuler-btn:hover{
     background-color: #ff0000;
     color: #ffffff;
     font-weight: bold;
+}
+
+@media(max-width:800px){
+    .SouscriptionModal-wrapper {
+        width:  70%;
+    }
 }
