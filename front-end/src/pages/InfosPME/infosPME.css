@@ -1,49 +1,57 @@
   /* Style global pour la section d'informations sur la PME */
 .infosPME {
-    margin: 0 auto;
-    padding-top: 90px; /* Compense la hauteur de la navbar */
+    margin: 0 auto; 
     min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #f2fcf8;
 }
 
+.infosPME-Wrapper{
+  width: 65%;
+  background-color: #fff;
+  padding-top: 130px; /* Compense la hauteur de la navbar et une marge entre la navbar et la carte*/
+}
 /* Style pour l'en-tête avec logo et informations */
 .infosPME_header {
     display: flex;
     flex-direction: row;
-    border: 1px solid rgb(0, 255, 34);
-    border-radius: 50px;
-    width: 55%;
+    border: 1px solid #C8C8C8;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px #0000001a;
+    width: 80%;
     height: auto;
+    margin:auto;
     justify-content: center;
     text-align: center;
 }
 
-/* Style pour le logo de la PME */
-.pme-logo {
-    width: 150px;
-    height: 150px;
-    border-radius: 8px;
-    margin-left: 20px;
-    margin-top: 120px;
-    object-fit: cover;
-    margin-right: 20px;
+div.infosPME_header div.logo-pme-info{
+     width: 30%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin: auto;
 }
+
+/* Style pour le logo de la PME */
 
 /* Style pour les informations de la PME */
 .pme-info {
     flex: 1;
     padding: 30px;
 }
+div.pme-info div.all-p{
+    margin-bottom:15px;
+}
 
 /* Style pour le titre de la PME */
 .pme-title {
-    font-size: 32px;
+    font-size: 27px;
     color: #333333;
-    margin-bottom: 10px;
     font-weight: bold;
     display: flex;
     justify-content: start;
@@ -51,12 +59,16 @@
 
 /* Style pour la description de la PME */
 .pPme {
-    font-size: 18px;
+    font-size: 17px;
     color: #555555;
     margin-bottom: 10px;
     line-height: 1.5;
     text-align: start;
 }
+p.pPme.p > span.all-p-title{
+    font-weight: bold;
+}
+
 
 /* Style pour la section des commentaires */
 .infosPME_comments {
@@ -78,7 +90,7 @@
 }
 
 /* Style pour le bouton */
-.AbonnementBtn {
+div.pme-info .AbonnementBtn {
     background-color: #28a745;
     color: white;
     border: none;
@@ -86,7 +98,12 @@
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    width:50%;
+    transition: background-color 0.40s ease-out, box-shadow 0.45s ease-in;
+}
+div.pme-info .AbonnementBtn:hover{
+    background-color:#fdb024;
+    box-shadow: 2px 2px 1px #D3D3D3;
 }
 
 .commentaireBtn:hover {
@@ -126,18 +143,25 @@
 .btn-souley2{
     background-color: #28a745;
 }
-.rating-stars {
+div.rating-stars {
     display: flex;
     align-items: start;
     justify-content: start;
+    margin:10px 0;
 }
 p{
     text-align: start;
 }
-.commentaires{
-    margin-top: 30px;
-    margin-bottom: 50px;
-    width: 55%;
+h2.commentaires-title{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+div.commentaires{
+    margin: 50px auto;
+    width: 80%;
     height:50vh ;
     /* border:1px solid #007bff; */
     display: block;
