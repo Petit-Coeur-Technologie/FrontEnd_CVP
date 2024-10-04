@@ -22,7 +22,7 @@ const SkeletonPme = () => {
                 {/* Commentaire 1 */}
                 <div className="comment1">
                     <div className="commentaire1">
-                        <div className="comment-img1 bg-gray-300 h-15 w-15 rounded-full"></div>
+                        <div className="comment-img1 bg-gray-300 h-12 w-12 rounded-full"></div>
                         <div className="bg-gray-300 h-6 w-1/3"></div>
                     </div>
                     <div className="ecriture bg-gray-300 h-4 w-full mb-2"></div>
@@ -33,7 +33,7 @@ const SkeletonPme = () => {
                 {/* Commentaire 2 */}
                 <div className="comment2">
                     <div className="commentaire2">
-                        <div className="comment-img2 bg-gray-300 h-15 w-15 rounded-full"></div>
+                        <div className="comment-img2 bg-gray-300 h-12 w-12 rounded-full"></div>
                         <div className="bg-gray-300 h-6 w-1/3"></div>
                     </div>
                     <div className="bg-gray-300 h-4 w-full mb-2"></div>
@@ -44,7 +44,7 @@ const SkeletonPme = () => {
                 {/* Commentaire 3 */}
                 <div className="comment3">
                     <div className="commentaire3">
-                        <div className="comment-img3 bg-gray-300 h-15 w-15 rounded-full"></div>
+                        <div className="comment-img3 bg-gray-300 h-12 w-12 rounded-full"></div>
                         <div className="bg-gray-300 h-6 w-1/3"></div>
                     </div>
                     <div className="bg-gray-300 h-4 w-full mb-2"></div>

@@ -167,22 +167,25 @@ function InfosPme() {
 
                     ) : (
                         <>
+                        <div className="infosPME-Wrapper">
                             <div className="infosPME_header">
-                                <img
-                                    src={pme.logo_pme}
-                                    alt={pme.nom_pme}
-                                    className="pme-logo"
-                                />
+                                <div className="logo-pme-info">
+                                    <img
+                                        src={pme.logo_pme}
+                                        alt={pme.nom_pme}
+                                        className="pme-logo"
+                                    />
+                                </div>
                                 <div className="pme-info">
                                     <h1 className="pme-title">{pme.nom_pme}</h1>
                                     <div className="rating-stars">
                                         {renderStars(pme.rating)}
                                     </div>
                                     <div className="all-p">
-                                        <p className="pPme p">{pme.description}</p>
-                                        <p className="pPme p">Zone d'intervention: {pme.zone_intervention}</p>
-                                        <p className="pPme p">Tarif mensuel: {pme.tarif_mensuel} FG</p>
-                                        <p className="pPme p">Tarif abonnement: {pme.tarif_abonnement} FG</p>
+                                        <p className="pPme p"><span className="all-p-title">Présentation de l'entreprise:</span><br/>{pme.description}</p>
+                                        <p className="pPme p"><span className="all-p-title">Zone d'intervention:</span> {pme.zone_intervention}</p>
+                                        <p className="pPme p"><span className="all-p-title">Tarif mensuel:</span> {pme.tarif_mensuel} FG</p>
+                                        <p className="pPme p"><span className="all-p-title">Tarif abonnement:</span> {pme.tarif_abonnement} FG</p>
                                     </div>
                                     <button
                                         type="button"
@@ -203,8 +206,9 @@ function InfosPme() {
                                     }}
                                 />
                             )}
-
+                            <h2 className="commentaires-title">Notes et avis</h2>
                             <div className="commentaires">
+                                
                                 <div className="comment1">
                                     <div className="commentaire1">
                                         <img className="comment-img" src={myImage} alt="pct" />
@@ -245,7 +249,7 @@ function InfosPme() {
 
                                 </div>
                             </div>
-
+                        </div>
                         </>
                     )
                     }

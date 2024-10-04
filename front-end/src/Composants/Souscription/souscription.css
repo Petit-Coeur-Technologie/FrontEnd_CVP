@@ -1,4 +1,4 @@
-.modal-overlay {
+.SouscriptionModal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,20 +10,56 @@
     justify-content: center;
 }
 
-.modal {
+.SouscriptionModal-wrapper {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 40%;
     text-align: center;
 }
 
-.modal-btn {
-    margin: 10px;
-    padding: 8px 16px;
-    background-color: #007bff;
+.SouscriptionModal-wrapper > h2 {
+    font-size: 20px;
+    color: #ff0000;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+button.souscriptionmodal-btn {
+    width:80%;
+    padding: 10px;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.45s, color 0.45s;
+}
+
+
+button.souscriptionmodal-btn.connexion-btn{
+     background-color: #218838;
+     margin-top:15px;
+     margin-bottom: 8px;
+}
+
+button.souscriptionmodal-btn.connexion-btn:hover{
+     background-color: #28a745;
+     font-weight: bold;
+}
+button.souscriptionmodal-btn.annuler-btn{
+     border: 1px solid #ff0000;
+     color: #ff0000;
+}
+
+button.souscriptionmodal-btn.annuler-btn:hover{
+    background-color: #ff0000;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+@media(max-width:800px){
+    .SouscriptionModal-wrapper {
+        width:  70%;
+    }
 }
