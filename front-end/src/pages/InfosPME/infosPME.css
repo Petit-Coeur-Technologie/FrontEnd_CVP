@@ -243,27 +243,22 @@ div.commentaires{
 
 
 
-@media(max-width:830px){
+@media(max-width:900px){
    .infosPME{
-    width: 90%;
+    width: 100%;
     min-height: 100vh;
    } 
-   .infosPME_header{
-    width: 100%;
-    
+   .infosPME-Wrapper{
+      width: 80%;
    }
-   .pme-title{
+   .infosPME_header {
+    width: 80%;
     display: flex;
-    justify-content: start;
-   }
-   .pme-logo{
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items:center ;
-    margin-top: 0;
-    
-   }
+    flex-direction: column;
+    }
+    div.infosPME_header div.logo-pme-info{
+        padding:15px;
+    }
    .pme-info{
     padding: 20px;
    }
@@ -273,11 +268,5 @@ div.commentaires{
 .pme-description, .pme-zone, .pme-tarifs {
     font-size: 26px;
 }
-.infosPME_header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-}
+
 }
