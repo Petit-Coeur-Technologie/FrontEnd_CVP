@@ -15,7 +15,6 @@ function InfosPme() {
     const [souscrit, setSouscrit] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [commentaire, setCommentaire] = useState(""); // État pour le commentaire
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [erreur, setErreur] = useState(false);
@@ -189,7 +188,7 @@ function InfosPme() {
                                     </div>
                                     <button
                                         type="button"
-                                        className="AbonnementBtn"
+                                        className="btnAbonnement"
                                         onClick={Souscription}
                                         disabled={souscrit}
                                     >

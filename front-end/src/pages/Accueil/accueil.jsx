@@ -21,6 +21,7 @@ function Accueil() {
   const [currentPage, setCurrentPage] = useState(1);
   const pmesPerPage = 10;
   const [isLoading, setIsLoading] = useState(true);
+  const [isservicesLoading, setIsServicesLoading] = useState(true);
 
   useEffect(() => {
     fetch('https://ville-propre.onrender.com/pmes')
@@ -53,7 +54,7 @@ function Accueil() {
     window.scrollTo({
       top: 300,
       behavior: "auto",
-    });    
+    });
   };
 
   // Méthode pour filtrer les PME
@@ -86,6 +87,49 @@ function Accueil() {
         setErreur(true);
       })
   };
+
+  const ServicesLoading = () => (
+    <>
+      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
+        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
+        <div className='details'>
+          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+        </div>
+      </div>
+
+      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
+        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
+        <div className='details'>
+          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+        </div>
+      </div>
+
+      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
+        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
+        <div className='details'>
+          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+        </div>
+      </div>
+
+      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
+        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
+        <div className='details'>
+          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+        </div>
+      </div>
+    </>
+  )
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsServicesLoading(false);
+    }, 3000),
+      []
+  })
 
 
   return (
@@ -161,34 +205,41 @@ function Accueil() {
       <section className="services-section">
         <h2>Nos services</h2>
         <div className="services-list">
-          <div className="service">
-            <img src={abonnement} alt="" />
-            <div className='details'>
-              <h3>Abonnement</h3>
-              <p>Abonnez-vous facilement à des services adaptés à vos besoins et suivez vos abonnements en toute simplicité.</p>
-            </div>
-          </div>
-          <div className="service">
-            <img src={payement} alt="" />
-            <div className='details'>
-              <h3>Paiement et suivi automatisé</h3>
-              <p>Bénéficiez d'une gestion et d'un suivi instantané des paiements en toute sécurité.</p>
-            </div>
-          </div>
-          <div className="service">
-            <img src={gestion} alt="" />
-            <div className='details'>
-              <h3>Gestion des déchets ménagers</h3>
-              <p>Optimisez la gestion des collectes en suivant les passages réguliers et assurez une collecte efficace. </p>
-            </div>
-          </div>
-          <div className="service">
-            <img src={sensibilisation} alt="" />
-            <div className='details'>
-              <h3>Recyclage et Réutilisation</h3>
-              <p>Informez-vous sur les bonnes pratiques de recyclage pour un avenir durable et contribuez à un environnement plus propre.</p>
-            </div>
-          </div>
+          {isservicesLoading ? (
+            <ServicesLoading />
+          ) : (
+            <>
+              <div className="service">
+                <img src={abonnement} alt="" />
+                <div className='details'>
+                  <h3>Abonnement</h3>
+                  <p>Abonnez-vous facilement à des services adaptés à vos besoins et suivez vos abonnements en toute simplicité.</p>
+                </div>
+              </div>
+              <div className="service">
+                <img src={payement} alt="" />
+                <div className='details'>
+                  <h3>Paiement et suivi automatisé</h3>
+                  <p>Bénéficiez d'une gestion et d'un suivi instantané des paiements en toute sécurité.</p>
+                </div>
+              </div>
+              <div className="service">
+                <img src={gestion} alt="" />
+                <div className='details'>
+                  <h3>Gestion des déchets ménagers</h3>
+                  <p>Optimisez la gestion des collectes en suivant les passages réguliers et assurez une collecte efficace. </p>
+                </div>
+              </div>
+              <div className="service">
+                <img src={sensibilisation} alt="" />
+                <div className='details'>
+                  <h3>Recyclage et Réutilisation</h3>
+                  <p>Informez-vous sur les bonnes pratiques de recyclage pour un avenir durable et contribuez à un environnement plus propre.</p>
+                </div>
+              </div>
+            </>
+
+          )}
         </div>
       </section>
     </div>

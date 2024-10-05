@@ -90,7 +90,7 @@ p.pPme.p > span.all-p-title{
 }
 
 /* Style pour le bouton */
-div.pme-info .AbonnementBtn {
+div.pme-info .btnAbonnement {
     background-color: #28a745;
     color: white;
     border: none;
@@ -101,7 +101,7 @@ div.pme-info .AbonnementBtn {
     width:50%;
     transition: background-color 0.40s ease-out, box-shadow 0.45s ease-in;
 }
-div.pme-info .AbonnementBtn:hover{
+div.pme-info .btnAbonnement:hover{
     background-color:#fdb024;
     box-shadow: 2px 2px 1px #D3D3D3;
 }
@@ -234,7 +234,7 @@ div.commentaires{
    .pme-info{
     padding: 20px;
    }
-   .AbonnementBtn {
+   .btnAbonnement {
     display: flex;
 }
 .pme-description, .pme-zone, .pme-tarifs {
