@@ -9,6 +9,7 @@ import sensibilisation from '/src/assets/sensibilisation.png';
 import loading from '/src/assets/loading.png';
 import PageErreur from '../PageErreur/pageErreur';
 import toast from 'react-hot-toast';
+import SkeletonServices from '../../Composants/Skeleton/SkeletonServices';
 
 function Accueil() {
   const [pmes, setPmes] = useState([]); // Toutes les PME non filtrées
@@ -87,42 +88,6 @@ function Accueil() {
         setErreur(true);
       })
   };
-
-  const ServicesLoading = () => (
-    <>
-      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
-        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
-        <div className='details'>
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-        </div>
-      </div>
-
-      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
-        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
-        <div className='details'>
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-        </div>
-      </div>
-
-      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
-        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
-        <div className='details'>
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-        </div>
-      </div>
-
-      <div className="service animate-pulse bg-gray-200 p-4 rounded-lg shadow">
-        <div className="h-32 bg-gray-300 rounded-lg mb-4"></div>
-        <div className='details'>
-          <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-        </div>
-      </div>
-    </>
-  )
 
   useEffect(() => {
     setTimeout(() => {
@@ -206,14 +171,14 @@ function Accueil() {
         <h2>Nos services</h2>
         <div className="services-list">
           {isservicesLoading ? (
-            <ServicesLoading />
+            < SkeletonServices/> // Affiche le skeleton loader
           ) : (
             <>
               <div className="service">
                 <img src={abonnement} alt="" />
                 <div className='details'>
                   <h3>Abonnement</h3>
-                  <p>Abonnez-vous facilement à des services adaptés à vos besoins et suivez vos abonnements en toute simplicité.</p>
+                  <p>Abonnez-vous facilement à des services adaptés à vos besoins.</p>
                 </div>
               </div>
               <div className="service">
@@ -238,7 +203,6 @@ function Accueil() {
                 </div>
               </div>
             </>
-
           )}
         </div>
       </section>
