@@ -24,7 +24,7 @@
     outline: none;
     transition: all 0.5s ease-out;
     cursor: pointer;
-    border-radius: 50px; /* Coins arrondis pour le menu */
+    border-radius: 10px; /* Coins arrondis pour le menu */
 }
 
 .btnPageErreur:hover,.btnPageErreur:focus{
