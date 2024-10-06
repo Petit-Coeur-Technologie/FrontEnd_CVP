@@ -56,6 +56,9 @@
   background-color: #f2fcf8;
   height: 40px;
 }
+.input-recherche:focus-visible{
+   outline: none;
+}
 
 .input-recherche::-webkit-input-placeholder {
   color: #000;
