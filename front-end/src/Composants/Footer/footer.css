@@ -90,7 +90,10 @@
 .cmtFoot:focus {
   border-color: #ffffff;
 }
-
+.cmtMail:focus-visible,
+.cmtFoot:focus-visible{
+  outline:none;
+}
 .btnCmtFoot {
   width: 120px;
   padding: 10px;
