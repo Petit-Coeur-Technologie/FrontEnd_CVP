@@ -239,7 +239,9 @@ border-radius: 50%;
   transition: right 1s ease; /* Animation fluide pour l'apparition */
   font-family: 'Arial', sans-serif; /* Police élégante */
 }
-
+.divVoirInfoProfil.affInfoProfil{
+  margin-top:0!important;
+}
 .affInfoProfil {
   right: 0px !important; /* Légèrement à droite pour ne pas toucher le bord */
 }
