@@ -89,7 +89,12 @@ function Accueil() {
       })
   };
 
+
   useEffect(() => {
+    window.scrollTo({
+      top:0,
+      behavior:"auto",
+  })
     setTimeout(() => {
       setIsServicesLoading(false);
     }, 3000),
