@@ -17,6 +17,13 @@ function PmeCard({ pme }) {
         return stars;
     }
 
+    const handleDetailClick=()=>{
+        window.scrollTo({
+            top:0,
+            behavior:"auto",
+        })
+    }
+
     return (
         <div className="pme-card">
             <div className='pmeLogo'>
@@ -34,7 +41,7 @@ function PmeCard({ pme }) {
                 </div>
                 <div className="card-button">
                     <Link to={`/${pme.id}`}>
-                        <button type="button" className='btnCard'>Détails</button>
+                        <button type="button" className='btnCard' onClick={handleDetailClick}>Détails</button>
                     </Link>
                 </div>
             </div>
