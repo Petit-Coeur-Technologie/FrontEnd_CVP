@@ -19,6 +19,11 @@ export default function Dashboard() {
   const [showPopup, setShowPopup] = useState(false); // Ajout de l'état showPopup pour gérer le popup
   const [ouvrirBarLatteral, setOuvrirBarLatteral] = useState(false); // Ajout de l'état showPopup pour gérer le popup
 
+  const handleDeconnexion=()=>{
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    navigate("/connexion")
+  }
+
   const functionOuvrirBarLatteral = () =>{
     setOuvrirBarLatteral(!ouvrirBarLatteral);
   }
@@ -290,11 +295,9 @@ export default function Dashboard() {
               <span>Aide/Assistance</span>
             </Link>
           </li>
-          <li onClick={() => handleProfileClick('Déconnexion')}>
-            <Link to="deconnexion">
+          <li onClick={handleDeconnexion}>
               <i className='bx bxs-log-out'></i>
               <span>Déconnexion</span>
-            </Link>
           </li>
         </ul>
       </div>

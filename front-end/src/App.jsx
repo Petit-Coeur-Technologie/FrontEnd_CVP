@@ -27,6 +27,8 @@ import InfosPme from './pages/InfosPME/infosPME.jsx';
 import PageInexistante from './Composants/PageInexistante/pageInexistante.jsx';
 import AbonnementsEnAttente from './Composants/AbonnementEnAttente/AbonnementEnAttente.jsx';
 import Profil from './Composants/Profil/Profil.jsx';
+import PrivateRoutes from './Composants/PrivateRoutes/privateRoute.jsx';
+import PublicRoute from './Composants/PrivateRoutes/PublicRoute.jsx';
 
 
 
@@ -44,15 +46,19 @@ function App() {
   return (
     // <CheckConnection>
     <div>
-        {!hideNavbarAndFooter && <Navbar />}
+      {!hideNavbarAndFooter && <Navbar />}
+      <Routes>
+        <Route path='/' element={<Accueil />} />
+        {/* <Route path='/sens' element={<Sensibilisation />} /> */}
+        <Route path='/:id' element={<InfosPme />} />
 
-        <Routes>
-          <Route path='/' element={<Accueil />} />
+        {/* Route protégée avec PublicRoute */}
+        <Route element={<PublicRoute />}>
           <Route path='/inscription' element={<Inscription />} />
-          {/* <Route path='/sens' element={<Sensibilisation />} /> */}
-          <Route path='/:id' element={<InfosPme />} />
-
-          {/* Route protégée avec PrivateRoute */}
+          <Route path='/connexion' element={<Connexion />} />
+        </Route>
+        {/* Route protégée avec PrivateRoute */}
+        <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<Home />} />
             <Route path="abonnes" element={<Abonnes />} />
@@ -69,18 +75,17 @@ function App() {
             <Route path="monabonnement" element={<MonAbonnement />} />
             <Route path="abonnementenattente" element={<AbonnementsEnAttente />} />
           </Route>
+        </Route>
 
-          <Route path='/connexion' element={<Connexion />} />
+        {/* Route 404 */}
+        <Route path='/404' element={<PageInexistante />} />
 
-         {/* Route 404 */}
-         <Route path='/404' element={<PageInexistante />} />
-          
-          {/* Route pour capturer les chemins inconnus */}
-          <Route path='*' element={<Navigate to="/404" replace state={{ from: location.pathname }} />} />
+        {/* Route pour capturer les chemins inconnus */}
+        <Route path='*' element={<Navigate to="/404" replace state={{ from: location.pathname }} />} />
 
-        </Routes>
+      </Routes>
 
-        {!hideNavbarAndFooter && <Footer />}
+      {!hideNavbarAndFooter && <Footer />}
     </div>
     // </CheckConnection>
   );
