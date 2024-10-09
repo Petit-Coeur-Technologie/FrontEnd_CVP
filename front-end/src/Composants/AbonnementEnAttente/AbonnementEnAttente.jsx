@@ -160,20 +160,8 @@ const AbonnementsEnAttente = () => {
                         </div>
                       </div>
                       <div className='divValidation'>
-                        <button
-                          type='button'
-                          className='btnAccepter'
-                          onClick={() => handleAcceptAbonnement(abonne.id)}
-                        >
-                          Accepter
-                        </button>
-                        <button
-                          type='button'
-                          onClick={() => handleRefuseAbonnement(abonne.id)}
-                          className='btnRefuser'
-                        >
-                          Refuser
-                        </button>
+                        <button type='button' className='btnAccepter' onClick={() => handleAcceptAbonnement(abonne.id)}>Accepter</button>
+                        <button type='button' onClick={() => handleRefuseAbonnement(abonne.id)} className='btnRefuser'>Refuser</button>
                       </div>
                     </div>
                   );

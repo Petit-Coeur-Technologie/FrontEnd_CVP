@@ -7,10 +7,10 @@
 
  .contentFilsDashboard {
     overflow: hidden;
-    background-color: rgb(207, 207, 207);
+    background-color: #efefefef;
 }
 
-.btnAccepter{
+/* .btnAccepter{
     background-color: green;
     color: white;
     padding: 10px;
@@ -21,8 +21,28 @@
 .btnAccepter:hover{
     background-color: rgb(5, 88, 5);
     color: white;
-}
-.btnRefuser{
+} */
+ /* Style pour le bouton 'Accepter' */
+.btnAccepter {
+    background-color: #4CAF50; /* Vert pour accepter */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+  }
+  
+  .btnAccepter:hover {
+    background-color: #45a049; /* Changement de couleur au survol */
+    transform: scale(1.05); /* Légère mise en avant au survol */
+  }
+/* .btnRefuser{
     background-color: red;
     color: white;
     padding: 10px;
@@ -32,7 +52,36 @@
 .btnRefuser:hover{
     background-color: rgb(166, 10, 10);
     color: white;
-}
+} */
+ /* Style pour le bouton 'Refuser' */
+.btnRefuser {
+    background-color: #f44336; /* Rouge pour refuser */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s;
+  }
+  
+  .btnRefuser:hover {
+    background-color: #d32f2f; /* Changement de couleur au survol */
+    transform: scale(1.05); /* Légère mise en avant au survol */
+  }
+  
+  /* Ajout d'une animation subtile */
+  button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
 .chargementMessageAbonnes{
     position: relative;
     top: 50px;
@@ -65,6 +114,9 @@
     display: flex;
     border-bottom: 1px solid #777171;
     width: 100%;
+    position: relative;
+    left: -10px;
+    margin-top: 10px;
 }
 
 .donneesAbonnementEnAttente{
@@ -72,30 +124,68 @@
     margin:0;
     width: 65% !important;
 }
-.divValidation{
+/* .divValidation{
     display:flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-}
-.chargementMessageAbonnementEnAttente {
-    font-size: 1em;
-    color: #6c757d; 
-    width: 100%;
-    justify-content: center;
-    position: relative;
-    top: 30px;
+} */
+ /* Styles pour la div contenant les boutons */
+.divValidation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px 10px 10px;
+    margin-left: 30px;
   }
 
-  /* @media (min-width:900px) {
+.chargementMessageAbonnementEnAttente {
+    position: absolute;
+    font-size: 1.5em;
+    color: #626669; 
+    width: 100%!important;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  @media (min-width:1229px) {
     .donneesAbonnementEnAttente{
-        width: 80%!important;
+        width: 100%!important;
     }
     .divDonnesAbonnementEnAttente{
         width: 100%;
         height: 100%;
     }
-}  */
+    .contentFilsDashboard{
+        left: 140px;
+    }
+} 
+  @media (min-width:901px) {
+    .donneesAbonnementEnAttente{
+        width: 82.5%!important;
+    }
+    .divDonnesAbonnementEnAttente{
+        width: 100%;
+        height: 100%;
+    }
+    .contentFilsDashboard{
+        left: 130px;
+    }
+} 
+
+  @media (max-width:900px) {
+    .donneesAbonnementEnAttente{
+        width: 86%!important;
+        margin-left: 15px;
+    }
+    .divDonnesAbonnementEnAttente{
+        width: 100%;
+        height: 100%;
+    }
+} 
+
 
  @media (max-width:700px) {
     .donneesAbonnementEnAttente{
@@ -116,8 +206,8 @@
         display: flex;
         margin:0;
         width: 100%!important;
-        border-bottom: 1px solid #cbc5c5;
         margin-bottom: 5px;
+        padding-left: 10px;
     }
     .chargementMessageAbonnementEnAttente {
         text-align: center;
@@ -132,7 +222,8 @@
 
 @media (max-width:450px) {
     .donneesAbonnementEnAttente{
-        width: 75%!important;
+        width: 74%!important;
+        margin-left: 10px;
     }
     .autreInfos{
         margin-left: 0px;
@@ -141,6 +232,13 @@
         text-align: center;
         width: 100%;
         justify-content: center;
+    }
+    .divValidation{
+        width: 40%;
+        margin-left: 0;
+    }
+    .btnAccepter, .btnRefuser{
+        width: 130px
     }
 }
 
@@ -152,19 +250,22 @@
     .donneesAbonnementEnAttente{
         width: 100%!important;
         position: relative;
-        left: 12%;
+        left: 5%;
         display: flex;
         justify-content: center;
+        border-bottom: 1px solid #cbc5c5;
     }
     .autreInfos{
         margin-left: 0px;
     }
     .divValidation{
-        width: 80%;
-        position: relative;
-        display: block;
-        left: 13%;
+        width: 102%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-left: 0;
     }
+
     .chargementMessageAbonnementEnAttente {
         text-align: center;
         font-size: 1em;
@@ -175,5 +276,9 @@
       .divNombreAbonnementEnAttenteDashboard{
         top: -10px;
         left: -118px;
+      }
+      .chargementMessageAbonne, .abonneNonTrouve{
+        font-size: 1rem;
+        left: -3%;
       }
 }
