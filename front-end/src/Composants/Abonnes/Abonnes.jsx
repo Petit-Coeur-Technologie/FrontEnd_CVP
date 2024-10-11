@@ -53,6 +53,7 @@ const Abonnes = () => {
         const data = await response.json();
         if (Array.isArray(data)) {
           setAbonnes(data);
+          console.log(data);
         } else {
           console.error('Les données reçues ne sont pas un tableau:', data);
         }
@@ -172,31 +173,37 @@ const Abonnes = () => {
           />
         </form>
       </div>
-
+  
       <div className='divDonnes'>
         {chargement ? (
           <p className="chargementMessageAbonne">Veuillez patienter quelques secondes...</p>
         ) : filteredAbonnes.length > 0 ? (
-          filteredAbonnes.map((abonne, index) => (
-            <div className='donnees' key={index}>
-              <div className='divImageProfil'>
-                <img src={abonne.utilisateur.copie_pi} alt="profil" />
+          filteredAbonnes.map((abonne, index) => {
+            // Corriger la logique pour l'image du profil
+            const utilisateur = abonne.utilisateur || {};
+
+  
+            return (
+              <div className='donnees' key={index}>
+                <div className='divImageProfil'>
+                  <img src={utilisateur.role === "menage" ? utilisateur.copie_pi : utilisateur.utilisateur?.copie_pi || profilImg} alt="profil" />
+                </div>
+                <p>{utilisateur.role === "menage" ? utilisateur.nom_prenom : utilisateur.nom_entreprise}</p>
+                <address>{getQuartierNameById(utilisateur.role === "menage" ? utilisateur.quartier_id : utilisateur.utilisateur?.quartier_id)}</address>
+                <p>{utilisateur.role === "menage" ? utilisateur.tel : utilisateur.utilisateur?.tel}</p>
+                <p>{utilisateur.role === "menage" ? utilisateur.role : utilisateur.utilisateur?.role}</p>
+                <div className='divBtnDetails'>
+                  <button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button>
+                  <button onClick={() => handleAnnulerAbonnement(index)} className='btnAnnulerAbonnement'>Annuler</button>
+                </div>
               </div>
-              <p>{abonne.utilisateur.nom_prenom}</p>
-              <address>{getQuartierNameById(abonne.utilisateur.quartier_id)}</address>
-              <p>{abonne.utilisateur.tel}</p>
-              <p>{abonne.utilisateur.role}</p>
-              <div className='divBtnDetails'>
-                <button onClick={() => handleDetailler(index)} className='btnDetails'>Détails</button>
-                <button onClick={() => handleAnnulerAbonnement(index)} className='btnAnnulerAbonnement'>Annuler</button>
-              </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <p className='abonneNonTrouve'>Aucun utilisateur trouvé</p>
         )}
       </div>
-
+  
       {popupVisible && selectedAbonne && (
         <div className='popup'>
           <div className='popupContent'>
@@ -211,6 +218,7 @@ const Abonnes = () => {
               <button onClick={handleShowComments}>Voir Commentaires</button>
               <button onClick={handleAddComment}>Ajouter Commentaire</button>
             </div>
+  
             {showCommentsPopup && (
               <div className='divCommentaires'>
                 <h3>Commentaires :</h3>
@@ -222,6 +230,7 @@ const Abonnes = () => {
                 <button onClick={() => setShowCommentsPopup(false)}>Fermer</button>
               </div>
             )}
+  
             {showAddCommentPopup && (
               <div className='ajouterCommentaire'>
                 <textarea
@@ -237,7 +246,7 @@ const Abonnes = () => {
         </div>
       )}
     </div>
-  );
+  );  
 };
 
 export default Abonnes;

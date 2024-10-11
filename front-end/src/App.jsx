@@ -12,12 +12,11 @@ import './App.css';
 import 'boxicons/css/boxicons.min.css';
 import Messagerie from './Composants/Messagerie/Messagerie.jsx';
 import Abonnes from './Composants/Abonnes/Abonnes.jsx';
-import MonAbonnement from './Composants/MonAbonnement.jsx';
+import MonAbonnement from './Composants/MonAbonnement/MonAbonnement.jsx';
 import Home from './Composants/Home/Home.jsx';
 import Calendrier from './Composants/Calendrier/Calendrier.jsx';
 import Notification from './Composants/Notifications/Notifications.jsx';
 import AideAssistance from './Composants/Aide/AideAssistance.jsx';
-import Deconnexion from './Composants/Deconnexion/Deconnexion.jsx';
 import Details from './Composants/Details/Details.jsx';
 import Parametres from './Composants/Parametre/Parametres.jsx';
 import Connexion from './pages/Connexion/Connexion.jsx';
@@ -62,7 +61,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<Home />} />
             <Route path="abonnes" element={<Abonnes />} />
-            <Route path="monabonnement" element={<MonAbonnement />} />
+            {/* <Route path="monabonnement" element={<MonAbonnement />} /> */}
             <Route path="home" element={<Home />} />
             <Route path="calendrier" element={<Calendrier />} />
             <Route path="messagerie" element={<Messagerie />} />
@@ -70,7 +69,6 @@ function App() {
             <Route path="profil" element={<Profil />} />
             <Route path="notifications" element={<Notification />} />
             <Route path="aide-assistance" element={<AideAssistance />} />
-            <Route path="deconnexion" element={<Deconnexion />} />
             <Route path="details/:index" element={<Details />} />
             <Route path="monabonnement" element={<MonAbonnement />} />
             <Route path="abonnementenattente" element={<AbonnementsEnAttente />} />

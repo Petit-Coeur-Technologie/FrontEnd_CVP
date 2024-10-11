@@ -75,6 +75,9 @@
 .menuBarLaterale1 .liClass:first-child{
 padding-right: 76px;
 }
+.menuBarLaterale1 .liClass:nth-child(3){
+  padding-bottom: 0px!important;
+}
 
 .menuBarLaterale2 .liClass:first-child{
 padding-right: 76px;
@@ -105,7 +108,7 @@ padding-right: 76px;
 
 .menuBarLaterale1 .active, .menuBarLaterale2 .active {
   /* Style des éléments actifs */
-  background-color: rgb(207, 207, 207);
+  background-color: #efefefef;
   color: var(--vert);
   position: relative;
 }
@@ -216,8 +219,8 @@ cursor: pointer;
 
 .imageProfil {
 /* Style pour l'image de profil */
-width: 100%;
-height: 100%;
+width: 90%;
+height: 90%;
 object-fit: contain; /* Cela garantit que l'image couvre tout en restant proportionnée */
 border-radius: 50%;
 }
@@ -386,11 +389,7 @@ padding: 0;
   max-height: 400px;
   overflow-y: scroll;
 }
-.abonneNonTrouve{
-  padding: 10px;
-  text-align: center;
-  grid-column: span 2;
-}
+
 .donnees {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -442,18 +441,21 @@ padding: 0;
 .donnees p, .donnees address {
   transition: all 0.3s ease; 
 }
-
 .divBtnDetails{
   border: none;
   position: absolute;
   display: flex;
-  bottom: 20px;
+  bottom: 12px;
   color: var(--blanc);
   border-radius: 10px;
   margin-top: 5px;
   width: 80%;
   height: 30px;
   cursor: pointer;
+  gap: 10px;
+}
+.imageDefautChargement{
+  background-color: red;
 }
 
 .btnDetails, .btnAnnulerAbonnement{
@@ -491,8 +493,8 @@ padding: 0;
   align-items: center;
   border-radius: 50%;
   position: relative;
-  top: 20px;
-  left: 10px;
+  top: 10px;
+  left: -25px;
   color: white;
 }
 .pNombreAbonnementEnAttenteDashboard{
@@ -531,13 +533,14 @@ padding: 0;
   }
   
   .abonnesConteneur{
-    width: 96%!important;
+    width: 98%!important;
   }
 }
 
+
 @media (min-width:1023px){
   .abonnesConteneur{
-    width: 92%;
+    width: 95%;
   }
   .divDonnes {
     display: grid;
@@ -743,13 +746,19 @@ padding: 0;
     color: var(--vert) !important;
   }
 }
-.chargementMessageAbonne {
-  position: absolute;
-  font-size: 1em;
-  color: #6c757d; 
-  width: 100%!important;
+
+.chargementMessageAbonne, .abonneNonTrouve {
+  position: fixed;
+  font-size: 1.5em;
+  color: #6c757d;
+  width: 100% !important;
   display: flex;
   justify-content: center;
+  margin-top: 30px;
+  left: 10%;
+}
+.abonneNonTrouve{
+  grid-column: span 2;
 }
 .divContainer {
   overflow: auto;

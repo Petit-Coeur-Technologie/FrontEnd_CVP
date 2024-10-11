@@ -4,7 +4,7 @@ import myImage from '/src/assets/logo_provisoire.png';
 import MotDePasseOublie from '../MDPOublié/motdepasseoublie';
 
 import "./Connexion.css";
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 
 export default function Connexion() {
   const [username, setUsername] = useState('');
@@ -46,7 +46,7 @@ export default function Connexion() {
   
       const data = await response.json();
       console.log(data); // Assure-toi que cette ligne s'exécute
-      toast.success("Connexion réussie");
+      // toast.success("Connexion réussie");
       const redirectPath = location.state?.from?.pathname || '/dashboard';
       navigate(redirectPath);
   
@@ -58,7 +58,7 @@ export default function Connexion() {
       document.cookie = `authToken=${accessToken}; path=/; max-age=${60 * 60 * 24}`;
       document.cookie = `userId=${userId}; path=/; max-age=${60 * 60 * 24}`;
       document.cookie = `role=${role}; path=/; max-age=${60 * 60 * 24}`;
-      toast.success('Connexion réussie');
+      // toast.success('Connexion réussie');
 
   
     } catch (error) {
