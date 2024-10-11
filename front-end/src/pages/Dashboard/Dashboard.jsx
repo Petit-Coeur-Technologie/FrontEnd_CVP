@@ -31,6 +31,11 @@ export default function Dashboard() { // Déclaration du composant fonctionnel D
     setProfileImage(newImage); // Met à jour l'image de profil avec la nouvelle image
   };
 
+  const DeconnexionDansDashboard = () =>{
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    navigate('/');
+  }
+
   // Tableau d'éléments pour le premier menu latéral
   const elements_ul_Barlaterale1 = [
     { name: 'Home', path: 'home', icon: 'bxs-home' }, // Chaque élément a un nom, un chemin, et une icône
@@ -141,11 +146,9 @@ export default function Dashboard() { // Déclaration du composant fonctionnel D
               <span>Aide/Assistance</span>
             </Link>
           </li>
-          <li onClick={() => handleProfileClick('Déconnexion')}> {/* Clic pour déconnexion */}
-            <Link to="deconnexion">
+          <li onClick={DeconnexionDansDashboard}> {/* Clic pour déconnexion */}
               <i className='bx bxs-log-out'></i> {/* Icône de déconnexion */}
               <span>Déconnexion</span>
-            </Link>
           </li>
           <li onClick={()=>handleProfileClick('Préparation')}> {/* Clic pour accéder à la préparation */}
             <Link to='preparation'>
