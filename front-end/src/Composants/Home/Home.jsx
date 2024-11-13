@@ -28,7 +28,7 @@ const Home = () => {
   const [sommeTotal, setSommeTotal] = useState(0);
   const [filter, setFilter] = useState('year');
   const [extractedData, setExtractedData] = useState({ year: {}, month: {} });
-  
+
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -68,7 +68,7 @@ const Home = () => {
 
       const data = await response.json();
       processChartData(data);
-      console.log(data); 
+      console.log(data);
       // Filtre pour obtenir le nombre d'abonnés actifs
       const abonnementsActifs = data.filter(item => item.status_abonnement === "actif");
       setNbrAbonne(abonnementsActifs.length);
@@ -83,7 +83,7 @@ const Home = () => {
   const processChartData = (data) => {
     const activeData = data.filter(item => item.status_abonnement === "actif");
     const extractedData = extractDateData(activeData);
-    
+
     setExtractedData(extractedData);
     filterData(extractedData, filter);
   };
@@ -151,10 +151,11 @@ const Home = () => {
 
   return (
     <div className={`divHomeMere ${userRole === "pme" ? "classRolePme" : ""}`}>
-      <h4 className="titreStatistique">Statistiques des Abonnements</h4>
       <div className="divGraphique">
         {userRole === "pme" && (
           <>
+
+            <h4 className="titreStatistique">Statistiques des Abonnements</h4>
             <div className="divControlsChartContainer1">
               <div className="divNbrGraphique">
                 <div className="controls">

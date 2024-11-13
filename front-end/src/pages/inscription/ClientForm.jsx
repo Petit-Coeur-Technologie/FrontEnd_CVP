@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './inscription.css'
 import "boxicons/css/boxicons.min.css";
+import ButtonVP from '../../ComposantGraphiques/button';
+import LinkWithIcon from '../../ComposantGraphiques/linkWithIcon';
+import InputWithIconForm from '../../ComposantGraphiques/InputWithIconForm'
 
 const passwordClient = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
 const phonePatternClt = /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
@@ -66,8 +69,8 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
 
     return (
         <form onSubmit={handleSubmit(onSubmitClt)}>
-           <div className={`form-container ${userRole === 'entreprise' ? 'form-container2' : ''}`}>
-           <div className={`input-container ${userRole === 'menage' ? 'input-containerMENAGE' : ''}`}> 
+            <div className={`form-container ${userRole === 'entreprise' ? 'form-container2' : ''}`}>
+                <div className={`input-container ${userRole === 'menage' ? 'input-containerMENAGE' : ''}`}>
                     <select name="role" id="role" className="type selectIns" {...register("roleClt")} value={userRole} onChange={(e) => onUserRoleChange(e.target.value)} required>
                         <option value="menage">Ménage</option>
                         <option value="entreprise">Entreprise</option>
@@ -78,8 +81,21 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                     <i className='bx bxs-user' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="nom_prenom" className="noms inputIns" placeholder="Nom et Prénom(s)"
                         {...register("nomsClt", { required: "Veuillez saisir votre nom" })} />
-                </div>
+
                 {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
+                </div>
+
+                {/* <div className="input-container input-containerTablette">
+                    <InputWithIconForm
+                        icon={'bx'}
+                        icontype={'bxs-user'}
+                        placeholder={'Nom et Prénom'}
+                        registerName={'nomsClt'}
+                        requiredText={'Veuillez saisir votre nom'}
+                    />
+                    {errors.nomsClt && <p className="error-message">{errors.nomsClt.message}</p>}
+                </div> */}
+                
 
 
                 <div className="input-container input-containerTablette">
@@ -96,9 +112,9 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         {errors.genreClt && <span className="error-message">{errors.genreClt.message}</span>}
                     </select>
                 </div>
-                 {/* -------- Pour la selection de la ville, la commun et le quartier si c'est un Client -------------------------------*/}
+                {/* -------- Pour la selection de la ville, la commun et le quartier si c'est un Client -------------------------------*/}
                 {/* Pour la selection de la ville */}
-              <div className="input-container input-containerSelect input-containerTablette">
+                <div className="input-container input-containerSelect input-containerTablette">
                     <i className='bx bxs-location-plus' style={{ color: '#fdb024' }}></i>
                     <div className="adresse">
                         <select
@@ -113,10 +129,10 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                             ))}
                         </select>
 
-                        </div>
-                        </div>
-                        <div className="input-container input-containerSelect input-containerTablette">
-                        <i className='bx bx-location-plus' ></i>
+                    </div>
+                </div>
+                <div className="input-container input-containerSelect input-containerTablette">
+                    <i className='bx bx-location-plus' ></i>
                     <div className="adresse">
                         <select
                             id="commune"
@@ -131,10 +147,10 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                                 <option key={commune.id} value={commune.id}>{commune.commune}</option>
                             ))}
                         </select>
-                        </div>
-                        </div>
-                        <div className="input-container input-containerSelect input-containerTablette">
-                        <i className='bx bx-current-location' ></i>
+                    </div>
+                </div>
+                <div className="input-container input-containerSelect input-containerTablette">
+                    <i className='bx bx-current-location' ></i>
                     <div >
                         <select
                             id="quartierClt"
@@ -171,7 +187,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 {/* Affichage conditionnel basé sur le type de client */}
                 {userRole === "entreprise" && (
                     <>
-                         <div className="input-container input-containerTablette">
+                        <div className="input-container input-containerTablette">
                             <i className='bx bxs-building' style={{ color: '#fdb024' }}></i>
                             <input type="text" name="nom_entreprise" className="nom inputIns" placeholder="Nom de l'entreprise"
                                 {...register("nomEntreprise")} required />
@@ -193,7 +209,7 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                         </div>
                     </>
                 )}
-                 <div className="input-container input-containerTablette">
+                <div className="input-container input-containerTablette">
                     <i className='bx bxs-lock' style={{ color: '#fdb024' }}></i>
                     <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" className="inputIns"
                         {...register("mdpClt", {
@@ -220,12 +236,14 @@ function ClientForm({ onSubmitClt, isLoading, copieFileRef, entrepriseFileRef, u
                 </label>
             </div>
             <div className="divSub">
-                <button type="submit" id='subClt' className='sub' disabled={isLoading}>{isLoading ? 'Chargement...' : 'S\'inscrire'}</button>
+                <ButtonVP name={isLoading ? 'Chargement...' : 'S\'inscrire'} type={'submit'} />
             </div>
             {/* -------------------------------------------------------------------------------------------------------------- */}
-            <div className="ins insEntreprise">
-                <div className="divTextIconGoogle"><div className="cercle cercleGoogle"><i className="bx bxl-google google-icon"></i></div><p className="textInscrireAvecGoogle ">connexion avec google</p></div>
-                <div className="divTextIconFacebook"><div className="cercle"><i className='bx bxl-facebook' style={{ color: '#1877F2', fontSize: '30px' }} ></i></div><p className="textInscrireAvecFacebook ">connexion avec facebook</p></div>
+            <div className="instype">
+                <div className="ins insEntreprise">
+                    <LinkWithIcon icon={'bx'} icontype={'bxl-google'} iconName={'google-icon'} name={'Se connecter avec Google'} />
+                    <LinkWithIcon icon={'bx'} icontype={'bxl-facebook'} iconName={'google-icon'} name={'Se connecter avec Facebook'} />
+                </div>
             </div>
         </form>
     );

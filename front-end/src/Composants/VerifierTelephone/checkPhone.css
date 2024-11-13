@@ -1,0 +1,50 @@
+.containerTel {
+    color: white;
+}
+
+.TelHeader {
+    color: white;
+    font-size: 25px;
+    font-weight: bolder; 
+    margin: 20px 0px;
+}
+
+.enterTelOtp {
+    display: flex;
+    align-items: baseline;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.TelLabel {
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.TelInput {
+    font-size: 25px;
+    width: 170px;
+    height: 40px;
+    color: black;
+    padding-right: 10px;
+    text-align: right;
+
+    border-radius: 10px;
+}
+
+.TelButton {
+    background-color: #fdb024;
+    width: 70px;
+    margin-left: 20%;
+    height: 45px;
+    
+
+    border-radius: 10%;
+    font-weight: bolder;
+}
+
+.TelResend {
+    background-color: transparent;
+    margin-bottom: 50px;
+}

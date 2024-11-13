@@ -207,6 +207,11 @@ function InfosPme() {
                             )}
                             <h2 className="commentaires-title">Notes et avis</h2>
                             <div className="commentaires">
+
+                                {/**
+                                 * To Do
+                                 * charger les commentaires sur une pme trier par date et les afficher
+                                 */}
                                 
                                 <div className="comment1">
                                     <div className="commentaire1">
