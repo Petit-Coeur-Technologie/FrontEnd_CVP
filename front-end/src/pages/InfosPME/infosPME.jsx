@@ -186,6 +186,7 @@ function InfosPme() {
                                         <p className="pPme p"><span className="all-p-title">Tarif mensuel:</span> {pme.tarif_mensuel} FG</p>
                                         <p className="pPme p"><span className="all-p-title">Tarif abonnement:</span> {pme.tarif_abonnement} FG</p>
                                     </div>
+                                    
                                     <button
                                         type="button"
                                         className="btnAbonnement"
