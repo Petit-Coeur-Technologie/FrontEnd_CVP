@@ -138,39 +138,6 @@ function InfosPme() {
                         }
 
                     }
-
-                    /* if ('pme' in data && data.pme.id == id) {
-                        switch(data.status_abonnement) {
-                            case 'actif':
-                                dispatchState({
-                                    type: 'STATE_ABONNE',
-                                    payload: showButtonByState
-                                })
-                                break
-                            case 'pending':
-                                dispatchState({
-                                    type: 'STATE_PENDING',
-                                    payload: showButtonByState                                    
-                                })
-                                break
-                            case 'rejected':
-                                dispatchState({
-                                    type: 'STATE_REJECTED',
-                                    payload: showButtonByState                                    
-                                })
-                                break
-                            default:
-                                dispatchState({
-                                    type: 'STATE_NOTHING',
-                                    payload: showButtonByState
-                                })
-                        }
-                    } else {
-                        dispatchState({
-                            type: 'STATE_BTNDISABLED',
-                            payload: showButtonByState
-                        })
-                    } */
                 })
         } catch {
             console.log("An error!")
@@ -262,7 +229,7 @@ function InfosPme() {
         };
 
 
-        /* try {
+        try {
             const response = await fetch('https://ville-propre.onrender.com/abonnement', {
                 method: 'POST',
                 headers: {
@@ -285,7 +252,7 @@ function InfosPme() {
         } catch (error) {
             console.error('Une erreur est survenue', error);
             toast('Une erreur est survenue');
-        } */ 
+        } 
     };
 
     function renderStars(rating) {
