@@ -110,6 +110,16 @@ div.pme-info .btnAbonnement:hover{
     background-color: #218838;
 }
 
+
+/*lamine ajout*/
+.btnDisabled:disabled {
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+}
+
+/*fin ajout*/
+
 /* Lien pour s'abonner */
 .infosPME_comments .p .a {
     color: #007bff;

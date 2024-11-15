@@ -25,6 +25,8 @@ function Inscription() {
   const idFileRef = useRef(null);
   const logoFileRef = useRef(null);
 
+  
+
   const copieFileRef = useRef(null);
   const entrepriseFileRef = useRef(null);
 
@@ -35,6 +37,7 @@ function Inscription() {
   const [emailChecking, setEmailChecking] = React.useState(false)
   const [telChecking, setTelChecking] = React.useState(false)
   const [inscriptionValid, setInscriptionValid] = React.useState(false)
+  const idRCCMRef = useRef(null);
 
   const inputEmailRef = React.useRef()
   const inputTelRef = React.useRef()
@@ -200,6 +203,16 @@ function Inscription() {
       return;
     }
 
+    /* Ajout lamine */
+    if (idRCCMRef.current && idRCCMRef.current.files.length > 0) {
+      console.log('rccm_pme en attente!voir ligne en dessous dans le code')
+      //formData.append('rccm_pme', idRCCMRef.current.files[0]); //To Do retire les commentaire pour ajouter l'attribue rccm pme dans le formulaire envoyer à la base de données
+    } else {
+      toast.error("Veuillez télécharger la photo de votre RCCM.");
+      return;
+    }
+    /* fin */
+
     formData.append('create_at', new Date().toISOString());
     formData.append('update_at', new Date().toISOString());
     formData.append('is_actif', true);
@@ -287,7 +300,13 @@ function Inscription() {
                         onUserRoleChange={setUserRole}  // Ajoutez ceci pour changer le role d'utilisateur
                       />
                     ) : (
-                      <PmeForm onSubmit={onSubmitPme} isLoading={isLoading} idFileRef={idFileRef} logoFileRef={logoFileRef} />
+                      <PmeForm 
+                        onSubmit={onSubmitPme} 
+                        isLoading={isLoading} 
+                        idFileRef={idFileRef} 
+                        logoFileRef={logoFileRef} 
+                        idRCCMRef= {idRCCMRef}
+                      />
                     )}
                     <div className={`divLogin-link ${userRole === 'menage' ? 'divLogin-linkPme' : ''}`}>
                       <p> Vous êtes déjà inscrit?  <a href='/connexion' className="login-link" >Connectez-vous</a></p>

@@ -104,3 +104,39 @@
 .inputTwoVP:focus {
     outline: none;
 }
+
+/**####################################################################################################################################"*/
+/**ModalValidation*/
+
+.SouscriptionModal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.SouscriptionModal-wrapper2 {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 25%;
+    text-align: center;
+}
+
+.SouscriptionModal-wrapper2 > h1 {
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-bottom: 20px;
+    color: red;
+    
+}
+
+.SouscriptionModal-wrapper2 > p {
+    margin-bottom: 30px;
+    
+}

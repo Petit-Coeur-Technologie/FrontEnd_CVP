@@ -6,7 +6,7 @@ import "boxicons/css/boxicons.min.css";
 const passwordPme = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{8,}$/;
 const phonePatternPme = /^\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 
-function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
+function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef, idRCCMRef }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
 
     const [pmeVilles, setPmeVilles] = useState([]);
@@ -19,12 +19,16 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
     const [pmeIdFile, setPmeIdFile] = useState("Pièce d'identité");
     const [pmeLogoFile, setPmeLogoFile] = useState("Logo");
 
+    /* Ajout Lamine */
+    const [pmeRCCMFile, setPmeRCCMFile] = useState('Photo de votre RCCM')
+    /* Fin Ajout */
+
 
     useEffect(() => {
         fetch('https://ville-propre.onrender.com/villes')
             .then(response => response.json())
             .then(data => {
-                console.log('Here the data: '+data)
+                console.log('Here the data: ' + data)
                 setPmeVilles(data)
             })
             .catch(error => console.error('Erreur lors de la récupération des villes:', error));
@@ -64,6 +68,8 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
             setPmeIdFile(event.target.files[0].name);
         } else if (fileType === "logoFile" && event.target.files.length > 0) {
             setPmeLogoFile(event.target.files[0].name);
+        } else if (fileType === "rccmFile" && event.target.files.length > 0) {
+            setPmeRCCMFile(event.target.files[0].name)
         }
     };
 
@@ -179,6 +185,21 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
                     <input type="text" name="numEnregistrementPME" className="registration inputIns"
                         placeholder="Numéro d'enregistrement"  {...register("numEnregistrementPME")} required />
                 </div>
+
+                {/**
+                 * lamine
+                 * Ajout du champ pour uploader la photo RCCM 
+                */}
+                <div className="input-container input-containerTablette">
+                    <i className='bx bxs-file-doc' style={{ color: '#fdb024' }}></i>
+                    <input type="file" name="rccm_pme" id="rccm_pme" className="file-upload inputIns"
+                        ref={idRCCMRef} onChange={(e) => handlePmeFileChange(e, 'rccmFile')} />
+                    <label htmlFor="rccm_pme" className="file-upload-label">
+                        {pmeRCCMFile}
+                    </label>
+                </div>
+                {/* Fin Ajout*/}
+
                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-image' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="logo_pme" id="logo_pme" className="file-upload inputIns"
@@ -187,6 +208,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
                         {pmeLogoFile}
                     </label>
                 </div>
+
                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-home' style={{ color: '#fdb024' }}></i>
                     <input type="zone" name="zone_intervention" className="zone inputIns" placeholder="Zone d'intervention"
@@ -199,6 +221,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef }) {
                             maxLength: { value: 500, message: "Veuillez saisir une description de 500 caractères maximum" }
                         })} ></textarea>
                 </div>
+
                 <div className="input-container input-containerTablette">
                     <i className='bx bx-euro' style={{ color: '#fdb024' }}></i>
                     <input type="text" name="tarif_mensuel" className="tarif-mensuel inputIns" placeholder="Tarif mensuel (en GNF)"
