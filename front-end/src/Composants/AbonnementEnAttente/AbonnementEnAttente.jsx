@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './AbonnementEnAttente.css';
 import { toast } from 'react-hot-toast';
+import ModalValidationYesNo from '../../ComposantGraphiques/modalValidation2';
 
 const AbonnementsEnAttente = () => {
   const [abonnes, setAbonnes] = useState([]);
@@ -8,7 +9,13 @@ const AbonnementsEnAttente = () => {
   const [clientQuartiers, setClientQuartiers] = useState([]);
   const [accessToken, setAccessToken] = useState('');
   const [chargement, setChargement] = useState(true);
-  
+
+  /** Ajout lamine */
+  const [showModaAccept, setShowModalAccept] = React.useState(false);
+  const [acceptClicked, setAcceptClicked] = React.useState(false)
+
+  /** Fin ajout */
+
   // Fonction pour obtenir les cookies
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
@@ -20,7 +27,7 @@ const AbonnementsEnAttente = () => {
   useEffect(() => {
     const userIdFromCookie = getCookie('userId');
     const tokenFromCookie = getCookie('authToken');
-  
+
     if (userIdFromCookie) setUserId(userIdFromCookie);
     if (tokenFromCookie) setAccessToken(tokenFromCookie);
   }, []);
@@ -28,7 +35,7 @@ const AbonnementsEnAttente = () => {
   // ========================= POUR RECUPERER LES ABONNEMENTS EN ATTENTE =======================
   useEffect(() => {
     if (!userId || !accessToken) return;
-  
+
     const fetchAbonnes = async () => {
       setChargement(true);
       try {
@@ -39,11 +46,11 @@ const AbonnementsEnAttente = () => {
             'Content-Type': 'application/json'
           }
         });
-  
+
         if (!response.ok) {
           throw new Error(`Erreur réseau lors de la récupération des abonnés. Code: ${response.status}`);
         }
-  
+
         const data = await response.json();
         setAbonnes(data);
 
@@ -53,7 +60,7 @@ const AbonnementsEnAttente = () => {
         setChargement(false);
       }
     };
-  
+
     fetchAbonnes();
   }, [userId, accessToken]);
 
@@ -80,16 +87,21 @@ const AbonnementsEnAttente = () => {
   }, [clientQuartiers]);
 
   // ========================= POUR VALIDER LES ABONNEMENTS EN ATTENTE =======================
+  //ajout lamine intégration du modalYesNo
+  const handleModalClicked = () => {
+    setShowModalAccept(true)
+  }
+  //fin ajout lamine
   const handleAcceptAbonnement = async (idAbonnement) => {
     try {
       const response = await fetch(`https://ville-propre.onrender.com/abonnements/${idAbonnement}/accepted`, {
-        method: 'PUT', 
+        method: 'PUT',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ status_abonnement: 'actif' })
-      });      
+      });
 
       if (!response.ok) {
         throw new Error(`Erreur lors de l'acceptation de l'abonnement. Code: ${response.status}`);
@@ -104,6 +116,8 @@ const AbonnementsEnAttente = () => {
 
     } catch (error) {
       console.error('Erreur lors de l\'acceptation de l\'abonnement:', error.message);
+    } finally {
+        setShowModalAccept(false)
     }
   };
 
@@ -160,9 +174,20 @@ const AbonnementsEnAttente = () => {
                         </div>
                       </div>
                       <div className='divValidation'>
-                        <button type='button' className='btnAccepter' onClick={() => handleAcceptAbonnement(abonne.id)}>Accepter</button>
+                        <button type='button' className='btnAccepter' onClick={handleModalClicked}>Accepter</button>
                         <button type='button' onClick={() => handleRefuseAbonnement(abonne.id)} className='btnRefuser'>Refuser</button>
                       </div>
+
+                      {showModaAccept && (
+                        <ModalValidationYesNo
+                          onClose={() => {
+                            setShowModalAccept(false)
+                          }}
+
+                          handleClick={() => handleAcceptAbonnement(abonne.id)}
+                        />
+                      )}
+
                     </div>
                   );
                 })

@@ -193,7 +193,7 @@ function PmeForm({ onSubmit, isLoading, idFileRef, logoFileRef, idRCCMRef }) {
                 <div className="input-container input-containerTablette">
                     <i className='bx bxs-file-doc' style={{ color: '#fdb024' }}></i>
                     <input type="file" name="rccm_pme" id="rccm_pme" className="file-upload inputIns"
-                        ref={idRCCMRef} onChange={(e) => handlePmeFileChange(e, 'rccmFile')} />
+                        ref={idRCCMRef} onChange={(e) => handlePmeFileChange(e, 'rccmFile')} required/>
                     <label htmlFor="rccm_pme" className="file-upload-label">
                         {pmeRCCMFile}
                     </label>

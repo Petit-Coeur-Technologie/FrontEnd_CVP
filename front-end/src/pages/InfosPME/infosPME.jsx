@@ -252,7 +252,7 @@ function InfosPme() {
         } catch (error) {
             console.error('Une erreur est survenue', error);
             toast('Une erreur est survenue');
-        } 
+        }
     };
 
     function renderStars(rating) {
