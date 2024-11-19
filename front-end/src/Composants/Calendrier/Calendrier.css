@@ -465,3 +465,53 @@
    }
 
 }
+
+/** Ajout lamine*/
+.calendarContainer {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  margin: 15px;
+}
+
+.calendarContainerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.ConfigCalendar {
+  margin: 10px;
+  width: max-content;
+  line-height: 50px;
+  
+}
+
+.highlightNextDays {
+  background-color: rgba(0, 0, 255, 0.5);
+
+}
+
+.highlightDoneDays {
+  background-color: rgba(0, 128, 0, 0.5);
+}
+
+.highlightMissedDays {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.buttonIteraction {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0px;
+}
+
+
+
+/** Fin ajout*/

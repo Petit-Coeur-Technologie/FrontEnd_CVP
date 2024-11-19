@@ -8,6 +8,7 @@ import PageErreur from "../PageErreur/pageErreur";
 import SkeletonPme from "../../Composants/Skeleton/SkeletonPme";
 
 import ModalValidation from "../../ComposantGraphiques/modalValidation";
+import ModalValidationYesNo from "../../ComposantGraphiques/modalValidation2";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 
 //Lamine
@@ -72,7 +73,7 @@ function InfosPme() {
     const [abonneClicked, setAbonneClicked] = React.useState(false)
 
     const [showButtonByState, dispatchState] = React.useReducer(buttonStateReducer, {
-        buttonState:'nothing', isSuscribed: false, btnAbonnementClass: ''
+        buttonState: 'nothing', isSuscribed: false, btnAbonnementClass: ''
     })
 
     const getUserID = (name) => {
@@ -82,7 +83,7 @@ function InfosPme() {
         return userID
     }
 
-    useEffect(() => {
+    const handleAbonnementClicked = React.useCallback(() => {
         const token = getCookie('authToken');
         const userId = getUserID('userId')
 
@@ -102,10 +103,10 @@ function InfosPme() {
                             payload: showButtonByState
                         })
                         console.log('hello')
-                        
+
                         if (data.pme.id == id) {
                             console.log(data.status_abonnement)
-                            switch(data.status_abonnement) {
+                            switch (data.status_abonnement) {
                                 case 'actif':
                                     dispatchState({
                                         type: 'STATE_ABONNE',
@@ -115,13 +116,13 @@ function InfosPme() {
                                 case 'pending':
                                     dispatchState({
                                         type: 'STATE_PENDING',
-                                        payload: showButtonByState                                    
+                                        payload: showButtonByState
                                     })
                                     break
                                 case 'rejected':
                                     dispatchState({
                                         type: 'STATE_REJECTED',
-                                        payload: showButtonByState                                    
+                                        payload: showButtonByState
                                     })
                                     break
                                 default:
@@ -130,7 +131,7 @@ function InfosPme() {
                                         payload: showButtonByState
                                     })
                             }
-                        } else if (data.status_abonnement != 'rejected'){
+                        } else if (data.status_abonnement != 'rejected') {
                             dispatchState({
                                 type: 'STATE_BTNDISABLED',
                                 payload: showButtonByState
@@ -143,6 +144,10 @@ function InfosPme() {
             console.log("An error!")
         }
     }, [])
+
+    useEffect(() => { // A mettre dans une memoized function pour le boutton soumission de l'abonnement puisse aussi l'appeler
+        handleAbonnementClicked()
+    }, [handleAbonnementClicked])
 
 
     /* Fin ajout*/
@@ -202,21 +207,10 @@ function InfosPme() {
 
     const Souscription = async () => {
         const token = getCookie('authToken');
-        console.log("Token utilisé pour la souscription:", token);
 
         if (!isAuthenticated) {
             setShowLoginModal(true);
             return;
-        }
-
-        if (!abonneClicked) {
-            setShowConditionAbonnement(true)
-        }
-
-        if (!souscrit) {
-            setAbonneClicked(true)
-        } else {
-            setAbonneClicked(false)
         }
 
         const souscriptionData = {
@@ -228,6 +222,8 @@ function InfosPme() {
             fin_abonnement: new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString()
         };
 
+        
+        setShowConditionAbonnement(false) //Ferme le modal
 
         try {
             const response = await fetch('https://ville-propre.onrender.com/abonnement', {
@@ -253,6 +249,9 @@ function InfosPme() {
             console.error('Une erreur est survenue', error);
             toast('Une erreur est survenue');
         }
+
+        handleAbonnementClicked() //ajout lamine
+        
     };
 
     function renderStars(rating) {
@@ -327,11 +326,10 @@ function InfosPme() {
                                             <p className="pPme p"><span className="all-p-title">Tarif mensuel:</span> {pme.tarif_mensuel} FG</p>
                                             <p className="pPme p"><span className="all-p-title">Tarif abonnement:</span> {pme.tarif_abonnement} FG</p>
                                         </div>
-                                        {console.log("Lmamam: "+showButtonByState.isSuscribed)}
                                         <button
                                             type="button"
                                             className={`btnAbonnement ${showButtonByState.btnAbonnementClass}`}
-                                            onClick={Souscription}
+                                            onClick={() => setShowConditionAbonnement(true)}
                                             disabled={showButtonByState.isSuscribed}
                                         >
                                             {/* {souscrit ? "Abonné" : "S'abonner"} */}
@@ -352,12 +350,23 @@ function InfosPme() {
 
                                 {/* lamine */}
                                 {showConditionAbonnement && (
-                                    <ModalValidation
-                                        onClose={() => {
-                                            setShowConditionAbonnement(false)
-                                            !souscrit && setAbonneClicked(false)
-                                        }}
-                                    />
+                                    <>
+                                        <ModalValidation
+                                            onClose={() => {
+                                                setShowConditionAbonnement(false)
+                                                !souscrit && setAbonneClicked(false)
+                                            }}
+                                        />
+
+                                        <ModalValidationYesNo
+                                            onClose={() => {
+                                                setShowConditionAbonnement(false)
+                                            }}
+
+                                            handleClick={Souscription}
+                                        />
+
+                                    </>
                                 )}
 
                                 {/* Fin lamine */}
