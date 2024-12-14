@@ -14,6 +14,7 @@
   height: 100vh;
   padding: 0px;
   position: fixed;
+  
 }
 
 /* Conteneur pour l'image et le titre */
@@ -33,6 +34,8 @@
 .title{
   position: relative;
   top: 20px;
+  color: black;
+  font-size: 70px;
 }
 
 /* Logo */
@@ -417,8 +420,17 @@ div.inscriptionForm-wrapper > form {
     flex-wrap: wrap;
     justify-content: start;
   }
+
+  .instype {
+    display: flex;
+    justify-content: center;
+  }
+
   .ins {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+   
   }
 
   .input-containerTablettePolitique {
@@ -620,3 +632,56 @@ div.inscriptionForm-wrapper > form {
   height: 30px;
   width: 30px;
 }
+
+/**Added by lamine*/
+.containerOtp {
+  display: flex;
+  justify-content: center;
+  font-size: large;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+}
+
+.otpHeader {
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.otpLabel {
+  font-weight: bold;
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.otpInput {
+  border: 1 solid;
+  width: 250px;
+  color: black;
+  padding: 10px;
+  font-size: 25px;
+}
+
+.otpButton {
+  padding: 10px;
+  margin-left: 20px;
+  height: 60px;
+  width: 100px;
+  border: 2px solid;
+  background-color: #004d40;
+  
+}
+
+.otpButton:hover {
+  background-color: #00804b;
+}
+
+.backtohometext_wrapper {
+  margin-left: 220px;
+  
+}
+
+.otpResend {
+  margin-top: 15px;
+}
+

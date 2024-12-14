@@ -1,0 +1,106 @@
+/**Button*/
+.buttonVP {
+    margin: 5px;
+    background-color: #fdb024;
+    width: 150px;
+    height: 40px;
+    color: #004d40;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 18px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/**####################################################################################################################################"*/
+/**Input with icon and placeholder*/
+.inputWithIconVPWrapper{
+    display: flex;
+    align-items: first baseline;
+    background-color: #04623b;
+    margin: 10px;
+    padding: 0 6px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.iconVP {
+    color: rgb(253, 176, 36);
+    font-weight: bold;
+}
+
+.inputVP {
+    width: calc(100%-20px);    
+    padding: 10px;
+    font-size: 16px;
+    background-color: #04623b;
+    color: white;
+    width: 100%;
+    border: none;
+}
+
+.inputVP:focus {
+    outline: none;
+}
+
+/**####################################################################################################################################"*/
+/**Link with Icon*/
+
+.linkWithIconVPWrapper {
+    display: flex;
+    justify-content: left;
+    align-items: first baseline;
+    background-color: #05673f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, boxshadow 0.3s ease;
+    width: 280px;
+    margin: 4px;
+    border-radius: 18px;
+    
+}
+
+.circleIconVP {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+}
+
+.linkWithIconVPWrapper > a {
+    color: white !important;
+    font-size: 16px !important;
+}
+
+/**####################################################################################################################################"*/
+/***/
+.inputWithIconTwoVPWrapper{
+    display: flex;
+    align-items: first baseline;
+    background-color: #04623b;
+    padding: 0 6px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.iconTwoVP {
+    color: rgb(253, 176, 36);
+    font-weight: bold;
+}
+
+.inputTwoVP {
+    width: calc(100%-20px);    
+    padding: 7px;
+    font-size: 16px;
+    background-color: #04623b;
+    color: white;
+    width: 100%;
+    border: none;
+}
+
+.inputTwoVP:focus {
+    outline: none;
+}
